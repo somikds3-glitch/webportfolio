@@ -9,7 +9,7 @@
     :root { color-scheme: light; }
     * { box-sizing: border-box; }
 
-    /* Apple-esque system font stack */
+    /* Apple-like system font stack */
     html, body {
       margin: 0;
       padding: 0;
@@ -198,6 +198,27 @@
     .modal-sub { margin: 0 0 10px 0; color: #555; }
     .modal-year { font-weight: 700; color: #000; }
 
+    /* Modal tabs */
+    .modal-tabs {
+      display: flex;
+      gap: 8px;
+      margin: -6px 0 10px;
+      flex-wrap: wrap;
+    }
+    .modal-tab {
+      border: 1px solid #ddd;
+      background: #f9f9f9;
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: background .2s ease, border-color .2s ease;
+    }
+    .modal-tab:hover { background: #f1f1f1; border-color: #ccc; }
+    .modal-tab[aria-selected="true"] {
+      background: #111; color: #fff; border-color: #111;
+    }
+
     /* ----------------------
        CLOUD EFFECT KEYFRAMES
     ---------------------- */
@@ -277,7 +298,7 @@
             "year":"2014",
             "title":"Chemtex Speciality Limited",
             "subtitle":"Sales and Service Engineer",
-            "img":"Chemtex.png",
+            "img":"chemtex.png",
             "alt":"Chemtex logo"
           }'
         >2014</button>
@@ -295,25 +316,25 @@
           }'
         >2016</button>
 
+        <!-- 2017 with MULTIPLE TABS (array payload) -->
         <button
           class="year"
-          data-payload='{
-            "year":"2017",
-            "title":"MBA in Energy and Environment",
-            "subtitle":"Symbiosis Institute of International Business",
-            "img":"SIIB.png",
-            "alt":"SIIB logo"
-          }'
-        >2017</button>
-        <button
-          class="year"
-          data-payload='{
-            "year":"2017",
-            "title":"Summer Internship",
-            "subtitle":"KPMG India",
-            "img":"KPMG.png",
-            "alt":"KPMG logo"
-          }'
+          data-payload='[
+            {
+              "year":"2017",
+              "title":"MBA in Energy and Environment",
+              "subtitle":"Symbiosis Institute of International Business",
+              "img":"SIIB.png",
+              "alt":"SIIB logo"
+            },
+            {
+              "year":"2017",
+              "title":"Summer Internship",
+              "subtitle":"KPMG India",
+              "img":"KPMG.png",
+              "alt":"KPMG logo"
+            }
+          ]'
         >2017</button>
 
         <button
@@ -357,6 +378,7 @@
       <button class="modal-close" aria-label="Close">✕</button>
       <img class="modal-img" src="" alt="Logo">
       <div>
+        <div class="modal-tabs" role="tablist"></div>
         <h3 class="modal-title">Title</h3>
         <p class="modal-sub"><span class="modal-year">Year</span></p>
         <p style="margin:0;color:#666;">(Additional details can go here in the next iteration.)</p>
@@ -433,7 +455,7 @@
     })();
 
     /* ----------------------
-       3) Timeline interactions (left→right transition + modal)
+       3) Timeline interactions (left→right transition + modal with tabs)
     ---------------------- */
     document.addEventListener('DOMContentLoaded', () => {
       const line   = document.querySelector('.timeline');
@@ -460,18 +482,43 @@
       const firstActive = years.find(y => !y.disabled && !y.classList.contains('disabled'));
       if (firstActive) setTimeout(() => setActive(firstActive), 100);
 
-      // Modal wiring
+      // Modal wiring (supports single object OR array for tabs)
       const modal = document.getElementById('career-modal');
       const mTitle = modal.querySelector('.modal-title');
       const mSub   = modal.querySelector('.modal-sub');
       const mImg   = modal.querySelector('.modal-img');
+      const mTabs  = modal.querySelector('.modal-tabs');
       const mClose = modal.querySelector('.modal-close');
 
-      function openModal(data) {
-        mTitle.textContent = data.title || '';
-        mSub.innerHTML = `<span class="modal-year">${data.year}</span> — ${data.subtitle || ''}`;
-        mImg.src = data.img || '';
-        mImg.alt = data.alt || data.title || 'Logo';
+      function renderEntry(entry) {
+        mTitle.textContent = entry.title || '';
+        mSub.innerHTML = `<span class="modal-year">${entry.year || ''}</span> — ${entry.subtitle || ''}`;
+        mImg.src = entry.img || '';
+        mImg.alt = entry.alt || entry.title || 'Logo';
+      }
+
+      function openModal(payload) {
+        const items = Array.isArray(payload) ? payload : [payload];
+        mTabs.innerHTML = '';
+
+        if (items.length > 1) {
+          items.forEach((it, idx) => {
+            const tab = document.createElement('button');
+            tab.className = 'modal-tab';
+            tab.type = 'button';
+            tab.role = 'tab';
+            tab.setAttribute('aria-selected', idx === 0 ? 'true' : 'false');
+            tab.textContent = it.title ? it.title : `Item ${idx + 1}`;
+            tab.addEventListener('click', () => {
+              mTabs.querySelectorAll('.modal-tab').forEach(t => t.setAttribute('aria-selected','false'));
+              tab.setAttribute('aria-selected','true');
+              renderEntry(items[idx]);
+            });
+            mTabs.appendChild(tab);
+          });
+        }
+
+        renderEntry(items[0]);
         modal.classList.add('show');
       }
       function closeModal() { modal.classList.remove('show'); }
@@ -484,7 +531,12 @@
         btn.addEventListener('click', () => {
           if (btn.disabled || btn.classList.contains('disabled')) return;
           setActive(btn);
-          const payload = btn.dataset.payload ? JSON.parse(btn.dataset.payload) : null;
+
+          const raw = btn.dataset.payload;
+          if (!raw) return;
+
+          let payload;
+          try { payload = JSON.parse(raw); } catch { payload = null; }
           if (payload) openModal(payload);
         });
       });
