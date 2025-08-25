@@ -75,7 +75,7 @@
       header { background-attachment: scroll, scroll; }
     }
 
-    /* Hero content: one-time reveal */
+    /* Hero content: one-time cloud reveal */
     .hero-content {
       position: relative;
       z-index: 1;
@@ -109,13 +109,32 @@
     .band p { position: relative; z-index: 1; max-width: 1000px; margin: auto; font-style: italic; }
 
     /* ----------------------
-       SECTIONS (fade in/out opacity with scroll – JS controlled)
+       SECTIONS
+       - cloud reveal ONCE
+       - continuous fade in/out while scrolling
     ---------------------- */
     section {
-      padding: 100px 40px; text-align: center; will-change: opacity; transition: opacity 240ms linear; opacity: 0.25;
+      padding: 100px 40px;
+      text-align: center;
+
+      /* continuous fade is JS-driven; this is the default min opacity */
+      will-change: opacity;
+      transition: opacity 240ms linear;
+      opacity: 0.25;
     }
+    /* Initial cloud state (before reveal) */
+    section.reveal-seed {
+      opacity: 0;
+      transform: translateY(40px);
+      filter: blur(20px);
+    }
+    /* Plays once on first reveal */
+    section.revealed {
+      animation: cloudFade 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
     section h2 { font-size: 32px; margin-bottom: 20px; letter-spacing: -0.2px; }
-    section p { max-width: 800px; margin: auto; font-size: 18px; }
+    section p  { max-width: 800px; margin: auto; font-size: 18px; }
 
     /* ----------------------
        CAREER TIMELINE
@@ -139,9 +158,7 @@
       cursor: pointer; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
     }
     .year:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,.08); border-color: #bbb; }
-    .year.disabled, .year[disabled] {
-      opacity: 0.45; cursor: not-allowed; background: #fafafa; border-style: dashed;
-    }
+    .year.disabled, .year[disabled] { opacity: 0.45; cursor: not-allowed; background: #fafafa; border-style: dashed; }
     .year::after {
       content: ""; position: absolute; left: 50%; transform: translateX(-50%);
       top: 36px; width: 10px; height: 10px; background: #aaa; border-radius: 50%;
@@ -150,7 +167,7 @@
     .year.active { border-color: #111; color: #111; }
     .year.active::after { background: #111; }
 
-    /* Active cursor/indicator bar sliding under the active year */
+    /* Sliding indicator under the active year */
     .cursor {
       position: absolute; top: 40px; height: 7px; background: #111; border-radius: 4px;
       transition: left .35s cubic-bezier(.22,1,.36,1), width .35s cubic-bezier(.22,1,.36,1);
@@ -182,156 +199,13 @@
     .modal-year { font-weight: 700; color: #000; }
 
     /* ----------------------
-       CLOUD EFFECT KEYFRAMES (hero reveal)
+       CLOUD EFFECT KEYFRAMES
     ---------------------- */
     @keyframes cloudFade {
       0%   { opacity: 0; filter: blur(20px); transform: translateY(60px); }
       100% { opacity: 1; filter: blur(0);    transform: translateY(0); }
     }
   </style>
-  /* Sections start in a cloud state, animate once on first reveal */
-    section.reveal-seed {
-      opacity: 0;
-      transform: translateY(40px);
-      filter: blur(20px);
-    }
-    section.revealed {
-      animation: cloudFade 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    }
-  <script>
-    // 1) One-time reveal for the hero content
-    document.addEventListener('DOMContentLoaded', () => {
-      const hero = document.querySelector('.hero-content');
-      if (hero) setTimeout(() => hero.classList.add('visible'), 80);
-    });
-
-    // 2) Continuous fade-in/fade-out for sections as you scroll
-    (function() {
-      const sections = Array.from(document.querySelectorAll('section'));
-      if (!sections.length) return;
-
-      let ticking = false;
-      const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
-      const lerp  = (a, b, t) => a + (b - a) * t;
-
-      function update() {
-        const vh = window.innerHeight || document.documentElement.clientHeight;
-        const centerY = vh / 2;
-
-        for (const el of sections) {
-          const rect = el.getBoundingClientRect();
-          const elCenter = rect.top + rect.height / 2;
-          const dist = Math.abs(elCenter - centerY);
-          const norm = clamp(dist / (vh * 0.6), 0, 1);
-          const opacity = lerp(1.0, 0.25, norm);
-          el.style.opacity = opacity.toFixed(3);
-        }
-        ticking = false;
-      }
-
-      function onScroll() {
-        if (!ticking) {
-          window.requestAnimationFrame(update);
-          ticking = true;
-        }
-      }
-      <script>
-  // Seed sections with initial cloud state
-  document.addEventListener('DOMContentLoaded', () => {
-    const sections = document.querySelectorAll('section');
-    sections.forEach(sec => sec.classList.add('reveal-seed'));
-  });
-
-  // One-time cloud reveal when a section first enters view
-    (function () {
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('revealed');
-            entry.target.classList.remove('reveal-seed');
-            io.unobserve(entry.target); // reveal only once
-          }
-        });
-      }, { root: null, rootMargin: '0px 0px -80px 0px', threshold: 0.15 });
-  
-      document.querySelectorAll('section').forEach(sec => io.observe(sec));
-    })();
-  </script>
-
-      window.addEventListener('scroll', onScroll, { passive: true });
-      window.addEventListener('resize', update, { passive: true });
-      window.addEventListener('load', update, { passive: true });
-      document.addEventListener('DOMContentLoaded', update, { passive: true });
-    })();
-
-    // 3) Timeline interactions (left→right transition + modal)
-    document.addEventListener('DOMContentLoaded', () => {
-      const line   = document.querySelector('.timeline');
-      const cursor = document.querySelector('.cursor');
-      const years  = Array.from(document.querySelectorAll('.timeline .year'));
-
-      function moveCursorTo(el) {
-        const rect = el.getBoundingClientRect();
-        const parentRect = line.getBoundingClientRect();
-        const left = rect.left - parentRect.left + line.scrollLeft;
-        cursor.style.left = `${left + 6}px`;
-        cursor.style.width = `${rect.width - 12}px`;
-        // Ensure the clicked year scrolls into view (left→right transition)
-        el.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-      }
-
-      function setActive(el) {
-        years.forEach(y => y.classList.remove('active'));
-        el.classList.add('active');
-        moveCursorTo(el);
-      }
-
-      // Initialize at first clickable (2014)
-      const firstActive = years.find(y => !y.disabled && !y.classList.contains('disabled'));
-      if (firstActive) {
-        // small delay so widths are measured after layout
-        setTimeout(() => setActive(firstActive), 100);
-      }
-
-      // Modal wiring
-      const modal = document.getElementById('career-modal');
-      const mTitle = modal.querySelector('.modal-title');
-      const mSub   = modal.querySelector('.modal-sub');
-      const mImg   = modal.querySelector('.modal-img');
-      const mClose = modal.querySelector('.modal-close');
-
-      function openModal(data) {
-        mTitle.textContent = data.title || '';
-        mSub.innerHTML = `<span class="modal-year">${data.year}</span> — ${data.subtitle || ''}`;
-        mImg.src = data.img || '';
-        mImg.alt = data.alt || data.title || 'Logo';
-        modal.classList.add('show');
-      }
-      function closeModal() { modal.classList.remove('show'); }
-
-      mClose.addEventListener('click', closeModal);
-      modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
-
-      years.forEach(btn => {
-        btn.addEventListener('click', () => {
-          if (btn.disabled || btn.classList.contains('disabled')) return;
-
-          setActive(btn);
-
-          // If the year has payload, show popup
-          const payload = btn.dataset.payload ? JSON.parse(btn.dataset.payload) : null;
-          if (payload) openModal(payload);
-        });
-      });
-
-      // Reposition cursor on resize
-      window.addEventListener('resize', () => {
-        const active = document.querySelector('.timeline .year.active');
-        if (active) moveCursorTo(active);
-      });
-    });
-  </script>
 </head>
 <body>
   <!-- NAVIGATION -->
@@ -479,5 +353,138 @@
       </div>
     </div>
   </div>
+
+  <script>
+    /* ----------------------
+       1) Hero: one-time cloud reveal
+    ---------------------- */
+    document.addEventListener('DOMContentLoaded', () => {
+      const hero = document.querySelector('.hero-content');
+      if (hero) setTimeout(() => hero.classList.add('visible'), 80);
+    });
+
+    /* ----------------------
+       2) Sections:
+          - seed cloud state
+          - play cloud reveal once via IntersectionObserver
+          - keep continuous fade in/out while scrolling
+    ---------------------- */
+    (function() {
+      const sections = Array.from(document.querySelectorAll('section'));
+      if (!sections.length) return;
+
+      // Seed initial cloud state
+      sections.forEach(sec => sec.classList.add('reveal-seed'));
+
+      // One-time cloud reveal on first intersection
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            entry.target.classList.remove('reveal-seed');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { root: null, rootMargin: '0px 0px -80px 0px', threshold: 0.15 });
+
+      sections.forEach(sec => io.observe(sec));
+
+      // Continuous fade mapping
+      let ticking = false;
+      const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
+      const lerp  = (a, b, t) => a + (b - a) * t;
+
+      function update() {
+        const vh = window.innerHeight || document.documentElement.clientHeight;
+        const centerY = vh / 2;
+
+        for (const el of sections) {
+          const rect = el.getBoundingClientRect();
+          const elCenter = rect.top + rect.height / 2;
+          const dist = Math.abs(elCenter - centerY);
+          const norm = clamp(dist / (vh * 0.6), 0, 1);
+          const opacity = lerp(1.0, 0.25, norm);
+          el.style.opacity = opacity.toFixed(3);
+        }
+        ticking = false;
+      }
+
+      function onScroll() {
+        if (!ticking) {
+          window.requestAnimationFrame(update);
+          ticking = true;
+        }
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', update, { passive: true });
+      window.addEventListener('load', update, { passive: true });
+      document.addEventListener('DOMContentLoaded', update, { passive: true });
+    })();
+
+    /* ----------------------
+       3) Timeline interactions (left→right transition + modal)
+    ---------------------- */
+    document.addEventListener('DOMContentLoaded', () => {
+      const line   = document.querySelector('.timeline');
+      const cursor = document.querySelector('.cursor');
+      const years  = Array.from(document.querySelectorAll('.timeline .year'));
+
+      function moveCursorTo(el) {
+        const rect = el.getBoundingClientRect();
+        const parentRect = line.getBoundingClientRect();
+        const left = rect.left - parentRect.left + line.scrollLeft;
+        cursor.style.left = `${left + 6}px`;
+        cursor.style.width = `${rect.width - 12}px`;
+        // Smooth horizontal scroll (left→right) to focus the active year
+        el.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
+
+      function setActive(el) {
+        years.forEach(y => y.classList.remove('active'));
+        el.classList.add('active');
+        moveCursorTo(el);
+      }
+
+      // Initialize at first clickable (2014)
+      const firstActive = years.find(y => !y.disabled && !y.classList.contains('disabled'));
+      if (firstActive) setTimeout(() => setActive(firstActive), 100);
+
+      // Modal wiring
+      const modal = document.getElementById('career-modal');
+      const mTitle = modal.querySelector('.modal-title');
+      const mSub   = modal.querySelector('.modal-sub');
+      const mImg   = modal.querySelector('.modal-img');
+      const mClose = modal.querySelector('.modal-close');
+
+      function openModal(data) {
+        mTitle.textContent = data.title || '';
+        mSub.innerHTML = `<span class="modal-year">${data.year}</span> — ${data.subtitle || ''}`;
+        mImg.src = data.img || '';
+        mImg.alt = data.alt || data.title || 'Logo';
+        modal.classList.add('show');
+      }
+      function closeModal() { modal.classList.remove('show'); }
+
+      mClose.addEventListener('click', closeModal);
+      modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+      years.forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (btn.disabled || btn.classList.contains('disabled')) return;
+          setActive(btn);
+          const payload = btn.dataset.payload ? JSON.parse(btn.dataset.payload) : null;
+          if (payload) openModal(payload);
+        });
+      });
+
+      // Reposition cursor on resize
+      window.addEventListener('resize', () => {
+        const active = document.querySelector('.timeline .year.active');
+        if (active) moveCursorTo(active);
+      });
+    });
+  </script>
 </body>
 </html>
