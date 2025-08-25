@@ -30,9 +30,27 @@
       text-decoration: none;
       color: #222;
       font-weight: bold;
+      padding: 6px 12px;
+      position: relative;
       transition: color 0.3s;
     }
-    nav a:hover { color: #555; }
+    /* underline effect */
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0%;
+      height: 2px;
+      background: black;
+      transition: width 0.3s ease-in-out;
+    }
+    nav a:hover {
+      color: black;
+    }
+    nav a:hover::after {
+      width: 100%;
+    }
 
     /* ----------------------
        HEADER HERO WITH PARALLAX
@@ -40,7 +58,7 @@
     header {
       text-align: center;
       padding: 140px 20px 100px;
-      background: #000 url('https://companieslogo.com/img/orig/MSCI_BIG.D-03d7ad86.png?t=1720244492') center/40% no-repeat;
+      background: linear-gradient(180deg, #222, #111) url('https://companieslogo.com/img/orig/MSCI_BIG.D-03d7ad86.png?t=1720244492') center/40% no-repeat;
       background-attachment: fixed; /* parallax effect */
       color: white;
       position: relative;
@@ -49,7 +67,7 @@
       content: "";
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(255,255,255,0.4); /* subtle overlay so logo stays visible */
+      background: rgba(0,0,0,0.3); /* subtle overlay */
     }
     .hero-content {
       position: relative;
@@ -85,8 +103,9 @@
       border: 2px solid #222;
     }
     .btn-primary:hover {
-      background: #000;
-      border-color: #000;
+      background: black;
+      border-color: black;
+      color: white;
       transform: translateY(-2px);
     }
     .btn-secondary {
@@ -95,8 +114,9 @@
       border: 2px solid white;
     }
     .btn-secondary:hover {
-      background: white;
-      color: #000;
+      background: black;
+      border: 2px solid black;
+      color: white;
       transform: translateY(-2px);
     }
 
@@ -161,6 +181,7 @@
   </style>
 
   <script>
+    // Reveal sections on scroll with cloud effect
     window.addEventListener('scroll', () => {
       document.querySelectorAll('section').forEach(sec => {
         const rect = sec.getBoundingClientRect();
