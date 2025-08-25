@@ -3,14 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <title>Portfolio – Somik Das</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
 
   <style>
+    :root { color-scheme: light dark; }
+    * { box-sizing: border-box; }
     body {
       margin: 0;
       font-family: 'Roboto', sans-serif;
       color: #222;
       scroll-behavior: smooth;
+      background: #fff;
     }
 
     /* ----------------------
@@ -121,8 +125,8 @@
     }
 
     /* ----------------------
-       BAND WITH MSCI LOGO (large, stretched) + LEFT→RIGHT DARK GRADIENT
-       Using layered backgrounds so the gradient sits above the image.
+       BAND WITH LOCAL IMAGE + LEFT→RIGHT DARK GRADIENT
+       Stretched large image via background-size: cover
     ---------------------- */
     .band {
       position: relative;
@@ -133,17 +137,13 @@
       line-height: 1.8;
       color: #fff;
 
-      /* gradient overlay first, then the MSCI logo */
+      /* Gradient overlay first, then your uploaded image */
       background-image:
         linear-gradient(to right, rgba(0,0,0,0.45), rgba(0,0,0,0.9)),
-        url('https://seekvectorlogo.com/wp-content/uploads/2019/01/msci-vector-logo.png');
+        url('IMG_5903.png'); /* or use the absolute URL: https://somikds3-glitch.github.io/webportfolio/IMG_5903.png */
       background-position: center center, center center;
       background-repeat: no-repeat, no-repeat;
-
-      /* "cover" keeps aspect ratio while filling the section (visually “stretched large”) */
       background-size: cover, cover;
-
-      /* keep the parallax feel */
       background-attachment: fixed, fixed;
     }
     .band p {
@@ -185,6 +185,14 @@
       0% { opacity: 0; filter: blur(20px); transform: translateY(60px); }
       100% { opacity: 1; filter: blur(0); transform: translateY(0); }
     }
+
+    /* iOS/some mobile browsers don't support background-attachment: fixed well */
+    @media (max-width: 768px) {
+      header { background-attachment: scroll, scroll; }
+      .band  { background-attachment: scroll, scroll; }
+      header h1 { font-size: 40px; }
+      header p  { font-size: 18px; }
+    }
   </style>
 
   <script>
@@ -220,12 +228,12 @@
       </p>
       <div class="hero-buttons">
         <a href="#projects" class="btn-primary">View My Work</a>
-        <a href="resume.pdf" class="btn-secondary" target="_blank">Download Resume</a>
+        <a href="resume.pdf" class="btn-secondary" target="_blank" rel="noopener">Download Resume</a>
       </div>
     </div>
   </header>
 
-  <!-- BAND WITH MSCI LOGO -->
+  <!-- BAND WITH YOUR UPLOADED IMAGE -->
   <div class="band">
     <p>
       As a graduate from a Top Tier Management School, I bring a high level of motivation and dedication to every task,
