@@ -208,6 +208,18 @@
       background: #111; color: #fff; border-color: #111;
     }
 
+    /* --- Brands scroller --- */
+    .brands-wrap { margin: 10px auto 28px; max-width: 1100px; text-align: left; }
+    .brands-title { font-size: 16px; font-weight: 700; margin: 0 0 10px; letter-spacing: .2px; }
+    .brands-scroller { position: relative; overflow: hidden; border-radius: 12px; background: #fafafa; box-shadow: inset 0 0 0 1px #eee; padding: 10px 0; }
+    .brands-track { display: flex; align-items: center; gap: 36px; width: max-content; animation: scrollBrands 28s linear infinite; padding-left: 12px; }
+    .brands-logo { height: 38px; width: auto; filter: grayscale(0); opacity: .95; transition: transform .2s ease, opacity .2s ease, filter .2s ease; }
+    .brands-logo:hover { transform: translateY(-2px); opacity: 1; filter: none; }
+
+    @keyframes scrollBrands { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    @media (prefers-reduced-motion: reduce) { .brands-track { animation: none; } }
+
     /* ----------------------
        CLOUD EFFECT KEYFRAMES
     ---------------------- */
@@ -267,6 +279,33 @@
   <section id="career">
     <h2>Career</h2>
     <p>[Placeholder for career history and roles]</p>
+
+    <!-- BRAND SCROLLER -->
+    <div class="brands-wrap">
+      <div class="brands-title">Brands associated with</div>
+      <div class="brands-scroller" aria-label="Associated brands">
+        <div class="brands-track">
+          <!-- Row 1 -->
+          <img src="chemtex.png" class="brands-logo" alt="Chemtex Speciality Limited">
+          <img src="SIIB.png" class="brands-logo" alt="Symbiosis Institute of International Business">
+          <img src="KPMG.png" class="brands-logo" alt="KPMG India">
+          <img src="MnM.png" class="brands-logo" alt="MarketsandMarkets Research">
+          <img src="LT.png" class="brands-logo" alt="L&T Financial Services">
+          <img src="GDRC.png" class="brands-logo" alt="GlobalData Research Centre">
+          <img src="EVS.png" class="brands-logo" alt="Evalueserve">
+          <img src="MSCI.png" class="brands-logo" alt="MSCI Inc.">
+          <!-- Row 2 (duplicate for seamless loop) -->
+          <img src="chemtex.png" class="brands-logo" alt="Chemtex Speciality Limited">
+          <img src="SIIB.png" class="brands-logo" alt="Symbiosis Institute of International Business">
+          <img src="KPMG.png" class="brands-logo" alt="KPMG India">
+          <img src="MnM.png" class="brands-logo" alt="MarketsandMarkets Research">
+          <img src="LT.png" class="brands-logo" alt="L&T Financial Services">
+          <img src="GDRC.png" class="brands-logo" alt="GlobalData Research Centre">
+          <img src="EVS.png" class="brands-logo" alt="Evalueserve">
+          <img src="MSCI.png" class="brands-logo" alt="MSCI Inc.">
+        </div>
+      </div>
+    </div>
 
     <!-- TIMELINE (2010 → 2025) -->
     <div class="timeline-wrap">
@@ -515,6 +554,7 @@
         <div class="modal-tabs" role="tablist"></div>
         <h3 class="modal-title">Title</h3>
         <p class="modal-sub"><span class="modal-year">Year</span></p>
+        <p style="margin:0;color:#666;">(Additional details can go here in the next iteration.)</p>
       </div>
     </div>
   </div>
