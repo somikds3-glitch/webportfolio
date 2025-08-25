@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Portfolio - Somik Das</title>
+  <title>Portfolio – Somik Das</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
     body {
@@ -11,13 +11,9 @@
       color: #222;
       scroll-behavior: smooth;
     }
-
-    /* ----------------------
-       NAVIGATION BAR
-    ---------------------- */
+    /* NAV BAR */
     nav {
-      position: sticky; 
-      top: 0;
+      position: sticky; top: 0;
       background: white;
       border-bottom: 1px solid #ddd;
       padding: 15px;
@@ -31,23 +27,16 @@
       font-weight: bold;
       transition: color 0.3s;
     }
-    nav a:hover {
-      color: #ff6600;
-    }
+    nav a:hover { color: #ff6600; }
 
-    /* ----------------------
-       HERO HEADER
-    ---------------------- */
+    /* HERO HEADER */
     header {
       text-align: center;
       padding: 100px 20px 50px;
       background: #000;
       color: white;
     }
-    header h1 {
-      font-size: 48px;
-      margin-bottom: 15px;
-    }
+    header h1 { font-size: 48px; margin-bottom: 15px; }
     header p {
       font-size: 20px;
       line-height: 1.5;
@@ -55,24 +44,23 @@
       margin: 0 auto;
     }
 
-    /* ----------------------
-       BIG BAND SECTION
-    ---------------------- */
+    /* BAND WITH MSCI LOGO BACKGROUND */
     .band {
       position: relative;
-      text-align: center;
       padding: 120px 20px;
       color: white;
-      font-family: "Monotype Corsiva", cursive;
+      font-family: 'Monotype Corsiva', cursive;
       font-size: 20px;
       line-height: 1.8;
+      text-align: center;
     }
     .band::before {
       content: "";
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: url('https://www.bing.com/ck/a?!&&p=edcba3e9a70e2d8f3fcd3efb4a6dc4088de6049eb4c8865fd72a221addcb7844JmltdHM9MTc1NjA4MDAwMA&ptn=3&ver=2&hsh=4&fclid=3dfc549d-ee9c-6ce8-1cb4-41a2efc06dcb&u=a1L2ltYWdlcy9zZWFyY2g_cT1tc2NpK2xvZ28maWQ9RThCQTNBMDAyRkM3RTEyNUI5RTgzNEY5NjJCRDUyNzkwNDJERDEzQyZGT1JNPUlBQ0ZJUg&ntb=1') center/contain no-repeat;
+      background: url('https://upload.wikimedia.org/wikipedia/commons/6/6e/MSCI_logo.svg') center/contain no-repeat;
       opacity: 0.1;
+      background-size: 50%;
     }
     .band p {
       position: relative;
@@ -82,9 +70,7 @@
       font-style: italic;
     }
 
-    /* ----------------------
-       SECTIONS
-    ---------------------- */
+    /* SECTIONS */
     section {
       padding: 100px 40px;
       text-align: center;
@@ -106,21 +92,16 @@
       font-size: 18px;
     }
   </style>
-
   <script>
-    // Scroll-triggered fade-in
     window.addEventListener('scroll', () => {
       document.querySelectorAll('section').forEach(sec => {
         const rect = sec.getBoundingClientRect();
-        if (rect.top < window.innerHeight - 100) {
-          sec.classList.add('visible');
-        }
+        if (rect.top < window.innerHeight - 100) sec.classList.add('visible');
       });
     });
   </script>
 </head>
 <body>
-  <!-- NAVIGATION -->
   <nav>
     <a href="#home">Home</a>
     <a href="#career">Career</a>
@@ -129,42 +110,40 @@
     <a href="#comments">Comments</a>
   </nav>
 
-  <!-- HERO -->
   <header id="home">
     <h1>Somik Das</h1>
     <p>
-      Passionate Data Ops, BI, and Analytics Professional | Driven to Deliver Excellence and Innovation | 
-      Data Operations | Data Visualisation | Data Processes Automation | Big Data Handling and Analysis
+      Passionate Data Ops, BI, and Analytics Professional | Driven to Deliver Excellence and Innovation |
+      Data Operations • Data Visualisation • Automation • Big Data Handling & Analysis
     </p>
   </header>
 
-  <!-- BAND -->
   <div class="band">
     <p>
-      As a graduate from a Top Tier Management School, I bring a high level of motivation and dedication...
-      <br><br>-Somik
+      As a graduate from a top-tier management school, I bring motivation and dedication to every task...
+      (long typed statement as before)
+      <br><br>- Somik
     </p>
   </div>
 
-  <!-- SECTIONS -->
   <section id="career">
     <h2>Career</h2>
-    <p>[Placeholder for career history and roles]</p>
+    <p>[Placeholder]</p>
   </section>
 
   <section id="education">
     <h2>Education</h2>
-    <p>[Placeholder for education background]</p>
+    <p>[Placeholder]</p>
   </section>
 
   <section id="projects">
     <h2>Projects</h2>
-    <p>[Placeholder for key data/AI projects]</p>
+    <p>[Placeholder]</p>
   </section>
 
   <section id="comments">
     <h2>User Comments / Testimonials</h2>
-    <p>[Placeholder for user feedback or LinkedIn recommendations]</p>
+    <p>[Placeholder]</p>
   </section>
 </body>
 </html>
