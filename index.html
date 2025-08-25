@@ -13,9 +13,11 @@
       scroll-behavior: smooth;
     }
 
-    /* NAV BAR */
+    /* ----------------------
+       NAVIGATION
+    ---------------------- */
     nav {
-      position: sticky; 
+      position: sticky;
       top: 0;
       background: white;
       border-bottom: 1px solid #ddd;
@@ -32,12 +34,14 @@
     }
     nav a:hover { color: #ff6600; }
 
-    /* HEADER with MSCI logo background */
+    /* ----------------------
+       HEADER WITH MSCI LOGO
+    ---------------------- */
     header {
       text-align: center;
       padding: 100px 20px 50px;
-      background: url('https://upload.wikimedia.org/wikipedia/commons/6/6e/MSCI_logo.svg') center/contain no-repeat;
-      background-color: #000;  /* fallback */
+      background: url('https://upload.wikimedia.org/wikipedia/commons/6/6e/MSCI_logo.svg') center/50% no-repeat;
+      background-color: #000; /* fallback */
       color: white;
       position: relative;
     }
@@ -45,7 +49,7 @@
       content: "";
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.6); /* dark overlay */
+      background: rgba(0,0,0,0.55); /* 55% dark overlay */
     }
     header h1, header p {
       position: relative;
@@ -59,7 +63,9 @@
       margin: 0 auto;
     }
 
-    /* BAND with professional background + Monotype Corsiva */
+    /* ----------------------
+       BAND WITH PROFESSIONAL BACKGROUND
+    ---------------------- */
     .band {
       position: relative;
       padding: 120px 20px;
@@ -74,7 +80,7 @@
       content: "";
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.6);
+      background: rgba(0,0,0,0.55); /* 55% transparency overlay */
     }
     .band p {
       position: relative;
@@ -84,17 +90,18 @@
       font-style: italic;
     }
 
-    /* SECTIONS (Career, Education, etc.) */
+    /* ----------------------
+       SECTION STYLING
+    ---------------------- */
     section {
       padding: 100px 40px;
       text-align: center;
       opacity: 0;
       transform: translateY(40px);
-      transition: all 1s ease-out;
+      filter: blur(20px);
     }
     section.visible {
-      opacity: 1;
-      transform: translateY(0);
+      animation: cloudFade 1.5s ease-out forwards;
     }
     section h2 {
       font-size: 32px;
@@ -105,10 +112,26 @@
       margin: auto;
       font-size: 18px;
     }
+
+    /* ----------------------
+       CLOUD EFFECT KEYFRAMES
+    ---------------------- */
+    @keyframes cloudFade {
+      0% {
+        opacity: 0;
+        filter: blur(20px);
+        transform: translateY(60px);
+      }
+      100% {
+        opacity: 1;
+        filter: blur(0);
+        transform: translateY(0);
+      }
+    }
   </style>
 
   <script>
-    // Smooth fade-in for sections on scroll
+    // Reveal sections with cloud-like effect on scroll
     window.addEventListener('scroll', () => {
       document.querySelectorAll('section').forEach(sec => {
         const rect = sec.getBoundingClientRect();
