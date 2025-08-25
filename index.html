@@ -48,37 +48,32 @@
       background: #000;
       transition: width 0.3s ease-in-out;
     }
-    nav a:hover {
-      color: #000;
-    }
-    nav a:hover::after {
-      width: 100%;
-    }
+    nav a:hover { color: #000; }
+    nav a:hover::after { width: 100%; }
 
     /* ----------------------
-       HEADER HERO WITH PARALLAX
+       HEADER HERO WITH MSCI BACKGROUND
+       (Your uploaded image fills header with a left→right dark gradient)
     ---------------------- */
     header {
       text-align: center;
       padding: 140px 20px 100px;
-      background:
-        linear-gradient(180deg, rgba(34,34,34,1), rgba(17,17,17,1)),
-        url('https://companieslogo.com/img/orig/MSCI_BIG.D-03d7ad86.png?t=1720244492') center/40% no-repeat;
+      background-image:
+        linear-gradient(to right, rgba(0,0,0,0.45), rgba(0,0,0,0.9)),
+        url('IMG_5903.png'); /* or use absolute URL: https://somikds3-glitch.github.io/webportfolio/IMG_5903.png */
+      background-position: center center, center center;
+      background-repeat: no-repeat, no-repeat;
+      background-size: cover, cover; /* “stretched large” */
       background-attachment: fixed, fixed;
       color: #fff;
       position: relative;
-    }
-    header::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.3);
     }
     .hero-content {
       position: relative;
       z-index: 1;
       max-width: 900px;
       margin: auto;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.35);
     }
     header h1 {
       font-size: 52px;
@@ -87,12 +82,10 @@
     header p {
       font-size: 20px;
       line-height: 1.6;
-      max-width: 800px;
+      max-width: 900px;
       margin: 0 auto 30px;
     }
-    .hero-buttons {
-      margin-top: 25px;
-    }
+    .hero-buttons { margin-top: 25px; }
     .hero-buttons a {
       display: inline-block;
       padding: 12px 28px;
@@ -107,26 +100,16 @@
       color: #fff;
       border: 2px solid #222;
     }
-    .btn-primary:hover {
-      background: #000;
-      border-color: #000;
-      transform: translateY(-2px);
-    }
+    .btn-primary:hover { background: #000; border-color: #000; transform: translateY(-2px); }
     .btn-secondary {
       background: transparent;
       color: #fff;
       border: 2px solid #fff;
     }
-    .btn-secondary:hover {
-      background: #000;
-      border: 2px solid #000;
-      color: #fff;
-      transform: translateY(-2px);
-    }
+    .btn-secondary:hover { background: #000; border-color: #000; color: #fff; transform: translateY(-2px); }
 
     /* ----------------------
-       BAND WITH LOCAL IMAGE + LEFT→RIGHT DARK GRADIENT
-       Stretched large image via background-size: cover
+       BAND (kept simple so header is the hero image)
     ---------------------- */
     .band {
       position: relative;
@@ -136,15 +119,7 @@
       font-size: 20px;
       line-height: 1.8;
       color: #fff;
-
-      /* Gradient overlay first, then your uploaded image */
-      background-image:
-        linear-gradient(to right, rgba(0,0,0,0.45), rgba(0,0,0,0.9)),
-        url('IMG_5903.png'); /* or use the absolute URL: https://somikds3-glitch.github.io/webportfolio/IMG_5903.png */
-      background-position: center center, center center;
-      background-repeat: no-repeat, no-repeat;
-      background-size: cover, cover;
-      background-attachment: fixed, fixed;
+      background: linear-gradient(180deg, #222, #111);
     }
     .band p {
       position: relative;
@@ -152,7 +127,6 @@
       max-width: 1000px;
       margin: auto;
       font-style: italic;
-      text-shadow: 0 2px 6px rgba(0,0,0,0.35);
     }
 
     /* ----------------------
@@ -165,18 +139,9 @@
       transform: translateY(40px);
       filter: blur(20px);
     }
-    section.visible {
-      animation: cloudFade 1.5s ease-out forwards;
-    }
-    section h2 {
-      font-size: 32px;
-      margin-bottom: 20px;
-    }
-    section p {
-      max-width: 800px;
-      margin: auto;
-      font-size: 18px;
-    }
+    section.visible { animation: cloudFade 1.5s ease-out forwards; }
+    section h2 { font-size: 32px; margin-bottom: 20px; }
+    section p { max-width: 800px; margin: auto; font-size: 18px; }
 
     /* ----------------------
        CLOUD EFFECT KEYFRAMES
@@ -186,10 +151,9 @@
       100% { opacity: 1; filter: blur(0); transform: translateY(0); }
     }
 
-    /* iOS/some mobile browsers don't support background-attachment: fixed well */
+    /* Mobile: many browsers don’t support background-attachment: fixed well */
     @media (max-width: 768px) {
       header { background-attachment: scroll, scroll; }
-      .band  { background-attachment: scroll, scroll; }
       header h1 { font-size: 40px; }
       header p  { font-size: 18px; }
     }
@@ -218,7 +182,7 @@
     <a href="#comments">Comments</a>
   </nav>
 
-  <!-- HEADER HERO -->
+  <!-- HEADER HERO (now shows your uploaded MSCI image as background) -->
   <header id="home">
     <div class="hero-content">
       <h1>Somik Das</h1>
@@ -233,7 +197,7 @@
     </div>
   </header>
 
-  <!-- BAND WITH YOUR UPLOADED IMAGE -->
+  <!-- BAND -->
   <div class="band">
     <p>
       As a graduate from a Top Tier Management School, I bring a high level of motivation and dedication to every task,
