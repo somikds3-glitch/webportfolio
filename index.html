@@ -189,7 +189,15 @@
       100% { opacity: 1; filter: blur(0);    transform: translateY(0); }
     }
   </style>
-
+  /* Sections start in a cloud state, animate once on first reveal */
+    section.reveal-seed {
+      opacity: 0;
+      transform: translateY(40px);
+      filter: blur(20px);
+    }
+    section.revealed {
+      animation: cloudFade 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
   <script>
     // 1) One-time reveal for the hero content
     document.addEventListener('DOMContentLoaded', () => {
@@ -227,6 +235,28 @@
           ticking = true;
         }
       }
+      <script>
+  // Seed sections with initial cloud state
+  document.addEventListener('DOMContentLoaded', () => {
+    const sections = document.querySelectorAll('section');
+    sections.forEach(sec => sec.classList.add('reveal-seed'));
+  });
+
+  // One-time cloud reveal when a section first enters view
+    (function () {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            entry.target.classList.remove('reveal-seed');
+            io.unobserve(entry.target); // reveal only once
+          }
+        });
+      }, { root: null, rootMargin: '0px 0px -80px 0px', threshold: 0.15 });
+  
+      document.querySelectorAll('section').forEach(sec => io.observe(sec));
+    })();
+  </script>
 
       window.addEventListener('scroll', onScroll, { passive: true });
       window.addEventListener('resize', update, { passive: true });
