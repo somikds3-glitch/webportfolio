@@ -28,19 +28,19 @@
     nav a {
       margin: 0 20px;
       text-decoration: none;
-      color: #004080;
+      color: #222;
       font-weight: bold;
       transition: color 0.3s;
     }
-    nav a:hover { color: #ff6600; }
+    nav a:hover { color: #555; }
 
     /* ----------------------
        HEADER HERO WITH PARALLAX
     ---------------------- */
     header {
       text-align: center;
-      padding: 120px 20px 100px;
-      background: #000 url('https://companieslogo.com/img/orig/MSCI_BIG-3c1c3b02.png?t=1636723739') center/40% no-repeat;
+      padding: 140px 20px 100px;
+      background: #000 url('https://companieslogo.com/img/orig/MSCI_BIG.D-03d7ad86.png?t=1720244492') center/40% no-repeat;
       background-attachment: fixed; /* parallax effect */
       color: white;
       position: relative;
@@ -49,7 +49,7 @@
       content: "";
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.3); /* lighter overlay so logo shows */
+      background: rgba(0,0,0,0.4); /* subtle overlay so logo stays visible */
     }
     .hero-content {
       position: relative;
@@ -57,7 +57,7 @@
       max-width: 900px;
       margin: auto;
     }
-    .header h1 {
+    header h1 {
       font-size: 52px;
       margin-bottom: 15px;
     }
@@ -68,24 +68,26 @@
       margin: 0 auto 30px;
     }
     .hero-buttons {
-      margin-top: 20px;
+      margin-top: 25px;
     }
     .hero-buttons a {
       display: inline-block;
-      padding: 12px 25px;
-      margin: 10px;
-      border-radius: 30px;
-      font-weight: bold;
+      padding: 12px 28px;
+      margin: 8px;
+      border-radius: 28px;
+      font-weight: 600;
       text-decoration: none;
-      transition: background 0.3s, transform 0.3s;
+      transition: all 0.3s;
     }
     .btn-primary {
-      background: #ff6600;
+      background: #222;
       color: white;
+      border: 2px solid #222;
     }
     .btn-primary:hover {
-      background: #e65c00;
-      transform: translateY(-3px);
+      background: #000;
+      border-color: #000;
+      transform: translateY(-2px);
     }
     .btn-secondary {
       background: transparent;
@@ -95,7 +97,7 @@
     .btn-secondary:hover {
       background: white;
       color: #000;
-      transform: translateY(-3px);
+      transform: translateY(-2px);
     }
 
     /* ----------------------
@@ -110,7 +112,7 @@
       line-height: 1.8;
       color: white;
       background: url('https://images.unsplash.com/photo-1534759846116-579de56f3bde?auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;
-      background-attachment: fixed; /* parallax effect */
+      background-attachment: fixed;
     }
     .band::after {
       content: "";
@@ -183,7 +185,6 @@
   <!-- HEADER HERO -->
   <header id="home">
     <div class="hero-content">
-      <img src="https://via.placeholder.com/150" alt="Profile Photo" class="hero-photo">
       <h1>Somik Das</h1>
       <p>
         Passionate Data Ops, BI, and Analytics Professional | Driven to Deliver Excellence and Innovation | 
