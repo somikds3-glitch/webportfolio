@@ -116,22 +116,12 @@
     section {
       padding: 100px 40px;
       text-align: center;
-
-      /* continuous fade is JS-driven; this is the default min opacity */
       will-change: opacity;
       transition: opacity 240ms linear;
       opacity: 0.25;
     }
-    /* Initial cloud state (before reveal) */
-    section.reveal-seed {
-      opacity: 0;
-      transform: translateY(40px);
-      filter: blur(20px);
-    }
-    /* Plays once on first reveal */
-    section.revealed {
-      animation: cloudFade 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    }
+    section.reveal-seed { opacity: 0; transform: translateY(40px); filter: blur(20px); }
+    section.revealed { animation: cloudFade 1s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
 
     section h2 { font-size: 32px; margin-bottom: 20px; letter-spacing: -0.2px; }
     section p  { max-width: 800px; margin: auto; font-size: 18px; }
@@ -167,7 +157,6 @@
     .year.active { border-color: #111; color: #111; }
     .year.active::after { background: #111; }
 
-    /* Sliding indicator under the active year */
     .cursor {
       position: absolute; top: 40px; height: 7px; background: #111; border-radius: 4px;
       transition: left .35s cubic-bezier(.22,1,.36,1), width .35s cubic-bezier(.22,1,.36,1);
@@ -316,7 +305,7 @@
           }'
         >2016</button>
 
-        <!-- 2017 with MULTIPLE TABS (array payload) -->
+        <!-- SINGLE 2017 button with two tabs (array payload) -->
         <button
           class="year"
           data-payload='[
@@ -325,14 +314,16 @@
               "title":"MBA in Energy and Environment",
               "subtitle":"Symbiosis Institute of International Business",
               "img":"SIIB.png",
-              "alt":"SIIB logo"
+              "alt":"SIIB logo",
+              "tab":"SIIB"
             },
             {
               "year":"2017",
               "title":"Summer Internship",
               "subtitle":"KPMG India",
               "img":"KPMG.png",
-              "alt":"KPMG logo"
+              "alt":"KPMG logo",
+              "tab":"KPMG"
             }
           ]'
         >2017</button>
@@ -396,16 +387,13 @@
     });
 
     /* ----------------------
-       2) Sections:
-          - seed cloud state
-          - play cloud reveal once via IntersectionObserver
-          - keep continuous fade in/out while scrolling
+       2) Sections cloud reveal + continuous fade
     ---------------------- */
     (function() {
       const sections = Array.from(document.querySelectorAll('section'));
       if (!sections.length) return;
 
-      // Seed initial cloud state
+      // Seed cloud state
       sections.forEach(sec => sec.classList.add('reveal-seed'));
 
       // One-time cloud reveal on first intersection
@@ -468,7 +456,7 @@
         const left = rect.left - parentRect.left + line.scrollLeft;
         cursor.style.left = `${left + 6}px`;
         cursor.style.width = `${rect.width - 12}px`;
-        // Smooth horizontal scroll (left→right) to focus the active year
+        // Smooth horizontal scroll to focus the active year
         el.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
       }
 
@@ -508,7 +496,7 @@
             tab.type = 'button';
             tab.role = 'tab';
             tab.setAttribute('aria-selected', idx === 0 ? 'true' : 'false');
-            tab.textContent = it.title ? it.title : `Item ${idx + 1}`;
+            tab.textContent = it.tab ? it.tab : (it.title ? it.title : `Item ${idx + 1}`);
             tab.addEventListener('click', () => {
               mTabs.querySelectorAll('.modal-tab').forEach(t => t.setAttribute('aria-selected','false'));
               tab.setAttribute('aria-selected','true');
