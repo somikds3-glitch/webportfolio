@@ -75,101 +75,114 @@
       header { background-attachment: scroll, scroll; }
     }
 
-    /* Hero content: one-time Apple-like reveal */
+    /* Hero content: one-time reveal */
     .hero-content {
       position: relative;
       z-index: 1;
       max-width: 940px;
       margin: auto;
       text-shadow: 0 2px 6px rgba(0,0,0,0.35);
-
-      /* initial state */
-      opacity: 0;
-      transform: translateY(40px);
-      filter: blur(20px);
+      opacity: 0; transform: translateY(40px); filter: blur(20px);
     }
-    .hero-content.visible {
-      animation: cloudFade 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-    }
-    header h1 {
-      font-size: 52px;
-      margin-bottom: 15px;
-      letter-spacing: -0.2px;
-      font-weight: 700;
-    }
-    header p {
-      font-size: 20px;
-      line-height: 1.6;
-      max-width: 900px;
-      margin: 0 auto 30px;
-      font-weight: 500;
-    }
+    .hero-content.visible { animation: cloudFade 1s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+    header h1 { font-size: 52px; margin-bottom: 15px; letter-spacing: -0.2px; font-weight: 700; }
+    header p { font-size: 20px; line-height: 1.6; max-width: 900px; margin: 0 auto 30px; font-weight: 500; }
     .hero-buttons { margin-top: 25px; }
     .hero-buttons a {
-      display: inline-block;
-      padding: 12px 28px;
-      margin: 8px;
-      border-radius: 28px;
-      font-weight: 700;
-      text-decoration: none;
-      letter-spacing: 0.2px;
+      display: inline-block; padding: 12px 28px; margin: 8px; border-radius: 28px; font-weight: 700;
+      text-decoration: none; letter-spacing: 0.2px;
       transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
     }
-    .btn-primary {
-      background: #222;
-      color: #fff;
-      border: 2px solid #222;
-    }
+    .btn-primary { background: #222; color: #fff; border: 2px solid #222; }
     .btn-primary:hover { background: #000; border-color: #000; transform: translateY(-2px); }
-    .btn-secondary {
-      background: transparent;
-      color: #fff;
-      border: 2px solid #fff;
-    }
+    .btn-secondary { background: transparent; color: #fff; border: 2px solid #fff; }
     .btn-secondary:hover { background: #000; border: 2px solid #000; color: #fff; transform: translateY(-2px); }
 
     /* ----------------------
        BAND (Lucida Sans as requested)
     ---------------------- */
     .band {
-      position: relative;
-      padding: 120px 20px;
-      text-align: center;
+      position: relative; padding: 120px 20px; text-align: center;
       font-family: "Lucida Sans", "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-      font-size: 20px;
-      line-height: 1.8;
-      color: #fff;
-      background: linear-gradient(180deg, #222, #111);
+      font-size: 20px; line-height: 1.8; color: #fff; background: linear-gradient(180deg, #222, #111);
     }
-    .band p {
-      position: relative;
-      z-index: 1;
-      max-width: 1000px;
-      margin: auto;
-      font-style: italic;
-    }
+    .band p { position: relative; z-index: 1; max-width: 1000px; margin: auto; font-style: italic; }
 
     /* ----------------------
-       SECTIONS (continuous fade in/out on scroll)
+       SECTIONS (fade in/out opacity with scroll – JS controlled)
     ---------------------- */
     section {
-      padding: 100px 40px;
-      text-align: center;
-
-      /* smooth transitions for opacity only */
-      will-change: opacity;
-      transition: opacity 240ms linear;
-      opacity: 0.25; /* default when far from center */
+      padding: 100px 40px; text-align: center; will-change: opacity; transition: opacity 240ms linear; opacity: 0.25;
     }
-    section h2 {
-      font-size: 32px;
-      margin-bottom: 20px;
-      letter-spacing: -0.2px;
-    }
+    section h2 { font-size: 32px; margin-bottom: 20px; letter-spacing: -0.2px; }
     section p { max-width: 800px; margin: auto; font-size: 18px; }
 
     /* ----------------------
-       CLOUD EFFECT KEYFRAMES for hero reveal
+       CAREER TIMELINE
+    ---------------------- */
+    .timeline-wrap { margin-top: 28px; }
+    .timeline {
+      position: relative;
+      display: flex; align-items: center; gap: 16px;
+      overflow-x: auto; scrollbar-width: thin; padding: 18px 12px 30px;
+      border-radius: 12px; background: #f7f7f7; box-shadow: inset 0 0 0 1px #eee;
+    }
+    .timeline::-webkit-scrollbar { height: 8px; }
+    .timeline::-webkit-scrollbar-thumb { background: #d0d0d0; border-radius: 8px; }
+    .timeline-track {
+      position: absolute; left: 12px; right: 12px; top: 42px; height: 3px; background: #ddd; border-radius: 2px;
+    }
+    .year {
+      position: relative; flex: 0 0 auto;
+      background: #fff; border: 1px solid #ddd; color: #333;
+      border-radius: 10px; padding: 8px 14px; font-weight: 700; letter-spacing: 0.2px;
+      cursor: pointer; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+    .year:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,.08); border-color: #bbb; }
+    .year.disabled, .year[disabled] {
+      opacity: 0.45; cursor: not-allowed; background: #fafafa; border-style: dashed;
+    }
+    .year::after {
+      content: ""; position: absolute; left: 50%; transform: translateX(-50%);
+      top: 36px; width: 10px; height: 10px; background: #aaa; border-radius: 50%;
+      box-shadow: 0 0 0 2px #f7f7f7;
+    }
+    .year.active { border-color: #111; color: #111; }
+    .year.active::after { background: #111; }
+
+    /* Active cursor/indicator bar sliding under the active year */
+    .cursor {
+      position: absolute; top: 40px; height: 7px; background: #111; border-radius: 4px;
+      transition: left .35s cubic-bezier(.22,1,.36,1), width .35s cubic-bezier(.22,1,.36,1);
+      pointer-events: none;
+    }
+
+    /* ----------------------
+       MODAL
+    ---------------------- */
+    .modal {
+      position: fixed; inset: 0; display: none; align-items: center; justify-content: center;
+      background: rgba(0,0,0,0.5); z-index: 2000; padding: 20px;
+    }
+    .modal.show { display: flex; }
+    .modal-card {
+      width: min(680px, 92vw); background: #fff; border-radius: 16px; padding: 22px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.25); position: relative;
+      display: grid; grid-template-columns: 120px 1fr; gap: 18px;
+    }
+    .modal-close {
+      position: absolute; top: 10px; right: 12px; border: none; background: transparent;
+      font-size: 22px; cursor: pointer; color: #333;
+    }
+    .modal-img {
+      width: 120px; height: 120px; border-radius: 12px; object-fit: contain; background: #fafafa; border: 1px solid #eee;
+    }
+    .modal-title { margin: 0 0 6px 0; font-size: 20px; font-weight: 800; }
+    .modal-sub { margin: 0 0 10px 0; color: #555; }
+    .modal-year { font-weight: 700; color: #000; }
+
+    /* ----------------------
+       CLOUD EFFECT KEYFRAMES (hero reveal)
     ---------------------- */
     @keyframes cloudFade {
       0%   { opacity: 0; filter: blur(20px); transform: translateY(60px); }
@@ -190,9 +203,8 @@
       if (!sections.length) return;
 
       let ticking = false;
-
-      function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
-      function lerp(a, b, t) { return a + (b - a) * t; }
+      const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
+      const lerp  = (a, b, t) => a + (b - a) * t;
 
       function update() {
         const vh = window.innerHeight || document.documentElement.clientHeight;
@@ -201,16 +213,9 @@
         for (const el of sections) {
           const rect = el.getBoundingClientRect();
           const elCenter = rect.top + rect.height / 2;
-
-          // Distance of element's center from viewport center
           const dist = Math.abs(elCenter - centerY);
-
-          // Normalize: 0 at center, ~1 when sufficiently far (tweak falloff with divisor)
           const norm = clamp(dist / (vh * 0.6), 0, 1);
-
-          // Opacity mapping: 1 at center, fading to 0.25 at far edges
           const opacity = lerp(1.0, 0.25, norm);
-
           el.style.opacity = opacity.toFixed(3);
         }
         ticking = false;
@@ -228,6 +233,74 @@
       window.addEventListener('load', update, { passive: true });
       document.addEventListener('DOMContentLoaded', update, { passive: true });
     })();
+
+    // 3) Timeline interactions (left→right transition + modal)
+    document.addEventListener('DOMContentLoaded', () => {
+      const line   = document.querySelector('.timeline');
+      const cursor = document.querySelector('.cursor');
+      const years  = Array.from(document.querySelectorAll('.timeline .year'));
+
+      function moveCursorTo(el) {
+        const rect = el.getBoundingClientRect();
+        const parentRect = line.getBoundingClientRect();
+        const left = rect.left - parentRect.left + line.scrollLeft;
+        cursor.style.left = `${left + 6}px`;
+        cursor.style.width = `${rect.width - 12}px`;
+        // Ensure the clicked year scrolls into view (left→right transition)
+        el.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
+
+      function setActive(el) {
+        years.forEach(y => y.classList.remove('active'));
+        el.classList.add('active');
+        moveCursorTo(el);
+      }
+
+      // Initialize at first clickable (2014)
+      const firstActive = years.find(y => !y.disabled && !y.classList.contains('disabled'));
+      if (firstActive) {
+        // small delay so widths are measured after layout
+        setTimeout(() => setActive(firstActive), 100);
+      }
+
+      // Modal wiring
+      const modal = document.getElementById('career-modal');
+      const mTitle = modal.querySelector('.modal-title');
+      const mSub   = modal.querySelector('.modal-sub');
+      const mImg   = modal.querySelector('.modal-img');
+      const mClose = modal.querySelector('.modal-close');
+
+      function openModal(data) {
+        mTitle.textContent = data.title || '';
+        mSub.innerHTML = `<span class="modal-year">${data.year}</span> — ${data.subtitle || ''}`;
+        mImg.src = data.img || '';
+        mImg.alt = data.alt || data.title || 'Logo';
+        modal.classList.add('show');
+      }
+      function closeModal() { modal.classList.remove('show'); }
+
+      mClose.addEventListener('click', closeModal);
+      modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+      document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+      years.forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (btn.disabled || btn.classList.contains('disabled')) return;
+
+          setActive(btn);
+
+          // If the year has payload, show popup
+          const payload = btn.dataset.payload ? JSON.parse(btn.dataset.payload) : null;
+          if (payload) openModal(payload);
+        });
+      });
+
+      // Reposition cursor on resize
+      window.addEventListener('resize', () => {
+        const active = document.querySelector('.timeline .year.active');
+        if (active) moveCursorTo(active);
+      });
+    });
   </script>
 </head>
 <body>
@@ -280,6 +353,68 @@
   <section id="career">
     <h2>Career</h2>
     <p>[Placeholder for career history and roles]</p>
+
+    <!-- TIMELINE (2010 → 2018 test set) -->
+    <div class="timeline-wrap">
+      <div class="timeline" id="career-timeline" aria-label="Career timeline">
+        <div class="timeline-track"></div>
+        <div class="cursor" aria-hidden="true" style="left:0;width:0;"></div>
+
+        <!-- Pre-2014 (not clickable) -->
+        <button class="year disabled" disabled aria-disabled="true">2010</button>
+        <button class="year disabled" disabled aria-disabled="true">2011</button>
+        <button class="year disabled" disabled aria-disabled="true">2012</button>
+        <button class="year disabled" disabled aria-disabled="true">2013</button>
+
+        <!-- From 2014 onwards (clickable as specified) -->
+        <button
+          class="year"
+          data-payload='{
+            "year":"2014",
+            "title":"Chemtex Speciality Limited",
+            "subtitle":"Sales and Service Engineer",
+            "img":"chemtex.png",
+            "alt":"Chemtex logo"
+          }'
+        >2014</button>
+
+        <button class="year disabled" disabled aria-disabled="true">2015</button>
+
+        <button
+          class="year"
+          data-payload='{
+            "year":"2016",
+            "title":"MBA in Energy and Environment",
+            "subtitle":"Symbiosis Institute of International Business",
+            "img":"SIIB.png",
+            "alt":"SIIB logo"
+          }'
+        >2016</button>
+
+        <button
+          class="year"
+          data-payload='{
+            "year":"2017",
+            "title":"MBA in Energy and Environment",
+            "subtitle":"Symbiosis Institute of International Business",
+            "img":"SIIB.png",
+            "alt":"SIIB logo"
+          }'
+        >2017</button>
+
+        <button
+          class="year"
+          data-payload='{
+            "year":"2018",
+            "title":"L&T Financial Services",
+            "subtitle":"Team Manager (June 2018)",
+            "img":"LT.png",
+            "alt":"L&T Financial Services logo"
+          }'
+        >2018</button>
+
+      </div>
+    </div>
   </section>
 
   <section id="education">
@@ -301,5 +436,18 @@
     <h2>User Comments / Testimonials</h2>
     <p>[Placeholder for user feedback or LinkedIn recommendations]</p>
   </section>
+
+  <!-- MODAL -->
+  <div class="modal" id="career-modal" role="dialog" aria-modal="true" aria-label="Career detail">
+    <div class="modal-card">
+      <button class="modal-close" aria-label="Close">✕</button>
+      <img class="modal-img" src="" alt="Logo">
+      <div>
+        <h3 class="modal-title">Title</h3>
+        <p class="modal-sub"><span class="modal-year">Year</span></p>
+        <p style="margin:0;color:#666;">(Additional details can go here in the next iteration.)</p>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
