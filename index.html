@@ -53,7 +53,7 @@
     nav a:hover::after { width: 100%; }
 
     /* ----------------------
-       HEADER HERO (MSCI image + left→right dark gradient)
+       HEADER HERO (MSCI background)
     ---------------------- */
     header {
       text-align: center;
@@ -67,7 +67,6 @@
       background-attachment: fixed, fixed;
       color: #fff;
       position: relative;
-      will-change: transform, opacity;
     }
     @media (max-width: 768px) {
       header { background-attachment: scroll, scroll; }
@@ -79,10 +78,7 @@
       margin: auto;
       text-shadow: 0 2px 6px rgba(0,0,0,0.35);
     }
-    header h1 {
-      font-size: 52px;
-      margin-bottom: 15px;
-    }
+    header h1 { font-size: 52px; margin-bottom: 15px; }
     header p {
       font-size: 20px;
       line-height: 1.6;
@@ -110,22 +106,20 @@
       color: #fff;
       border: 2px solid #fff;
     }
-    .btn-secondary:hover { background: #000; border-color: #000; color: #fff; transform: translateY(-2px); }
+    .btn-secondary:hover { background: #000; border: 2px solid #000; color: #fff; transform: translateY(-2px); }
 
     /* ----------------------
-       BAND (clean gradient — removed odd image behavior)
+       BAND
     ---------------------- */
     .band {
       position: relative;
       padding: 120px 20px;
       text-align: center;
-      font-family: "Monotype Corsiva", cursive;
+      font-family: "Lucida Sans", sans-serif; /* updated */
       font-size: 20px;
       line-height: 1.8;
       color: #fff;
       background: linear-gradient(180deg, #222, #111);
-      will-change: transform, opacity;
-      transform-origin: center center;
     }
     .band p {
       position: relative;
@@ -136,79 +130,40 @@
     }
 
     /* ----------------------
-       SECTION STYLING + scroll-driven transform
+       SECTION STYLING
     ---------------------- */
     section {
       padding: 100px 40px;
       text-align: center;
-      will-change: transform, opacity;
-      transform-origin: center center;
+      opacity: 0;
+      transform: translateY(40px);
+      filter: blur(20px);
+    }
+    section.visible {
+      animation: cloudFade 1.5s ease-out forwards;
     }
     section h2 { font-size: 32px; margin-bottom: 20px; }
     section p  { max-width: 800px; margin: auto; font-size: 18px; }
 
-    /* Helpful spacing so sections breathe on scroll */
-    section + section { margin-top: 10px; }
-
-    /* Subtle defaults before JS kicks in */
-    .band, section {
-      opacity: 0.9;
-      transform: scale(0.98);
-    }
-
-    /* Accessibility: reduce motion */
-    @media (prefers-reduced-motion: reduce) {
-      .band, section { transition: none !important; }
+    /* ----------------------
+       CLOUD EFFECT KEYFRAMES
+    ---------------------- */
+    @keyframes cloudFade {
+      0% { opacity: 0; filter: blur(20px); transform: translateY(60px); }
+      100% { opacity: 1; filter: blur(0); transform: translateY(0); }
     }
   </style>
 
   <script>
-    // Scroll-driven scale + fade:
-    // Each block (band + sections) grows towards the center of the viewport and
-    // gently shrinks/fades as it leaves.
-    (() => {
-      const blocks = Array.from(document.querySelectorAll('.band, section'));
-      let ticking = false;
-
-      function lerp(a, b, t) { return a + (b - a) * t; }
-
-      function update() {
-        const vh = window.innerHeight || document.documentElement.clientHeight;
-        const centerY = vh / 2;
-
-        for (const el of blocks) {
-          const rect = el.getBoundingClientRect();
-          const elCenter = rect.top + rect.height / 2;
-
-          // Distance of the element's center from the viewport center (0 = centered)
-          const dist = Math.abs(elCenter - centerY);
-
-          // Normalize: 0 (center) → 1 (far). Tune falloff with divisor (vh * 0.6)
-          const norm = Math.min(1, dist / (vh * 0.6));
-
-          // Map to visual properties
-          const scale = lerp(1.04, 0.94, norm);  // slightly larger near center
-          const opacity = lerp(1.0, 0.55, norm); // more opaque near center
-          const translateY = lerp(0, 14, norm);  // subtle drift away
-
-          el.style.transform = `translateY(${translateY}px) scale(${scale})`;
-          el.style.opacity = opacity;
+    // Reveal sections on scroll with cloud fade-in
+    window.addEventListener('scroll', () => {
+      document.querySelectorAll('section').forEach(sec => {
+        const rect = sec.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+          sec.classList.add('visible');
         }
-        ticking = false;
-      }
-
-      function onScroll() {
-        if (!ticking) {
-          window.requestAnimationFrame(update);
-          ticking = true;
-        }
-      }
-
-      window.addEventListener('scroll', onScroll, { passive: true });
-      window.addEventListener('resize', update, { passive: true });
-      window.addEventListener('load', update, { passive: true });
-      document.addEventListener('DOMContentLoaded', update, { passive: true });
-    })();
+      });
+    });
   </script>
 </head>
 <body>
