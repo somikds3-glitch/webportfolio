@@ -35,12 +35,13 @@
     nav a:hover { color: #ff6600; }
 
     /* ----------------------
-       HEADER WITH MSCI LOGO
+       HEADER HERO WITH PARALLAX
     ---------------------- */
     header {
       text-align: center;
-      padding: 100px 20px 50px;
+      padding: 120px 20px 100px;
       background: #000 url('https://upload.wikimedia.org/wikipedia/commons/6/6e/MSCI_logo.svg') center/60% no-repeat;
+      background-attachment: fixed; /* parallax effect */
       color: white;
       position: relative;
     }
@@ -48,22 +49,65 @@
       content: "";
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.25); /* 55% overlay */
+      background: rgba(0,0,0,0.55);
     }
-    header h1, header p {
+    .hero-content {
       position: relative;
       z-index: 1;
+      max-width: 900px;
+      margin: auto;
     }
-    header h1 { font-size: 48px; margin-bottom: 15px; }
+    .hero-photo {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid white;
+      margin-bottom: 20px;
+    }
+    header h1 {
+      font-size: 52px;
+      margin-bottom: 15px;
+    }
     header p {
       font-size: 20px;
-      line-height: 1.5;
+      line-height: 1.6;
       max-width: 800px;
-      margin: 0 auto;
+      margin: 0 auto 30px;
+    }
+    .hero-buttons {
+      margin-top: 20px;
+    }
+    .hero-buttons a {
+      display: inline-block;
+      padding: 12px 25px;
+      margin: 10px;
+      border-radius: 30px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .btn-primary {
+      background: #ff6600;
+      color: white;
+    }
+    .btn-primary:hover {
+      background: #e65c00;
+      transform: translateY(-3px);
+    }
+    .btn-secondary {
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+    }
+    .btn-secondary:hover {
+      background: white;
+      color: #000;
+      transform: translateY(-3px);
     }
 
     /* ----------------------
-       BAND WITH PROFESSIONAL BACKGROUND
+       BAND WITH PARALLAX BACKGROUND
     ---------------------- */
     .band {
       position: relative;
@@ -74,12 +118,13 @@
       line-height: 1.8;
       color: white;
       background: url('https://images.unsplash.com/photo-1534759846116-579de56f3bde?auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;
+      background-attachment: fixed; /* parallax effect */
     }
     .band::after {
       content: "";
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.85); /* 55% overlay */
+      background: rgba(0,0,0,0.55);
     }
     .band p {
       position: relative;
@@ -116,21 +161,12 @@
        CLOUD EFFECT KEYFRAMES
     ---------------------- */
     @keyframes cloudFade {
-      0% {
-        opacity: 0;
-        filter: blur(20px);
-        transform: translateY(60px);
-      }
-      100% {
-        opacity: 1;
-        filter: blur(0);
-        transform: translateY(0);
-      }
+      0% { opacity: 0; filter: blur(20px); transform: translateY(60px); }
+      100% { opacity: 1; filter: blur(0); transform: translateY(0); }
     }
   </style>
 
   <script>
-    // Reveal sections with cloud-like effect on scroll
     window.addEventListener('scroll', () => {
       document.querySelectorAll('section').forEach(sec => {
         const rect = sec.getBoundingClientRect();
@@ -148,17 +184,24 @@
     <a href="#career">Career</a>
     <a href="#education">Education</a>
     <a href="#projects">Projects</a>
-    <a href="#projects">Certifications</a>
+    <a href="#certifications">Certifications</a>
     <a href="#comments">Comments</a>
   </nav>
 
-  <!-- HEADER -->
+  <!-- HEADER HERO -->
   <header id="home">
-    <h1>Somik Das</h1>
-    <p>
-      Passionate Data Ops, BI, and Analytics Professional | Driven to Deliver Excellence and Innovation | 
-      Data Operations • Data Visualisation • Data Processes Automation • Big Data Handling & Analysis
-    </p>
+    <div class="hero-content">
+      <img src="https://via.placeholder.com/150" alt="Profile Photo" class="hero-photo">
+      <h1>Somik Das</h1>
+      <p>
+        Passionate Data Ops, BI, and Analytics Professional | Driven to Deliver Excellence and Innovation | 
+        Data Operations • Data Visualisation • Data Processes Automation • Big Data Handling & Analysis
+      </p>
+      <div class="hero-buttons">
+        <a href="#projects" class="btn-primary">View My Work</a>
+        <a href="resume.pdf" class="btn-secondary" target="_blank">Download Resume</a>
+      </div>
+    </div>
   </header>
 
   <!-- BAND -->
@@ -190,6 +233,11 @@
   <section id="projects">
     <h2>Projects</h2>
     <p>[Placeholder for key data/AI projects]</p>
+  </section>
+
+  <section id="certifications">
+    <h2>Certifications</h2>
+    <p>[Placeholder for certifications, e.g., Power BI, Azure, DataOps, etc.]</p>
   </section>
 
   <section id="comments">
