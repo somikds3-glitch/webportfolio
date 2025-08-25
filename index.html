@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Portfolio – Somik Das</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
 
   <style>
     body {
@@ -19,7 +19,7 @@
     nav {
       position: sticky;
       top: 0;
-      background: white;
+      background: #fff;
       border-bottom: 1px solid #ddd;
       padding: 15px;
       text-align: center;
@@ -34,7 +34,6 @@
       position: relative;
       transition: color 0.3s;
     }
-    /* underline effect */
     nav a::after {
       content: "";
       position: absolute;
@@ -42,11 +41,11 @@
       bottom: 0;
       width: 0%;
       height: 2px;
-      background: black;
+      background: #000;
       transition: width 0.3s ease-in-out;
     }
     nav a:hover {
-      color: black;
+      color: #000;
     }
     nav a:hover::after {
       width: 100%;
@@ -58,16 +57,18 @@
     header {
       text-align: center;
       padding: 140px 20px 100px;
-      background: linear-gradient(180deg, #222, #111) url('https://companieslogo.com/img/orig/MSCI_BIG.D-03d7ad86.png?t=1720244492') center/40% no-repeat;
-      background-attachment: fixed; /* parallax effect */
-      color: white;
+      background:
+        linear-gradient(180deg, rgba(34,34,34,1), rgba(17,17,17,1)),
+        url('https://companieslogo.com/img/orig/MSCI_BIG.D-03d7ad86.png?t=1720244492') center/40% no-repeat;
+      background-attachment: fixed, fixed;
+      color: #fff;
       position: relative;
     }
     header::after {
       content: "";
       position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.3); /* subtle overlay */
+      inset: 0;
+      background: rgba(0,0,0,0.3);
     }
     .hero-content {
       position: relative;
@@ -99,29 +100,29 @@
     }
     .btn-primary {
       background: #222;
-      color: white;
+      color: #fff;
       border: 2px solid #222;
     }
     .btn-primary:hover {
-      background: black;
-      border-color: black;
-      color: white;
+      background: #000;
+      border-color: #000;
       transform: translateY(-2px);
     }
     .btn-secondary {
       background: transparent;
-      color: white;
-      border: 2px solid white;
+      color: #fff;
+      border: 2px solid #fff;
     }
     .btn-secondary:hover {
-      background: black;
-      border: 2px solid black;
-      color: white;
+      background: #000;
+      border: 2px solid #000;
+      color: #fff;
       transform: translateY(-2px);
     }
 
     /* ----------------------
-       BAND WITH PARALLAX BACKGROUND
+       BAND WITH MSCI LOGO (large, stretched) + LEFT→RIGHT DARK GRADIENT
+       Using layered backgrounds so the gradient sits above the image.
     ---------------------- */
     .band {
       position: relative;
@@ -130,15 +131,20 @@
       font-family: "Monotype Corsiva", cursive;
       font-size: 20px;
       line-height: 1.8;
-      color: white;
-      background: url('https://images.unsplash.com/photo-1534759846116-579de56f3bde?auto=format&fit=crop&w=1500&q=80') center/cover no-repeat;
-      background-attachment: fixed;
-    }
-    .band::after {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.55);
+      color: #fff;
+
+      /* gradient overlay first, then the MSCI logo */
+      background-image:
+        linear-gradient(to right, rgba(0,0,0,0.45), rgba(0,0,0,0.9)),
+        url('https://seekvectorlogo.com/wp-content/uploads/2019/01/msci-vector-logo.png');
+      background-position: center center, center center;
+      background-repeat: no-repeat, no-repeat;
+
+      /* "cover" keeps aspect ratio while filling the section (visually “stretched large”) */
+      background-size: cover, cover;
+
+      /* keep the parallax feel */
+      background-attachment: fixed, fixed;
     }
     .band p {
       position: relative;
@@ -146,6 +152,7 @@
       max-width: 1000px;
       margin: auto;
       font-style: italic;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.35);
     }
 
     /* ----------------------
@@ -208,7 +215,7 @@
     <div class="hero-content">
       <h1>Somik Das</h1>
       <p>
-        Passionate Data Ops, BI, and Analytics Professional | Driven to Deliver Excellence and Innovation | 
+        Passionate Data Ops, BI, and Analytics Professional | Driven to Deliver Excellence and Innovation |
         Data Operations • Data Visualisation • Data Processes Automation • Big Data Handling & Analysis
       </p>
       <div class="hero-buttons">
@@ -218,16 +225,16 @@
     </div>
   </header>
 
-  <!-- BAND -->
+  <!-- BAND WITH MSCI LOGO -->
   <div class="band">
     <p>
-      As a graduate from a Top Tier Management School, I bring a high level of motivation and dedication to every task, 
-      ensuring excellence and adherence to standards. Currently working as a Data Processes Professional, I specialize 
-      in managing and optimizing data workflows, data modeling, defining QA/QC processes, and building efficient data 
-      pipelines. My expertise includes data operations, process automation, dataset prescreening and visualization, 
-      enabling actionable insights and supporting data-driven decision-making. With a strong interest in AI, I am actively 
-      implementing AI Prompt Engineering by leveraging and democratizing AI to make it accessible and impactful across 
-      data processes. I am eager to continue refining my skills in advanced data management, AI, and analytics within a 
+      As a graduate from a Top Tier Management School, I bring a high level of motivation and dedication to every task,
+      ensuring excellence and adherence to standards. Currently working as a Data Processes Professional, I specialize
+      in managing and optimizing data workflows, data modeling, defining QA/QC processes, and building efficient data
+      pipelines. My expertise includes data operations, process automation, dataset prescreening and visualization,
+      enabling actionable insights and supporting data-driven decision-making. With a strong interest in AI, I am actively
+      implementing AI Prompt Engineering by leveraging and democratizing AI to make it accessible and impactful across
+      data processes. I am eager to continue refining my skills in advanced data management, AI, and analytics within a
       dynamic work environment that fosters innovation and growth.
       <br><br>- Somik
     </p>
