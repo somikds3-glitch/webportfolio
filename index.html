@@ -75,7 +75,7 @@
       header { background-attachment: scroll, scroll; }
     }
 
-    /* Hero content: Apple-like reveal (same pattern as sections) */
+    /* Hero content: one-time Apple-like reveal */
     .hero-content {
       position: relative;
       z-index: 1;
@@ -129,7 +129,7 @@
     .btn-secondary:hover { background: #000; border: 2px solid #000; color: #fff; transform: translateY(-2px); }
 
     /* ----------------------
-       BAND (kept; font = Lucida Sans per your request)
+       BAND (Lucida Sans as requested)
     ---------------------- */
     .band {
       position: relative;
@@ -150,19 +150,16 @@
     }
 
     /* ----------------------
-       SECTION STYLING (Apple-like reveal)
+       SECTIONS (continuous fade in/out on scroll)
     ---------------------- */
     section {
       padding: 100px 40px;
       text-align: center;
 
-      /* initial state */
-      opacity: 0;
-      transform: translateY(40px);
-      filter: blur(20px);
-    }
-    section.visible {
-      animation: cloudFade 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      /* smooth transitions for opacity only */
+      will-change: opacity;
+      transition: opacity 240ms linear;
+      opacity: 0.25; /* default when far from center */
     }
     section h2 {
       font-size: 32px;
@@ -172,7 +169,7 @@
     section p { max-width: 800px; margin: auto; font-size: 18px; }
 
     /* ----------------------
-       CLOUD EFFECT KEYFRAMES (same as earlier, just nicer easing)
+       CLOUD EFFECT KEYFRAMES for hero reveal
     ---------------------- */
     @keyframes cloudFade {
       0%   { opacity: 0; filter: blur(20px); transform: translateY(60px); }
@@ -181,25 +178,56 @@
   </style>
 
   <script>
-    // Intersection Observer for reveal-on-scroll (hero + sections)
+    // 1) One-time reveal for the hero content
     document.addEventListener('DOMContentLoaded', () => {
-      // Reveal the hero immediately with a tiny delay (for that Apple-esque "settle" feel)
       const hero = document.querySelector('.hero-content');
       if (hero) setTimeout(() => hero.classList.add('visible'), 80);
-
-      const opts = { root: null, rootMargin: '0px 0px -80px 0px', threshold: 0.15 };
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('visible');
-            // Unobserve once revealed
-            observer.unobserve(entry.target);
-          }
-        });
-      }, opts);
-
-      document.querySelectorAll('section').forEach(sec => observer.observe(sec));
     });
+
+    // 2) Continuous fade-in/fade-out for sections as you scroll
+    (function() {
+      const sections = Array.from(document.querySelectorAll('section'));
+      if (!sections.length) return;
+
+      let ticking = false;
+
+      function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
+      function lerp(a, b, t) { return a + (b - a) * t; }
+
+      function update() {
+        const vh = window.innerHeight || document.documentElement.clientHeight;
+        const centerY = vh / 2;
+
+        for (const el of sections) {
+          const rect = el.getBoundingClientRect();
+          const elCenter = rect.top + rect.height / 2;
+
+          // Distance of element's center from viewport center
+          const dist = Math.abs(elCenter - centerY);
+
+          // Normalize: 0 at center, ~1 when sufficiently far (tweak falloff with divisor)
+          const norm = clamp(dist / (vh * 0.6), 0, 1);
+
+          // Opacity mapping: 1 at center, fading to 0.25 at far edges
+          const opacity = lerp(1.0, 0.25, norm);
+
+          el.style.opacity = opacity.toFixed(3);
+        }
+        ticking = false;
+      }
+
+      function onScroll() {
+        if (!ticking) {
+          window.requestAnimationFrame(update);
+          ticking = true;
+        }
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', update, { passive: true });
+      window.addEventListener('load', update, { passive: true });
+      document.addEventListener('DOMContentLoaded', update, { passive: true });
+    })();
   </script>
 </head>
 <body>
