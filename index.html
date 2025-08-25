@@ -67,12 +67,7 @@
       background-attachment: fixed, fixed;
       color: #fff;
       position: relative;
-
-      /* scroll effect defaults */
       will-change: transform, opacity;
-      transform-origin: center center;
-      opacity: 0.9;
-      transform: scale(0.98);
     }
     @media (max-width: 768px) {
       header { background-attachment: scroll, scroll; }
@@ -115,10 +110,10 @@
       color: #fff;
       border: 2px solid #fff;
     }
-    .btn-secondary:hover { background: #000; border: 2px solid #000; color: #fff; transform: translateY(-2px); }
+    .btn-secondary:hover { background: #000; border-color: #000; color: #fff; transform: translateY(-2px); }
 
     /* ----------------------
-       BAND
+       BAND (clean gradient — removed odd image behavior)
     ---------------------- */
     .band {
       position: relative;
@@ -129,12 +124,8 @@
       line-height: 1.8;
       color: #fff;
       background: linear-gradient(180deg, #222, #111);
-
-      /* scroll effect defaults */
       will-change: transform, opacity;
       transform-origin: center center;
-      opacity: 0.9;
-      transform: scale(0.98);
     }
     .band p {
       position: relative;
@@ -150,28 +141,33 @@
     section {
       padding: 100px 40px;
       text-align: center;
-
-      /* scroll effect defaults */
       will-change: transform, opacity;
       transform-origin: center center;
-      opacity: 0.9;
-      transform: scale(0.98);
     }
     section h2 { font-size: 32px; margin-bottom: 20px; }
     section p  { max-width: 800px; margin: auto; font-size: 18px; }
+
+    /* Helpful spacing so sections breathe on scroll */
     section + section { margin-top: 10px; }
+
+    /* Subtle defaults before JS kicks in */
+    .band, section {
+      opacity: 0.9;
+      transform: scale(0.98);
+    }
 
     /* Accessibility: reduce motion */
     @media (prefers-reduced-motion: reduce) {
-      header, .band, section { transition: none !important; transform: none !important; opacity: 1 !important; }
+      .band, section { transition: none !important; }
     }
   </style>
 
   <script>
-    // Scroll-driven scale + fade for header, band, and sections.
-    // Each block grows to full size near viewport center, then shrinks/fades away.
+    // Scroll-driven scale + fade:
+    // Each block (band + sections) grows towards the center of the viewport and
+    // gently shrinks/fades as it leaves.
     (() => {
-      const blocks = Array.from(document.querySelectorAll('header, .band, section'));
+      const blocks = Array.from(document.querySelectorAll('.band, section'));
       let ticking = false;
 
       function lerp(a, b, t) { return a + (b - a) * t; }
@@ -184,16 +180,16 @@
           const rect = el.getBoundingClientRect();
           const elCenter = rect.top + rect.height / 2;
 
-          // Distance from viewport center (0 = centered)
+          // Distance of the element's center from the viewport center (0 = centered)
           const dist = Math.abs(elCenter - centerY);
 
-          // Normalize: 0 (center) → 1 (far). Adjust falloff with divisor (vh * 0.6)
+          // Normalize: 0 (center) → 1 (far). Tune falloff with divisor (vh * 0.6)
           const norm = Math.min(1, dist / (vh * 0.6));
 
-          // Visual mapping: stronger near center, gentler at edges
-          const scale = lerp(1.05, 0.94, norm);   // slightly larger when centered
-          const opacity = lerp(1.0, 0.55, norm);  // more opaque when centered
-          const translateY = lerp(0, 14, norm);   // subtle drift
+          // Map to visual properties
+          const scale = lerp(1.04, 0.94, norm);  // slightly larger near center
+          const opacity = lerp(1.0, 0.55, norm); // more opaque near center
+          const translateY = lerp(0, 14, norm);  // subtle drift away
 
           el.style.transform = `translateY(${translateY}px) scale(${scale})`;
           el.style.opacity = opacity;
