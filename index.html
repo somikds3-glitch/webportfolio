@@ -268,7 +268,7 @@
     <h2>Career</h2>
     <p>[Placeholder for career history and roles]</p>
 
-    <!-- TIMELINE (2010 → 2018 test set) -->
+    <!-- TIMELINE (2010 → 2025) -->
     <div class="timeline-wrap">
       <div class="timeline" id="career-timeline" aria-label="Career timeline">
         <div class="timeline-track"></div>
@@ -288,7 +288,8 @@
             "title":"Chemtex Speciality Limited",
             "subtitle":"Sales and Service Engineer",
             "img":"chemtex.png",
-            "alt":"Chemtex logo"
+            "alt":"Chemtex logo",
+            "tab":"Chemtex"
           }'
         >2014</button>
 
@@ -301,11 +302,12 @@
             "title":"MBA in Energy and Environment",
             "subtitle":"Symbiosis Institute of International Business",
             "img":"SIIB.png",
-            "alt":"SIIB logo"
+            "alt":"SIIB logo",
+            "tab":"SIIB"
           }'
         >2016</button>
 
-        <!-- SINGLE 2017 button with two tabs (array payload) -->
+        <!-- 2017 with MULTIPLE TABS (array payload) -->
         <button
           class="year"
           data-payload='[
@@ -324,20 +326,161 @@
               "img":"KPMG.png",
               "alt":"KPMG logo",
               "tab":"KPMG"
+            },
+            {
+              "year":"2017",
+              "title":"MarketsandMarkets Research Pvt. Ltd.",
+              "subtitle":"Strategic Research Analyst",
+              "img":"MnM.png",
+              "alt":"MarketsandMarkets logo",
+              "tab":"MnM"
             }
           ]'
         >2017</button>
 
+        <!-- 2018 with MULTIPLE TABS (L&T + MnM) -->
+        <button
+          class="year"
+          data-payload='[
+            {
+              "year":"2018",
+              "title":"L&T Financial Services",
+              "subtitle":"Team Manager (June 2018)",
+              "img":"LT.png",
+              "alt":"L&T Financial Services logo",
+              "tab":"L&T"
+            },
+            {
+              "year":"2018",
+              "title":"MarketsandMarkets Research Pvt. Ltd.",
+              "subtitle":"Strategic Research Analyst",
+              "img":"MnM.png",
+              "alt":"MarketsandMarkets logo",
+              "tab":"MnM"
+            }
+          ]'
+        >2018</button>
+
+        <!-- 2019 single (MnM) -->
         <button
           class="year"
           data-payload='{
-            "year":"2018",
-            "title":"L&T Financial Services",
-            "subtitle":"Team Manager (June 2018)",
-            "img":"LT.png",
-            "alt":"L&T Financial Services logo"
+            "year":"2019",
+            "title":"MarketsandMarkets Research Pvt. Ltd.",
+            "subtitle":"Strategic Research Analyst",
+            "img":"MnM.png",
+            "alt":"MarketsandMarkets logo",
+            "tab":"MnM"
           }'
-        >2018</button>
+        >2019</button>
+
+        <!-- 2020 with MULTIPLE TABS (MnM + GDRC) -->
+        <button
+          class="year"
+          data-payload='[
+            {
+              "year":"2020",
+              "title":"MarketsandMarkets Research Pvt. Ltd.",
+              "subtitle":"Strategic Research Analyst",
+              "img":"MnM.png",
+              "alt":"MarketsandMarkets logo",
+              "tab":"MnM"
+            },
+            {
+              "year":"2020",
+              "title":"GlobalData Research Centre",
+              "subtitle":"Senior Research Analyst",
+              "img":"GDRC.png",
+              "alt":"GlobalData Research Centre logo",
+              "tab":"GDRC"
+            }
+          ]'
+        >2020</button>
+
+        <!-- 2021 with MULTIPLE TABS (GDRC + EVS) -->
+        <button
+          class="year"
+          data-payload='[
+            {
+              "year":"2021",
+              "title":"GlobalData Research Centre",
+              "subtitle":"Senior Research Analyst",
+              "img":"GDRC.png",
+              "alt":"GlobalData Research Centre logo",
+              "tab":"GDRC"
+            },
+            {
+              "year":"2021",
+              "title":"Evalueserve",
+              "subtitle":"Senior Analyst",
+              "img":"EVS.png",
+              "alt":"Evalueserve logo",
+              "tab":"EVS"
+            }
+          ]'
+        >2021</button>
+
+        <!-- 2022 single (EVS) -->
+        <button
+          class="year"
+          data-payload='{
+            "year":"2022",
+            "title":"Evalueserve",
+            "subtitle":"Senior Analyst",
+            "img":"EVS.png",
+            "alt":"Evalueserve logo",
+            "tab":"EVS"
+          }'
+        >2022</button>
+
+        <!-- 2023 single (EVS) -->
+        <button
+          class="year"
+          data-payload='{
+            "year":"2023",
+            "title":"Evalueserve",
+            "subtitle":"Senior Analyst",
+            "img":"EVS.png",
+            "alt":"Evalueserve logo",
+            "tab":"EVS"
+          }'
+        >2023</button>
+
+        <!-- 2024 with MULTIPLE TABS (EVS + MSCI) -->
+        <button
+          class="year"
+          data-payload='[
+            {
+              "year":"2024",
+              "title":"Evalueserve",
+              "subtitle":"Senior Analyst",
+              "img":"EVS.png",
+              "alt":"Evalueserve logo",
+              "tab":"EVS"
+            },
+            {
+              "year":"2024",
+              "title":"MSCI Inc.",
+              "subtitle":"Senior Associate, DCS (Data Operations)",
+              "img":"MSCI.png",
+              "alt":"MSCI logo",
+              "tab":"MSCI"
+            }
+          ]'
+        >2024</button>
+
+        <!-- 2025 single (MSCI) -->
+        <button
+          class="year"
+          data-payload='{
+            "year":"2025",
+            "title":"MSCI Inc.",
+            "subtitle":"Senior Associate, DCS (Data Operations)",
+            "img":"MSCI.png",
+            "alt":"MSCI logo",
+            "tab":"MSCI"
+          }'
+        >2025</button>
 
       </div>
     </div>
@@ -372,6 +515,7 @@
         <div class="modal-tabs" role="tablist"></div>
         <h3 class="modal-title">Title</h3>
         <p class="modal-sub"><span class="modal-year">Year</span></p>
+        <p style="margin:0;color:#666;">(Additional details can go here in the next iteration.)</p>
       </div>
     </div>
   </div>
