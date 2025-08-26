@@ -247,6 +247,13 @@
   </style>
 </head>
 <body>
+  <!-- Fallback if JS fails: ensure hero text stays visible -->
+  <noscript>
+    <style>
+      .hero-content { opacity: 1 !important; filter: none !important; transform: none !important; }
+    </style>
+  </noscript>
+
   <!-- NAVIGATION -->
   <nav>
     <a href="#home">Home</a>
@@ -300,7 +307,6 @@
       <div class="brands-title">Brands associated with</div>
       <div class="brands-scroller" aria-label="Associated brands">
         <div class="brands-track">
-          <!-- Row 1 -->
           <img src="Chemtex.png" class="brands-logo" alt="Chemtex Speciality Limited">
           <img src="SIIB.png" class="brands-logo" alt="Symbiosis Institute of International Business">
           <img src="KPMG.png" class="brands-logo" alt="KPMG India">
@@ -309,7 +315,7 @@
           <img src="GDRC.png" class="brands-logo" alt="GlobalData Research Centre">
           <img src="EVS.png" class="brands-logo" alt="Evalueserve">
           <img src="MSCI.png" class="brands-logo" alt="MSCI Inc.">
-          <!-- Row 2 (duplicate for seamless loop) -->
+          <!-- duplicate for seamless loop -->
           <img src="Chemtex.png" class="brands-logo" alt="Chemtex Speciality Limited">
           <img src="SIIB.png" class="brands-logo" alt="Symbiosis Institute of International Business">
           <img src="KPMG.png" class="brands-logo" alt="KPMG India">
@@ -334,7 +340,7 @@
         <button class="year disabled" disabled aria-disabled="true">2012</button>
         <button class="year disabled" disabled aria-disabled="true">2013</button>
 
-        <!-- From 2014 onwards (clickable as specified) -->
+        <!-- From 2014 onwards -->
         <button
           class="year"
           data-payload='{
@@ -361,7 +367,7 @@
           }'
         >2016</button>
 
-        <!-- 2017 with MULTIPLE TABS (array payload) -->
+        <!-- 2017 with tabs -->
         <button
           class="year"
           data-payload='[
@@ -384,7 +390,7 @@
           ]'
         >2017</button>
 
-        <!-- 2018 with MULTIPLE TABS (L&T + MnM) -->
+        <!-- 2018 with tabs -->
         <button
           class="year"
           data-payload='[
@@ -407,7 +413,6 @@
           ]'
         >2018</button>
 
-        <!-- 2019 single (MnM) -->
         <button
           class="year"
           data-payload='{
@@ -420,7 +425,7 @@
           }'
         >2019</button>
 
-        <!-- 2020 with MULTIPLE TABS (MnM + GDRC) -->
+        <!-- 2020 with tabs -->
         <button
           class="year"
           data-payload='[
@@ -443,7 +448,7 @@
           ]'
         >2020</button>
 
-        <!-- 2021 with MULTIPLE TABS (GDRC + EVS) -->
+        <!-- 2021 with tabs -->
         <button
           class="year"
           data-payload='[
@@ -466,7 +471,6 @@
           ]'
         >2021</button>
 
-        <!-- 2022 single (EVS) -->
         <button
           class="year"
           data-payload='{
@@ -479,7 +483,6 @@
           }'
         >2022</button>
 
-        <!-- 2023 single (EVS) -->
         <button
           class="year"
           data-payload='{
@@ -492,7 +495,7 @@
           }'
         >2023</button>
 
-        <!-- 2024 with MULTIPLE TABS (EVS + MSCI) -->
+        <!-- 2024 with tabs -->
         <button
           class="year"
           data-payload='[
@@ -515,7 +518,6 @@
           ]'
         >2024</button>
 
-        <!-- 2025 single (MSCI) -->
         <button
           class="year"
           data-payload='{
@@ -531,7 +533,7 @@
       </div>
     </div>
 
-    <!-- POST-TIMELINE ROLE CARD -->
+    <!-- POST-TIMELINE ROLE CARDS -->
     <div class="role-card" aria-labelledby="msci-role-title">
       <div class="role-header">
         <img src="MSCI.png" alt="MSCI logo" class="role-logo">
@@ -622,9 +624,9 @@
       <div class="role-body">
         <ul>
           <li>Experienced in syndicate and custom research projects, encompassing qualitative and quantitative analysis.</li>
-          <li>Conducted research on heavy power components, including competitor analysis, market sizing, and go-to-market strategy, leading to consultative and advisory contributions.</li>
-          <li>Proficient in data modeling, database analysis, creating artifacts like scenario-based data models, and extracting actionable insights from data through industry expertise and standard frameworks.</li>
-          <li>In addition, I've created newsletters, client decks, and country Power Outlooks, and worked as a COVID-19 Analyst.</li>
+          <li>Conducted research on heavy power components, including competitor analysis, market sizing, and go-to-market strategy.</li>
+          <li>Proficient in data modeling, database analysis, scenario-based data models, and extracting actionable insights via standard frameworks.</li>
+          <li>Also created newsletters, client decks, country Power Outlooks, and worked as a COVID-19 Analyst.</li>
         </ul>
       </div>
     </div>
@@ -674,17 +676,6 @@
     });
 
     /* ----------------------
-       2) Sections cloud reveal + continuous fade
-    ---------------------- */
-    (function() {
-      const sections = Array.from(document.querySelectorAll('section'));
-      if (!sections.length) return;
-
-      // Seed cloud state
-      sections.forEach(sec => sec.classList.add('reveal-seed'));
-
-
-          ----------------------
        2) Sections cloud reveal + continuous fade
     ---------------------- */
     (function() {
@@ -837,8 +828,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-     
