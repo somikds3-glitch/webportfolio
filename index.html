@@ -217,7 +217,6 @@
     .brands-logo:hover { transform: translateY(-2px); opacity: 1; filter: none; }
 
     @keyframes scrollBrands { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
     @media (prefers-reduced-motion: reduce) { .brands-track { animation: none; } }
 
     /* --- Role card (post-timeline) --- */
@@ -228,6 +227,15 @@
     .role-meta { margin: 0; color: #555; }
     .role-body ul { text-align: left; max-width: 1000px; margin: 12px auto 0; padding-left: 18px; }
     .role-body li { margin: 6px 0; line-height: 1.5; }
+
+    /* --- Hands-On Tools Usage --- */
+    .role-tools { margin-top: 20px; text-align: left; }
+    .role-tools h4 { margin-bottom: 12px; font-size: 16px; font-weight: 700; }
+    .tool { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .tool-icon { width: 22px; height: 22px; object-fit: contain; }
+    .bar { flex: 1; height: 8px; background: #eee; border-radius: 4px; overflow: hidden; }
+    .bar div { height: 100%; background: #0047AB; } /* MSCI blue */
+    .percent { font-size: 13px; font-weight: 600; min-width: 32px; text-align: right; }
 
     /* ----------------------
        CLOUD EFFECT KEYFRAMES
@@ -333,7 +341,7 @@
             "year":"2014",
             "title":"Chemtex Speciality Limited",
             "subtitle":"Sales and Service Engineer",
-            "img":"chemtex.png",
+            "img":"Chemtex.png",
             "alt":"Chemtex logo",
             "tab":"Chemtex"
           }'
@@ -536,14 +544,73 @@
         <ul>
           <li>Manages data quality processes, utilizing automation tools for quality assessment to enhance efficiency and accuracy.</li>
           <li>Possesses advanced expertise in Microsoft Excel, adept at handling large volumes of data effectively.</li>
-          <li>AI prompt engineering–driven utilisation in pandas, Power BI, and Jupyter Notebooks; conduct data pre‑screening and ground‑truth evaluation; planned and implemented notebooks leveraging libraries such as matplotlib, openpyxl, and PyPDF2.</li>
-          <li>Demonstrates comprehensive knowledge of equities, financial markets, and company disclosures such as 10‑Ks and annual reports.</li>
+          <li>AI prompt engineering–driven utilisation in pandas, Power BI, and Jupyter Notebooks; conduct data pre-screening and ground-truth evaluation; planned and implemented notebooks leveraging libraries such as matplotlib, openpyxl, and PyPDF2.</li>
+          <li>Demonstrates comprehensive knowledge of equities, financial markets, and company disclosures such as 10-Ks and annual reports.</li>
           <li>Conducts Data Quality Assurance (QA) processes, including results assessment, reporting, and process improvement.</li>
           <li>Creates impactful presentations and performs detailed data analysis, showcasing excellent written and oral communication skills.</li>
           <li>Collaborates with global teams in an international environment, working seamlessly across hierarchies, functions, and time zones.</li>
         </ul>
+
+        <!-- Hands-On Tools Usage -->
+        <div class="role-tools">
+          <h4>Hands-On Tools Usage</h4>
+          <div class="tool">
+            <img src="icons/jupyter.png" alt="Jupyter Notebooks" class="tool-icon">
+            <span>Jupyter Notebooks</span>
+            <div class="bar"><div style="width:25%"></div></div>
+            <span class="percent">25%</span>
+          </div>
+          <div class="tool">
+            <img src="icons/excel.png" alt="Microsoft Excel" class="tool-icon">
+            <span>Advanced Microsoft Excel</span>
+            <div class="bar"><div style="width:25%"></div></div>
+            <span class="percent">25%</span>
+          </div>
+          <div class="tool">
+            <img src="icons/postgres.png" alt="Postgres SQL" class="tool-icon">
+            <span>Postgres SQL</span>
+            <div class="bar"><div style="width:25%"></div></div>
+            <span class="percent">25%</span>
+          </div>
+          <div class="tool">
+            <img src="icons/miro.png" alt="Miro Board" class="tool-icon">
+            <span>Miro Board</span>
+            <div class="bar"><div style="width:10%"></div></div>
+            <span class="percent">10%</span>
+          </div>
+          <div class="tool">
+            <img src="icons/postman.png" alt="Postman" class="tool-icon">
+            <span>Postman</span>
+            <div class="bar"><div style="width:5%"></div></div>
+            <span class="percent">5%</span>
+          </div>
+          <div class="tool">
+            <img src="icons/loop.png" alt="Microsoft Loop" class="tool-icon">
+            <span>Microsoft Loop</span>
+            <div class="bar"><div style="width:5%"></div></div>
+            <span class="percent">5%</span>
+          </div>
+          <div class="tool">
+            <img src="icons/whiteboard.png" alt="Microsoft Whiteboard" class="tool-icon">
+            <span>Microsoft Whiteboard</span>
+            <div class="bar"><div style="width:2%"></div></div>
+            <span class="percent">2%</span>
+          </div>
+          <div class="tool">
+            <img src="icons/jira.png" alt="Jira Sprints" class="tool-icon">
+            <span>Jira Sprints</span>
+            <div class="bar"><div style="width:2%"></div></div>
+            <span class="percent">2%</span>
+          </div>
+          <div class="tool">
+            <span>Others</span>
+            <div class="bar"><div style="width:1%"></div></div>
+            <span class="percent">1%</span>
+          </div>
+        </div>
       </div>
     </div>
+
     <div class="role-card" aria-labelledby="evs-role-title">
       <div class="role-header">
         <img src="EVS.png" alt="EVS logo" class="role-logo">
@@ -607,6 +674,17 @@
     });
 
     /* ----------------------
+       2) Sections cloud reveal + continuous fade
+    ---------------------- */
+    (function() {
+      const sections = Array.from(document.querySelectorAll('section'));
+      if (!sections.length) return;
+
+      // Seed cloud state
+      sections.forEach(sec => sec.classList.add('reveal-seed'));
+
+
+          ----------------------
        2) Sections cloud reveal + continuous fade
     ---------------------- */
     (function() {
@@ -729,6 +807,7 @@
         renderEntry(items[0]);
         modal.classList.add('show');
       }
+
       function closeModal() { modal.classList.remove('show'); }
 
       mClose.addEventListener('click', closeModal);
@@ -758,3 +837,8 @@
   </script>
 </body>
 </html>
+
+
+
+
+     
