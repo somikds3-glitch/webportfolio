@@ -220,28 +220,37 @@
     @media (prefers-reduced-motion: reduce) { .brands-track { animation: none; } }
 
     /* --- Role card (post-timeline) --- */
-    .role-card { max-width: 1100px; margin: 28px auto 0; padding: 20px; border: 1px solid #eee; border-left: 6px solid #0047AB; border-radius: 12px; background: #f9fbff; box-shadow: 0 8px 24px rgba(0,0,0,.06); }
+    .role-card {
+      max-width: 1100px; margin: 28px auto 0; padding: 20px;
+      border: 1px solid #eee; border-left: 6px solid #0047AB;
+      border-radius: 12px; background: #f9fbff;
+      box-shadow: 0 8px 24px rgba(0,0,0,.06);
+    }
     .role-header { display: flex; align-items: center; gap: 16px; margin-bottom: 6px; }
     .role-logo { width: 56px; height: 56px; object-fit: contain; border-radius: 12px; background: #fafafa; border: 1px solid #eee; }
     .role-title { margin: 0; font-size: 20px; font-weight: 800; }
-    .role-meta { margin: 0; color: #555; }
+    .role-meta  { margin: 0; color: #555; }
     .role-body ul { text-align: left; max-width: 1000px; margin: 12px auto 0; padding-left: 18px; }
-    .role-body li { margin: 6px 0; line-height: .role-btn {
-    display: inline-block;
-    margin-top: 14px;
-    padding: 8px 16px;
-    font-size: 14px;
-    font-weight: 600;
-    color: #0047AB;
-    border: 1px solid #0047AB;
-    border-radius: 6px;
-    text-decoration: none;
-    transition: all 0.2s ease;
+    .role-body li { margin: 6px 0; line-height: 1.5; }   /* ✅ closed properly */
+    
+    /* NEW BUTTON (kept separate) */
+    .role-btn {
+      display: inline-block;
+      margin-top: 14px;
+      padding: 8px 16px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #0047AB;
+      border: 1px solid #0047AB;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: all 0.2s ease;
     }
     .role-btn:hover {
       background: #0047AB;
       color: #fff;
     }
+
     
     
     
