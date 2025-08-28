@@ -270,10 +270,15 @@
     /* --- Triple cards row (L&T / Aglow / Chemtex) --- */
     .triple-cards{
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(3, minmax(0, 1fr)); /* always 3 columns on most screens */
       gap: 18px;
       max-width: 1100px;
-      margin: 28px auto 0;
+      margin: 28px auto;            /* centers the row horizontally */
+      
+      /* vertical middle of the section */
+      min-height: 50vh;              /* gives space to center within the section */
+      align-content: center;         /* centers the whole grid block vertically */
+      align-items: start;            /* keep card content starting at top inside each card */
     }
     
     /* compact role-cards in the row */
@@ -285,38 +290,24 @@
     /* left-align content inside */
     .triple-card .role-body{ text-align: left; }
     
-    /* optional vertical scroll for long text */
+    /* optional vertical scroll for the left card's long text */
     .triple-card .role-body.scrollable{
       max-height: 240px;
       overflow: auto;
       padding-right: 6px;
     }
     
-    /* stack on small screens */
-    @media (max-width: 900px){
-      .triple-cards{ grid-template-columns: 1fr; }
+    /* keep 3 columns down to ~600px; below that, stack */
+    @media (max-width: 600px){
+      .triple-cards{
+        grid-template-columns: 1fr;  /* stack on very small screens only */
+        min-height: unset;           /* no forced vertical centering when stacked */
+        align-content: start;
+      }
     }
     
     /* ensure all role cards are left-aligned */
     .role-card{ text-align: left; }
-
-    /* NEW BUTTON (kept separate) */
-    .role-btn {
-      display: inline-block;
-      margin-top: 14px;
-      padding: 8px 16px;
-      font-size: 14px;
-      font-weight: 600;
-      color: #0047AB;
-      border: 1px solid #0047AB;
-      border-radius: 6px;
-      text-decoration: none;
-      transition: all 0.2s ease;
-    }
-    .role-btn:hover {
-      background: #0047AB;
-      color: #fff;
-    }
 
     
     
