@@ -155,12 +155,18 @@
        - cloud reveal ONCE
        - continuous fade in/out while scrolling
     ---------------------- */
-    section {
-      height: 100vh;        /* each section fills screen */
-      overflow-y: auto;     /* allow scrolling inside if content is tall */
+    section{
+      height: 100svh;                 /* works with visible browser UI */
+      overflow-y: auto;
       padding: 60px 20px;
+      padding-bottom: calc(60px + env(safe-area-inset-bottom)); /* room above bottom bars */
       text-align: center;
-      display: none;        /* 🚫 hidden by default, JS will show the active one */
+      display: none;
+    }
+    
+    /* If supported, prefer dynamic viewport (iOS 16+/modern Android) */
+    @supports (height: 100dvh){
+      section{ height: 100dvh; }
     }
 
 
