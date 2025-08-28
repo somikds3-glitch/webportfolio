@@ -392,6 +392,31 @@
     }
 
 
+    /* === Normalize widths/heights in LEFT tools box === */
+    .gdrc-column.tools .tool-row .bar{
+      width: var(--tool-bar-w);
+      flex: 0 0 var(--tool-bar-w);   /* override earlier flex:1 */
+      height: 8px;                   /* match thickness with other bars */
+    }
+    
+    .gdrc-column.tools .tool-row .percent{
+      width: var(--tool-pct-w);
+      flex: 0 0 var(--tool-pct-w);
+      text-align: right;
+    }
+    
+    /* Let the label flex while bar/% stay fixed */
+    .gdrc-column.tools .tool-row span:not(.percent){
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+    
+    /* (Optional) lock icon size for consistency */
+    .gdrc-column.tools .tool-icon{
+      width: 22px;
+      height: 22px;
+    }
+
     /* ----------------------
        CLOUD EFFECT KEYFRAMES
     ---------------------- */
