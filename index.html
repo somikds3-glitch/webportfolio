@@ -1521,6 +1521,12 @@
     document.addEventListener("DOMContentLoaded", () => {
       const sections = document.querySelectorAll("section");
       const navLinks = document.querySelectorAll("nav a");
+
+      // Keep CSS --nav-h equal to the actual nav height
+      const navEl = document.querySelector('nav');
+      const setNavH = () => document.documentElement.style.setProperty('--nav-h', ((navEl && navEl.offsetHeight) || 64) + 'px');
+      setNavH(); window.addEventListener('resize', setNavH); window.addEventListener('load', setNavH);
+
   
       // ----------------------
       // Modal elements
