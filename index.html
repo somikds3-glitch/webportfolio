@@ -1511,6 +1511,15 @@
     })();
     </script>
 
+
+
+    const navEl = document.querySelector('nav');
+    const setNavH = () => {
+      document.documentElement.style.setProperty('--nav-h', ((navEl && navEl.offsetHeight) || 64) + 'px');
+    };
+    setNavH();
+    window.addEventListener('resize', setNavH);
+
     <!-- ✅ Unified JavaScript block -->
     <script>
     document.addEventListener("DOMContentLoaded", () => {
