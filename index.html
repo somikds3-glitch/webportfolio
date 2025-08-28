@@ -151,33 +151,29 @@
 
 
     /* ----------------------
-   SECTIONS
-    ---------------------- */
-    :root{ --nav-h: 64px; } /* will be updated by JS below */
-    
-    section{
-      height: calc(100svh - var(--nav-h));
-      min-height: calc(100svh - var(--nav-h));
-      overflow-y: auto;
-      padding: 60px 20px;
-      padding-bottom: calc(60px + env(safe-area-inset-bottom)); /* keep content clear of bottom UI */
-      text-align: center;
-      display: none;
-    }
-    
-    @supports (height: 100dvh){
-      section{
-        height: calc(100dvh - var(--nav-h));
-        min-height: calc(100dvh - var(--nav-h));
-      }
-    }
-    
-    /* Bottom spacer so the right scrollbar isn't clipped by the taskbar/browser UI */
-    section::after{
-      content:"";
-      display:block;
-      height: max(16px, env(safe-area-inset-bottom));
-    }
+     SECTIONS
+  ---------------------- */
+  :root{ --nav-h: 64px; } /* JS will keep this accurate */
+  
+  section{
+    /* Fill the viewport below the nav so nothing hides under the taskbar */
+    position: fixed;
+    top: var(--nav-h);
+    right: 0;
+    bottom: 0;
+    left: 0;
+  
+    overflow-y: auto;
+  
+    /* normal padding + safe bottom so content & scrollbar stay clear of UI bars */
+    padding: 60px 20px;
+    padding-bottom: max(60px, calc(60px + env(safe-area-inset-bottom)));
+  
+    text-align: center;
+    display: none; /* your JS toggles this */
+    scrollbar-gutter: stable both-edges; /* keeps layout from shifting when scrollbar appears */
+  }
+
 
 
 
