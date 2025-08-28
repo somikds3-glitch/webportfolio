@@ -118,17 +118,14 @@
        - continuous fade in/out while scrolling
     ---------------------- */
     section {
-      padding: 100px 40px;
+      min-height: 100vh;             /* Each section takes full viewport height */
+      padding: 60px 20px;            /* Reasonable spacing */
       text-align: center;
-      will-change: opacity;
-      transition: opacity 240ms linear;
-      opacity: 0.25;
+      scroll-snap-align: start;      /* Snap to start of each section */
+      scroll-margin-top: 80px;       /* Prevent content from hiding behind sticky nav */
+      opacity: 1;                    /* Remove cloud reveal opacity if not needed */
+      transition: none;              /* Disable animation for instant view switch */
     }
-    section.reveal-seed { opacity: 0; transform: translateY(40px); filter: blur(20px); }
-    section.revealed { animation: cloudFade 1s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
-
-    section h2 { font-size: 32px; margin-bottom: 20px; letter-spacing: -0.2px; }
-    section p  { max-width: 800px; margin: auto; font-size: 18px; }
 
     /* ----------------------
        CAREER TIMELINE
