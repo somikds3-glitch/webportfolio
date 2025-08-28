@@ -565,6 +565,30 @@
     .role-card a.role-btn{ margin-top: 18px; margin-bottom: 6px; }
 
 
+    /* === FIX: lock widths in LEFT tools box === */
+    .gdrc-column.tools .tool-row{
+      display: grid;
+      grid-template-columns: 22px 1fr var(--tool-bar-w) var(--tool-pct-w);
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .gdrc-column.tools .tool-row .bar{
+      width: 100% !important;
+      height: 8px;
+      flex: 0 0 auto !important;
+    }
+    
+    .gdrc-column.tools .tool-row .percent{
+      width: var(--tool-pct-w) !important;
+      flex: 0 0 auto !important;
+      text-align: right;
+    }
+    
+    .gdrc-column.tools .tool-row span:not(.percent){
+      min-width: 0;
+    }
+
 
   </style>
 </head>
