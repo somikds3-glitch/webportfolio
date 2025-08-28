@@ -176,6 +176,12 @@
       display: none; /* your JS toggles this */
       scrollbar-gutter: stable both-edges;
     }
+    section::after{
+      content:"";
+      display:block;
+      height: calc(env(safe-area-inset-bottom) + var(--bottom-extra));
+    }
+
 
 
 
