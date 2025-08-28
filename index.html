@@ -373,6 +373,43 @@
       border-radius: 4px;
       object-fit: cover;
     }
+    .mentions-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      padding-right: 4px; /* To leave space for scrollbar */
+    }
+    @media (max-width: 600px) {
+      .mentions-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .mention {
+      display: flex;
+      align-items: center;
+    }
+    .mention a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #0047AB;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      line-height: 1.4;
+    }
+    .mention a:hover {
+      text-decoration: underline;
+    }
+    .mention img {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+
 
 
   </style>
