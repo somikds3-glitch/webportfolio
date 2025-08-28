@@ -599,6 +599,20 @@
     .gdrc-column.tools .tool-row .bar{ width: 100% !important; height: 8px; }
     .gdrc-column.tools .tool-row .percent{ text-align: right; }
 
+
+    /* Put each piece in a fixed grid column so rows with NO icon still line up */
+.gdrc-column.tools .tool-row .tool-icon { grid-column: 1; }
+.gdrc-column.tools .tool-row .bar       { grid-column: 3; }
+.gdrc-column.tools .tool-row .percent   { grid-column: 4; }
+.gdrc-column.tools .tool-row span:not(.percent):not(.tool-icon) {
+  grid-column: 2;
+  min-width: 0;           /* prevent squeeze overflow */
+  overflow: hidden;
+  text-overflow: ellipsis; /* optional: tidy long labels */
+  white-space: nowrap;     /* optional: keep on one line */
+}
+
+
     
     .gdrc-column.tools .tool-row .bar{
       width: 100% !important;
