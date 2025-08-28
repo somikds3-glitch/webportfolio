@@ -336,6 +336,34 @@
     .percent { font-size: 13px; font-weight: 600; min-width: 32px; text-align: right; }
 
 
+    /* === Consistent progress bar width across all tool lists === */
+    .tool .bar{
+      flex: 0 0 var(--tool-bar-w);
+      width: var(--tool-bar-w);
+    }
+    .tool .percent{
+      flex: 0 0 var(--tool-pct-w);
+      min-width: var(--tool-pct-w);
+      text-align: right;
+      font-size: 13px; font-weight: 600;
+    }
+    .tool > span { flex: 1; } /* let the label take remaining space */
+    
+    .tool-row .bar{
+      flex: 0 0 var(--tool-bar-w);
+      width: var(--tool-bar-w);
+    }
+    .tool-row .percent{
+      flex: 0 0 var(--tool-pct-w);
+      min-width: var(--tool-pct-w);
+      text-align: right;
+    }
+    
+    /* Optional: slightly smaller bar on narrow screens */
+    @media (max-width: 720px){
+      :root{ --tool-bar-w: clamp(160px, 60vw, 220px); }
+    }
+
 
     /* ----------------------
        CLOUD EFFECT KEYFRAMES
