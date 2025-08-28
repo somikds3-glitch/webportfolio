@@ -583,10 +583,14 @@
     /* === FIX: lock widths in LEFT tools box === */
     .gdrc-column.tools .tool-row{
       display: grid;
-      grid-template-columns: 22px 1fr var(--tool-bar-w) var(--tool-pct-w);
+      /* icon | flexible label | bar (min 120px, up to 40% of row) | percent */
+      grid-template-columns: 22px minmax(0,1fr) minmax(120px, 40%) var(--tool-pct-w);
       align-items: center;
       gap: 10px;
     }
+    .gdrc-column.tools .tool-row .bar{ width: 100% !important; height: 8px; }
+    .gdrc-column.tools .tool-row .percent{ text-align: right; }
+
     
     .gdrc-column.tools .tool-row .bar{
       width: 100% !important;
