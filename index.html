@@ -350,35 +350,13 @@
       text-align: right;
     }
 
-    .mention {
-      display: flex;
-      align-items: center;
-      margin-bottom: 12px;
-    }
-    .mention a {
-      display: flex;
-      align-items: center;
-      text-decoration: none;
-      gap: 10px;
-      color: #0047AB;
-      font-weight: 600;
-      font-size: 14px;
-    }
-    .mention a:hover {
-      text-decoration: underline;
-    }
-    .mention img {
-      width: 20px;
-      height: 20px;
-      border-radius: 4px;
-      object-fit: cover;
-    }
     .mentions-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 12px;
-      padding-right: 4px; /* To leave space for scrollbar */
+      padding-right: 4px;
     }
+    
     @media (max-width: 600px) {
       .mentions-grid {
         grid-template-columns: 1fr;
@@ -386,9 +364,15 @@
     }
     
     .mention {
-      display: flex;
-      align-items: center;
+      border-radius: 6px;
+      transition: background 0.2s ease, box-shadow 0.2s ease;
     }
+    
+    .mention:hover {
+      background: #f1f6ff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+    
     .mention a {
       display: flex;
       align-items: center;
@@ -398,10 +382,13 @@
       font-weight: 600;
       text-decoration: none;
       line-height: 1.4;
+      padding: 6px 8px;
     }
+    
     .mention a:hover {
       text-decoration: underline;
     }
+    
     .mention img {
       width: 24px;
       height: 24px;
