@@ -169,7 +169,8 @@
     
       /* normal padding + safe bottom so content & scrollbar stay clear of bottom UI */
       padding: 60px 20px;
-      padding-bottom: max(60px, env(safe-area-inset-bottom));
+      padding-bottom: calc(60px + env(safe-area-inset-bottom) + var(--bottom-extra));
+
     
       text-align: center;
       display: none; /* your JS toggles this */
