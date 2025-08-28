@@ -454,6 +454,28 @@
       flex-shrink: 0;
     }
 
+    /* Force "View important projects →" to render as a button */
+    .role-card a.role-btn,
+    .role-card a.role-btn:link,
+    .role-card a.role-btn:visited{
+      display:inline-block;
+      padding:8px 16px;
+      border:1px solid #0047AB;
+      border-radius:6px;
+      font-weight:600;
+      color:#0047AB;
+      text-decoration:none;
+      transition:all .2s ease;
+    }
+    .role-card a.role-btn:hover{
+      background:#0047AB;
+      color:#fff;
+      text-decoration:none;
+    }
+
+    /* optional */
+    .role-card a.role-btn{ background:rgba(0,71,171,0.06); }
+
 
 
   </style>
