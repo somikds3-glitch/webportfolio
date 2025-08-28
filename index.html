@@ -151,28 +151,27 @@
 
 
     /* ----------------------
-     SECTIONS
-  ---------------------- */
-  :root{ --nav-h: 64px; } /* JS will keep this accurate */
-  
-  section{
-    /* Fill the viewport below the nav so nothing hides under the taskbar */
-    position: fixed;
-    top: var(--nav-h);
-    right: 0;
-    bottom: 0;
-    left: 0;
-  
-    overflow-y: auto;
-  
-    /* normal padding + safe bottom so content & scrollbar stay clear of UI bars */
-    padding: 60px 20px;
-    padding-bottom: max(60px, calc(60px + env(safe-area-inset-bottom)));
-  
-    text-align: center;
-    display: none; /* your JS toggles this */
-    scrollbar-gutter: stable both-edges; /* keeps layout from shifting when scrollbar appears */
-  }
+       SECTIONS
+    ---------------------- */
+    :root{ --nav-h: 64px; } /* JS will keep this accurate */
+    
+    section{
+      /* fill the viewport below the nav, but NOT fixed */
+      position: relative;
+      height: calc(100dvh - var(--nav-h));
+      min-height: calc(100dvh - var(--nav-h));
+    
+      overflow-y: auto;
+    
+      /* normal padding + safe bottom so content & scrollbar stay clear of bottom UI */
+      padding: 60px 20px;
+      padding-bottom: max(60px, env(safe-area-inset-bottom));
+    
+      text-align: center;
+      display: none; /* your JS toggles this */
+      scrollbar-gutter: stable both-edges;
+    }
+
 
 
 
