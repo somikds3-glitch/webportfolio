@@ -339,6 +339,27 @@
     .bar div { height: 100%; background: #0047AB; } /* MSCI blue */
     .percent { font-size: 13px; font-weight: 600; min-width: 32px; text-align: right; }
 
+    /* === Uniform tool bar widths across ALL tool lists === */
+    .tool .bar,
+    .tool-row .bar{
+      width: var(--tool-bar-w);
+      flex: 0 0 var(--tool-bar-w);   /* override previous flex:1 */
+    }
+    
+    .tool .percent,
+    .tool-row .percent{
+      width: var(--tool-pct-w);
+      flex: 0 0 var(--tool-pct-w);
+      text-align: right;
+    }
+    
+    /* Let the label flex while keeping icon / bar / % fixed */
+    .tool span:not(.percent),
+    .tool-row span:not(.percent){
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+
 
     /* === Consistent progress bar width across all tool lists === */
     .tool .bar{
