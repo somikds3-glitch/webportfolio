@@ -264,7 +264,42 @@
     .role-meta  { margin: 0; color: #555; text-align: left; }
     .role-body ul { text-align: left; max-width: 1000px; margin: 12px auto 0; padding-left: 18px; }
     .role-body li { margin: 6px 0; line-height: 1.5; }   /* ✅ closed properly */
+
+
+
+    /* --- Triple cards row (L&T / Aglow / Chemtex) --- */
+    .triple-cards{
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      max-width: 1100px;
+      margin: 28px auto 0;
+    }
     
+    /* compact role-cards in the row */
+    .triple-card{
+      margin: 0;
+      max-width: unset;
+    }
+    
+    /* left-align content inside */
+    .triple-card .role-body{ text-align: left; }
+    
+    /* optional vertical scroll for long text */
+    .triple-card .role-body.scrollable{
+      max-height: 240px;
+      overflow: auto;
+      padding-right: 6px;
+    }
+    
+    /* stack on small screens */
+    @media (max-width: 900px){
+      .triple-cards{ grid-template-columns: 1fr; }
+    }
+    
+    /* ensure all role cards are left-aligned */
+    .role-card{ text-align: left; }
+
     /* NEW BUTTON (kept separate) */
     .role-btn {
       display: inline-block;
