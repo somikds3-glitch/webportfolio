@@ -1158,133 +1158,133 @@
       document.addEventListener('DOMContentLoaded', update, { passive: true });
     })();
 
-     <!-- ✅ Unified JavaScript block -->
-     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-          const sections = document.querySelectorAll("section");
-          const navLinks = document.querySelectorAll("nav a");
-    
-          // ----------------------
-          // Modal elements
-          // ----------------------
-          const modal = document.getElementById('career-modal');
-          const mTitle = modal.querySelector('.modal-title');
-          const mSub   = modal.querySelector('.modal-sub');
-          const mImg   = modal.querySelector('.modal-img');
-          const mTabs  = modal.querySelector('.modal-tabs');
-          const mClose = modal.querySelector('.modal-close');
-    
-          function renderEntry(entry) {
-            mTitle.textContent = entry.title || '';
-            mSub.innerHTML = `<span class="modal-year">${entry.year || ''}</span> — ${entry.subtitle || ''}`;
-            mImg.src = entry.img || '';
-            mImg.alt = entry.alt || entry.title || 'Logo';
-          }
-    
-          function openModal(payload) {
-            const items = Array.isArray(payload) ? payload : [payload];
-            mTabs.innerHTML = '';
-    
-            if (items.length > 1) {
-              items.forEach((it, idx) => {
-                const tab = document.createElement('button');
-                tab.className = 'modal-tab';
-                tab.type = 'button';
-                tab.role = 'tab';
-                tab.setAttribute('aria-selected', idx === 0 ? 'true' : 'false');
-                tab.textContent = it.tab ? it.tab : (it.title ? it.title : `Item ${idx + 1}`);
-                tab.addEventListener('click', () => {
-                  mTabs.querySelectorAll('.modal-tab').forEach(t => t.setAttribute('aria-selected','false'));
-                  tab.setAttribute('aria-selected','true');
-                  renderEntry(items[idx]);
-                });
-                mTabs.appendChild(tab);
-              });
-            }
-    
-            renderEntry(items[0]);
-            modal.classList.add('show');
-          }
-    
-          function closeModal() { modal.classList.remove('show'); }
-          mClose.addEventListener('click', closeModal);
-          modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
-          document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-    
-          // ----------------------
-          // Timeline setup
-          // ----------------------
-          function initTimeline() {
-            const line   = document.querySelector('.timeline');
-            const cursor = document.querySelector('.cursor');
-            const years  = Array.from(document.querySelectorAll('.timeline .year'));
-    
-            if (!line || !cursor || !years.length) return;
-    
-            function moveCursorTo(el) {
-              const rect = el.getBoundingClientRect();
-              const parentRect = line.getBoundingClientRect();
-              const left = rect.left - parentRect.left + line.scrollLeft;
-              cursor.style.left = `${left + 6}px`;
-              cursor.style.width = `${rect.width - 12}px`;
-              el.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-            }
-    
-            function setActive(el) {
-              years.forEach(y => y.classList.remove('active'));
-              el.classList.add('active');
-              moveCursorTo(el);
-            }
-    
-            // Initial active
-            const firstActive = years.find(y => !y.disabled && !y.classList.contains('disabled'));
-            if (firstActive) setTimeout(() => setActive(firstActive), 100);
-    
-            // Button clicks
-            years.forEach(btn => {
-              btn.addEventListener('click', () => {
-                if (btn.disabled || btn.classList.contains('disabled')) return;
-                setActive(btn);
-    
-                const raw = btn.dataset.payload;
-                if (!raw) return;
-                let payload;
-                try { payload = JSON.parse(raw); } catch { payload = null; }
-                if (payload) openModal(payload);
-              });
-            });
-    
-            // Resize handling
-            window.addEventListener('resize', () => {
-              const active = document.querySelector('.timeline .year.active');
-              if (active) moveCursorTo(active);
-            });
-          }
-    
-          // ----------------------
-          // Section switching
-          // ----------------------
-          function showSection(id) {
-            sections.forEach(sec => {
-              sec.style.display = (sec.id === id) ? "block" : "none";
-            });
-    
-            if (id === "career") {
-              initTimeline();
-            }
-          }
-    
-          // Default show home
-          showSection("home");
-    
-          navLinks.forEach(link => {
-            link.addEventListener("click", e => {
-              e.preventDefault();
-              const id = link.getAttribute("href").substring(1);
-              showSection(id);
-            });
+    <!-- ✅ Unified JavaScript block -->
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const sections = document.querySelectorAll("section");
+    const navLinks = document.querySelectorAll("nav a");
+
+    // ----------------------
+    // Modal elements
+    // ----------------------
+    const modal = document.getElementById('career-modal');
+    const mTitle = modal.querySelector('.modal-title');
+    const mSub   = modal.querySelector('.modal-sub');
+    const mImg   = modal.querySelector('.modal-img');
+    const mTabs  = modal.querySelector('.modal-tabs');
+    const mClose = modal.querySelector('.modal-close');
+
+    function renderEntry(entry) {
+      mTitle.textContent = entry.title || '';
+      mSub.innerHTML = `<span class="modal-year">${entry.year || ''}</span> — ${entry.subtitle || ''}`;
+      mImg.src = entry.img || '';
+      mImg.alt = entry.alt || entry.title || 'Logo';
+    }
+
+    function openModal(payload) {
+      const items = Array.isArray(payload) ? payload : [payload];
+      mTabs.innerHTML = '';
+
+      if (items.length > 1) {
+        items.forEach((it, idx) => {
+          const tab = document.createElement('button');
+          tab.className = 'modal-tab';
+          tab.type = 'button';
+          tab.role = 'tab';
+          tab.setAttribute('aria-selected', idx === 0 ? 'true' : 'false');
+          tab.textContent = it.tab ? it.tab : (it.title ? it.title : `Item ${idx + 1}`);
+          tab.addEventListener('click', () => {
+            mTabs.querySelectorAll('.modal-tab').forEach(t => t.setAttribute('aria-selected','false'));
+            tab.setAttribute('aria-selected','true');
+            renderEntry(items[idx]);
           });
+          mTabs.appendChild(tab);
         });
-    </script> 
+      }
+
+      renderEntry(items[0]);
+      modal.classList.add('show');
+    }
+
+    function closeModal() { modal.classList.remove('show'); }
+    mClose.addEventListener('click', closeModal);
+    modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+    // ----------------------
+    // Timeline setup
+    // ----------------------
+    function initTimeline() {
+      const line   = document.querySelector('.timeline');
+      const cursor = document.querySelector('.cursor');
+      const years  = Array.from(document.querySelectorAll('.timeline .year'));
+
+      if (!line || !cursor || !years.length) return;
+
+      function moveCursorTo(el) {
+        const rect = el.getBoundingClientRect();
+        const parentRect = line.getBoundingClientRect();
+        const left = rect.left - parentRect.left + line.scrollLeft;
+        cursor.style.left = `${left + 6}px`;
+        cursor.style.width = `${rect.width - 12}px`;
+        el.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+      }
+
+      function setActive(el) {
+        years.forEach(y => y.classList.remove('active'));
+        el.classList.add('active');
+        moveCursorTo(el);
+      }
+
+      // Initial active
+      const firstActive = years.find(y => !y.disabled && !y.classList.contains('disabled'));
+      if (firstActive) setTimeout(() => setActive(firstActive), 100);
+
+      // Button clicks
+      years.forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (btn.disabled || btn.classList.contains('disabled')) return;
+          setActive(btn);
+
+          const raw = btn.dataset.payload;
+          if (!raw) return;
+          let payload;
+          try { payload = JSON.parse(raw); } catch { payload = null; }
+          if (payload) openModal(payload);
+        });
+      });
+
+      // Resize handling
+      window.addEventListener('resize', () => {
+        const active = document.querySelector('.timeline .year.active');
+        if (active) moveCursorTo(active);
+      });
+    }
+
+    // ----------------------
+    // Section switching
+    // ----------------------
+    function showSection(id) {
+      sections.forEach(sec => {
+        sec.style.display = (sec.id === id) ? "block" : "none";
+      });
+
+      if (id === "career") {
+        initTimeline();
+      }
+    }
+
+    // Default show home
+    showSection("home");
+
+    navLinks.forEach(link => {
+      link.addEventListener("click", e => {
+        e.preventDefault();
+        const id = link.getAttribute("href").substring(1);
+        showSection(id);
+      });
+    });
+  });
+  </script>
 </body>
 </html>
