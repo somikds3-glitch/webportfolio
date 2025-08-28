@@ -1515,6 +1515,20 @@
           const id = link.getAttribute("href").substring(1);
           showSection(id);
         });
+        // Make any in-page anchor (e.g., href="#projects") switch sections
+        document.body.addEventListener("click", (e) => {
+          const a = e.target.closest('a[href^="#"]');
+          if (!a) return;
+        
+          const id = a.getAttribute("href").slice(1);
+          const target = document.getElementById(id);
+          if (!target) return; // not a section anchor
+        
+          e.preventDefault();
+          showSection(id);
+          target.scrollTo({ top: 0, behavior: "smooth" });
+        });
+
       });
     });
     </script>
