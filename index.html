@@ -720,32 +720,29 @@
 /* ----------------------------------
    Testimonials (Pinterest Masonry)
 ----------------------------------- */
+/* The Masonry Wrapper becomes a Grid */
 .testimonial-masonry {
-  column-count: 2;   
-  column-gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 24px; /* spacing between rows and columns */
   max-width: 1200px;
   margin: 30px auto;
   padding: 0 16px;
 }
 
-@media (max-width: 992px) { .testimonial-masonry { column-count: 1; } }
-
+/* Individual testimonial card */
 .testimonial {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
-  gap: 24px; /* perfect consistent spacing */
-  max-width: 1200px;
-  margin: 30px auto;
-  padding: 0 16px;
-  break-inside: avoid;
+  break-inside: avoid; /* just in case */
   opacity: 0;
   transform: translateY(30px);
   animation: fadeUp 0.8s ease forwards;
 }
 
-    .testimonial {
-    margin: 0; /* Grid handles spacing */
-  }
+/* Optional margin reset */
+.testimonial {
+  margin: 0; /* grid already provides gap */
+}
+
 
 .testimonial:nth-child(1) { animation-delay: 0.2s; }
 .testimonial:nth-child(2) { animation-delay: 0.4s; }
