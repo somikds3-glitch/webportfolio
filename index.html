@@ -1996,6 +1996,32 @@
 
       });
     });
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const testimonials = document.querySelectorAll("#testimonial-list .testimonial");
+      const loadMoreBtn = document.getElementById("loadMoreBtn");
+    
+      let visibleCount = 2; // how many testimonials are shown at first
+      const increment = 2;  // how many to show each click
+    
+      // hide testimonials beyond visibleCount
+      testimonials.forEach((t, i) => {
+        if (i >= visibleCount) t.classList.add("hidden");
+      });
+    
+      loadMoreBtn.addEventListener("click", () => {
+        const hiddenTestimonials = document.querySelectorAll("#testimonial-list .testimonial.hidden");
+        for (let i = 0; i < increment && i < hiddenTestimonials.length; i++) {
+          hiddenTestimonials[i].classList.remove("hidden");
+        }
+    
+        // hide button if no more testimonials
+        if (document.querySelectorAll("#testimonial-list .testimonial.hidden").length === 0) {
+          loadMoreBtn.style.display = "none";
+        }
+      });
+    });
+
     </script>
   </body>
   </html>
