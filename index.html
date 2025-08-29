@@ -731,14 +731,21 @@
 @media (max-width: 992px) { .testimonial-masonry { column-count: 1; } }
 
 .testimonial {
-  display: inline-block;
-  width: 100%;
-  margin: 0 0 35px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 24px; /* perfect consistent spacing */
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 0 16px;
   break-inside: avoid;
   opacity: 0;
   transform: translateY(30px);
   animation: fadeUp 0.8s ease forwards;
 }
+
+    .testimonial {
+    margin: 0; /* Grid handles spacing */
+  }
 
 .testimonial:nth-child(1) { animation-delay: 0.2s; }
 .testimonial:nth-child(2) { animation-delay: 0.4s; }
