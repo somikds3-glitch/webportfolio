@@ -182,7 +182,35 @@
       height: calc(env(safe-area-inset-bottom) + var(--bottom-extra));
     }
 
-
+    /* === CAREER background (dimmed image) === */
+    :root { --career-dim: 0.60; } /* increase to 0.7/0.8 for darker */
+    
+    #career {
+      position: relative;
+      isolation: isolate; /* keeps overlay contained to this section */
+    }
+    
+    #career::before {
+      content: "";
+      position: fixed;
+      top: var(--nav-h);  /* below sticky nav */
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background:
+        linear-gradient(rgba(0,0,0,var(--career-dim)), rgba(0,0,0,var(--career-dim))),
+        url('https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&cs=tinysrgb&h=2160&w=3840');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      z-index: 0;
+      pointer-events: none; /* clicks pass through */
+    }
+    
+    #career > * {
+      position: relative;
+      z-index: 1; /* ensures your content (headings, logos, timeline) is above background */
+    }
 
 
 
