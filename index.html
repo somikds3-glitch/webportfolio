@@ -13,6 +13,9 @@
       --bottom-extra: 156px;
     }
 
+
+
+
     /* Apple-like system font stack */
     html, body {
       margin: 0;
@@ -24,6 +27,8 @@
       height: 100%;
       overflow: hidden;   /* 🚫 disable global page scroll */
     }
+
+
 
     /* ----------------------
        NAVIGATION
@@ -76,9 +81,17 @@
       color: #fff;
       position: relative;
     }
-    @media (max-width: 768px) { .hero-section { background-attachment: scroll, scroll; } }
+    @media (max-width: 768px) {
+      .hero-section {
+        background-attachment: scroll, scroll;
+      }
+    }
+    /* Keep hero backgrounds scroll-based to avoid container glitches */
     #home.hero-section { background-attachment: scroll, scroll; }
 
+
+
+    /* Hero content: one-time cloud reveal */
     .hero-content {
       position: relative;
       z-index: 1;
@@ -102,7 +115,7 @@
     .btn-secondary:hover { background: #000; border: 2px solid #000; color: #fff; transform: translateY(-2px); }
 
     /* ----------------------
-       BAND
+       BAND (Lucida Sans as requested)
     ---------------------- */
     .band {
       position: relative; padding: 120px 20px; text-align: center;
@@ -111,36 +124,56 @@
     }
     .band p { position: relative; z-index: 1; max-width: 1000px; margin: auto; font-style: italic; }
 
+    /* Glass-morphism Band Box inside Home */
     .glass-box {
-      margin: 60px auto 0;
+      margin: 60px auto 0;             /* space below hero */
       max-width: 900px;
       padding: 30px 40px;
       border-radius: 16px;
-      background: rgba(255, 255, 255, 0.12);
+      background: rgba(255, 255, 255, 0.12); /* frosted glass look */
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
       color: #fff;
       font-size: 18px;
       line-height: 1.8;
       box-shadow: 0 8px 32px rgba(0,0,0,0.25);
-      opacity: 0; transform: translateY(30px);
-      animation: fadeUp 1s ease forwards; animation-delay: 0.5s;
+    
+      /* animation setup */
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 1s ease forwards;
+      animation-delay: 0.5s;
     }
-    @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+    
+    /* Fade-in up animation */
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
 
     /* ----------------------
        SECTIONS
     ---------------------- */
     :root{ --nav-h: 64px; } /* JS will keep this accurate */
+    
     section{
+      /* fill the viewport below the nav, but NOT fixed */
       position: relative;
       height: calc(100dvh - var(--nav-h));
       min-height: calc(100dvh - var(--nav-h));
+    
       overflow-y: auto;
+    
+      /* normal padding + safe bottom so content & scrollbar stay clear of bottom UI */
       padding: 60px 20px;
       padding-bottom: calc(60px + env(safe-area-inset-bottom) + var(--bottom-extra));
+
+    
       text-align: center;
-      display: none;
+      display: none; /* your JS toggles this */
       scrollbar-gutter: stable both-edges;
     }
     section::after{
@@ -148,6 +181,11 @@
       display:block;
       height: calc(env(safe-area-inset-bottom) + var(--bottom-extra));
     }
+
+
+
+
+
 
     /* ----------------------
        CAREER TIMELINE
@@ -179,6 +217,7 @@
     }
     .year.active { border-color: #111; color: #111; }
     .year.active::after { background: #111; }
+
     .cursor {
       position: absolute; top: 40px; height: 7px; background: #111; border-radius: 4px;
       transition: left .35s cubic-bezier(.22,1,.36,1), width .35s cubic-bezier(.22,1,.36,1);
@@ -188,24 +227,47 @@
     /* ----------------------
        MODAL
     ---------------------- */
-    .modal { position: fixed; inset: 0; display: none; align-items: center; justify-content: center;
-      background: rgba(0,0,0,0.5); z-index: 2000; padding: 20px; }
+    .modal {
+      position: fixed; inset: 0; display: none; align-items: center; justify-content: center;
+      background: rgba(0,0,0,0.5); z-index: 2000; padding: 20px;
+    }
     .modal.show { display: flex; }
     .modal-card {
       width: min(680px, 92vw); background: #fff; border-radius: 16px; padding: 22px;
       box-shadow: 0 20px 60px rgba(0,0,0,.25); position: relative;
       display: grid; grid-template-columns: 120px 1fr; gap: 18px;
     }
-    .modal-close { position: absolute; top: 10px; right: 12px; border: none; background: transparent;
-      font-size: 22px; cursor: pointer; color: #333; }
-    .modal-img { width: 120px; height: 120px; border-radius: 12px; object-fit: contain; background: #fafafa; border: 1px solid #eee; }
+    .modal-close {
+      position: absolute; top: 10px; right: 12px; border: none; background: transparent;
+      font-size: 22px; cursor: pointer; color: #333;
+    }
+    .modal-img {
+      width: 120px; height: 120px; border-radius: 12px; object-fit: contain; background: #fafafa; border: 1px solid #eee;
+    }
     .modal-title { margin: 0 0 6px 0; font-size: 20px; font-weight: 800; }
     .modal-sub { margin: 0 0 10px 0; color: #555; }
     .modal-year { font-weight: 700; color: #000; }
-    .modal-tabs { display: flex; gap: 8px; margin: -6px 0 10px; flex-wrap: wrap; }
-    .modal-tab { border: 1px solid #ddd; background: #f9f9f9; padding: 6px 10px; border-radius: 8px; font-size: 13px; cursor: pointer; transition: background .2s ease, border-color .2s ease; }
+
+    /* Modal tabs */
+    .modal-tabs {
+      display: flex;
+      gap: 8px;
+      margin: -6px 0 10px;
+      flex-wrap: wrap;
+    }
+    .modal-tab {
+      border: 1px solid #ddd;
+      background: #f9f9f9;
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: background .2s ease, border-color .2s ease;
+    }
     .modal-tab:hover { background: #f1f1f1; border-color: #ccc; }
-    .modal-tab[aria-selected="true"] { background: #111; color: #fff; border-color: #111; }
+    .modal-tab[aria-selected="true"] {
+      background: #111; color: #fff; border-color: #111;
+    }
 
     /* --- Brands scroller --- */
     .brands-wrap { margin: 10px auto 28px; max-width: 1100px; text-align: left; }
@@ -214,6 +276,7 @@
     .brands-track { display: flex; align-items: center; gap: 36px; width: max-content; animation: scrollBrands 28s linear infinite; padding-left: 12px; }
     .brands-logo { height: 38px; width: auto; filter: grayscale(0); opacity: .95; transition: transform .2s ease, opacity .2s ease, filter .2s ease; }
     .brands-logo:hover { transform: translateY(-2px); opacity: 1; filter: none; }
+
     @keyframes scrollBrands { from { transform: translateX(0); } to { transform: translateX(-50%); } }
     @media (prefers-reduced-motion: reduce) { .brands-track { animation: none; } }
 
@@ -223,165 +286,158 @@
       border: 1px solid #eee; border-left: 6px solid #0047AB;
       border-radius: 12px; background: #f9fbff;
       box-shadow: 0 8px 24px rgba(0,0,0,.06);
-      text-align: left;
     }
     .role-header { display: flex; align-items: center; gap: 16px; margin-bottom: 6px; }
     .role-logo { width: 56px; height: 56px; object-fit: contain; border-radius: 12px; background: #fafafa; border: 1px solid #eee; }
     .role-title { margin: 0; font-size: 20px; font-weight: 800; }
     .role-meta  { margin: 0; color: #555; text-align: left; }
     .role-body ul { text-align: left; max-width: 1000px; margin: 12px auto 0; padding-left: 18px; }
-    .role-body li { margin: 6px 0; line-height: 1.5; }
+    .role-body li { margin: 6px 0; line-height: 1.5; }   /* ✅ closed properly */
+
+
 
     /* --- Triple cards row (L&T / Aglow / Chemtex) --- */
     .triple-cards{
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr)); /* always 3 columns on most screens */
       gap: 18px;
       max-width: 1100px;
-      margin: 28px auto;
-      min-height: 50vh;
-      align-content: center;
+      margin: 28px auto;            /* centers the row horizontally */
+      
+      /* vertical middle of the section */
+      min-height: 50vh;              /* gives space to center within the section */
+      align-content: center;         /* centers the whole grid block vertically */
+      align-items: start;            /* keep card content starting at top inside each card */
       align-items: stretch;
     }
-    .triple-card{ margin: 0; max-width: unset; }
+    
+    /* compact role-cards in the row */
+    .triple-card{
+      margin: 0;
+      max-width: unset;
+    }
+    
+    /* left-align content inside */
     .triple-card .role-body{ text-align: left; }
+    
+    /* optional vertical scroll for the left card's long text */
     .triple-card .role-body.scrollable{
-      max-height: 240px; overflow: auto; padding-right: 6px;
+      max-height: 240px;
+      overflow: auto;
+      padding-right: 6px;
     }
+    
+    /* keep 3 columns down to ~600px; below that, stack */
     @media (max-width: 600px){
-      .triple-cards{ grid-template-columns: 1fr; min-height: unset; align-content: start; }
+      .triple-cards{
+        grid-template-columns: 1fr;  /* stack on very small screens only */
+        min-height: unset;           /* no forced vertical centering when stacked */
+        align-content: start;
+      }
     }
+    
+    /* ensure all role cards are left-aligned */
+    .role-card{ text-align: left; }
 
-    /* --- Hands-On Tools Usage --- */
+    
+    
+    
+    
+    
+     /* --- Hands-On Tools Usage --- */
     .role-tools { margin-top: 20px; text-align: left; }
     .role-tools h4 { margin-bottom: 16px;  font-size: 16px; font-weight: 700; }
-    .tools-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 24px; }
-    @media (max-width: 720px) { .tools-grid { grid-template-columns: 1fr; } }
+    
+    /* NEW: the two-column grid wrapper */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;  /* two equal columns */
+      gap: 12px 24px;                  /* row/column spacing */
+    }
+    @media (max-width: 720px) {
+      .tools-grid { grid-template-columns: 1fr; } /* stack on phones */
+    }
+    
     .tool { display: flex; align-items: center; gap: 10px; }
     .tool-icon { width: 22px; height: 22px; object-fit: contain; }
     .bar { flex: 1; height: 8px; background: #eee; border-radius: 4px; overflow: hidden; }
-    .bar div { height: 100%; background: #0047AB; }
+    .bar div { height: 100%; background: #0047AB; } /* MSCI blue */
     .percent { font-size: 13px; font-weight: 600; min-width: 32px; text-align: right; }
 
-    .tool .bar, .tool-row .bar{ width: var(--tool-bar-w); flex: 0 0 var(--tool-bar-w); }
-    .tool .percent, .tool-row .percent{ width: var(--tool-pct-w); flex: 0 0 var(--tool-pct-w); text-align: right; }
-    .tool span:not(.percent), .tool-row span:not(.percent){ flex: 1 1 auto; min-width: 0; }
+    /* === Uniform tool bar widths across ALL tool lists === */
+    .tool .bar,
+    .tool-row .bar{
+      width: var(--tool-bar-w);
+      flex: 0 0 var(--tool-bar-w);   /* override previous flex:1 */
+    }
+    
+    .tool .percent,
+    .tool-row .percent{
+      width: var(--tool-pct-w);
+      flex: 0 0 var(--tool-pct-w);
+      text-align: right;
+    }
+    
+    /* Let the label flex while keeping icon / bar / % fixed */
+    .tool span:not(.percent),
+    .tool-row span:not(.percent){
+      flex: 1 1 auto;
+      min-width: 0;
+    }
 
-    @media (max-width: 720px){ :root{ --tool-bar-w: clamp(160px, 60vw, 220px); } }
+
+    /* === Consistent progress bar width across all tool lists === */
+    .tool .bar{
+      flex: 0 0 var(--tool-bar-w);
+      width: var(--tool-bar-w);
+    }
+    .tool .percent{
+      flex: 0 0 var(--tool-pct-w);
+      min-width: var(--tool-pct-w);
+      text-align: right;
+      font-size: 13px; font-weight: 600;
+    }
+    .tool > span { flex: 1; } /* let the label take remaining space */
+    
+    .tool-row .bar{
+      flex: 0 0 var(--tool-bar-w);
+      width: var(--tool-bar-w);
+    }
+    .tool-row .percent{
+      flex: 0 0 var(--tool-pct-w);
+      min-width: var(--tool-pct-w);
+      text-align: right;
+    }
+    
+    /* Optional: slightly smaller bar on narrow screens */
+    @media (max-width: 720px){
+      :root{ --tool-bar-w: clamp(160px, 60vw, 220px); }
+    }
+
 
     /* === Normalize widths/heights in LEFT tools box === */
     .gdrc-column.tools .tool-row .bar{
-      width: var(--tool-bar-w); flex: 0 0 var(--tool-bar-w); height: 8px;
+      width: var(--tool-bar-w);
+      flex: 0 0 var(--tool-bar-w);   /* override earlier flex:1 */
+      height: 8px;                   /* match thickness with other bars */
     }
+    
     .gdrc-column.tools .tool-row .percent{
-      width: var(--tool-pct-w); flex: 0 0 var(--tool-pct-w); text-align: right;
+      width: var(--tool-pct-w);
+      flex: 0 0 var(--tool-pct-w);
+      text-align: right;
     }
-    .gdrc-column.tools .tool-row span:not(.percent){ flex: 1 1 auto; min-width: 0; }
-    .gdrc-column.tools .tool-icon{ width: 22px; height: 22px; }
-
-    /* ----------------------
-       GDRC Two-Column Section
-    ---------------------- */
-    .gdrc-columns { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 20px; }
-    @media (max-width: 768px) { .gdrc-columns { grid-template-columns: 1fr; } }
-    .gdrc-column {
-      background: #fdfdfd; border: 1px solid #eee; border-radius: 10px; padding: 16px;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.04);
+    
+    /* Let the label flex while bar/% stay fixed */
+    .gdrc-column.tools .tool-row span:not(.percent){
+      flex: 1 1 auto;
+      min-width: 0;
     }
-    .gdrc-column h4 { margin-top: 0; font-size: 16px; font-weight: 700; margin-bottom: 12px; color: #0047AB; }
-    .gdrc-scroller { display: flex; flex-direction: column; gap: 10px; }
-    .tool-row { display: flex; align-items: center; gap: 10px; }
-    .tool-row span { font-size: 14px; font-weight: 600; }
-    .tool-row .bar { flex: 1; height: 6px; background: #eee; border-radius: 4px; overflow: hidden; }
-    .tool-row .bar > div { height: 100%; background: #0047AB; }
-    .tool-row .percent { font-size: 13px; font-weight: 600; min-width: 32px; text-align: right; }
-
-    .mentions-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding-right: 4px; }
-    @media (max-width: 600px) { .mentions-grid { grid-template-columns: 1fr; } }
-    .mention { border-radius: 6px; transition: background 0.2s ease, box-shadow 0.2s ease; }
-    .mention:hover { background: #f1f6ff; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05); }
-    .mention a { display: flex; align-items: center; gap: 8px; color: #0047AB; font-size: 13px; font-weight: 600; text-decoration: none; line-height: 1.4; padding: 6px 8px; }
-    .mention a:hover { text-decoration: underline; }
-    .mention img { width: 24px; height: 24px; object-fit: contain; border-radius: 4px; flex-shrink: 0; }
-
-    /* Role button (light cards) */
-    .role-card a.role-btn,
-    .role-card a.role-btn:link,
-    .role-card a.role-btn:visited{
-      display:inline-block; padding:8px 16px; border:1px solid #0047AB; border-radius:6px;
-      font-weight:600; color:#0047AB; text-decoration:none; transition:all .2s ease;
-      background:rgba(0,71,171,0.06); margin-top:18px; margin-bottom:6px;
-    }
-    .role-card a.role-btn:hover{ background:#0047AB; color:#fff; text-decoration:none; }
-
-    /* === FIX: lock widths in LEFT tools box === */
-    .gdrc-column.tools .tool-row{
-      display: grid;
-      grid-template-columns: 22px minmax(0,1fr) minmax(120px, 40%) var(--tool-pct-w);
-      align-items: center; gap: 10px;
-    }
-    .gdrc-column.tools .tool-row .bar{ width: 100% !important; height: 8px; }
-    .gdrc-column.tools .tool-row .percent{ text-align: right; }
-    .gdrc-column.tools .tool-row .tool-icon { grid-column: 1; }
-    .gdrc-column.tools .tool-row .bar       { grid-column: 3; }
-    .gdrc-column.tools .tool-row .percent   { grid-column: 4; }
-    .gdrc-column.tools .tool-row span:not(.percent):not(.tool-icon) {
-      grid-column: 2; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
-    }
-
-    /* ----------------------
-       NEW: Dark "Frozen" card (KPMG Internship)
-    ---------------------- */
-    .frost-card{
-      max-width: 1100px;
-      margin: 28px auto 0;
-      padding: 22px 22px 18px;
-      border-radius: 14px;
-      background: rgba(15, 17, 26, 0.72);
-      color: #fff;
-      border: 1px solid rgba(255,255,255,0.14);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.35), inset 0 0 0 1px rgba(255,255,255,0.06);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      text-align: left;
-    }
-    .frost-card .role-header{ margin-bottom: 8px; }
-    .frost-card .role-logo{
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.18);
-    }
-    .frost-card .role-title{ color: #fff; }
-    .frost-card .role-meta{ color: #cfd6ff; }
-    .frost-card p, .frost-card li{ color: #f1f4ff; }
-    .frost-card ul{ margin-top: 8px; padding-left: 18px; }
-
-    .frost-actions{
-      display: flex;
-      justify-content: space-between;   /* left & right */
-      gap: 12px;
-      margin-top: 14px;
-      flex-wrap: wrap;
-    }
-    @media (max-width: 520px){
-      .frost-actions{ flex-direction: column; }
-    }
-    .frost-btn{
-      display: inline-block;
-      padding: 10px 16px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 700;
-      letter-spacing: .2px;
-      border: 1px solid rgba(255,255,255,0.35);
-      color: #fff;
-      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
-      box-shadow: 0 6px 18px rgba(0,0,0,0.25);
-      transition: transform .2s ease, background .2s ease, border-color .2s ease;
-    }
-    .frost-btn:hover{
-      transform: translateY(-2px);
-      background: rgba(255,255,255,0.16);
-      border-color: rgba(255,255,255,0.55);
+    
+    /* (Optional) lock icon size for consistency */
+    .gdrc-column.tools .tool-icon{
+      width: 22px;
+      height: 22px;
     }
 
     /* ----------------------
@@ -391,11 +447,198 @@
       0%   { opacity: 0; filter: blur(20px); transform: translateY(60px); }
       100% { opacity: 1; filter: blur(0);    transform: translateY(0); }
     }
+    /* ----------------------
+   GDRC Two-Column Section
+---------------------- */
+    .gdrc-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 20px;
+    }
+    @media (max-width: 768px) {
+      .gdrc-columns {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .gdrc-column {
+      background: #fdfdfd;
+      border: 1px solid #eee;
+      border-radius: 10px;
+      padding: 16px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.04);
+    }
+    .gdrc-column h4 {
+      margin-top: 0;
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #0047AB;
+    }
+    
+    .gdrc-scroller {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .tool-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .tool-row span {
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .tool-row .bar {
+      flex: 1;
+      height: 6px;
+      background: #eee;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .tool-row .bar > div {
+      height: 100%;
+      background: #0047AB;
+    }
+    .tool-row .percent {
+      font-size: 13px;
+      font-weight: 600;
+      min-width: 32px;
+      text-align: right;
+    }
+
+    .mentions-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      padding-right: 4px;
+    }
+    
+    @media (max-width: 600px) {
+      .mentions-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .mention {
+      border-radius: 6px;
+      transition: background 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    .mention:hover {
+      background: #f1f6ff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+    
+    .mention a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #0047AB;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      line-height: 1.4;
+      padding: 6px 8px;
+    }
+    
+    .mention a:hover {
+      text-decoration: underline;
+    }
+    
+    .mention img {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+
+    /* Force "View important projects →" to render as a button */
+    .role-card a.role-btn,
+    .role-card a.role-btn:link,
+    .role-card a.role-btn:visited{
+      display:inline-block;
+      padding:8px 16px;
+      border:1px solid #0047AB;
+      border-radius:6px;
+      font-weight:600;
+      color:#0047AB;
+      text-decoration:none;
+      transition:all .2s ease;
+    }
+    .role-card a.role-btn:hover{
+      background:#0047AB;
+      color:#fff;
+      text-decoration:none;
+    }
+
+    /* optional */
+    .role-card a.role-btn{ background:rgba(0,71,171,0.06); }
+
+
+    /* subtle spacing below preceding content */
+    .role-card a.role-btn{
+      margin-top: 18px; /* was 14px; tweak to taste (16–20px) */
+    }
+
+    .role-card a.role-btn{ margin-top: 18px; margin-bottom: 6px; }
+
+
+    /* === FIX: lock widths in LEFT tools box === */
+    .gdrc-column.tools .tool-row{
+      display: grid;
+      /* icon | flexible label | bar (min 120px, up to 40% of row) | percent */
+      grid-template-columns: 22px minmax(0,1fr) minmax(120px, 40%) var(--tool-pct-w);
+      align-items: center;
+      gap: 10px;
+    }
+    .gdrc-column.tools .tool-row .bar{ width: 100% !important; height: 8px; }
+    .gdrc-column.tools .tool-row .percent{ text-align: right; }
+
+
+    /* Put each piece in a fixed grid column so rows with NO icon still line up */
+.gdrc-column.tools .tool-row .tool-icon { grid-column: 1; }
+.gdrc-column.tools .tool-row .bar       { grid-column: 3; }
+.gdrc-column.tools .tool-row .percent   { grid-column: 4; }
+.gdrc-column.tools .tool-row span:not(.percent):not(.tool-icon) {
+  grid-column: 2;
+  min-width: 0;           /* prevent squeeze overflow */
+  overflow: hidden;
+  text-overflow: ellipsis; /* optional: tidy long labels */
+  white-space: nowrap;     /* optional: keep on one line */
+}
+
+
+    
+    .gdrc-column.tools .tool-row .bar{
+      width: 100% !important;
+      height: 8px;
+      flex: 0 0 auto !important;
+    }
+    
+    .gdrc-column.tools .tool-row .percent{
+      width: var(--tool-pct-w) !important;
+      flex: 0 0 auto !important;
+      text-align: right;
+    }
+    
+    .gdrc-column.tools .tool-row span:not(.percent){
+      min-width: 0;
+    }
+
+
   </style>
 </head>
 <body>
+  <!-- Fallback if JS fails: ensure hero text stays visible -->
   <noscript>
-    <style>.hero-content { opacity: 1 !important; filter: none !important; transform: none !important; }</style>
+    <style>
+      .hero-content { opacity: 1 !important; filter: none !important; transform: none !important; }
+    </style>
   </noscript>
 
   <!-- NAVIGATION -->
@@ -419,17 +662,31 @@
         </p>
         <div class="hero-buttons">
           <a href="#projects" class="btn-primary">View My Work</a>
-          <a href="https://drive.google.com/file/d/1IifV8kX1eWRcoTKXnsMP0MUXiZBdIuB1/view?usp=drivesdk"
-             class="btn-secondary" target="_blank" rel="noopener">Download Resume</a>
+          <a
+            href="https://drive.google.com/file/d/1IifV8kX1eWRcoTKXnsMP0MUXiZBdIuB1/view?usp=drivesdk"
+            class="btn-secondary"
+            target="_blank"
+            rel="noopener"
+          >Download Resume</a>
         </div>
       </div>
     </header>
+  
+    <!-- Band styled as glass-box, still inside #home -->
     <div class="band glass-box">
       <p>
-        As a graduate from a Top Tier Management School, I bring a high level of motivation and dedication to every task...
+        As a graduate from a Top Tier Management School, I bring a high level of motivation and dedication to every task,
+        ensuring excellence and adherence to standards. Currently working as a Data Processes Professional, I specialize
+        in managing and optimizing data workflows, data modeling, defining QA/QC processes, and building efficient data
+        pipelines. My expertise includes data operations, process automation, dataset prescreening and visualization,
+        enabling actionable insights and supporting data-driven decision-making. With a strong interest in AI, I am actively
+        implementing AI Prompt Engineering by leveraging and democratizing AI to make it accessible and impactful across
+        data processes. I am eager to continue refining my skills in advanced data management, AI, and analytics within a
+        dynamic work environment that fosters innovation and growth.
       </p>
     </div>
   </section>
+
 
   <!-- SECTIONS -->
   <section id="career">
@@ -474,41 +731,195 @@
         <button class="year disabled" disabled aria-disabled="true">2013</button>
 
         <!-- From 2014 onwards -->
-        <button class="year" data-payload='{"year":"2014","title":"Chemtex Speciality Limited","subtitle":"Sales and Service Engineer","img":"Chemtex.png","alt":"Chemtex logo","tab":"Chemtex"}'>2014</button>
+        <button
+          class="year"
+          data-payload='{
+            "year":"2014",
+            "title":"Chemtex Speciality Limited",
+            "subtitle":"Sales and Service Engineer",
+            "img":"Chemtex.png",
+            "alt":"Chemtex logo",
+            "tab":"Chemtex"
+          }'
+        >2014</button>
+
         <button class="year disabled" disabled aria-disabled="true">2015</button>
-        <button class="year" data-payload='{"year":"2016","title":"MBA in Energy and Environment","subtitle":"Symbiosis Institute of International Business","img":"SIIB.png","alt":"SIIB logo","tab":"SIIB"}'>2016</button>
+
+        <button
+          class="year"
+          data-payload='{
+            "year":"2016",
+            "title":"MBA in Energy and Environment",
+            "subtitle":"Symbiosis Institute of International Business",
+            "img":"SIIB.png",
+            "alt":"SIIB logo",
+            "tab":"SIIB"
+          }'
+        >2016</button>
 
         <!-- 2017 with tabs -->
-        <button class="year" data-payload='[
-          {"year":"2017","title":"MBA in Energy and Environment","subtitle":"Symbiosis Institute of International Business","img":"SIIB.png","alt":"SIIB logo","tab":"SIIB"},
-          {"year":"2017","title":"Summer Internship","subtitle":"KPMG India","img":"KPMG.png","alt":"KPMG logo","tab":"KPMG"}]'>2017</button>
+        <button
+          class="year"
+          data-payload='[
+            {
+              "year":"2017",
+              "title":"MBA in Energy and Environment",
+              "subtitle":"Symbiosis Institute of International Business",
+              "img":"SIIB.png",
+              "alt":"SIIB logo",
+              "tab":"SIIB"
+            },
+            {
+              "year":"2017",
+              "title":"Summer Internship",
+              "subtitle":"KPMG India",
+              "img":"KPMG.png",
+              "alt":"KPMG logo",
+              "tab":"KPMG"
+            }
+          ]'
+        >2017</button>
 
         <!-- 2018 with tabs -->
-        <button class="year" data-payload='[
-          {"year":"2018","title":"L&T Financial Services","subtitle":"Team Manager (June 2018)","img":"LT.jpeg","alt":"L&T Financial Services logo","tab":"L&T"},
-          {"year":"2018","title":"MarketsandMarkets Research Pvt. Ltd.","subtitle":"Strategic Research Analyst","img":"MnM.png","alt":"MarketsandMarkets logo","tab":"MnM"}]'>2018</button>
+        <button
+          class="year"
+          data-payload='[
+            {
+              "year":"2018",
+              "title":"L&T Financial Services",
+              "subtitle":"Team Manager (June 2018)",
+              "img":"LT.jpeg",
+              "alt":"L&T Financial Services logo",
+              "tab":"L&T"
+            },
+            {
+              "year":"2018",
+              "title":"MarketsandMarkets Research Pvt. Ltd.",
+              "subtitle":"Strategic Research Analyst",
+              "img":"MnM.png",
+              "alt":"MarketsandMarkets logo",
+              "tab":"MnM"
+            }
+          ]'
+        >2018</button>
 
-        <button class="year" data-payload='{"year":"2019","title":"MarketsandMarkets Research Pvt. Ltd.","subtitle":"Strategic Research Analyst","img":"MnM.png","alt":"MarketsandMarkets logo","tab":"MnM"}'>2019</button>
+        <button
+          class="year"
+          data-payload='{
+            "year":"2019",
+            "title":"MarketsandMarkets Research Pvt. Ltd.",
+            "subtitle":"Strategic Research Analyst",
+            "img":"MnM.png",
+            "alt":"MarketsandMarkets logo",
+            "tab":"MnM"
+          }'
+        >2019</button>
 
         <!-- 2020 with tabs -->
-        <button class="year" data-payload='[
-          {"year":"2020","title":"MarketsandMarkets Research Pvt. Ltd.","subtitle":"Strategic Research Analyst","img":"MnM.png","alt":"MarketsandMarkets logo","tab":"MnM"},
-          {"year":"2020","title":"GlobalData Research Centre","subtitle":"Senior Research Analyst","img":"GDRC.png","alt":"GlobalData Research Centre logo","tab":"GDRC"}]'>2020</button>
+        <button
+          class="year"
+          data-payload='[
+            {
+              "year":"2020",
+              "title":"MarketsandMarkets Research Pvt. Ltd.",
+              "subtitle":"Strategic Research Analyst",
+              "img":"MnM.png",
+              "alt":"MarketsandMarkets logo",
+              "tab":"MnM"
+            },
+            {
+              "year":"2020",
+              "title":"GlobalData Research Centre",
+              "subtitle":"Senior Research Analyst",
+              "img":"GDRC.png",
+              "alt":"GlobalData Research Centre logo",
+              "tab":"GDRC"
+            }
+          ]'
+        >2020</button>
 
         <!-- 2021 with tabs -->
-        <button class="year" data-payload='[
-          {"year":"2021","title":"GlobalData Research Centre","subtitle":"Senior Research Analyst","img":"GDRC.png","alt":"GlobalData Research Centre logo","tab":"GDRC"},
-          {"year":"2021","title":"Evalueserve","subtitle":"Senior Analyst","img":"EVS.png","alt":"Evalueserve logo","tab":"EVS"}]'>2021</button>
+        <button
+          class="year"
+          data-payload='[
+            {
+              "year":"2021",
+              "title":"GlobalData Research Centre",
+              "subtitle":"Senior Research Analyst",
+              "img":"GDRC.png",
+              "alt":"GlobalData Research Centre logo",
+              "tab":"GDRC"
+            },
+            {
+              "year":"2021",
+              "title":"Evalueserve",
+              "subtitle":"Senior Analyst",
+              "img":"EVS.png",
+              "alt":"Evalueserve logo",
+              "tab":"EVS"
+            }
+          ]'
+        >2021</button>
 
-        <button class="year" data-payload='{"year":"2022","title":"Evalueserve","subtitle":"Senior Analyst","img":"EVS.png","alt":"Evalueserve logo","tab":"EVS"}'>2022</button>
-        <button class="year" data-payload='{"year":"2023","title":"Evalueserve","subtitle":"Senior Analyst","img":"EVS.png","alt":"Evalueserve logo","tab":"EVS"}'>2023</button>
+        <button
+          class="year"
+          data-payload='{
+            "year":"2022",
+            "title":"Evalueserve",
+            "subtitle":"Senior Analyst",
+            "img":"EVS.png",
+            "alt":"Evalueserve logo",
+            "tab":"EVS"
+          }'
+        >2022</button>
+
+        <button
+          class="year"
+          data-payload='{
+            "year":"2023",
+            "title":"Evalueserve",
+            "subtitle":"Senior Analyst",
+            "img":"EVS.png",
+            "alt":"Evalueserve logo",
+            "tab":"EVS"
+          }'
+        >2023</button>
 
         <!-- 2024 with tabs -->
-        <button class="year" data-payload='[
-          {"year":"2024","title":"Evalueserve","subtitle":"Senior Analyst","img":"EVS.png","alt":"Evalueserve logo","tab":"EVS"},
-          {"year":"2024","title":"MSCI Inc.","subtitle":"Senior Associate, DCS (Data Operations)","img":"MSCI.png","alt":"MSCI logo","tab":"MSCI"}]'>2024</button>
+        <button
+          class="year"
+          data-payload='[
+            {
+              "year":"2024",
+              "title":"Evalueserve",
+              "subtitle":"Senior Analyst",
+              "img":"EVS.png",
+              "alt":"Evalueserve logo",
+              "tab":"EVS"
+            },
+            {
+              "year":"2024",
+              "title":"MSCI Inc.",
+              "subtitle":"Senior Associate, DCS (Data Operations)",
+              "img":"MSCI.png",
+              "alt":"MSCI logo",
+              "tab":"MSCI"
+            }
+          ]'
+        >2024</button>
 
-        <button class="year" data-payload='{"year":"2025","title":"MSCI Inc.","subtitle":"Senior Associate, DCS (Data Operations)","img":"MSCI.png","alt":"MSCI logo","tab":"MSCI"}'>2025</button>
+        <button
+          class="year"
+          data-payload='{
+            "year":"2025",
+            "title":"MSCI Inc.",
+            "subtitle":"Senior Associate, DCS (Data Operations)",
+            "img":"MSCI.png",
+            "alt":"MSCI logo",
+            "tab":"MSCI"
+          }'
+        >2025</button>
+
       </div>
     </div>
 
@@ -532,101 +943,367 @@
           <li>Collaborates with global teams in an international environment, working seamlessly across hierarchies, functions, and time zones.</li>
         </ul>
 
+        <!-- Hands-On Tools Usage -->
+        <!-- Hands-On Tools Usage -->
         <div class="role-tools">
           <h4>Hands-On Tools Usage</h4>
           <div class="tools-grid">
-            <div class="tool"><img src="jupyter.png" alt="Jupyter Notebooks" class="tool-icon"><span>Jupyter Notebooks</span><div class="bar"><div style="width:15%"></div></div><span class="percent">15%</span></div>
-            <div class="tool"><img src="excel.png" alt="Microsoft Excel" class="tool-icon"><span>Advanced Microsoft Excel</span><div class="bar"><div style="width:25%"></div></div><span class="percent">25%</span></div>
-            <div class="tool"><img src="postgres.png" alt="Postgres SQL" class="tool-icon"><span>Postgres SQL</span><div class="bar"><div style="width:25%"></div></div><span class="percent">25%</span></div>
-            <div class="tool"><img src="powerbi.png" alt="Power BI" class="tool-icon"><span>Power BI (Data Visualisation)</span><div class="bar"><div style="width:10%"></div></div><span class="percent">10%</span></div>
-            <div class="tool"><img src="miro.png" alt="Miro Board" class="tool-icon"><span>Miro Board</span><div class="bar"><div style="width:10%"></div></div><span class="percent">10%</span></div>
-            <div class="tool"><img src="postman.png" alt="Postman" class="tool-icon"><span>Postman</span><div class="bar"><div style="width:5%"></div></div><span class="percent">5%</span></div>
-            <div class="tool"><img src="loop.png" alt="Microsoft Loop" class="tool-icon"><span>Microsoft Loop</span><div class="bar"><div style="width:5%"></div></div><span class="percent">5%</span></div>
-            <div class="tool"><img src="whiteboard.png" alt="Microsoft Whiteboard" class="tool-icon"><span>Microsoft Whiteboard</span><div class="bar"><div style="width:2%"></div></div><span class="percent">2%</span></div>
-            <div class="tool"><img src="jira.png" alt="Jira Sprints" class="tool-icon"><span>Jira Sprints</span><div class="bar"><div style="width:2%"></div></div><span class="percent">2%</span></div>
-            <div class="tool"><span>Others</span><div class="bar"><div style="width:1%"></div></div><span class="percent">1%</span></div>
+            <div class="tool">
+              <img src="jupyter.png" alt="Jupyter Notebooks" class="tool-icon">
+              <span>Jupyter Notebooks</span>
+              <div class="bar"><div style="width:15%"></div></div>
+              <span class="percent">15%</span>
+            </div>
+        
+            <div class="tool">
+              <img src="excel.png" alt="Microsoft Excel" class="tool-icon">
+              <span>Advanced Microsoft Excel</span>
+              <div class="bar"><div style="width:25%"></div></div>
+              <span class="percent">25%</span>
+            </div>
+        
+            <div class="tool">
+              <img src="postgres.png" alt="Postgres SQL" class="tool-icon">
+              <span>Postgres SQL</span>
+              <div class="bar"><div style="width:25%"></div></div>
+              <span class="percent">25%</span>
+            </div>
+        
+            <div class="tool">
+              <img src="powerbi.png" alt="Power BI" class="tool-icon">
+              <span>Power BI (Data Visualisation)</span>
+              <div class="bar"><div style="width:10%"></div></div>
+              <span class="percent">10%</span>
+            </div>
+        
+            <div class="tool">
+              <img src="miro.png" alt="Miro Board" class="tool-icon">
+              <span>Miro Board</span>
+              <div class="bar"><div style="width:10%"></div></div>
+              <span class="percent">10%</span>
+            </div>
+        
+            <div class="tool">
+              <img src="postman.png" alt="Postman" class="tool-icon">
+              <span>Postman</span>
+              <div class="bar"><div style="width:5%"></div></div>
+              <span class="percent">5%</span>
+            </div>
+        
+            <div class="tool">
+              <img src="loop.png" alt="Microsoft Loop" class="tool-icon">
+              <span>Microsoft Loop</span>
+              <div class="bar"><div style="width:5%"></div></div>
+              <span class="percent">5%</span>
+            </div>
+        
+            <div class="tool">
+              <img src="whiteboard.png" alt="Microsoft Whiteboard" class="tool-icon">
+              <span>Microsoft Whiteboard</span>
+              <div class="bar"><div style="width:2%"></div></div>
+              <span class="percent">2%</span>
+            </div>
+        
+            <div class="tool">
+              <img src="jira.png" alt="Jira Sprints" class="tool-icon">
+              <span>Jira Sprints</span>
+              <div class="bar"><div style="width:2%"></div></div>
+              <span class="percent">2%</span>
+            </div>
+        
+            <div class="tool">
+              <span>Others</span>
+              <div class="bar"><div style="width:1%"></div></div>
+              <span class="percent">1%</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
     <div class="role-card" aria-labelledby="evs-role-title">
-      <div class="role-header">
-        <img src="EVS.png" alt="EVS logo" class="role-logo">
-        <div>
-          <h3 id="evs-role-title" class="role-title">Senior Analyst, Evalueserve India</h3>
-          <p class="role-meta">August 2021 - October 2024</p>
-        </div>
-      </div>
-      <div class="role-body">
-        <ul>
-          <li>Experienced in syndicate and custom research projects, encompassing qualitative and quantitative analysis.</li>
-          <li>Conducted research on heavy power components, including competitor analysis, market sizing, and go-to-market strategy.</li>
-          <li>Proficient in data modeling, database analysis, scenario-based data models, and extracting actionable insights via standard frameworks.</li>
-          <li>Additionally, conducted extensive research and analysis, constructing over 50 client competitor profiles and customer profiles, which improved strategic decision-making.</li>
-          <li>Also created newsletters, client decks, country Power Outlooks, and worked as a COVID-19 Analyst.</li>
-          <li>Developed advanced data visualization dashboards using Excel, Power BI, Infogram, Google Data Studio, and Tableau. These dashboards increased visibility of key business insights for stakeholders.</li>
-        </ul>
-
-        <div class="role-tools">
-          <h4>Hands-On Tools Usage</h4>
-          <div class="tools-grid">
-            <div class="tool"><img src="excel.png" alt="Microsoft Excel" class="tool-icon"><span>Advanced Microsoft Excel</span><div class="bar"><div style="width:25%"></div></div><span class="percent">25%</span></div>
-            <div class="tool"><img src="powerbi.png" alt="Power BI" class="tool-icon"><span>Data Visualisation (Power BI)</span><div class="bar"><div style="width:20%"></div></div><span class="percent">20%</span></div>
-            <div class="tool"><img src="powerautomate.png" alt="Power Automate (Desktop)" class="tool-icon"><span>Power Automate (Desktop)</span><div class="bar"><div style="width:20%"></div></div><span class="percent">20%</span></div>
-            <div class="tool"><img src="webscraper.png" alt="WebScrapper" class="tool-icon"><span>WebScrapper</span><div class="bar"><div style="width:15%"></div></div><span class="percent">15%</span></div>
-            <div class="tool"><img src="tableau.png" alt="Tableau" class="tool-icon"><span>Tableau</span><div class="bar"><div style="width:5%"></div></div><span class="percent">5%</span></div>
-            <div class="tool"><img src="sp.png" alt="S&P CapIQ" class="tool-icon"><span>S&P CapIQ</span><div class="bar"><div style="width:5%"></div></div><span class="percent">5%</span></div>
-            <div class="tool"><img src="factiva.png" alt="Factiva" class="tool-icon"><span>Factiva</span><div class="bar"><div style="width:5%"></div></div><span class="percent">5%</span></div>
-            <div class="tool"><span>Others</span><div class="bar"><div style="width:5%"></div></div><span class="percent">5%</span></div>
-          </div>
-        </div>
-        <a href="#projects" class="role-btn">View important projects →</a>
+    <div class="role-header">
+      <img src="EVS.png" alt="EVS logo" class="role-logo">
+      <div>
+        <h3 id="evs-role-title" class="role-title">Senior Analyst, Evalueserve India</h3>
+        <p class="role-meta">August 2021 - October 2024</p>
       </div>
     </div>
+    <div class="role-body">
+      <ul>
+        <li>Experienced in syndicate and custom research projects, encompassing qualitative and quantitative analysis.</li>
+        <li>Conducted research on heavy power components, including competitor analysis, market sizing, and go-to-market strategy.</li>
+        <li>Proficient in data modeling, database analysis, scenario-based data models, and extracting actionable insights via standard frameworks.</li>
+        <li>Additionally, conducted extensive research and analysis, constructing over 50 client competitor profiles and customer profiles, which improved strategic decision-making.</li>
+        <li>Also created newsletters, client decks, country Power Outlooks, and worked as a COVID-19 Analyst.</li>
+        <li>Developed advanced data visualization dashboards using Excel, Power BI, Infogram, Google Data Studio, and Tableau. These dashboards increased visibility of key business insights for stakeholders.</li>
+      </ul>
 
-    <div class="role-card" aria-labelledby="gdrc-role-title">
-      <div class="role-header">
-        <img src="GDRC.png" alt="GDRC logo" class="role-logo">
-        <div>
-          <h3 id="gdrc-role-title" class="role-title">Senior Research Analyst, GlobalData Research Centre (GDRC)</h3>
-          <p class="role-meta">February 2020 – August 2021</p>
+    <!-- Hands-On Tools Usage -->
+      <div class="role-tools">
+        <h4>Hands-On Tools Usage</h4>
+        <div class="tools-grid">
+          <div class="tool">
+            <img src="excel.png" alt="Microsoft Excel" class="tool-icon">
+            <span>Advanced Microsoft Excel</span>
+            <div class="bar"><div style="width:25%"></div></div>
+            <span class="percent">25%</span>
+          </div>
+      
+          <div class="tool">
+            <img src="powerbi.png" alt="Power BI" class="tool-icon">
+            <span>Data Visualisation (Power BI)</span>
+            <div class="bar"><div style="width:20%"></div></div>
+            <span class="percent">20%</span>
+          </div>
+      
+          <div class="tool">
+            <img src="powerautomate.png" alt="Power Automate (Desktop)" class="tool-icon">
+            <span>Power Automate (Desktop)</span>
+            <div class="bar"><div style="width:20%"></div></div>
+            <span class="percent">20%</span>
+          </div>
+      
+          <div class="tool">
+            <img src="webscraper.png" alt="WebScrapper" class="tool-icon">
+            <span>WebScrapper</span>
+            <div class="bar"><div style="width:15%"></div></div>
+            <span class="percent">15%</span>
+          </div>
+      
+          <div class="tool">
+            <img src="tableau.png" alt="Tableau" class="tool-icon">
+            <span>Tableau</span>
+            <div class="bar"><div style="width:5%"></div></div>
+            <span class="percent">5%</span>
+          </div>
+
+          <div class="tool">
+            <img src="sp.png" alt="S&P CapIQ" class="tool-icon">
+            <span>S&P CapIQ</span>
+            <div class="bar"><div style="width:5%"></div></div>
+            <span class="percent">5%</span>
+          </div>
+
+          <div class="tool">
+            <img src="factiva.png" alt="Factiva" class="tool-icon">
+            <span>Factiva</span>
+            <div class="bar"><div style="width:5%"></div></div>
+            <span class="percent">5%</span>
+          </div>
+      
+          <div class="tool">
+            <span>Others</span>
+            <div class="bar"><div style="width:5%"></div></div>
+            <span class="percent">5%</span>
+          </div>
         </div>
       </div>
-      <div class="role-body">
-        <ul>
-          <li>Conducted research on heavy power components, including competitor analysis, market sizing, and go-to-market strategy, leading to consultative and advisory contributions.</li>
-          <li>Proficient in data modeling, database analysis, creating artifacts like scenario-based data models, and extracting actionable insights from data through industry expertise and standard frameworks.</li>
-          <li>In addition, created newsletters, client decks, and country Power Outlooks, and worked as a COVID-19 Analyst.</li>
-        </ul>
 
-        <div class="gdrc-columns">
+      
+      <!-- NEW BUTTON -->
+      <a href="#projects" class="role-btn">View important projects →</a>
+    </div>
+  </div>
+
+
+      <div class="role-card" aria-labelledby="gdrc-role-title">
+    <div class="role-header">
+      <img src="GDRC.png" alt="GDRC logo" class="role-logo">
+      <div>
+        <h3 id="gdrc-role-title" class="role-title">Senior Research Analyst, GlobalData Research Centre (GDRC)</h3>
+        <p class="role-meta">February 2020 – August 2021</p>
+      </div>
+    </div>
+    <div class="role-body">
+      <ul>
+        <li>Conducted research on heavy power components, including competitor analysis, market sizing, and go-to-market strategy, leading to consultative and advisory contributions.</li>
+        <li>Proficient in data modeling, database analysis, creating artifacts like scenario-based data models, and extracting actionable insights from data through industry expertise and standard frameworks.</li>
+        <li>In addition, created newsletters, client decks, and country Power Outlooks, and worked as a COVID-19 Analyst.</li>
+      </ul>
+                  <!-- Dual Column Section: Tools + Mentions -->
+       <div class="gdrc-columns">
+          <!-- Left Column: Hands-On Tools -->
           <div class="gdrc-column tools">
             <h4>Hands-On Tools Usage</h4>
             <div class="gdrc-scroller">
-              <div class="tool-row"><img src="excel.png" alt="Microsoft Excel" class="tool-icon"><span>Microsoft Excel</span><div class="bar"><div style="width:35%"></div></div><span class="percent">35%</span></div>
-              <div class="tool-row"><img src="tableau.png" alt="Tableau" class="tool-icon"><span>Tableau</span><div class="bar"><div style="width:25%"></div></div><span class="percent">25%</span></div>
-              <div class="tool-row"><img src="googledata.png" alt="Google Data Studio / Looker Studio" class="tool-icon"><span>Google Data Studio / Looker Studio</span><div class="bar"><div style="width:20%"></div></div><span class="percent">20%</span></div>
-              <div class="tool-row"><img src="powerpoint.png" alt="Microsoft PowerPoint / Word" class="tool-icon"><span>Microsoft PowerPoint / Word</span><div class="bar"><div style="width:15%"></div></div><span class="percent">15%</span></div>
-              <div class="tool-row"><span>Others</span><div class="bar"><div style="width:5%"></div></div><span class="percent">5%</span></div>
+              <div class="tool-row">
+                <img src="excel.png" alt="Microsoft Excel" class="tool-icon">
+                <span>Microsoft Excel</span>
+                <div class="bar"><div style="width:35%"></div></div>
+                <span class="percent">35%</span>
+              </div>
+              <div class="tool-row">
+                <img src="tableau.png" alt="Tableau" class="tool-icon">
+                <span>Tableau</span>
+                <div class="bar"><div style="width:25%"></div></div>
+                <span class="percent">25%</span>
+              </div>
+              <div class="tool-row">
+                <img src="googledata.png" alt="Google Data Studio / Looker Studio" class="tool-icon">
+                <span>Google Data Studio / Looker Studio</span>
+                <div class="bar"><div style="width:20%"></div></div>
+                <span class="percent">20%</span>
+              </div>
+              <div class="tool-row">
+                <img src="powerpoint.png" alt="Microsoft PowerPoint / Word" class="tool-icon">
+                <span>Microsoft PowerPoint / Word</span>
+                <div class="bar"><div style="width:15%"></div></div>
+                <span class="percent">15%</span>
+              </div>
+              <div class="tool-row">
+                <span>Others</span>
+                <div class="bar"><div style="width:5%"></div></div>
+                <span class="percent">5%</span>
+              </div>
             </div>
           </div>
 
+        
+          <!-- Right Column: Notable Mentions -->
           <div class="gdrc-column mentions">
             <h4>Notable Mentions / Blogs / White Papers</h4>
             <div class="gdrc-scroller mentions-grid">
-              <!-- links omitted for brevity -->
-              <div class="mention"><a href="https://www.bloomberg.com/news/articles/2020-05-05/italy-leads-power-demand-recovery-as-europe-starts-to-reopen" target="_blank" rel="noopener"><img src="https://www.google.com/s2/favicons?sz=24&domain=bloomberg.com" alt="Bloomberg"><span>Bloomberg</span></a></div>
-              <!-- ...other mentions... -->
+          
+              <div class="mention">
+                <a href="https://www.bloomberg.com/news/articles/2020-05-05/italy-leads-power-demand-recovery-as-europe-starts-to-reopen" target="_blank" rel="noopener">
+                  <img src="https://www.google.com/s2/favicons?sz=24&domain=bloomberg.com" alt="Bloomberg">
+                  <span>Bloomberg</span>
+                </a>
+              </div>
+          
+              <div class="mention">
+                <a href="https://www.zawya.com/en/business/covid-19-disrupts-global-solar-pv-supply-chain-globaldata-f64u26t8" target="_blank" rel="noopener">
+                  <img src="https://www.google.com/s2/favicons?sz=24&domain=zawya.com" alt="Zawya">
+                  <span>Zawya (1)</span>
+                </a>
+              </div>
+          
+              <div class="mention">
+                <a href="https://www.zawya.com/en/business/manufacturing-firms-repurpose-facilities-to-combat-covid-19-q1siyjyk" target="_blank" rel="noopener">
+                  <img src="https://www.google.com/s2/favicons?sz=24&domain=zawya.com" alt="Zawya">
+                  <span>Zawya (2)</span>
+                </a>
+              </div>
+
+              <div class="mention">
+                <a href="https://www.zawya.com/en/business/covid-19-likely-to-impact-short-term-development-of-renewables-in-middle-east-e109zw6p" target="_blank" rel="noopener">
+                  <img src="https://www.google.com/s2/favicons?sz=24&domain=zawya.com" alt="Zawya">
+                  <span>Zawya (3)</span>
+                </a>
+              </div>
+          
+              <div class="mention">
+                <a href="https://www.smart-energy.com/top-stories/globaldata-explores-the-impact-of-covid-19-on-the-energy-sector/" target="_blank" rel="noopener">
+                  <img src="https://www.google.com/s2/favicons?sz=24&domain=smart-energy.com" alt="SEI">
+                  <span>SEI</span>
+                </a>
+              </div>
+          
+              <div class="mention">
+                <a href="https://www.energetica-india.net/news/wind-project-approval-delays-to-hamper-uk-from-achieving-offshore-capacity-globaldata" target="_blank" rel="noopener">
+                  <img src="https://www.google.com/s2/favicons?sz=24&domain=energetica-india.net" alt="Energetica">
+                  <span>Energetica</span>
+                </a>
+              </div>
+          
+              <div class="mention">
+                <a href="https://www.windsystemsmag.com/globaldata-spanish-turbine-manufacturers-get-back-to-business/" target="_blank" rel="noopener">
+                  <img src="https://www.google.com/s2/favicons?sz=24&domain=windsystemsmag.com" alt="Wind Systems Magazine">
+                  <span>Wind Systems Magazine</span>
+                </a>
+              </div>
+          
+              <div class="mention">
+                <a href="https://pes.eu.com/press-releases/indias-silicon-pv-manufacturer-provides-noble-response-to-covid-19-outbreak-by-aspiring-to-join-hands-with-ventilator-manufacturers-says-globaldata/" target="_blank" rel="noopener">
+                  <img src="https://www.google.com/s2/favicons?sz=24&domain=pes.eu.com" alt="PES">
+                  <span>PES</span>
+                </a>
+              </div>
+          
+              <div class="mention">
+                <a href="https://solarquarter.com/2020/12/01/ecuador-could-achieve-optimistic-400mw-solar-pv-capacity-by-2030/" target="_blank" rel="noopener">
+                  <img src="https://www.google.com/s2/favicons?sz=24&domain=solarquarter.com" alt="Solar Quarter">
+                  <span>Solar Quarter (1)</span>
+                </a>
+              </div>
+          
+              <div class="mention">
+                <a href="https://www.saurenergy.com/solar-energy-news/bangladesh-module-manufacturers-need-stimulus-to-maintain-operations-globaldata" target="_blank" rel="noopener">
+                  <img src="https://www.google.com/s2/favicons?sz=24&domain=saurenergy.com" alt="Saur Energy">
+                  <span>Saur Energy</span>
+                </a>
+              </div>
+          
+              <div class="mention">
+                <a href="https://solarquarter.com/2020/07/22/malaysia-bets-on-large-scale-solar-pv-to-revive-covid-19-hit-economy-globaldata/" target="_blank" rel="noopener">
+                  <img src="https://www.google.com/s2/favicons?sz=24&domain=solarquarter.com" alt="Solar Quarter">
+                  <span>Solar Quarter (2)</span>
+                </a>
+              </div>
+          
+              <div class="mention">
+                <a href="https://www.powerengineeringint.com/coal-fired/spains-remaining-coal-fired-plants-likely-to-be-phased-out-by-2025/" target="_blank" rel="noopener">
+                  <img src="https://www.google.com/s2/favicons?sz=24&domain=powerengineeringint.com" alt="PEI">
+                  <span>PEI</span>
+                </a>
+              </div>
+          
+              <div class="mention">
+                <a href="https://www.hydroreview.com/business-finance/business/moroccos-capacity-mix-to-be-52-renewables-by-2030/#gref" target="_blank" rel="noopener">
+                  <img src="https://www.google.com/s2/favicons?sz=24&domain=hydroreview.com" alt="Hydro Review">
+                  <span>Hydro Review</span>
+                </a>
+              </div>
+          
+              <div class="mention">
+                <a href="https://www.sonnenseite.com/en/politics/germany-goes-aggressive-on-renewables-with-the-latest-amendment-of-the-eeg-asking-for-highly-optimistic-annual-re-additions-says-globaldata/" target="_blank" rel="noopener">
+                  <img src="https://www.google.com/s2/favicons?sz=24&domain=sonnenseite.com" alt="Sonnenseite">
+                  <span>Sonnenseite</span>
+                </a>
+              </div>
+          
+              <div class="mention">
+                <a href="https://www.greencarcongress.com/2020/09/20200910-globaldata.html" target="_blank" rel="noopener">
+                  <img src="https://www.google.com/s2/favicons?sz=24&domain=greencarcongress.com" alt="Green Car Congress">
+                  <span>Green Car Congress</span>
+                </a>
+              </div>
+          
+              <div class="mention">
+                <a href="https://www.offshore-energy.biz/taiwan-to-become-second-largest-apac-offshore-wind-market/" target="_blank" rel="noopener">
+                  <img src="https://www.google.com/s2/favicons?sz=24&domain=offshore-energy.biz" alt="Offshore Wind Energy">
+                  <span>Offshore Wind Energy</span>
+                </a>
+              </div>
+          
+              <div class="mention">
+                <a href="https://renewablesnow.com/news/bangladesh-backs-renewables-energy-efficiency-through-usd-2187m-fund-697528/" target="_blank" rel="noopener">
+                  <img src="https://www.google.com/s2/favicons?sz=24&domain=renewablesnow.com" alt="Renewables Now">
+                  <span>Renewables Now</span>
+                </a>
+              </div>
+          
+              <div class="mention">
+                <a href="https://www.evwind.es/2020/09/16/wind-power-concentrated-solar-power-and-photovoltaic-energy-potential-in-chile-stands-out/77204" target="_blank" rel="noopener">
+                  <img src="https://www.google.com/s2/favicons?sz=24&domain=evwind.es" alt="EV Wind">
+                  <span>EV Wind</span>
+                </a>
+              </div>
             </div>
           </div>
-        </div>
+         </div>
+        <!-- NEW BUTTON HERE -->
+            <a href="#projects" class="role-btn">View important projects →</a>
+            </div>
+            </div> 
+  </div>
 
-        <a href="#projects" class="role-btn">View important projects →</a>
-      </div>
-    </div>
-
-    <!-- MarketsandMarkets role card -->
+  <!-- ================================
+         MarketsandMarkets ROLE CARD (NEW)
+         Paste this block inside #career,
+         ABOVE the GDRC role-card.
+    ================================== -->
     <div class="role-card" aria-labelledby="mnm-role-title">
       <div class="role-header">
         <img src="MnM.png" alt="MarketsandMarkets logo" class="role-logo">
@@ -635,6 +1312,7 @@
           <p class="role-meta">November 2018 – January 2020</p>
         </div>
       </div>
+  
       <div class="role-body">
         <ul>
           <li><strong>Consultant &amp; syndicated research analyst:</strong> crafted proposals for consulting engagements; delivered market strategy and research via primary &amp; secondary sources; built client-facing sales decks; partnered with inbound/outbound sales, including cold outreach and use of global information resources.</li>
@@ -643,88 +1321,137 @@
           <li><strong>Thought leadership:</strong> published articles on smart solar, electrical components, and smart ports; analyzed corporate developments and strategic M&amp;A; articulated growth drivers, restraints, opportunities, and constraints.</li>
           <li><strong>Collateral &amp; key initiatives:</strong> produced capability decks on Smart Energy and emerging power-generation/T&amp;D technologies (renewables focus); authored multiple reports across energy &amp; environment; contributed to the “2iTB” initiative, handling Technip and nVent.</li>
         </ul>
-
+  
+        <!-- Dual Column Section: Tools (left) + Mentions (right) -->
         <div class="gdrc-columns">
+          <!-- Left Column: Hands-On Tools -->
           <div class="gdrc-column tools">
             <h4>Hands-On Tools Usage</h4>
             <div class="gdrc-scroller">
-              <div class="tool-row"><img src="excel.png" alt="Advanced Microsoft Excel" class="tool-icon"><span>Advanced Microsoft Excel</span><div class="bar"><div style="width:65%"></div></div><span class="percent">65%</span></div>
-              <div class="tool-row"><img src="powerpoint.png" alt="Microsoft Word/PowerPoint" class="tool-icon"><span>Microsoft Word/PowerPoint</span><div class="bar"><div style="width:20%"></div></div><span class="percent">20%</span></div>
-              <div class="tool-row"><img src="factiva.png" alt="Factiva" class="tool-icon"><span>Factiva</span><div class="bar"><div style="width:7%"></div></div><span class="percent">7%</span></div>
-              <div class="tool-row"><img src="tableau.png" alt="Tableau" class="tool-icon"><span>Tableau</span><div class="bar"><div style="width:5%"></div></div><span class="percent">5%</span></div>
-              <div class="tool-row"><span>Others</span><div class="bar"><div style="width:3%"></div></div><span class="percent">3%</span></div>
+              <div class="tool-row">
+                <img src="excel.png" alt="Advanced Microsoft Excel" class="tool-icon">
+                <span>Advanced Microsoft Excel</span>
+                <div class="bar"><div style="width:65%"></div></div>
+                <span class="percent">65%</span>
+              </div>
+              <div class="tool-row">
+                <img src="powerpoint.png" alt="Microsoft Word/PowerPoint" class="tool-icon">
+                <span>Microsoft Word/PowerPoint</span>
+                <div class="bar"><div style="width:20%"></div></div>
+                <span class="percent">20%</span>
+              </div>
+              <div class="tool-row">
+                <img src="factiva.png" alt="Factiva" class="tool-icon">
+                <span>Factiva</span>
+                <div class="bar"><div style="width:7%"></div></div>
+                <span class="percent">7%</span>
+              </div>
+              <div class="tool-row">
+                <img src="tableau.png" alt="Tableau" class="tool-icon">
+                <span>Tableau</span>
+                <div class="bar"><div style="width:5%"></div></div>
+                <span class="percent">5%</span>
+              </div>
+              <div class="tool-row">
+                <span>Others</span>
+                <div class="bar"><div style="width:3%"></div></div>
+                <span class="percent">3%</span>
+              </div>
             </div>
           </div>
-
+  
+          <!-- Right Column: Mentions -->
           <div class="gdrc-column mentions">
             <h4>Notable Mentions / Blogs / White Papers</h4>
             <div class="gdrc-scroller mentions-grid">
-              <div class="mention"><a href="https://blog.marketsandmarkets.com/nsw-labor-pledges-state-owned-renewable-energy-company-to-power-three-million-homes-and-to-cut-down-the-states-carbon-emissions/" target="_blank" rel="noopener"><img src="MnM.png" alt="MnM"><span>NSW Labor pledges state-owned renewable energy company…</span></a></div>
-              <div class="mention"><a href="https://blog.marketsandmarkets.com/total-eren-strengthens-its-renewable-energy-foothold-in-south-europe/" target="_blank" rel="noopener"><img src="MnM.png" alt="MnM"><span>Total Eren strengthens renewable energy foothold…</span></a></div>
+              <!-- Replace # with actual URLs when ready -->
+              <div class="mention">
+                <a href="https://blog.marketsandmarkets.com/nsw-labor-pledges-state-owned-renewable-energy-company-to-power-three-million-homes-and-to-cut-down-the-states-carbon-emissions/" target="_blank" rel="noopener">
+                  <img src="MnM.png" alt="MnM">
+                  <span>NSW Labor pledges state-owned renewable energy company to power three million homes and to cut down the state’s carbon emissions</span>
+                </a>
+              </div>
+              <div class="mention">
+                <a href="https://blog.marketsandmarkets.com/total-eren-strengthens-its-renewable-energy-foothold-in-south-europe/" target="_blank" rel="noopener">
+                  <img src="MnM.png" alt="MnM">
+                  <span>Total Eren Strengthens Its Renewable Energy Foothold In South Europe</span>
+                </a>
+              </div>
             </div>
           </div>
         </div>
-
+  
+        <!-- Optional CTA, keep if you want consistency with other cards -->
         <a href="#projects" class="role-btn">View important projects →</a>
       </div>
     </div>
 
-    <!-- === Three compact cards row: L&T / Aglow / Chemtex === -->
+
+  <!-- === Three compact cards row: L&T / Aglow / Chemtex === -->
     <div class="triple-cards">
+    
+      <!-- Left: L&T Financial Services -->
       <div class="role-card triple-card">
-        <div class="role-header"><img src="LT.jpeg" alt="L&T Financial Services logo" class="role-logo">
-          <div><h3 class="role-title">Team Manager, L&amp;T Financial Services</h3><p class="role-meta">May 2018 – November 2018</p></div>
+        <div class="role-header">
+          <img src="LT.jpeg" alt="L&amp;T Financial Services logo" class="role-logo">
+          <div>
+            <h3 class="role-title">Team Manager, L&amp;T Financial Services</h3>
+            <p class="role-meta">May 2018 – November 2018</p>
+          </div>
         </div>
         <div class="role-body scrollable">
-          <p>A certified NISM SERIES V A candidate…</p>
+          <p>
+            A certified NISM SERIES V A candidate, I started in financial services as a financial advisor (Mutual Funds):
+            advising clients on investments, ticket size, and risk appetite.
+          </p>
           <ul>
-            <li>Worked in Housing Finance on credit policy checks…</li>
-            <li>Worked in Two Wheeler Finance (product &amp; collections)…</li>
+            <li>
+              Worked in Housing Finance on credit policy checks; evaluated LOAN-TO-VALUE using Average Bank Balance; conducted
+              Field Investigation; analyzed client financial statements.
+            </li>
+            <li>
+              Worked in Two Wheeler Finance (product &amp; collections): managed MIS, GNPA and early-bucket sheets; coordinated
+              with agencies; collated collection data; analyzed &amp; segmented GNPA/early-bucket MIS.
+            </li>
           </ul>
         </div>
       </div>
-
+    
+      <!-- Center: Aglow Quality Testing Laboratories -->
       <div class="role-card triple-card">
-        <div class="role-header"><img src="aglow.jpeg" alt="Aglow Quality Testing Laboratories logo" class="role-logo">
-          <div><h3 class="role-title">Procurement Engineering Trainee, Aglow Quality Testing Laboratories Private Limited</h3><p class="role-meta">May 2015 – January 2016</p></div>
+        <div class="role-header">
+          <img src="aglow.jpeg" alt="Aglow Quality Testing Laboratories logo" class="role-logo">
+          <div>
+            <h3 class="role-title">Procurement Engineering Trainee, Aglow Quality Testing Laboratories Private Limited</h3>
+            <p class="role-meta">May 2015 – January 2016</p>
+          </div>
         </div>
-        <div class="role-body"><p>Communication with clients; maintaining databases…</p></div>
+        <div class="role-body">
+          <p>
+            Communication with clients; maintaining databases; maintaining an inventory database; tracking inventory condition;
+            supporting the R&amp;D team end-to-end.
+          </p>
+        </div>
       </div>
-
+    
+      <!-- Right: Chemtex Speciality Limited -->
       <div class="role-card triple-card">
-        <div class="role-header"><img src="Chemtex.png" alt="Chemtex Speciality Limited logo" class="role-logo">
-          <div><h3 class="role-title">Sales and Service Engineer, Chemtex Speciality Limited</h3><p class="role-meta">June 2014 – August 2014</p></div>
+        <div class="role-header">
+          <img src="Chemtex.png" alt="Chemtex Speciality Limited logo" class="role-logo">
+          <div>
+            <h3 class="role-title">Sales and Service Engineer, Chemtex Speciality Limited</h3>
+            <p class="role-meta">June 2014 – August 2014</p>
+          </div>
         </div>
-        <div class="role-body"><p>On-call marketing; after-sales servicing of glycol…</p></div>
-      </div>
-    </div>
-
-    <!-- ▼ NEW: Dark, frozen KPMG internship card (no sub-columns) -->
-    <div class="frost-card" aria-labelledby="kpmg-role-title">
-      <div class="role-header">
-        <img src="KPMG.png" alt="KPMG logo" class="role-logo">
-        <div>
-          <h3 id="kpmg-role-title" class="role-title">Summer Internship, KPMG India</h3>
-          <p class="role-meta">March 2017 – May 2017</p>
+        <div class="role-body">
+          <p>
+            On-call marketing; after-sales servicing of glycol (food &amp; non-food grade); specific gravity tests; bill
+            generation &amp; clarification; Silvox demos; order follow-up.
+          </p>
         </div>
       </div>
-
-      <p><strong>Project Title:</strong> Preparation of a technical note on SDGs and SDBs and formulation of client proposals and approach notes on IAQ, Sustainable solutions in the transportation sector, and E-Waste Management in the banking sector.</p>
-
-      <p><strong>Description:</strong></p>
-      <ul>
-        <li>Prepared proposals for clients to provide sustainable services in the field of transportation services,</li>
-        <li>Prepared proposals for clients to provide sustainable services on IAQ and</li>
-        <li>Prepared approach notes for clients to provide sustainable services in E-Waste Management.</li>
-      </ul>
-      <p>Provided support in coordinating a seminar on the Biomedical and Hazardous Waste Management Act Amendment 2016 and GRI training.</p>
-
-      <div class="frost-actions">
-        <a class="frost-btn" href="https://drive.google.com/file/d/0B7BnsadGNakzX1lRalJxTjdKRDQ/view?usp=drivesdk&resourcekey=0-S8oYmGS4Ho1j4yMbnGwSPg" target="_blank" rel="noopener">Internship Report</a>
-        <a class="frost-btn" href="https://drive.google.com/file/d/14gQ6X0dJ4ZynOG3andCUO6CH6DWVI3gr/view?usp=drivesdk" target="_blank" rel="noopener">Internship certificate</a>
-      </div>
+    
     </div>
-    <!-- ▲ END KPMG CARD -->
 
   </section>
 
@@ -762,19 +1489,25 @@
   </div>
 
   <script>
-    /* Hero reveal */
+    /* ----------------------
+       1) Hero: one-time cloud reveal
+    ---------------------- */
     document.addEventListener('DOMContentLoaded', () => {
       const hero = document.querySelector('.hero-content');
       if (hero) setTimeout(() => hero.classList.add('visible'), 80);
     });
 
-    /* Section reveal (opacity forced to 1) */
+    /* ----------------------
+       2) Sections cloud reveal + continuous fade
+    ---------------------- */
     (function() {
       const sections = Array.from(document.querySelectorAll('section'));
       if (!sections.length) return;
 
+      // Seed cloud state
       sections.forEach(sec => sec.classList.add('reveal-seed'));
 
+      // One-time cloud reveal on first intersection
       const io = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -787,45 +1520,60 @@
 
       sections.forEach(sec => io.observe(sec));
 
-      function update() { for (const el of sections) el.style.opacity = "1"; }
+      // Disable section opacity fading by forcing full opacity
+      function update() {
+        for (const el of sections) {
+          el.style.opacity = "1";
+        }
+      }
+
+
       window.addEventListener('scroll', update, { passive: true });
       window.addEventListener('resize', update, { passive: true });
       window.addEventListener('load', update, { passive: true });
       document.addEventListener('DOMContentLoaded', update, { passive: true });
     })();
-  </script>
+    </script>
 
-  <script>
+    <!-- ✅ Unified JavaScript block -->
+    <script>
     document.addEventListener("DOMContentLoaded", () => {
       const sections = document.querySelectorAll("section");
       const navLinks = document.querySelectorAll("nav a");
+
+      // Keep CSS --nav-h equal to the actual nav height
       const navEl = document.querySelector('nav');
       const setNavH = () => document.documentElement.style.setProperty('--nav-h', ((navEl && navEl.offsetHeight) || 64) + 'px');
       setNavH(); window.addEventListener('resize', setNavH); window.addEventListener('load', setNavH);
 
-      /* Modal elements */
+  
+      // ----------------------
+      // Modal elements
+      // ----------------------
       const modal = document.getElementById('career-modal');
       const mTitle = modal.querySelector('.modal-title');
       const mSub   = modal.querySelector('.modal-sub');
       const mImg   = modal.querySelector('.modal-img');
       const mTabs  = modal.querySelector('.modal-tabs');
       const mClose = modal.querySelector('.modal-close');
-
+  
       function renderEntry(entry) {
         mTitle.textContent = entry.title || '';
         mSub.innerHTML = `<span class="modal-year">${entry.year || ''}</span> — ${entry.subtitle || ''}`;
         mImg.src = entry.img || '';
         mImg.alt = entry.alt || entry.title || 'Logo';
       }
-
+  
       function openModal(payload) {
         const items = Array.isArray(payload) ? payload : [payload];
         mTabs.innerHTML = '';
-
+  
         if (items.length > 1) {
           items.forEach((it, idx) => {
             const tab = document.createElement('button');
-            tab.className = 'modal-tab'; tab.type = 'button'; tab.role = 'tab';
+            tab.className = 'modal-tab';
+            tab.type = 'button';
+            tab.role = 'tab';
             tab.setAttribute('aria-selected', idx === 0 ? 'true' : 'false');
             tab.textContent = it.tab ? it.tab : (it.title ? it.title : `Item ${idx + 1}`);
             tab.addEventListener('click', () => {
@@ -836,23 +1584,26 @@
             mTabs.appendChild(tab);
           });
         }
-
+  
         renderEntry(items[0]);
         modal.classList.add('show');
       }
-
+  
       function closeModal() { modal.classList.remove('show'); }
       mClose.addEventListener('click', closeModal);
       modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
       document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
-
-      /* Timeline */
+  
+      // ----------------------
+      // Timeline setup
+      // ----------------------
       function initTimeline() {
         const line   = document.querySelector('.timeline');
         const cursor = document.querySelector('.cursor');
         const years  = Array.from(document.querySelectorAll('.timeline .year'));
+  
         if (!line || !cursor || !years.length) return;
-
+  
         function moveCursorTo(el) {
           const rect = el.getBoundingClientRect();
           const parentRect = line.getBoundingClientRect();
@@ -861,59 +1612,76 @@
           cursor.style.width = `${rect.width - 12}px`;
           el.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
         }
-
+  
         function setActive(el) {
           years.forEach(y => y.classList.remove('active'));
           el.classList.add('active');
           moveCursorTo(el);
         }
-
+  
+        // Initial active
         const firstActive = years.find(y => !y.disabled && !y.classList.contains('disabled'));
         if (firstActive) setTimeout(() => setActive(firstActive), 100);
-
+  
+        // Button clicks
         years.forEach(btn => {
           btn.addEventListener('click', () => {
             if (btn.disabled || btn.classList.contains('disabled')) return;
             setActive(btn);
-            const raw = btn.dataset.payload; if (!raw) return;
-            let payload; try { payload = JSON.parse(raw); } catch { payload = null; }
+  
+            const raw = btn.dataset.payload;
+            if (!raw) return;
+            let payload;
+            try { payload = JSON.parse(raw); } catch { payload = null; }
             if (payload) openModal(payload);
           });
         });
-
+  
+        // Resize handling
         window.addEventListener('resize', () => {
           const active = document.querySelector('.timeline .year.active');
           if (active) moveCursorTo(active);
         });
       }
-
-      /* Section switching */
+  
+      // ----------------------
+      // Section switching
+      // ----------------------
       function showSection(id) {
-        sections.forEach(sec => { sec.style.display = (sec.id === id) ? "block" : "none"; });
-        if (id === "career") { initTimeline(); }
+        sections.forEach(sec => {
+          sec.style.display = (sec.id === id) ? "block" : "none";
+        });
+  
+        if (id === "career") {
+          initTimeline();
+        }
       }
-
+  
+      // Default show home
       showSection("home");
-
+  
       navLinks.forEach(link => {
         link.addEventListener("click", e => {
           e.preventDefault();
           const id = link.getAttribute("href").substring(1);
           showSection(id);
         });
-      });
+        // Make any in-page anchor (e.g., href="#projects") switch sections
+        document.body.addEventListener("click", (e) => {
+          const a = e.target.closest('a[href^="#"]');
+          if (!a) return;
+        
+          const id = a.getAttribute("href").slice(1);
+          const target = document.getElementById(id);
+          if (!target) return; // not a section anchor
+        
+          e.preventDefault();
+          showSection(id);
+          target.scrollTo({ top: 0, behavior: "smooth" });
+        });
 
-      document.body.addEventListener("click", (e) => {
-        const a = e.target.closest('a[href^="#"]');
-        if (!a) return;
-        const id = a.getAttribute("href").slice(1);
-        const target = document.getElementById(id);
-        if (!target) return;
-        e.preventDefault();
-        showSection(id);
-        target.scrollTo({ top: 0, behavior: "smooth" });
       });
     });
-  </script>
-</body>
-</html>
+    </script>
+  </body>
+  </html>
