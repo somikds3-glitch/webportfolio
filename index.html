@@ -925,6 +925,36 @@
 .edu-nav.next{ right: 6px; }
 .edu-nav:hover{ border-color: #bbb; }
 
+    /* Arrow buttons */
+.edu-nav{
+  position: absolute; top: 50%; transform: translateY(-50%);
+  border: 1px solid #ddd; background: #fff; border-radius: 8px;
+  width: 34px; height: 34px; font-size: 20px; line-height: 30px;
+  cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
+.edu-nav.prev{ left: 6px; }
+.edu-nav.next{ right: 6px; }
+.edu-nav:hover{ border-color: #bbb; }
+
+/* ▼ PASTE HERE */
+ /* Show 4 per view; scroll to see the rest */
+.edu-scroller { --per-view: 4; --gap: 18px; }
+
+.edu-scroller .edu-track{
+  width: 100% !important;       /* override max-content so % bases work */
+  gap: var(--gap);               /* keep your 18px spacing */
+}
+
+.edu-scroller .edu-item{
+  /* exactly 4 columns incl. gaps */
+  flex: 0 0 calc((100% - (var(--per-view) - 1) * var(--gap)) / var(--per-view));
+}
+
+/* (nice to have) fewer per view on phones */
+@media (max-width: 720px){
+  .edu-scroller { --per-view: 2; }
+}
+
 
 
 
