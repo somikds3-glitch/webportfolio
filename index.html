@@ -2484,5 +2484,20 @@
     });
 
     </script>
+
+  <script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.edu-scroller-wrap').forEach(wrap => {
+    const scroller = wrap.querySelector('.edu-scroller');
+    const prev = wrap.querySelector('.prev');
+    const next = wrap.querySelector('.next');
+    const step = Math.max(300, scroller.clientWidth * 0.6);
+
+    prev.addEventListener('click', () => scroller.scrollBy({ left: -step, behavior: 'smooth' }));
+    next.addEventListener('click', () => scroller.scrollBy({ left:  step, behavior: 'smooth' }));
+  });
+});
+</script>
+
   </body>
   </html>
