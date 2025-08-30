@@ -1005,6 +1005,38 @@
 }
 
 
+
+
+
+
+    /* --- HERITAGE: stop the scroller box from overflowing --- */
+/* 1) Let grid children shrink inside the card */
+.stack-cards .heritage-narrow .gdrc-columns > .gdrc-column{
+  min-width: 0;                 /* critical fix in CSS Grid */
+}
+
+/* 2) Keep the column’s contents inside the card */
+.stack-cards .heritage-narrow .gdrc-column{
+  overflow: hidden;             /* prevents right-bleed of the white box */
+}
+
+/* 3) Make the scroller compute width with padding included */
+.stack-cards .heritage-narrow .edu-scroller,
+.stack-cards .heritage-narrow .edu-track,
+.stack-cards .heritage-narrow .edu-item{
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+/* 4) Keep the track constrained to the column width */
+.stack-cards .heritage-narrow .edu-track{
+  width: 100%;                  /* works with your per-view calc */
+}
+
+/* 5) Make sure arrows sit above and don’t cause layout jitter */
+.stack-cards .heritage-narrow .edu-nav{ z-index: 3; }
+
+
   </style>
 </head>
 <body>
