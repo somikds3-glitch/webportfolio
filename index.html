@@ -974,6 +974,35 @@
   justify-self: start;         /* align left within the grid */
 }
 
+/* Keep Heritage card inside the 1100px container and full width */
+.stack-cards{ max-width:1100px; margin:28px auto; }
+.stack-cards .heritage-narrow{
+  width:100% !important;
+  max-width:1100px !important;
+  margin-left:0 !important;
+  justify-self:center;
+}
+
+/* Inside Heritage: left column is 2× right column */
+.stack-cards .heritage-narrow .gdrc-columns{
+  grid-template-columns: 2fr 1fr;
+}
+
+/* Scroller: show exactly 2 items per view that fill the left column */
+.stack-cards .heritage-narrow .edu-scroller{ --per-view: 2; --gap: 18px; }
+.stack-cards .heritage-narrow .edu-scroller .edu-track{
+  width: 100% !important;
+  gap: var(--gap);
+}
+.stack-cards .heritage-narrow .edu-scroller .edu-item{
+  flex: 0 0 calc((100% - (var(--per-view) - 1) * var(--gap)) / var(--per-view));
+}
+
+/* Mobile: stack columns, one scroller item per view */
+@media (max-width:720px){
+  .stack-cards .heritage-narrow .gdrc-columns{ grid-template-columns: 1fr; }
+  .stack-cards .heritage-narrow .edu-scroller{ --per-view: 1; }
+}
 
 
   </style>
