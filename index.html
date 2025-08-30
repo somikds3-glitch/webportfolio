@@ -853,25 +853,18 @@
   margin:28px auto;
 }
 
-    /* Match one .double-cards column width and align the Heritage card to the right */
-.stack-cards .heritage-narrow{
-  /* exactly half of the 2-col layout, but cap it so it doesn’t get too wide */
-  width: min(calc((100% - 18px)), 720px);
-  max-width: 1100px;
-  box-sizing: border-box;
-  margin-left: auto; /* push to right edge */
-}
-@media (max-width: 720px){
-  .stack-cards .heritage-narrow{
-    width: 100%;
-    max-width: 1100px;
-    margin-left: 0;
-  }
-}
-
 
 .map-iframe{ width:100%; height:220px; border:0; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.06); }
 .edu-actions{ display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+/* Heritage: full width (matches both columns combined) */
+.stack-cards { justify-items: stretch; }
+
+.stack-cards .heritage-narrow{
+  width: 100% !important;     /* fill the 1100px container like the two-card row */
+  max-width: none !important;
+  margin-left: 0 !important;
+  justify-self: stretch;
+}
 
 
     /* Education docs scroller */
