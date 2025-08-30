@@ -856,6 +856,42 @@
 .edu-actions{ display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
 
 
+    /* Education docs scroller */
+.edu-scroller{
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #fafafa;
+  box-shadow: inset 0 0 0 1px #eee;
+  padding: 10px 0;
+  margin-top: 12px;
+}
+.edu-track{
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  width: max-content;
+  animation: eduScroll 24s linear infinite;
+  padding-left: 12px;
+}
+.edu-item{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,.04);
+  white-space: nowrap;
+}
+.edu-item img{ width:24px; height:24px; object-fit:contain; }
+.edu-item a{ color:#0047AB; font-weight:700; text-decoration:none; }
+.edu-item a:hover{ text-decoration:underline; }
+
+@keyframes eduScroll { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+@media (prefers-reduced-motion: reduce){ .edu-track{ animation: none; } }
+
   </style>
 </head>
 <body>
