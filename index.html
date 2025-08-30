@@ -854,10 +854,11 @@
 }
     /* Match one .double-cards column width and align the Heritage card to the right */
 .stack-cards .heritage-narrow{
-  width: calc((100% - 18px) / 2); /* 18px = the gap used in .double-cards */
-  margin-left: auto;              /* push to the right edge */
+  width: calc((100% - 18px) / 2, 520px); /* 18px = the gap used in .double-cards */
+  box-sizing: border-box;                      /* include padding/border in the width */
+  margin-left: auto;             /* push to the right edge */
 }
-@media (max-width: 400px){
+@media (max-width: 720px){
   .stack-cards .heritage-narrow{
     width: 100%;
     margin-left: 0;
