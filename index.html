@@ -973,7 +973,13 @@
   .edu-scroller { --per-view: 2; }
 }
 
+/* FIX: Heritage card should be left-aligned */
+.stack-cards { justify-items: start; }
 
+.stack-cards .heritage-narrow{
+  margin-left: 0 !important;   /* stop the right push */
+  justify-self: start;         /* align left within the grid */
+}
 
 
 
