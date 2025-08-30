@@ -856,15 +856,15 @@
     /* Match one .double-cards column width and align the Heritage card to the right */
 .stack-cards .heritage-narrow{
   /* exactly half of the 2-col layout, but cap it so it doesn’t get too wide */
-  width: min(calc((100% - 18px)/2), 320px);
-  max-width: 420px;
+  width: min(calc((100% - 18px)/2), 720px);
+  max-width: 1100px;
   box-sizing: border-box;
   margin-left: auto; /* push to right edge */
 }
 @media (max-width: 720px){
   .stack-cards .heritage-narrow{
     width: 100%;
-    max-width: none;
+    max-width: 1100px;
     margin-left: 0;
   }
 }
