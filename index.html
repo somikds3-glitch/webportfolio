@@ -2515,10 +2515,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const scroller = wrap.querySelector('.edu-scroller');
     const prev = wrap.querySelector('.prev');
     const next = wrap.querySelector('.next');
-    const step = Math.max(300, scroller.clientWidth * 0.6);
+    function step(){ return Math.max(240, Math.round(scroller.clientWidth * 0.8)); }
 
-    prev.addEventListener('click', () => scroller.scrollBy({ left: -step, behavior: 'smooth' }));
-    next.addEventListener('click', () => scroller.scrollBy({ left:  step, behavior: 'smooth' }));
+prev.addEventListener('click', () => scroller.scrollBy({ left: -step(), behavior: 'smooth' }));
+next.addEventListener('click', () => scroller.scrollBy({ left:  step(),  behavior: 'smooth' }));
+
   });
 });
 </script>
