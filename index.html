@@ -852,21 +852,20 @@
   max-width:1100px;
   margin:28px auto;
 }
-    /* Match one .double-cards column width and align the Heritage card to the right */
-/* Works in both the education stack and the 3-up row if you want */
-.stack-cards .heritage-narrow,
-.triple-cards .heritage-narrow{
-  /* match one column of .double-cards, but cap it so it's narrower */
-  width: min(calc((100% - 18px) / 2), 520px);  /* change 520px to taste */
-  box-sizing: border-box;
-  justify-self: end;   /* right-align inside the grid cell */
-}
 
+    /* Match one .double-cards column width and align the Heritage card to the right */
+.stack-cards .heritage-narrow{
+  /* exactly half of the 2-col layout, but cap it so it doesn’t get too wide */
+  width: min(calc((100% - 18px)/2), 420px);
+  max-width: 420px;
+  box-sizing: border-box;
+  margin-left: auto; /* push to right edge */
+}
 @media (max-width: 720px){
-  .stack-cards .heritage-narrow,
-  .triple-cards .heritage-narrow{
+  .stack-cards .heritage-narrow{
     width: 100%;
-    justify-self: stretch;
+    max-width: none;
+    margin-left: 0;
   }
 }
 
