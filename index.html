@@ -2757,6 +2757,31 @@
 
     </script>
 
+          <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const certs = document.querySelectorAll("#cert-list .testimonial");
+  const btn   = document.getElementById("loadMoreCerts");
+  if (!btn || !certs.length) return;
+
+  let visible = 3;        // show 3 cards initially
+  const step  = 3;        // reveal 3 more each click
+
+  // hide beyond the initial 3
+  certs.forEach((c, i) => { if (i >= visible) c.classList.add("hidden"); });
+
+  btn.addEventListener("click", () => {
+    const hidden = document.querySelectorAll("#cert-list .testimonial.hidden");
+    for (let i = 0; i < step && i < hidden.length; i++) {
+      hidden[i].classList.remove("hidden");
+    }
+    if (document.querySelectorAll("#cert-list .testimonial.hidden").length === 0) {
+      btn.style.display = "none";
+    }
+  });
+});
+</script>
+
+
   <script>
 document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.edu-scroller-wrap').forEach(wrap => {
