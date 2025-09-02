@@ -2861,5 +2861,34 @@ next.addEventListener('click', () => scroller.scrollBy({ left:  step(),  behavio
 });
 </script>
 
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const list = document.getElementById("cert-list");
+  const btn  = document.getElementById("loadMoreCerts");
+  if (!list || !btn) return;
+
+  // Always start with only 3 visible
+  const cards = Array.from(list.querySelectorAll(".testimonial"));
+  cards.forEach((el, i) => {
+    if (i >= 3) el.classList.add("hidden");
+  });
+
+  // Show or hide button based on how many cards exist
+  btn.style.display = (cards.length > 3) ? "inline-block" : "none";
+
+  btn.addEventListener("click", (e) => {
+    e.preventDefault();               // just in case
+    const hiddenNow = Array.from(list.querySelectorAll(".testimonial.hidden")).slice(0, 3);
+    hiddenNow.forEach(el => el.classList.remove("hidden"));
+
+    // Hide button if nothing left to show
+    if (!list.querySelector(".testimonial.hidden")) {
+      btn.style.display = "none";
+    }
+  });
+});
+</script>
+
+
   </body>
   </html>
