@@ -439,6 +439,35 @@
   border-color: #222;
 }
 
+    /* Certifications: uniform logo box */
+#cert-list .testimonial-header{
+  display: flex;
+  align-items: center;
+  gap: 12px;            /* space between logo and text */
+}
+
+#cert-list .testimonial-img{
+  width: 64px;          /* uniform square */
+  height: 64px;
+  object-fit: contain;  /* keep logo proportions without cropping */
+  background: #fff;     /* clean backdrop for PNGs with transparency */
+  padding: 6px;         /* breathing room inside the box */
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  flex: 0 0 auto;       /* prevent stretch */
+}
+
+/* Tighten on small screens if needed */
+@media (max-width: 520px){
+  #cert-list .testimonial-img{
+    width: 56px;
+    height: 56px;
+    padding: 5px;
+  }
+}
+
+
 
 
   
