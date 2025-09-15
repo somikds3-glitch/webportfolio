@@ -1174,6 +1174,34 @@
 }
 
 
+/* Lightbox overlay */
+.image-lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+/* Active state */
+.image-lightbox.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Enlarged image */
+.image-lightbox img {
+  max-width: 85%;
+  max-height: 85%;
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+  transition: transform 0.3s ease;
+}
 
 
 
