@@ -3167,6 +3167,34 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 </script>
 
+      <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const projects = document.querySelectorAll("#projects-list .project-card");
+  const btn = document.getElementById("loadMoreProjects");
+  let visible = 2;
+  const step = 2;
+
+  projects.forEach((p, i) => {
+    if (i >= visible) p.classList.add("hidden");
+  });
+
+  btn.addEventListener("click", () => {
+    const hidden = document.querySelectorAll("#projects-list .project-card.hidden");
+    for (let i = 0; i < step && i < hidden.length; i++) {
+      hidden[i].classList.remove("hidden");
+    }
+    if (document.querySelectorAll("#projects-list .project-card.hidden").length === 0) {
+      btn.style.display = "none";
+    }
+  });
+
+  if (projects.length <= visible) {
+    btn.style.display = "none";
+  }
+});
+</script>
+
+
 
   </body>
   </html>
