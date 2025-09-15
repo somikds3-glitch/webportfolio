@@ -1113,14 +1113,6 @@
 }
 
 /* Projects – solid white, left aligned */
-
-
-/* Force left alignment inside Projects section */
-#projects,
-#projects * {
-  text-align: left !important;
-}
-
     
 #projects-list .project-card {
   background: #fff;
@@ -1134,11 +1126,17 @@
   color: #000;                     /* black text */
 }
 
-/* Make sure all child text is black */
-#projects-list .project-card * {
-  text-align: left; 
-  color: #000 !important;
+    /* Keep the Projects section title centered */
+#projects > h2 {
+  text-align: center !important;
 }
+
+/* Force only the project cards and their children to left align */
+#projects .project-card,
+#projects .project-card * {
+  text-align: left !important;
+}
+
 
 
 
