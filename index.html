@@ -1094,18 +1094,33 @@
 
     .stack-cards .role-card + .role-card { margin-top: 18px; }
 
-    /* Projects */
+/* Projects */
 #projects-list .project-card {
   margin: 20px auto;
   max-width: 1100px;
+  color: #000;              /* force text inside cards to black */
 }
+
 #projects-list .gdrc-columns {
   margin-top: 14px;
 }
+
 #projects-list img {
   box-shadow: 0 2px 10px rgba(0,0,0,0.12);
 }
-#projects-list .hidden { display: none; }
+
+#projects-list .hidden {
+  display: none;
+}
+
+/* Ensure all child text uses black */
+#projects-list .project-card p,
+#projects-list .project-card li,
+#projects-list .project-card h3,
+#projects-list .project-card a {
+  color: #000;
+}
+
 
 
 
