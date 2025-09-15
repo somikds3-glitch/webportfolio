@@ -1094,21 +1094,25 @@
 
     .stack-cards .role-card + .role-card { margin-top: 18px; }
 
-/* Projects */
-/* Keep frosted style but flip text to black */
+/* Projects – frosted style but black text */
 #projects-list .project-card {
-  background: rgba(255,255,255,0.72);   /* translucent white frost */
+  background: rgba(255,255,255,0.72);   /* frosted white */
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  color: #000;
+  border: 1px solid rgba(0,0,0,0.1);
+  color: #000 !important;               /* global reset */
 }
 
+/* Stronger overrides to beat .frost-card defaults */
+#projects-list .project-card *,
 #projects-list .project-card h3,
 #projects-list .project-card p,
 #projects-list .project-card li,
-#projects-list .project-card a {
+#projects-list .project-card a,
+#projects-list .project-card strong {
   color: #000 !important;
 }
+
 
 
 
