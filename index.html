@@ -1094,17 +1094,16 @@
 
     .stack-cards .role-card + .role-card { margin-top: 18px; }
 
-/* Projects – frosted style but black text */
+/* Projects – solid white background, black text */
 #projects-list .project-card {
-  background: rgba(255,255,255,0.72);   /* frosted white */
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(0,0,0,0.1);
-  color: #000 !important;               /* global reset */
+  background: #fff;                 /* solid background, no transparency */
+  border: 1px solid #ddd;
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  color: #000;                      /* base text color */
 }
 
-/* Stronger overrides to beat .frost-card defaults */
-#projects-list .project-card *,
+/* Ensure text always appears black */
 #projects-list .project-card h3,
 #projects-list .project-card p,
 #projects-list .project-card li,
