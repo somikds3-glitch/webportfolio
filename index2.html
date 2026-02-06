@@ -4002,169 +4002,170 @@
   </script>
 
   <!-- ✅ Unified JavaScript block -->
-  document.addEventListener("DOMContentLoaded", () => {
-  // 1. Navigation and Section Switching
-  const sections = document.querySelectorAll("section");
-  const navLinks = document.querySelectorAll("nav a");
-  const navEl = document.querySelector('nav');
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      // 1. Navigation and Section Switching
+      const sections = document.querySelectorAll("section");
+      const navLinks = document.querySelectorAll("nav a");
+      const navEl = document.querySelector('nav');
 
-  const setNavH = () => document.documentElement.style.setProperty('--nav-h', ((navEl && navEl.offsetHeight) || 72) +
-  'px');
-  setNavH();
-  window.addEventListener('resize', setNavH);
-  window.addEventListener('load', setNavH);
+      const setNavH = () => document.documentElement.style.setProperty('--nav-h', ((navEl && navEl.offsetHeight) || 72) +
+        'px');
+      setNavH();
+      window.addEventListener('resize', setNavH);
+      window.addEventListener('load', setNavH);
 
-  function showSection(id) {
-  sections.forEach(sec => {
-  sec.style.display = (sec.id === id) ? "block" : "none";
-  });
-  if (id === "career") initTimeline();
-  }
+      function showSection(id) {
+        sections.forEach(sec => {
+          sec.style.display = (sec.id === id) ? "block" : "none";
+        });
+        if (id === "career") initTimeline();
+      }
 
-  navLinks.forEach(link => {
-  link.addEventListener("click", e => {
-  e.preventDefault();
-  const id = link.getAttribute("href").substring(1);
-  showSection(id);
-  });
-  });
+      navLinks.forEach(link => {
+        link.addEventListener("click", e => {
+          e.preventDefault();
+          const id = link.getAttribute("href").substring(1);
+          showSection(id);
+        });
+      });
 
-  // Global anchor handling for cross-section links
-  document.body.addEventListener("click", (e) => {
-  const a = e.target.closest('a[href^="#"]');
-  if (!a || a.closest('nav')) return; // Ignore nav links already handled
+      // Global anchor handling for cross-section links
+      document.body.addEventListener("click", (e) => {
+        const a = e.target.closest('a[href^="#"]');
+        if (!a || a.closest('nav')) return; // Ignore nav links already handled
 
-  const id = a.getAttribute("href").slice(1);
-  const target = document.getElementById(id);
-  if (!target) return;
+        const id = a.getAttribute("href").slice(1);
+        const target = document.getElementById(id);
+        if (!target) return;
 
-  e.preventDefault();
-  showSection(id);
-  target.scrollTo({ top: 0, behavior: "smooth" });
-  });
+        e.preventDefault();
+        showSection(id);
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
 
-  showSection("home");
+      showSection("home");
 
-  // 2. Career Timeline and Modal
-  const modal = document.getElementById('career-modal');
-  const mTitle = modal.querySelector('.modal-title');
-  const mSub = modal.querySelector('.modal-sub');
-  const mImg = modal.querySelector('.modal-img');
-  const mTabs = modal.querySelector('.modal-tabs');
-  const mClose = modal.querySelector('.modal-close');
+      // 2. Career Timeline and Modal
+      const modal = document.getElementById('career-modal');
+      const mTitle = modal.querySelector('.modal-title');
+      const mSub = modal.querySelector('.modal-sub');
+      const mImg = modal.querySelector('.modal-img');
+      const mTabs = modal.querySelector('.modal-tabs');
+      const mClose = modal.querySelector('.modal-close');
 
-  function renderEntry(entry) {
-  mTitle.textContent = entry.title || '';
-  mSub.innerHTML = `<span class="modal-year">${entry.year || ''}</span> — ${entry.subtitle || ''}`;
-  mImg.src = entry.img || '';
-  mImg.alt = entry.alt || entry.title || 'Logo';
-  }
+      function renderEntry(entry) {
+        mTitle.textContent = entry.title || '';
+        mSub.innerHTML = `<span class="modal-year">${entry.year || ''}</span> — ${entry.subtitle || ''}`;
+        mImg.src = entry.img || '';
+        mImg.alt = entry.alt || entry.title || 'Logo';
+      }
 
-  function openModal(payload) {
-  const items = Array.isArray(payload) ? payload : [payload];
-  mTabs.innerHTML = '';
-  if (items.length > 1) {
-  items.forEach((it, idx) => {
-  const tab = document.createElement('button');
-  tab.className = 'modal-tab';
-  tab.textContent = it.tab || it.title || `Item ${idx + 1}`;
-  tab.setAttribute('aria-selected', idx === 0 ? 'true' : 'false');
-  tab.addEventListener('click', () => {
-  mTabs.querySelectorAll('.modal-tab').forEach(t => t.setAttribute('aria-selected', 'false'));
-  tab.setAttribute('aria-selected', 'true');
-  renderEntry(items[idx]);
-  });
-  mTabs.appendChild(tab);
-  });
-  }
-  renderEntry(items[0]);
-  modal.classList.add('show');
-  }
+      function openModal(payload) {
+        const items = Array.isArray(payload) ? payload : [payload];
+        mTabs.innerHTML = '';
+        if (items.length > 1) {
+          items.forEach((it, idx) => {
+            const tab = document.createElement('button');
+            tab.className = 'modal-tab';
+            tab.textContent = it.tab || it.title || `Item ${idx + 1}`;
+            tab.setAttribute('aria-selected', idx === 0 ? 'true' : 'false');
+            tab.addEventListener('click', () => {
+              mTabs.querySelectorAll('.modal-tab').forEach(t => t.setAttribute('aria-selected', 'false'));
+              tab.setAttribute('aria-selected', 'true');
+              renderEntry(items[idx]);
+            });
+            mTabs.appendChild(tab);
+          });
+        }
+        renderEntry(items[0]);
+        modal.classList.add('show');
+      }
 
-  const closeModal = () => modal.classList.remove('show');
-  mClose.addEventListener('click', closeModal);
-  modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+      const closeModal = () => modal.classList.remove('show');
+      mClose.addEventListener('click', closeModal);
+      modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-  function initTimeline() {
-  const line = document.querySelector('.timeline');
-  const cursor = document.querySelector('.cursor');
-  const years = Array.from(document.querySelectorAll('.timeline .year'));
-  if (!line || !cursor || !years.length) return;
+      function initTimeline() {
+        const line = document.querySelector('.timeline');
+        const cursor = document.querySelector('.cursor');
+        const years = Array.from(document.querySelectorAll('.timeline .year'));
+        if (!line || !cursor || !years.length) return;
 
-  function moveCursorTo(el) {
-  const rect = el.getBoundingClientRect();
-  const parentRect = line.getBoundingClientRect();
-  const left = rect.left - parentRect.left + line.scrollLeft;
-  cursor.style.left = `${left + 6}px`;
-  cursor.style.width = `${rect.width - 12}px`;
-  el.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-  }
+        function moveCursorTo(el) {
+          const rect = el.getBoundingClientRect();
+          const parentRect = line.getBoundingClientRect();
+          const left = rect.left - parentRect.left + line.scrollLeft;
+          cursor.style.left = `${left + 6}px`;
+          cursor.style.width = `${rect.width - 12}px`;
+          el.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        }
 
-  years.forEach(btn => {
-  btn.addEventListener('click', () => {
-  if (btn.disabled || btn.classList.contains('disabled')) return;
-  years.forEach(y => y.classList.remove('active'));
-  btn.classList.add('active');
-  moveCursorTo(btn);
-  try {
-  const payload = JSON.parse(btn.dataset.payload);
-  if (payload) openModal(payload);
-  } catch (e) {}
-  });
-  });
+        years.forEach(btn => {
+          btn.addEventListener('click', () => {
+            if (btn.disabled || btn.classList.contains('disabled')) return;
+            years.forEach(y => y.classList.remove('active'));
+            btn.classList.add('active');
+            moveCursorTo(btn);
+            try {
+              const payload = JSON.parse(btn.dataset.payload);
+              if (payload) openModal(payload);
+            } catch (e) { }
+          });
+        });
 
-  const first = years.find(y => !y.disabled && !y.classList.contains('disabled'));
-  if (first) setTimeout(() => { first.classList.add('active'); moveCursorTo(first); }, 100);
-  }
+        const first = years.find(y => !y.disabled && !y.classList.contains('disabled'));
+        if (first) setTimeout(() => { first.classList.add('active'); moveCursorTo(first); }, 100);
+      }
 
-  // 3. "Load More" Functionality
-  function setupLoadMore(listId, btnId, itemClass, initialCount, step) {
-  const list = document.getElementById(listId);
-  const btn = document.getElementById(btnId);
-  if (!list || !btn) return;
-  const items = Array.from(list.querySelectorAll(itemClass));
-  let visible = initialCount;
+      // 3. "Load More" Functionality
+      function setupLoadMore(listId, btnId, itemClass, initialCount, step) {
+        const list = document.getElementById(listId);
+        const btn = document.getElementById(btnId);
+        if (!list || !btn) return;
+        const items = Array.from(list.querySelectorAll(itemClass));
+        let visible = initialCount;
 
-  const updateVisibility = () => {
-  items.forEach((item, i) => item.classList.toggle('hidden', i >= visible));
-  btn.style.display = (items.length > visible) ? "inline-block" : "none";
-  };
+        const updateVisibility = () => {
+          items.forEach((item, i) => item.classList.toggle('hidden', i >= visible));
+          btn.style.display = (items.length > visible) ? "inline-block" : "none";
+        };
 
-  btn.addEventListener('click', (e) => {
-  e.preventDefault();
-  visible += step;
-  updateVisibility();
-  });
-  updateVisibility();
-  }
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          visible += step;
+          updateVisibility();
+        });
+        updateVisibility();
+      }
 
-  setupLoadMore('testimonial-list', 'loadMoreBtn', '.testimonial', 3, 3);
-  setupLoadMore('cert-list', 'loadMoreCerts', '.testimonial', 3, 3);
-  setupLoadMore('projects-list', 'loadMoreProjects', '.project-card', 2, 2);
+      setupLoadMore('testimonial-list', 'loadMoreBtn', '.testimonial', 3, 3);
+      setupLoadMore('cert-list', 'loadMoreCerts', '.testimonial', 3, 3);
+      setupLoadMore('projects-list', 'loadMoreProjects', '.project-card', 2, 2);
 
-  // 4. Scroller Navigation
-  document.querySelectorAll('.edu-scroller-wrap').forEach(wrap => {
-  const scroller = wrap.querySelector('.edu-scroller');
-  const prev = wrap.querySelector('.prev');
-  const next = wrap.querySelector('.next');
-  const step = () => Math.max(240, Math.round(scroller.clientWidth * 0.8));
-  prev?.addEventListener('click', () => scroller.scrollBy({ left: -step(), behavior: 'smooth' }));
-  next?.addEventListener('click', () => scroller.scrollBy({ left: step(), behavior: 'smooth' }));
-  });
+      // 4. Scroller Navigation
+      document.querySelectorAll('.edu-scroller-wrap').forEach(wrap => {
+        const scroller = wrap.querySelector('.edu-scroller');
+        const prev = wrap.querySelector('.prev');
+        const next = wrap.querySelector('.next');
+        const step = () => Math.max(240, Math.round(scroller.clientWidth * 0.8));
+        prev?.addEventListener('click', () => scroller.scrollBy({ left: -step(), behavior: 'smooth' }));
+        next?.addEventListener('click', () => scroller.scrollBy({ left: step(), behavior: 'smooth' }));
+      });
 
-  // 5. Image Lightbox
-  const lightbox = document.getElementById("imageLightbox");
-  const lightboxImg = lightbox?.querySelector("img");
-  document.querySelectorAll("#projects .gdrc-column img").forEach(img => {
-  img.addEventListener("click", () => {
-  if (lightboxImg) lightboxImg.src = img.src;
-  lightbox?.classList.add("active");
-  });
-  });
-  lightbox?.addEventListener("click", () => lightbox.classList.remove("active"));
-  document.addEventListener("keydown", e => { if (e.key === "Escape") lightbox?.classList.remove("active"); });
-  });
+      // 5. Image Lightbox
+      const lightbox = document.getElementById("imageLightbox");
+      const lightboxImg = lightbox?.querySelector("img");
+      document.querySelectorAll("#projects .gdrc-column img").forEach(img => {
+        img.addEventListener("click", () => {
+          if (lightboxImg) lightboxImg.src = img.src;
+          lightbox?.classList.add("active");
+        });
+      });
+      lightbox?.addEventListener("click", () => lightbox.classList.remove("active"));
+      document.addEventListener("keydown", e => { if (e.key === "Escape") lightbox?.classList.remove("active"); });
+    });
   </script>
 
   <!-- Image Lightbox -->
