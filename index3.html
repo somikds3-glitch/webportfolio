@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Somik Das · Financial Documents</title>
+<meta name="description" content="A monthly repository of financial documents. Click any item to open it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    color-scheme: light; box-sizing: border-box;
+    padding-top: env(safe-area-inset-top,0px); padding-bottom: env(safe-area-inset-bottom,0px);
+    --bg:#eef0f4; --surface:#fff; --surface-2:#f7f8fb; --surface-hover:#f2f4f8;
+    --border:#e2e5ec; --border-strong:#d4d8e2;
+    --text:#141821; --muted:#697086; --faint:#9aa1b2;
+    --accent:#2850c8; --accent-soft:#e8edfb;
+    --shadow:0 1px 2px rgba(20,24,33,.05),0 8px 24px rgba(20,24,33,.06);
+    --radius:16px;
+    --c-bank:#2850c8; --c-pay:#157f4a; --c-fund:#7c3aed; --c-tax:#b45309;
+    --c-rent:#0d9488; --c-util:#0e7490; --c-prov:#4f46e5; --c-ins:#be123c;
+    --c-arch:#556070; --c-doc:#475569;
+  }
+  @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#0d0f14; --surface:#161a22; --surface-2:#12151c; --surface-hover:#1c212b;
+    --border:#262c38; --border-strong:#323a49;
+    --text:#e8eaf0; --muted:#9aa3b4; --faint:#6b7385;
+    --accent:#7b9bff; --accent-soft:#1b2440;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.4);
+  }}
+  :root[data-theme="dark"]{
+    color-scheme:dark;
+    --bg:#0d0f14; --surface:#161a22; --surface-2:#12151c; --surface-hover:#1c212b;
+    --border:#262c38; --border-strong:#323a49;
+    --text:#e8eaf0; --muted:#9aa3b4; --faint:#6b7385;
+    --accent:#7b9bff; --accent-soft:#1b2440;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.4);
+  }
+  *{box-sizing:inherit;}
+  html{scroll-padding-top:env(safe-area-inset-top,0px); -webkit-text-size-adjust:100%;}
+  body{margin:0; background:var(--bg); color:var(--text);
+    font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased; line-height:1.5;}
+  .wrap{max-width:620px; margin:0 auto; padding:22px 16px 72px;}
+
+  .toolbar{display:flex; justify-content:flex-end; margin-bottom:4px;}
+  .icon-btn{appearance:none; border:1px solid var(--border); background:var(--surface);
+    color:var(--muted); width:38px; height:38px; border-radius:11px; display:grid; place-items:center;
+    cursor:pointer; transition:color .15s,border-color .15s;}
+  .icon-btn:hover{color:var(--text); border-color:var(--border-strong);}
+  .icon-btn:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+  .icon-btn svg{width:18px; height:18px;}
+  .moon{display:none;}
+  :root[data-theme="dark"] .moon,:root:not([data-theme="light"]) .moon{display:block;}
+  :root[data-theme="dark"] .sun{display:none;}
+  @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]) .sun{display:none;} }
+
+  .hero{text-align:center; padding:2px 0 4px;}
+  .mono{width:64px; height:64px; margin:0 auto 12px; border-radius:20px; background:var(--accent);
+    color:#fff; display:grid; place-items:center; font-weight:800; font-size:24px; letter-spacing:.5px;
+    box-shadow:0 10px 24px -8px color-mix(in srgb,var(--accent) 60%,transparent);}
+  .name{margin:0; font-size:24px; font-weight:800; letter-spacing:-.02em;}
+  .tagline{margin:5px 0 0; color:var(--muted); font-size:14px;}
+  .intro{color:var(--muted); font-size:12.5px; line-height:1.5; max-width:46ch; margin:10px auto 0;}
+  .plinks{display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin:14px auto 2px;}
+  .plink{display:inline-flex; align-items:center; gap:7px; border:1px solid var(--border); background:var(--surface);
+    color:var(--text); border-radius:999px; padding:7px 13px; font-size:13px; font-weight:600; text-decoration:none;
+    transition:border-color .15s,background .15s;}
+  .plink:hover{border-color:var(--border-strong); background:var(--surface-hover);}
+  .plink svg{width:15px; height:15px; color:var(--muted);}
+
+  .controls{position:sticky; top:env(safe-area-inset-top,0px); z-index:5; background:var(--bg);
+    padding:10px 0 8px; margin-bottom:4px;}
+  .search{position:relative;}
+  .search svg{position:absolute; left:13px; top:50%; transform:translateY(-50%); width:17px; height:17px; color:var(--faint);}
+  .search input{width:100%; border:1px solid var(--border); background:var(--surface); color:var(--text);
+    border-radius:12px; padding:12px 14px 12px 38px; font:inherit; font-size:15px;}
+  .search input:focus{outline:2px solid var(--accent); outline-offset:1px; border-color:transparent;}
+  .search input::placeholder{color:var(--faint);}
+
+  .chips{display:flex; gap:7px; overflow-x:auto; padding:9px 1px 2px; -webkit-overflow-scrolling:touch; scrollbar-width:none;}
+  .chips::-webkit-scrollbar{display:none;}
+  .chip{flex:none; border:1px solid var(--border); background:var(--surface); color:var(--muted);
+    border-radius:999px; padding:6px 13px; font-size:13px; font-weight:600; cursor:pointer; transition:all .15s;}
+  .chip[aria-pressed="true"]{background:var(--accent); border-color:var(--accent); color:#fff;}
+  .chip.ghost{margin-left:auto; border-style:dashed; font-weight:500;}
+
+  .month{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
+    box-shadow:var(--shadow); margin-top:14px; overflow:hidden;}
+  .month.sec{border-style:solid; border-color:var(--border);}
+  .month-head{list-style:none; cursor:pointer; display:flex; align-items:center; gap:12px; padding:14px 16px; user-select:none;}
+  .month-head::-webkit-details-marker{display:none;}
+  .month-title{display:flex; flex-direction:column; min-width:0;}
+  .month-name{font-weight:700; font-size:16px; letter-spacing:-.01em; display:flex; align-items:center; gap:7px;}
+  .month-name .pin{width:14px; height:14px; color:var(--faint); flex:none;}
+  .month-meta{font-size:11.5px; color:var(--muted); margin-top:1px;}
+  .month-count{font-size:12px; font-weight:600; background:var(--accent-soft); color:var(--accent);
+    padding:3px 9px; border-radius:999px; white-space:nowrap;}
+  .chev{margin-left:6px; color:var(--faint); transition:transform .2s ease; flex:none;}
+  .chev svg{width:18px; height:18px; display:block;}
+  details[open] > .month-head .chev{transform:rotate(180deg);}
+
+  .links{padding:0 12px 12px; display:flex; flex-direction:column; gap:8px;}
+
+  .cred{display:flex; align-items:center; gap:8px; padding:10px 12px; border:1px solid var(--border);
+    border-radius:12px; background:var(--accent-soft); font-size:12.5px;}
+  .cred .key{width:15px; height:15px; color:var(--accent); flex:none;}
+  .cred .label{color:var(--muted);}
+  .cred code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-weight:700; color:var(--text);}
+
+  .card{border:1px solid var(--border); border-radius:12px; background:var(--surface); overflow:hidden;
+    transition:border-color .15s;}
+  .card:hover{border-color:var(--border-strong);}
+  .open{display:flex; align-items:center; gap:12px; padding:11px 12px; text-decoration:none; color:inherit;
+    transition:background .15s;}
+  .open:hover{background:var(--surface-hover);}
+  .open:active{background:var(--surface-2);}
+  .open:focus-visible{outline:2px solid var(--accent); outline-offset:-2px;}
+  .tile{width:38px; height:38px; border-radius:10px; flex:none; display:grid; place-items:center; overflow:hidden;
+    background:color-mix(in srgb,var(--c) 13%,var(--surface)); color:var(--c);}
+  .tile svg{width:20px; height:20px;}
+  .tile img{width:100%; height:100%; object-fit:contain; padding:6px; background:#fff;}
+  .tile .initials{font-weight:800; font-size:12px; letter-spacing:.3px;}
+  @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]) .tile{
+    background:color-mix(in srgb,var(--c) 24%,var(--surface)); color:color-mix(in srgb,var(--c) 62%,white);} }
+  :root[data-theme="dark"] .tile{background:color-mix(in srgb,var(--c) 24%,var(--surface)); color:color-mix(in srgb,var(--c) 62%,white);}
+  .card-text{min-width:0; display:flex; flex-direction:column;}
+  .card-title{font-weight:600; font-size:14.5px; line-height:1.3;}
+  .card-sub{font-size:12px; color:var(--muted); margin-top:1px;}
+  .ext{margin-left:auto; color:var(--faint); flex:none; align-self:center;}
+  .ext svg{width:16px; height:16px; display:block;}
+  .open:hover .ext{color:var(--c);}
+
+  .pw{display:flex; align-items:center; gap:8px; padding:9px 12px; border-top:1px dashed var(--border);
+    background:var(--surface-2); font-size:12.5px;}
+  .pw .lock{width:14px; height:14px; color:var(--muted); flex:none;}
+  .pw .label{color:var(--muted);}
+  .pw code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-weight:600; color:var(--text);
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .copy{margin-left:auto; flex:none; border:1px solid var(--border); background:var(--surface); color:var(--muted);
+    border-radius:8px; padding:5px 10px; font:inherit; font-size:12px; font-weight:600; cursor:pointer;
+    display:inline-flex; align-items:center; gap:5px; transition:all .15s;}
+  .copy:hover{color:var(--text); border-color:var(--border-strong);}
+  .copy.done{color:#157f4a; border-color:#157f4a;}
+  .copy svg{width:13px; height:13px;}
+
+  .empty{border:1px dashed var(--border-strong); border-radius:12px; padding:18px 14px; text-align:center;
+    color:var(--muted); font-size:13.5px;}
+  .noresult{text-align:center; color:var(--muted); font-size:14px; padding:40px 10px;}
+
+  footer{text-align:center; color:var(--faint); font-size:12.5px; margin-top:24px; line-height:1.6;}
+  @media (prefers-reduced-motion:reduce){ *{transition:none !important;} }
+</style>
+</head>
+<body>
+  <main class="wrap">
+    <div class="toolbar">
+      <button class="icon-btn" id="themeBtn" type="button" aria-label="Switch theme" title="Switch theme">
+        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+    </div>
+
+    <header class="hero">
+      <div class="mono" id="mono">SD</div>
+      <h1 class="name" id="ownerName">Somik Das</h1>
+      <p class="tagline" id="ownerTag">Financial documents · updated monthly</p>
+      <p class="intro" id="intro" hidden></p>
+      <div class="plinks" id="plinks"></div>
+    </header>
+
+    <div class="controls">
+      <div class="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input id="search" type="search" placeholder="Search documents…" autocomplete="off" aria-label="Search documents">
+      </div>
+      <div class="chips" id="chips"></div>
+    </div>
+
+    <div id="list"></div>
+
+    <footer>Click any item to open the document. Tap “Copy” to copy a password.<br><span id="stamp"></span></footer>
+  </main>
+
+  <!-- ===================================================================== -->
+  <!-- FIN-DATA:BEGIN  —  To add a month, insert ONE object at the TOP of the  -->
+  <!-- "months" array. Standing reference groups live in "sections".           -->
+  <!-- Link fields: title, url, password?, brand?, type?. Months auto-sort by  -->
+  <!-- "id" (YYYY-MM), newest first. Nothing else in this file needs to change.-->
+  <!-- ===================================================================== -->
+  <script type="application/json" id="fin-data">
+{
+  "owner": { "name": "Somik Das", "initials": "SD", "tagline": "Financial documents · updated monthly" },
+  "profile": {
+    "intro": "A repository of financial documents. Viewing a document requires a valid Apple ID and password — please keep your Apple ID and password handy.",
+    "links": [
+      { "label": "LinkedIn", "url": "https://www.linkedin.com/in/somik-das?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" },
+      { "label": "Email", "url": "mailto:somikds3@gmail.com" },
+      { "label": "iCloud Drive", "url": "https://www.twitch.tv/https://www.icloud.com/iclouddrive/" }
+    ]
+  },
+  "sections": [
+    { "id": "archives", "name": "Yearly archives", "meta": "All documents together, by year", "links": [
+      { "title": "2026 Financial Documents — all documents", "url": "https://www.icloud.com/iclouddrive/0700VYTZBqAhgTR50ETs_r0Nw#2026_financial_documents", "type": "archive" },
+      { "title": "2025 Financial Documents — all documents", "url": "https://www.icloud.com/iclouddrive/0e7CaOujzTA82aGjOv9UWQwgg#2025_Read_full_file_names", "type": "archive" },
+      { "title": "2024 Financial Documents — all documents", "url": "https://www.icloud.com/iclouddrive/0ffXAAorbT90RZrgCpgf_KM3Q#2024_%28read_full_file_names%29", "type": "archive" },
+      { "title": "2023 Financial Documents — all documents", "url": "https://www.icloud.com/iclouddrive/0881FnJde1YpOMdC80VQAM3OA#2023_%28Read_full_file_names%29", "type": "archive" }
+    ]},
+    { "id": "epf", "name": "Provident Fund (EPF / UAN)", "meta": "EPFO passbooks & UAN card",
+      "credential": { "label": "UAN 101296357457", "password": "Somik1912$" }, "links": [
+      { "title": "UAN Card", "url": "https://www.icloud.com/iclouddrive/0eeKwDQ_A5r8kRuCISv9GMNPQ#101296357457-UAN_Card" },
+      { "title": "EPFO Evalueserve", "url": "https://www.icloud.com/iclouddrive/0beaXHXWfk-BZO-SHihcUtFUw#EPFO_Evalueserve" },
+      { "title": "EPFO GDRC Passbook", "url": "https://www.icloud.com/iclouddrive/045iLoLuMcOOgeF_BZ5RAEDHw#EPFOGDRC" },
+      { "title": "EPFO Passbook — MarketsAndMarkets Research Private Limited", "url": "https://www.icloud.com/iclouddrive/0cbAfJ8NCZ6J9GbYgA3RAaFPg#EpfoMarketsAndMarkets" },
+      { "title": "EPFO Passbook — L&T Financial Services", "url": "https://www.icloud.com/iclouddrive/05dyq4MPtUolY5ZI0fIeE9d-w#EPFOL&TFinancials" },
+      { "title": "EPFO Passbook (Aug 2025) — MSCI", "url": "https://www.icloud.com/iclouddrive/049Z3w-JlZoTd-umNiJgPLF9w#August_2025_EPFO_passbook" }
+    ]},
+    { "id": "lic", "name": "LIC Policies", "meta": "Annual policy receipts", "links": [
+      { "title": "2026 — Payment receipt for policy 403318942", "url": "https://www.icloud.com/iclouddrive/0d16zsL0MQxhlNuRfZHuhAF-g#LIC_POLICY_403318942" },
+      { "title": "2026 — Payment receipt for policy 505644853", "url": "https://www.icloud.com/iclouddrive/0dacpR7OTeJp5_d2oMtruOXvQ#LIC_Policy_505644853" },
+      { "title": "2025 — Payment receipt for policy 403318942", "url": "https://www.icloud.com/iclouddrive/0d5tcWx8tcZ8ReZ73cEvZLuGw#LIC_Policy_403318942" },
+      { "title": "2025 — Receipt for policy 505644853", "url": "https://www.icloud.com/iclouddrive/045UYIUKNZY62SGnC5tqTRBKA#LIC_policy_receipt_505644853" },
+      { "title": "2025 — Payment receipt for policy 405545620", "url": "https://www.icloud.com/iclouddrive/0e5wsRxybUflJ4l-j6-59YvCA#lic_november_2025" },
+      { "title": "LIC — All policy statements (FY2024-2025)", "url": "https://www.icloud.com/iclouddrive/0969dHCTeJV-gapahls_rkbkQ#LIC_ALL_POLICY_STATEMENT" }
+    ]}
+  ],
+  "months": [
+    { "id": "2026-11", "name": "November 2026", "meta": "Statements generated 26 Oct 2026", "links": [
+      { "title": "October 2026 Payslip", "url": "https://www.icloud.com/iclouddrive/0efL8jPHsCHSvN-pTZnJypeZQ" },
+      { "title": "October 2026 Mutual Funds statement", "url": "https://www.icloud.com/iclouddrive/0f7EVvVmXSzaEi6IGM95hqG6w", "password": "AWRPD3553G" },
+      { "title": "October 2026 Kotak Mahindra savings account statement", "url": "https://www.icloud.com/iclouddrive/0a5vRvXdCqjEfQesc6gE-GuuA", "password": "somi1912" },
+      { "title": "October 2026 SBI savings account statement", "url": "https://www.icloud.com/iclouddrive/013mtZA3xORVqzov3I25yBI3g", "password": "35953191291" },
+      { "title": "November 2026 House rent receipt", "url": "https://www.icloud.com/iclouddrive/0edpmSFNK3sicw60Aj6aUUr1A" },
+      { "title": "Internet receipt (Nov 2026 – May 2026)", "url": "https://www.icloud.com/iclouddrive/03dNjV9NlOv_gH3OhlEUOSH3A" }
+    ]},
+    { "id": "2026-10", "name": "October 2026", "meta": "Statements generated 26 Sep 2026", "links": [
+      { "title": "SBI Statement", "url": "https://www.icloud.com/iclouddrive/0f9eeO_gpO9FnbUSyD-PaR1uQ#sbi_password_35953191291", "password": "35953191291" },
+      { "title": "September 2026 MF statement", "url": "https://www.icloud.com/iclouddrive/0700VYTZBqAhgTR50ETs_r0Nw#2026_financial_documents" },
+      { "title": "Kotak Mahindra statement", "url": "https://www.icloud.com/iclouddrive/0700VYTZBqAhgTR50ETs_r0Nw#2026_financial_documents", "password": "somi1912" },
+      { "title": "Payslip", "url": "https://www.icloud.com/iclouddrive/0700VYTZBqAhgTR50ETs_r0Nw#2026_financial_documents" }
+    ]},
+    { "id": "2026-09", "name": "September 2026", "meta": "Statements generated 26 Aug 2026", "links": [
+      { "title": "September 2026 Payslip", "url": "https://www.icloud.com/iclouddrive/0af0U20UsohR9oUVOsXzAd96w#August_2026_Payslip" },
+      { "title": "September 2026 House Rent", "url": "https://www.icloud.com/iclouddrive/0e5x8B-4sKykERh9AtX6RZdNQ#house_rent" },
+      { "title": "Kotak August 2026 Statement", "url": "https://www.icloud.com/iclouddrive/08bHFKCC0wNdixnbnBAV0YIEg#Kotak_Aug_2026_statement" },
+      { "title": "SBI August 2026 Statement", "url": "https://www.icloud.com/iclouddrive/006Yb2C4setVaI-9QvsuXp8mg#SBI_Aug_2026_statement" },
+      { "title": "August 2026 MF statement", "url": "https://www.icloud.com/iclouddrive/0dfwRLqaNsRY6EwJG5CuRBKmA#MF_Statement_Aug_2026" }
+    ]},
+    { "id": "2026-08", "name": "August 2026", "meta": "Statements generated 26 Jul 2026", "links": [
+      { "title": "July Payslip", "url": "https://www.icloud.com/iclouddrive/0c2QQ7HcZnrSbozEHpk9F5Jnw#July_2026_Payslip" },
+      { "title": "Kotak July 2026 statement", "url": "https://www.icloud.com/iclouddrive/0ddeG32ubw9DYQAUtsH37Pb-A#kotak_July_2026_statement" },
+      { "title": "Mutual Fund Statement for July 2026", "url": "https://www.icloud.com/iclouddrive/02bZwD_cwBOJ_4YC-IxE5fYVg#MF_statement" },
+      { "title": "Rent receipt August 2026", "url": "https://www.icloud.com/iclouddrive/007BHq4I6urRLz4Pb2uOYX8SQ#rent_receipt" },
+      { "title": "SBI July 2026 statement", "url": "https://www.icloud.com/iclouddrive/0c702JJtR9UZrHxjKGlkMsX6A#sbi_statement_July_2026" }
+    ]},
+    { "id": "2026-07", "name": "July 2026", "meta": "Statements generated 26 Jun 2026", "links": [
+      { "title": "July Payslip", "url": "https://www.icloud.com/iclouddrive/01f6P26l1RQvWKqXfqXfv1urA#payslip_july_2026" },
+      { "title": "Computation Sheet", "url": "https://www.icloud.com/iclouddrive/0e97VyffPbtVIXLRcVfPs6RDA#IT_Computation_SHeet" },
+      { "title": "July rent receipt", "url": "https://www.icloud.com/iclouddrive/0abcSUx11owAYzMfr7uJdBtsA#July_Payslip" },
+      { "title": "Kotak Mahindra statement", "url": "https://www.icloud.com/iclouddrive/0d5fEEdHra0zDlVPXDMVR2VgA#Kotak_Mahindra_June_2026_statement" },
+      { "title": "SBI statement", "url": "https://www.icloud.com/iclouddrive/07fles9bh47gm-9MvTT00LI8w#AccountStatement_01052026_185349", "password": "SOM19121991" },
+      { "title": "Mutual Fund Statement", "url": "https://www.icloud.com/iclouddrive/0e7-oAo1wdiFxrBvnU4_DxSCw#MF_Statement", "password": "Somik1912$" }
+    ]},
+    { "id": "2026-06", "name": "June 2026", "meta": "Statements generated 26 May 2026", "links": [
+      { "title": "Payslip May 2026", "url": "https://www.icloud.com/iclouddrive/0f25cG2RmFM0fphYWg5jrJcKQ#Payslip_May_2026" },
+      { "title": "Tax Receipt May 2026", "url": "https://www.icloud.com/iclouddrive/0f0jI_hrtAkvaJ0p3xtxMgMOg#YTD_Tax_Receipt_May_2026" },
+      { "title": "IT Computation Sheet May 2026", "url": "https://www.icloud.com/iclouddrive/0dfI6TlK0WjpwJYqNCwJnInYQ#IT_Computation_Sheet" },
+      { "title": "Rent receipt June 2026", "url": "https://www.icloud.com/iclouddrive/0b86JM8stb6vYSGTiRAD_QdPA#Rent_Receipt" },
+      { "title": "May 2026 Kotak Bank Statement", "url": "https://www.icloud.com/iclouddrive/045QenUmv6ARLi3K2ZRwcbsww#KOTAK_MAY_2026" },
+      { "title": "CTC Breakup", "url": "https://www.icloud.com/iclouddrive/054vm13cws61lf-pBi7Teyikg#CTC_BreakUp_May_2026" },
+      { "title": "Mutual Funds", "url": "https://www.icloud.com/iclouddrive/00f69RrBWTx0uanSkO4s24szw#Mutual_Funds_May_2026", "password": "SOMIK19121991" },
+      { "title": "SBI Statement May 2026", "url": "https://www.icloud.com/iclouddrive/03cmwAflrDFdkD1oBKokP65kg#SBI_may_2026" }
+    ]},
+    { "id": "2026-05", "name": "May 2026", "meta": "Statements generated 26 Apr 2026", "links": [
+      { "title": "April 2026 Payslip", "url": "https://www.icloud.com/iclouddrive/04cATqirt0sFdhCgIs8efCXnQ#April_2026_Payslip" },
+      { "title": "IT Computation Sheet", "url": "https://www.icloud.com/iclouddrive/04fvTgNynzvXhzFKWkJArK2DQ#IT_Computation_Sheet_April_2016" },
+      { "title": "Earnings and Tax Sheet", "url": "https://www.icloud.com/iclouddrive/026Xi5lEy2VayKyjZlxFetG3g#Earnings_and_Tax_Sheet_April_2016" },
+      { "title": "Rent receipt - April 2026", "url": "https://www.icloud.com/iclouddrive/05b24bN_NlOvvUUjSigyUCXag#Rent_May_2026" },
+      { "title": "Kotak April 2026 statement", "url": "https://www.icloud.com/iclouddrive/0abUFijFfzLfYZJVgG41dkdlA#kotak_April_2026" },
+      { "title": "SBI Statement April 2026", "url": "https://www.icloud.com/iclouddrive/066f0NMd70QsIVcUbSVh2kqtg#SBI_SOMIK19121991", "password": "SOMIK19121991" },
+      { "title": "Mutual Fund April 2026", "url": "https://www.icloud.com/iclouddrive/012Rroijba0juQVlYQ46ARZew#CAMS_Password_Somik1912$", "password": "Somik1912$" }
+    ]},
+    { "id": "2026-04", "name": "April 2026", "meta": "Statements generated 26 Mar 2026", "links": [
+      { "title": "March Payslip 2026", "url": "https://www.icloud.com/iclouddrive/09dAjzfkEQM0jUPj0FBmIL-jA#March2026_Payslip" },
+      { "title": "IT Computation Sheet", "url": "https://www.icloud.com/iclouddrive/003uKe47TpxZRU83PX-XUTxDw#IT_Computation_Sheet" },
+      { "title": "Earnings and Tax Sheet", "url": "https://www.icloud.com/iclouddrive/053V-tFkxp4b7PlgI9lkSdYGQ#Earnings_and_Tax" },
+      { "title": "Kotak Mahindra Mar 2026 Statement", "url": "https://www.icloud.com/iclouddrive/0700VYTZBqAhgTR50ETs_r0Nw#2026_financial_documents" },
+      { "title": "SBI March 2026 Statement", "url": "https://www.icloud.com/iclouddrive/0capuJSxciJ0hxy3QfdCEPuQA#SBI2026March", "password": "SOMIK19121991" },
+      { "title": "House Rent April 2026", "url": "https://www.icloud.com/iclouddrive/004cm8uDthveo3hIKan7S23KQ#house_rent_april_2026" }
+    ]},
+    { "id": "2026-03", "name": "March 2026", "meta": "Statements generated 26 Feb 2026", "links": [
+      { "title": "Feb 2026 Payslip", "url": "https://www.icloud.com/iclouddrive/0e7gAdv1ADex7RfJl9Vj8r96A#Feb_2026_Payslip" },
+      { "title": "SBI statement Feb 2026", "url": "https://www.icloud.com/iclouddrive/04eOALNuxh2fo2WbCeJTmQhqA#SBI_bank_account_statement" },
+      { "title": "PPF Statement", "url": "https://www.icloud.com/iclouddrive/0614phU6LTDzSCQ6aXoGL4Mrw#PPF_statement" },
+      { "title": "Kotak Mahindra Statement February 2026", "url": "https://www.icloud.com/iclouddrive/0f8CSCne9vUGMcSQr9rsT2Glw#Kotak_Mahindra_Statement" },
+      { "title": "Rent receipt February 2026", "url": "https://www.icloud.com/iclouddrive/0f54u-gQZe7xPP-nIWunIdXxg#House_rent_march_2026" },
+      { "title": "Mutual Funds receipt", "url": "https://www.icloud.com/iclouddrive/08dAsXNzY5FxjMCxhkDMdlNMw#MutualFund_pass_Somik1912$", "password": "Somik1912$" }
+    ]},
+    { "id": "2026-02", "name": "February 2026", "meta": "Statements generated 26 Jan 2026", "links": [
+      { "title": "Kotak Mahindra Bank account statement January 2026", "url": "https://www.icloud.com/iclouddrive/04bCAR8qxqCOgozXEQG12AtSg#Payslip_Jan_2026" },
+      { "title": "Payslip January 2026", "url": "https://www.icloud.com/iclouddrive/04bCAR8qxqCOgozXEQG12AtSg#Payslip_Jan_2026" },
+      { "title": "Annual payslip", "url": "https://www.icloud.com/iclouddrive/06073TydtL9fuP65ZNLQm1m5Q#IT_Computation_Sheet_Jan_2026" },
+      { "title": "Income tax computation statement", "url": "https://www.icloud.com/iclouddrive/06bJnSVR04CmnYcqtdU5pI-gw#Annual_Salary_Jan_2026" },
+      { "title": "January 2026 mutual fund statement", "url": "https://www.icloud.com/iclouddrive/0b8PiQpw_IGJUSTu4uDQg5iiw#mf_jan2026" },
+      { "title": "SBI Statement Jan 2026", "url": "https://www.icloud.com/iclouddrive/042YEqklfx9GYdhmnDaP_LCEQ#sbi_jan_2026" }
+    ]},
+    { "id": "2026-01", "name": "January 2026", "meta": "Statements generated 26 Dec 2025", "links": [
+      { "title": "Dec 2025 Payslip", "url": "https://www.icloud.com/iclouddrive/0e7pjBI2JFUzBs6XEFkTUiqXg#dec_2026_payslip" },
+      { "title": "Dec 2025 IT computation sheet", "url": "https://www.icloud.com/iclouddrive/0700VYTZBqAhgTR50ETs_r0Nw#2026_financial_documents" },
+      { "title": "Dec 2025 annual payslip", "url": "https://www.icloud.com/iclouddrive/034El3bqYd6lGm6BniJ56vbvQ#dec_2025_annual_payslip" },
+      { "title": "Kotak Mahindra Bank account statement", "url": "https://www.icloud.com/iclouddrive/0b3savTSNMVDNG9OdKRTX13qA#kotak_mahindra_dec_2025_statemet" },
+      { "title": "SBI Statement", "url": "https://www.icloud.com/iclouddrive/0eaxFPO2vjHhJMwbysnjobd0Q#sbi_dec2025_statement%28Password_SOMIK19121991%29", "password": "SOMIK19121991" },
+      { "title": "Mutual Fund Statement", "url": "https://www.icloud.com/iclouddrive/00fNuUG6lzfjfElZYw883dVdg#MF_Dec_2025%28Password_Mumbai@2025%29", "password": "Mumbai@2025" },
+      { "title": "January 2026 rent agreement", "url": "https://www.icloud.com/iclouddrive/05bQG8cSgq9KHZO9EH1Enw43w#january_2026" }
+    ]}
+  ]
+}
+  </script>
+  <!-- FIN-DATA:END -->
+
+  <script>
+  (function(){
+    "use strict";
+    var root = document.documentElement;
+
+    try{ var s=localStorage.getItem("fin-theme"); if(s==="dark"||s==="light") root.setAttribute("data-theme",s);}catch(e){}
+    document.getElementById("themeBtn").addEventListener("click",function(){
+      var dark=root.getAttribute("data-theme")==="dark"||(!root.hasAttribute("data-theme")&&matchMedia("(prefers-color-scheme:dark)").matches);
+      var n=dark?"light":"dark"; root.setAttribute("data-theme",n);
+      try{localStorage.setItem("fin-theme",n);}catch(e){}
+    });
+
+    var DATA;
+    try{ DATA=JSON.parse(document.getElementById("fin-data").textContent); }
+    catch(e){ document.getElementById("list").innerHTML='<div class="noresult">Could not read the data block.</div>'; return; }
+
+    if(DATA.owner){
+      if(DATA.owner.name){ document.getElementById("ownerName").textContent=DATA.owner.name; document.title=DATA.owner.name+" · Financial Documents"; }
+      if(DATA.owner.initials) document.getElementById("mono").textContent=DATA.owner.initials;
+      if(DATA.owner.tagline) document.getElementById("ownerTag").textContent=DATA.owner.tagline;
+    }
+
+    var months=(DATA.months||[]).slice().sort(function(a,b){return (a.id<b.id?1:a.id>b.id?-1:0);});
+    var sections=(DATA.sections||[]).slice();
+
+    // profile
+    var prof=DATA.profile||{};
+    if(prof.intro){ var ie=document.getElementById("intro"); ie.textContent=prof.intro; ie.hidden=false; }
+    var PICONS={
+      linkedin:'<path d="M4 4h4v16H4zM6 2.5a2 2 0 1 0 0 4 2 2 0 0 0 0-4z" fill="currentColor" stroke="none"/><path d="M10 9h3.8v2h.05c.53-1 1.8-2.05 3.7-2.05 3.96 0 4.45 2.6 4.45 5.98V20h-4v-4.3c0-1.02-.02-2.34-1.43-2.34-1.43 0-1.65 1.12-1.65 2.27V20h-4z" fill="currentColor" stroke="none"/>',
+      mail:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M4 7l8 6 8-6"/>',
+      cloud:'<path d="M7 18a4 4 0 0 1 .5-8 5 5 0 0 1 9.5 1.5A3.5 3.5 0 0 1 17 18z"/>'
+    };
+    function piconFor(l){
+      var u=(l.url||"").toLowerCase(), lab=(l.label||"").toLowerCase();
+      if(/linkedin/.test(u)||/linkedin/.test(lab)) return PICONS.linkedin;
+      if(u.indexOf("mailto:")===0||/email|mail/.test(lab)) return PICONS.mail;
+      return PICONS.cloud;
+    }
+    var plinks=document.getElementById("plinks");
+    (prof.links||[]).forEach(function(l){
+      var a=document.createElement("a"); a.className="plink"; a.href=l.url;
+      if(a.href.indexOf("mailto:")!==0){ a.target="_blank"; a.rel="noopener noreferrer"; }
+      a.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+piconFor(l)+'</svg>';
+      var sp=document.createElement("span"); sp.textContent=l.label||"Link"; a.appendChild(sp);
+      plinks.appendChild(a);
+    });
+
+    var BRANDS={
+      sbi:{name:"SBI",domain:"sbi.co.in",color:"#22409a"},
+      kotak:{name:"Kotak",domain:"kotak.com",color:"#ed1c24"},
+      hdfc:{name:"HDFC",domain:"hdfcbank.com",color:"#004c8f"},
+      icici:{name:"ICICI",domain:"icicibank.com",color:"#ae282e"},
+      lic:{name:"LIC",domain:"licindia.in",color:"#00539f"},
+      absl:{name:"ABSL",domain:"adityabirlacapital.com",color:"#e21a23"},
+      canara:{name:"Canara",domain:"canararobeco.com",color:"#0067b1"},
+      ppfas:{name:"PPFAS",domain:"amc.ppfas.com",color:"#f47a20"},
+      epfo:{name:"EPFO",domain:"epfindia.gov.in",color:"#1f6f43"}
+    };
+    var TYPES={
+      bank:{label:"Banking",c:"var(--c-bank)",svg:'<path d="M3 21h18M4 21V10M20 21V10M12 3l9 5H3l9-5zM8 21v-7M12 21v-7M16 21v-7"/>'},
+      pay:{label:"Salary",c:"var(--c-pay)",svg:'<path d="M7 3h7l5 5v13H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M14 3v5h5"/><path d="M12 11c-1.3 0-2 .6-2 1.4 0 2 4 1.1 4 3.1 0 .9-.8 1.5-2 1.5s-2-.6-2-1.3M12 10v1M12 17.5v1"/>'},
+      fund:{label:"Investments",c:"var(--c-fund)",svg:'<path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/><path d="M18 7h3v3"/>'},
+      tax:{label:"Tax",c:"var(--c-tax)",svg:'<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 7h6M8.5 11.5l7 7M15.5 11.5l-7 7"/>'},
+      rent:{label:"Housing",c:"var(--c-rent)",svg:'<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/>'},
+      util:{label:"Utilities",c:"var(--c-util)",svg:'<path d="M5 13a10 10 0 0 1 14 0M8.5 16.5a5 5 0 0 1 7 0M2 9.5a15 15 0 0 1 20 0"/><circle cx="12" cy="20" r="1"/>'},
+      prov:{label:"Provident fund",c:"var(--c-prov)",svg:'<path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/>'},
+      ins:{label:"Insurance",c:"var(--c-ins)",svg:'<path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"/>'},
+      archive:{label:"Archive",c:"var(--c-arch)",svg:'<path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M3 11h18"/>'},
+      doc:{label:"Document",c:"var(--c-doc)",svg:'<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5z"/><path d="M14 3v5h5M9 13h6M9 17h6"/>'}
+    };
+    var ORDER={pay:0,tax:1,bank:2,fund:3,rent:4,util:5,prov:6,ins:7,archive:8,doc:9};
+
+    function classify(link){
+      var t=(link.title||"").toLowerCase();
+      var out={type:link.type||null, brand:link.brand||null};
+      if(!out.brand){
+        if(/\bsbi\b|state bank/.test(t)) out.brand="sbi";
+        else if(/kotak/.test(t)) out.brand="kotak";
+        else if(/hdfc/.test(t)) out.brand="hdfc";
+        else if(/icici/.test(t)) out.brand="icici";
+        else if(/\blic\b/.test(t)) out.brand="lic";
+        else if(/aditya birla|absl/.test(t)) out.brand="absl";
+        else if(/canara/.test(t)) out.brand="canara";
+        else if(/parag parikh|ppfas/.test(t)) out.brand="ppfas";
+        else if(/epfo/.test(t)) out.brand="epfo";
+      }
+      if(!out.type){
+        if(/ppf|epf|epfo|uan|provident/.test(t)) out.type="prov";
+        else if(/\blic\b|policy|insurance/.test(t)) out.type="ins";
+        else if(/internet|broadband|wifi|mobile bill/.test(t)) out.type="util";
+        else if(/mutual|\bmf\b|cams|folio/.test(t)) out.type="fund";
+        else if(/tax|computation|earnings|ctc|form 16|ytd/.test(t)) out.type="tax";
+        else if(/rent/.test(t)) out.type="rent";
+        else if(/payslip|salary/.test(t)) out.type="pay";
+        else if(/sbi|kotak|hdfc|icici|bank|account statement|passbook|statement/.test(t)) out.type="bank";
+        else out.type="doc";
+      }
+      if(out.brand){
+        if(out.brand==="absl"||out.brand==="canara"||out.brand==="ppfas") out.type="fund";
+        else if(out.brand==="epfo") out.type="prov";
+        else if(out.brand==="lic") out.type="ins";
+      }
+      return out;
+    }
+
+    function svgIcon(d){return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'+d+'</svg>';}
+    function makeTile(info){
+      var tile=document.createElement("span"); tile.className="tile";
+      var ty=TYPES[info.type]||TYPES.doc; var brand=info.brand?BRANDS[info.brand]:null;
+      tile.style.setProperty("--c", brand?brand.color:ty.c);
+      if(brand){
+        var img=document.createElement("img");
+        img.src="https://www.google.com/s2/favicons?domain="+brand.domain+"&sz=128";
+        img.alt=brand.name; img.loading="lazy"; img.width=38; img.height=38;
+        img.onerror=function(){ var sp=document.createElement("span"); sp.className="initials"; sp.textContent=brand.name.slice(0,4); tile.innerHTML=""; tile.appendChild(sp); };
+        tile.appendChild(img);
+      } else { tile.innerHTML=svgIcon(ty.svg); }
+      return tile;
+    }
+    function subLabel(info){ var ty=TYPES[info.type]||TYPES.doc; var brand=info.brand?BRANDS[info.brand]:null; return brand?(brand.name+" · "+ty.label):ty.label; }
+
+    var EXT=svgIcon('<path d="M7 17L17 7M9 7h8v8"/>');
+    var LOCK='<svg class="lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>';
+    var KEY='<svg class="key" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M10.8 12.2L21 2M16 7l3 3M14 9l2 2"/></svg>';
+    var COPYSVG='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>';
+    var PIN='<svg class="pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17v5M7 4h10l-1 7 3 3H5l3-3z"/></svg>';
+
+    function copyBtn(value){
+      var btn=document.createElement("button"); btn.className="copy"; btn.type="button"; btn.innerHTML=COPYSVG+'<span>Copy</span>';
+      btn.addEventListener("click",function(ev){
+        ev.preventDefault(); ev.stopPropagation();
+        var done=function(){ btn.classList.add("done"); btn.querySelector("span").textContent="Copied"; setTimeout(function(){btn.classList.remove("done"); btn.querySelector("span").textContent="Copy";},1400); };
+        function fallback(){ var ta=document.createElement("textarea"); ta.value=value; document.body.appendChild(ta); ta.select(); try{document.execCommand("copy");}catch(e){} document.body.removeChild(ta); done(); }
+        try{ if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(value).then(done,fallback);} else {fallback();} }catch(e){ fallback(); }
+      });
+      return btn;
+    }
+
+    function makeCard(link){
+      var info=classify(link);
+      var card=document.createElement("div"); card.className="card";
+      var a=document.createElement("a"); a.className="open"; a.href=link.url; a.target="_blank"; a.rel="noopener noreferrer";
+      a.appendChild(makeTile(info));
+      var txt=document.createElement("span"); txt.className="card-text";
+      var ti=document.createElement("span"); ti.className="card-title"; ti.textContent=link.title||"Document";
+      var sub=document.createElement("span"); sub.className="card-sub"; sub.textContent=subLabel(info);
+      txt.appendChild(ti); txt.appendChild(sub); a.appendChild(txt);
+      var ext=document.createElement("span"); ext.className="ext"; ext.innerHTML=EXT; a.appendChild(ext);
+      card.appendChild(a);
+      if(link.password){
+        var pw=document.createElement("div"); pw.className="pw";
+        pw.innerHTML=LOCK+'<span class="label">Password</span><code></code>';
+        pw.querySelector("code").textContent=link.password;
+        pw.appendChild(copyBtn(link.password)); card.appendChild(pw);
+      }
+      return card;
+    }
+
+    function buildGroup(g, opts){
+      opts=opts||{};
+      var d=document.createElement("details"); d.className="month"+(opts.section?" sec":""); d.open=!!opts.open;
+      var sum=document.createElement("summary"); sum.className="month-head";
+      var tt=document.createElement("span"); tt.className="month-title";
+      var nm=document.createElement("span"); nm.className="month-name";
+      if(opts.section){ nm.innerHTML=PIN; }
+      nm.appendChild(document.createTextNode(g.name||g.id)); tt.appendChild(nm);
+      if(g.meta){ var me=document.createElement("span"); me.className="month-meta"; me.textContent=g.meta; tt.appendChild(me); }
+      sum.appendChild(tt);
+      var cnt=document.createElement("span"); cnt.className="month-count";
+      cnt.textContent=(opts.links.length)+" link"+(opts.links.length===1?"":"s"); sum.appendChild(cnt);
+      var ch=document.createElement("span"); ch.className="chev"; ch.innerHTML=svgIcon('<path d="M6 9l6 6 6-6"/>'); sum.appendChild(ch);
+      d.appendChild(sum);
+      var lk=document.createElement("div"); lk.className="links";
+      if(opts.section && g.credential && g.credential.password){
+        var cr=document.createElement("div"); cr.className="cred";
+        cr.innerHTML=KEY+'<span class="label">'+(g.credential.label?g.credential.label+' · ':'')+'Password</span><code></code>';
+        cr.querySelector("code").textContent=g.credential.password;
+        cr.appendChild(copyBtn(g.credential.password)); lk.appendChild(cr);
+      }
+      if(opts.links.length===0){ var em=document.createElement("div"); em.className="empty"; em.textContent="No links yet."; lk.appendChild(em); }
+      else opts.links.forEach(function(l){ lk.appendChild(makeCard(l)); });
+      d.appendChild(lk); return d;
+    }
+
+    var listEl=document.getElementById("list");
+    var chipsEl=document.getElementById("chips");
+    var searchEl=document.getElementById("search");
+    var state={year:"all", q:""};
+
+    var years=[]; months.forEach(function(m){var y=(m.id||"").slice(0,4); if(y&&years.indexOf(y)<0)years.push(y);});
+    function mkChip(label,val){
+      var b=document.createElement("button"); b.className="chip"; b.type="button"; b.textContent=label;
+      b.dataset.val=val; b.setAttribute("aria-pressed", state.year===val?"true":"false");
+      b.addEventListener("click",function(){ state.year=val; render(); });
+      return b;
+    }
+    function buildChips(){
+      chipsEl.innerHTML="";
+      chipsEl.appendChild(mkChip("All","all"));
+      years.forEach(function(y){ chipsEl.appendChild(mkChip(y,y)); });
+      if(sections.length) chipsEl.appendChild(mkChip("Reference","ref"));
+      var toggle=document.createElement("button"); toggle.className="chip ghost"; toggle.type="button"; toggle.textContent="Expand all";
+      toggle.addEventListener("click",function(){
+        var ds=listEl.querySelectorAll("details"); var anyClosed=false;
+        ds.forEach(function(d){ if(!d.open) anyClosed=true; });
+        ds.forEach(function(d){ d.open=anyClosed; });
+        toggle.textContent=anyClosed?"Collapse all":"Expand all";
+      });
+      chipsEl.appendChild(toggle);
+    }
+
+    function matches(link,q){
+      if(!q) return true;
+      var info=classify(link);
+      return ((link.title||"")+" "+(link.password||"")+" "+subLabel(info)).toLowerCase().indexOf(q)>=0;
+    }
+
+    function render(){
+      Array.prototype.forEach.call(chipsEl.querySelectorAll(".chip:not(.ghost)"),function(c){
+        c.setAttribute("aria-pressed", c.dataset.val===state.year?"true":"false");
+      });
+      listEl.innerHTML="";
+      var q=state.q.trim().toLowerCase();
+      var searching=q.length>0, yr=state.year;
+      var wantSections = searching || yr==="all" || yr==="ref";
+      var wantMonths   = searching || yr!=="ref";
+      var shown=0, total=0;
+
+      if(wantSections){
+        sections.forEach(function(sec){
+          var links=(sec.links||[]).filter(function(l){return matches(l,q);});
+          if(searching && links.length===0) return;
+          total+=links.length; shown++;
+          listEl.appendChild(buildGroup(sec,{links:links, section:true, open: searching||yr==="ref"}));
+        });
+      }
+      if(wantMonths){
+        var firstOpen=false;
+        months.forEach(function(m){
+          if(!searching && yr!=="all" && yr!=="ref" && (m.id||"").slice(0,4)!==yr) return;
+          var links=(m.links||[]).filter(function(l){return matches(l,q);});
+          if(searching && links.length===0) return;
+          links=links.slice().map(function(l,i){return {l:l,i:i,o:(ORDER[classify(l).type]||9)};})
+            .sort(function(a,b){return a.o-b.o || a.i-b.i;}).map(function(x){return x.l;});
+          total+=links.length; shown++;
+          var openIt = searching || (yr!=="all" && yr!=="ref") || !firstOpen;
+          if(!firstOpen) firstOpen=true;
+          listEl.appendChild(buildGroup(m,{links:links, section:false, open:openIt}));
+        });
+      }
+      if(shown===0){ listEl.innerHTML='<div class="noresult">No documents match “'+state.q+'”.</div>'; }
+      document.getElementById("stamp").textContent="Last updated November 2026 · "+total+" documents";
+    }
+
+    var tmr;
+    searchEl.addEventListener("input",function(){ clearTimeout(tmr); tmr=setTimeout(function(){ state.q=searchEl.value; render(); },120); });
+
+    buildChips(); render();
+  })();
+  </script>
+</body>
+</html>
