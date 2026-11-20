@@ -441,7 +441,11 @@
         var img=document.createElement("img");
         img.src="https://www.google.com/s2/favicons?domain="+brand.domain+"&sz=128";
         img.alt=brand.name; img.loading="lazy"; img.width=38; img.height=38;
-        img.onerror=function(){ var sp=document.createElement("span"); sp.className="initials"; sp.textContent=brand.name.slice(0,4); tile.innerHTML=""; tile.appendChild(sp); };
+        var toInitials=function(){ var sp=document.createElement("span"); sp.className="initials"; sp.textContent=brand.name.slice(0,4); tile.innerHTML=""; tile.appendChild(sp); };
+        img.onerror=toInitials;
+        // The favicon service answers a missing icon with a tiny generic globe (~16px).
+        // Treat anything under 24px as "no real logo" and show clean branded initials instead.
+        img.onload=function(){ if(!img.naturalWidth || img.naturalWidth<24) toInitials(); };
         tile.appendChild(img);
       } else { tile.innerHTML=svgIcon(ty.svg); }
       return tile;
