@@ -235,6 +235,7 @@
       { "title": "October 2026 SBI savings account statement", "url": "https://www.icloud.com/iclouddrive/013mtZA3xORVqzov3I25yBI3g", "password": "35953191291" },
       { "title": "November 2026 House rent receipt", "url": "https://www.icloud.com/iclouddrive/0edpmSFNK3sicw60Aj6aUUr1A" },
       { "title": "Internet receipt (Nov 2026 – May 2026)", "url": "https://www.icloud.com/iclouddrive/03dNjV9NlOv_gH3OhlEUOSH3A" },
+      { "title": "November 2026 Airtel bill", "url": "https://www.icloud.com/iclouddrive/042HZS1ANnspdOIDQe2fp-kdw" },
       { "title": "LIC premium receipt (received 7 Nov 2026)", "url": "https://www.icloud.com/iclouddrive/07fBI2bu5hQCxAC0gGbe9Qiig", "password": "19121991" }
     ]},
     { "id": "2026-10", "name": "October 2026", "meta": "Statements generated 26 Sep 2026", "links": [
@@ -379,7 +380,8 @@
       absl:{name:"ABSL",domain:"adityabirlacapital.com",color:"#e21a23"},
       canara:{name:"Canara",domain:"canararobeco.com",color:"#0067b1"},
       ppfas:{name:"PPFAS",domain:"amc.ppfas.com",color:"#f47a20"},
-      epfo:{name:"EPFO",domain:"epfindia.gov.in",color:"#1f6f43"}
+      epfo:{name:"EPFO",domain:"epfindia.gov.in",color:"#1f6f43"},
+      airtel:{name:"Airtel",domain:"airtel.in",color:"#e40000"}
     };
     var TYPES={
       bank:{label:"Banking",c:"var(--c-bank)",svg:'<path d="M3 21h18M4 21V10M20 21V10M12 3l9 5H3l9-5zM8 21v-7M12 21v-7M16 21v-7"/>'},
@@ -408,11 +410,12 @@
         else if(/canara/.test(t)) out.brand="canara";
         else if(/parag parikh|ppfas/.test(t)) out.brand="ppfas";
         else if(/epfo/.test(t)) out.brand="epfo";
+        else if(/airtel/.test(t)) out.brand="airtel";
       }
       if(!out.type){
         if(/ppf|epf|epfo|uan|provident/.test(t)) out.type="prov";
         else if(/\blic\b|policy|insurance/.test(t)) out.type="ins";
-        else if(/internet|broadband|wifi|mobile bill/.test(t)) out.type="util";
+        else if(/internet|broadband|wifi|mobile bill|airtel|jio|vodafone|\bvi\b|electricity|gas bill/.test(t)) out.type="util";
         else if(/mutual|\bmf\b|cams|folio/.test(t)) out.type="fund";
         else if(/tax|computation|earnings|ctc|form 16|ytd/.test(t)) out.type="tax";
         else if(/rent/.test(t)) out.type="rent";
@@ -424,6 +427,7 @@
         if(out.brand==="absl"||out.brand==="canara"||out.brand==="ppfas") out.type="fund";
         else if(out.brand==="epfo") out.type="prov";
         else if(out.brand==="lic") out.type="ins";
+        else if(out.brand==="airtel") out.type="util";
       }
       return out;
     }
