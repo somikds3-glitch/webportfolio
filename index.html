@@ -1221,6 +1221,19 @@
   transform: scale(1.37); /* 185% of original size */
 }
 
+/* AI impact infographic: tall preview in card, full image in lightbox */
+#projects .gdrc-column img.tall-shot{
+  width: 100%;
+  max-height: 420px;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 8px;
+}
+#projects .gdrc-column img.tall-shot:hover{ transform: scale(1.03); }
+.image-lightbox{ overflow: auto; }
+.image-lightbox.tall{ align-items: flex-start; padding: 24px 0; }
+.image-lightbox.tall img{ max-width: min(92vw, 1200px); max-height: none; transform: none !important; }
+
   </style>
 </head>
 <body>
@@ -2427,6 +2440,34 @@
 
   <div id="projects-list">
 
+    <!-- Project 0: MSCI – AI Impact -->
+    <div class="project-card">
+      <div class="role-header">
+        <img src="MSCI.png" alt="MSCI logo" class="role-logo">
+        <div>
+          <h3 class="role-title">MSCI – AI First Data Collection: Impact Summary</h3>
+          <p class="role-meta">Platform: Claude, Cursor, MCP connectors</p>
+        </div>
+      </div>
+
+      <div class="gdrc-columns">
+        <!-- Left: Project Description -->
+        <div class="gdrc-column">
+          <p><strong>Overview:</strong> Six months of agentic pipelines, AI-designed workflows and MCP-connected tooling on MSCI's AI First Data Collection Modernization programme.</p>
+          <ul>
+            <li>Built an agentic E&amp;S extraction skill covering 13 ESG datapoints, working in three modes: Extract → Verify → Patch.</li>
+            <li>Designed an issuer-feedback validation agent and led the shared Agent Factory input schema across 6 datasets.</li>
+            <li>Wired 6 AI connectors (Atlassian, M365, DAP, databases, Sustainability &amp; Climate) into daily data operations.</li>
+          </ul>
+        </div>
+
+        <!-- Right: Infographic (click to view full size) -->
+        <div class="gdrc-column">
+          <img src="https://somikds3-glitch.github.io/webportfolio/AI-Impact.png" alt="AI impact infographic" class="tall-shot">
+        </div>
+      </div>
+    </div>
+
     <!-- Project 1: Evalueserve -->
     <div class="project-card">
       <div class="role-header">
@@ -3562,6 +3603,7 @@ document.addEventListener("DOMContentLoaded", () => {
   imgs.forEach(img => {
     img.addEventListener("click", () => {
       lightboxImg.src = img.src;
+      lightbox.classList.toggle("tall", img.classList.contains("tall-shot"));
       lightbox.classList.add("active");
     });
   });
@@ -3584,4 +3626,3 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   </body>
-  </html>
