@@ -1,595 +1,3628 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Somik Das · Financial Documents</title>
-<meta name="description" content="A monthly repository of financial documents. Click any item to open it.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-  :root{
-    color-scheme: light; box-sizing: border-box;
-    padding-top: env(safe-area-inset-top,0px); padding-bottom: env(safe-area-inset-bottom,0px);
-    --bg:#eef0f4; --surface:#fff; --surface-2:#f7f8fb; --surface-hover:#f2f4f8;
-    --border:#e2e5ec; --border-strong:#d4d8e2;
-    --text:#141821; --muted:#697086; --faint:#9aa1b2;
-    --accent:#2850c8; --accent-soft:#e8edfb;
-    --shadow:0 1px 2px rgba(20,24,33,.05),0 8px 24px rgba(20,24,33,.06);
-    --radius:16px;
-    --c-bank:#2850c8; --c-pay:#157f4a; --c-fund:#7c3aed; --c-tax:#b45309;
-    --c-rent:#0d9488; --c-util:#0e7490; --c-prov:#4f46e5; --c-ins:#be123c;
-    --c-arch:#556070; --c-doc:#475569;
+  <meta charset="UTF-8" />
+  <title>Portfolio – Somik Das</title>
+  
+  <!-- Social preview -->
+  <meta property="og:title" content="Portfolio – Somik Das">
+  <meta property="og:description" content="Somik Das — Data Ops, BI & Analytics. View projects, certifications and resume.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://somikds3-glitch.github.io/webportfolio/">
+  <meta property="og:image" content="https://somikds3-glitch.github.io/webportfolio/MSCI.png">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Portfolio – Somik Das">
+  <meta name="twitter:description" content="Somik Das — Data Ops, BI & Analytics.">
+  <meta name="twitter:image" content="https://somikds3-glitch.github.io/webportfolio/MSCI.png">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <style>
+    :root{
+      color-scheme: light;
+      --tool-bar-w: clamp(180px, 28vw, 260px);
+      --tool-pct-w: 48px;
+      --bottom-extra: 156px;
+    }
+
+
+
+
+    /* Apple-like system font stack */
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+                   Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", sans-serif;
+      color: #222;
+      background: #fff;
+      height: 100%;
+      overflow: hidden;   /* 🚫 disable global page scroll */
+    }
+
+
+
+    /* ----------------------
+       NAVIGATION
+    ---------------------- */
+    nav {
+      position: sticky;
+      top: 0;
+      background: #fff;
+      border-bottom: 1px solid #ddd;
+      padding: 15px;
+      text-align: center;
+      z-index: 1000;
+    }
+    nav a {
+      margin: 0 20px;
+      text-decoration: none;
+      color: #222;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+      padding: 6px 12px;
+      position: relative;
+      transition: color 0.3s;
+    }
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0%;
+      height: 2px;
+      background: #000;
+      transition: width 0.3s ease-in-out;
+    }
+    nav a:hover { color: #000; }
+    nav a:hover::after { width: 100%; }
+
+    /* ----------------------
+       HERO SECTION (Home)
+    ---------------------- */
+    .hero-section {
+      text-align: center;
+      padding: 140px 20px 100px;
+      background-image:
+        linear-gradient(to right, rgba(0,0,0,0.45), rgba(0,0,0,0.9)),
+        url('IMG_5903.png');
+      background-position: center center, center center;
+      background-repeat: no-repeat, no-repeat;
+      background-size: cover, cover;
+      background-attachment: fixed, fixed;
+      color: #fff;
+      position: relative;
+    }
+    @media (max-width: 768px) {
+      .hero-section {
+        background-attachment: scroll, scroll;
+      }
+    }
+    /* Keep hero backgrounds scroll-based to avoid container glitches */
+    #home.hero-section { background-attachment: scroll, scroll; }
+
+
+
+    /* Hero content: one-time cloud reveal */
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 940px;
+      margin: auto;
+      text-shadow: 0 2px 6px rgba(0,0,0,0.35);
+      opacity: 1; transform: none; filter: none;
+    }
+    .hero-content.visible { animation: cloudFade 1s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+    header h1 { font-size: 52px; margin-bottom: 15px; letter-spacing: -0.2px; font-weight: 700; }
+    header p { font-size: 20px; line-height: 1.6; max-width: 900px; margin: 0 auto 30px; font-weight: 500; }
+    .hero-buttons { margin-top: 25px; }
+    .hero-buttons a {
+      display: inline-block; padding: 12px 28px; margin: 8px; border-radius: 28px; font-weight: 700;
+      text-decoration: none; letter-spacing: 0.2px;
+      transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+    }
+    .btn-primary { background: #222; color: #fff; border: 2px solid #222; }
+    .btn-primary:hover { background: #000; border-color: #000; transform: translateY(-2px); }
+    .btn-secondary { background: transparent; color: #fff; border: 2px solid #fff; }
+    .btn-secondary:hover { background: #000; border: 2px solid #000; color: #fff; transform: translateY(-2px); }
+
+    /* ----------------------
+       BAND (Lucida Sans as requested)
+    ---------------------- */
+    .band {
+      position: relative; padding: 120px 20px; text-align: center;
+      font-family: "Lucida Sans", "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+      font-size: 20px; line-height: 1.8; color: #fff; background: linear-gradient(180deg, #222, #111);
+    }
+    .band p { position: relative; z-index: 1; max-width: 1000px; margin: auto; font-style: italic; }
+
+    /* Glass-morphism Band Box inside Home */
+    .glass-box {
+      margin: 60px auto 0;             /* space below hero */
+      max-width: 900px;
+      padding: 30px 40px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.12); /* frosted glass look */
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      color: #fff;
+      font-size: 18px;
+      line-height: 1.8;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+    
+      /* animation setup */
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeUp 1s ease forwards;
+      animation-delay: 0.5s;
+    }
+    
+    /* Fade-in up animation */
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+
+    /* ----------------------
+       SECTIONS
+    ---------------------- */
+    :root{ --nav-h: 64px; } /* JS will keep this accurate */
+    
+    section{
+      /* fill the viewport below the nav, but NOT fixed */
+      position: relative;
+      height: calc(100dvh - var(--nav-h));
+      min-height: calc(100dvh - var(--nav-h));
+    
+      overflow-y: auto;
+    
+      /* normal padding + safe bottom so content & scrollbar stay clear of bottom UI */
+      padding: 60px 20px;
+      padding-bottom: calc(60px + env(safe-area-inset-bottom) + var(--bottom-extra));
+
+    
+      text-align: center;
+      display: none; /* your JS toggles this */
+      scrollbar-gutter: stable both-edges;
+    }
+    section::after{
+      content:"";
+      display:block;
+      height: calc(env(safe-area-inset-bottom) + var(--bottom-extra));
+    }
+
+    /* === CAREER background (dimmed image) === */
+    :root { --career-dim: -0.188; } /* increase to 0.7/0.8 for darker */
+    
+    #career {
+      position: relative;
+      isolation: isolate; /* keeps overlay contained to this section */
+    }
+    
+    #career::before {
+      content: "";
+      position: fixed;
+      top: var(--nav-h);  /* below sticky nav */
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background:
+        linear-gradient(rgba(0,0,0,var(--career-dim)), rgba(0,0,0,var(--career-dim))),
+        url('careerback.gif');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      z-index: 0;
+      pointer-events: none; /* clicks pass through */
+    }
+    
+    #career > * {
+      position: relative;
+      z-index: 1; /* ensures your content (headings, logos, timeline) is above background */
+    }
+
+
+
+
+    /* ----------------------
+       CAREER TIMELINE
+    ---------------------- */
+    .timeline-wrap { margin-top: 28px; }
+    .timeline {
+      position: relative;
+      display: flex; align-items: center; gap: 16px;
+      overflow-x: auto; scrollbar-width: thin; padding: 18px 12px 30px;
+      border-radius: 12px; background: #f7f7f7; box-shadow: inset 0 0 0 1px #eee;
+    }
+    .timeline::-webkit-scrollbar { height: 8px; }
+    .timeline::-webkit-scrollbar-thumb { background: #d0d0d0; border-radius: 8px; }
+    .timeline-track {
+      position: absolute; left: 12px; right: 12px; top: 42px; height: 3px; background: #ddd; border-radius: 2px;
+    }
+    .year {
+      position: relative; flex: 0 0 auto;
+      background: #fff; border: 1px solid #ddd; color: #333;
+      border-radius: 10px; padding: 8px 14px; font-weight: 700; letter-spacing: 0.2px;
+      cursor: pointer; transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+    .year:hover { transform: translateY(-2px); box-shadow: 0 6px 18px rgba(0,0,0,.08); border-color: #bbb; }
+    .year.disabled, .year[disabled] { opacity: 0.45; cursor: not-allowed; background: #fafafa; border-style: dashed; }
+    .year::after {
+      content: ""; position: absolute; left: 50%; transform: translateX(-50%);
+      top: 36px; width: 10px; height: 10px; background: #aaa; border-radius: 50%;
+      box-shadow: 0 0 0 2px #f7f7f7;
+    }
+    .year.active { border-color: #111; color: #111; }
+    .year.active::after { background: #111; }
+
+    .cursor {
+      position: absolute; top: 40px; height: 7px; background: #111; border-radius: 4px;
+      transition: left .35s cubic-bezier(.22,1,.36,1), width .35s cubic-bezier(.22,1,.36,1);
+      pointer-events: none;
+    }
+
+    /* ----------------------
+       MODAL
+    ---------------------- */
+    .modal {
+      position: fixed; inset: 0; display: none; align-items: center; justify-content: center;
+      background: rgba(0,0,0,0.5); z-index: 2000; padding: 20px;
+    }
+    .modal.show { display: flex; }
+    .modal-card {
+      width: min(680px, 92vw); background: #fff; border-radius: 16px; padding: 22px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.25); position: relative;
+      display: grid; grid-template-columns: 120px 1fr; gap: 18px;
+    }
+    .modal-close {
+      position: absolute; top: 10px; right: 12px; border: none; background: transparent;
+      font-size: 22px; cursor: pointer; color: #333;
+    }
+    .modal-img {
+      width: 120px; height: 120px; border-radius: 12px; object-fit: contain; background: #fafafa; border: 1px solid #eee;
+    }
+    .modal-title { margin: 0 0 6px 0; font-size: 20px; font-weight: 800; }
+    .modal-sub { margin: 0 0 10px 0; color: #555; }
+    .modal-year { font-weight: 700; color: #000; }
+
+    /* Modal tabs */
+    .modal-tabs {
+      display: flex;
+      gap: 8px;
+      margin: -6px 0 10px;
+      flex-wrap: wrap;
+    }
+    .modal-tab {
+      border: 1px solid #ddd;
+      background: #f9f9f9;
+      padding: 6px 10px;
+      border-radius: 8px;
+      font-size: 13px;
+      cursor: pointer;
+      transition: background .2s ease, border-color .2s ease;
+    }
+    .modal-tab:hover { background: #f1f1f1; border-color: #ccc; }
+    .modal-tab[aria-selected="true"] {
+      background: #111; color: #fff; border-color: #111;
+    }
+
+    /* --- Brands scroller --- */
+    .brands-wrap { margin: 10px auto 28px; max-width: 1100px; text-align: left; }
+    .brands-title { font-size: 16px; font-weight: 700; margin: 0 0 10px; letter-spacing: .2px; }
+    .brands-scroller { position: relative; overflow: hidden; border-radius: 12px; background: #fafafa; box-shadow: inset 0 0 0 1px #eee; padding: 10px 0; }
+    .brands-track { display: flex; align-items: center; gap: 36px; width: max-content; animation: scrollBrands 28s linear infinite; padding-left: 12px; }
+    .brands-logo { height: 38px; width: auto; filter: grayscale(0); opacity: .95; transition: transform .2s ease, opacity .2s ease, filter .2s ease; }
+    .brands-logo:hover { transform: translateY(-2px); opacity: 1; filter: none; }
+
+    @keyframes scrollBrands { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @media (prefers-reduced-motion: reduce) { .brands-track { animation: none; } }
+
+    /* --- Role card (post-timeline) --- */
+    .role-card {
+      max-width: 1100px; margin: 28px auto 0; padding: 20px;
+      border: 1px solid #eee; border-left: 6px solid #0047AB;
+      border-radius: 12px; background: #f9fbff;
+      box-shadow: 0 8px 24px rgba(0,0,0,.06);
+    }
+    .role-header { display: flex; align-items: center; gap: 16px; margin-bottom: 6px; }
+    .role-logo { width: 56px; height: 56px; object-fit: contain; border-radius: 12px; background: #fafafa; border: 1px solid #eee; }
+    .role-title { margin: 0; font-size: 20px; font-weight: 800; }
+    .role-meta  { margin: 0; color: #555; text-align: left; }
+    .role-body ul { text-align: left; max-width: 1000px; margin: 12px auto 0; padding-left: 18px; }
+    .role-body li { margin: 6px 0; line-height: 1.5; }   /* ✅ closed properly */
+
+
+
+    /* --- Triple cards row (L&T / Aglow / Chemtex) --- */
+    .triple-cards{
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr)); /* always 3 columns on most screens */
+      gap: 18px;
+      max-width: 1100px;
+      margin: 28px auto;            /* centers the row horizontally */
+      
+      /* vertical middle of the section */
+      min-height: 50vh;              /* gives space to center within the section */
+      align-content: center;         /* centers the whole grid block vertically */
+      align-items: start;            /* keep card content starting at top inside each card */
+      align-items: stretch;
+    }
+    
+    /* compact role-cards in the row */
+    .triple-card{
+      margin: 0;
+      max-width: unset;
+    }
+    
+    /* left-align content inside */
+    .triple-card .role-body{ text-align: left; }
+    
+    /* optional vertical scroll for the left card's long text */
+    .triple-card .role-body.scrollable{
+      max-height: 240px;
+      overflow: auto;
+      padding-right: 6px;
+    }
+    
+    /* keep 3 columns down to ~600px; below that, stack */
+    @media (max-width: 600px){
+      .triple-cards{
+        grid-template-columns: 1fr;  /* stack on very small screens only */
+        min-height: unset;           /* no forced vertical centering when stacked */
+        align-content: start;
+      }
+    }
+    
+    /* ensure all role cards are left-aligned */
+    .role-card{ text-align: left; }
+
+
+     /* === Dark “frozen” card (KPMG) === */
+.frost-card{
+  max-width: 1100px;
+  margin: 28px auto 0;
+  padding: 22px 22px 18px;
+  border-radius: 14px;
+  background: rgba(15, 17, 26, 0.72);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.14);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.35), inset 0 0 0 1px rgba(255,255,255,0.06);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  text-align: left;
+}
+.frost-card .role-header{ margin-bottom: 8px; }
+.frost-card .role-logo{
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.18);
+}
+.frost-card .role-title{ color: #fff; }
+.frost-card .role-meta{ color: #cfd6ff; }
+.frost-card p, .frost-card li{ color: #f1f4ff; }
+.frost-card ul{ margin-top: 8px; padding-left: 18px; }
+
+.frost-actions{
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 14px;
+  flex-wrap: wrap;
+}
+@media (max-width: 520px){
+  .frost-actions{ flex-direction: column; }
+}
+.frost-btn{
+  display: inline-block;
+  padding: 10px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 700;
+  letter-spacing: .2px;
+  border: 1px solid rgba(255,255,255,0.35);
+  color: #fff;
+  background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02));
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+  transition: transform .2s ease, background .2s ease, border-color .2s ease;
+}
+.frost-btn:hover{
+  transform: translateY(-2px);
+  background: rgba(255,255,255,0.16);
+  border-color: rgba(255,255,255,0.55);
+}
+
+    /* Add spacing for certificate buttons */
+#cert-list .frost-btn {
+  margin-top: 10px;   /* gives breathing room under the date */
+  text-align: center; /* keeps button nicely aligned */
+}
+
+/* Hide only certification CARDS when they have .hidden */
+#cert-list .testimonial.hidden { 
+  display: none !important; 
+}
+
+
+
+    /* Black style specifically for the certifications "View more" button */
+#loadMoreCerts {
+  background: #000;
+  color: #fff;
+  border: 1px solid #000;
+}
+
+#loadMoreCerts:hover {
+  background: #222;   /* subtle hover darkening */
+  border-color: #222;
+}
+
+    /* Certifications: uniform logo box */
+#cert-list .testimonial-header{
+  display: flex;
+  align-items: center;
+  gap: 12px;            /* space between logo and text */
+}
+
+#cert-list .testimonial-img{
+  width: 64px;          /* uniform square */
+  height: 64px;
+  object-fit: contain;  /* keep logo proportions without cropping */
+  background: #fff;     /* clean backdrop for PNGs with transparency */
+  padding: 6px;         /* breathing room inside the box */
+  border-radius: 8px;
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  flex: 0 0 auto;       /* prevent stretch */
+}
+
+/* Tighten on small screens if needed */
+@media (max-width: 520px){
+  #cert-list .testimonial-img{
+    width: 56px;
+    height: 56px;
+    padding: 5px;
   }
-  @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]){
-    color-scheme:dark;
-    --bg:#0d0f14; --surface:#161a22; --surface-2:#12151c; --surface-hover:#1c212b;
-    --border:#262c38; --border-strong:#323a49;
-    --text:#e8eaf0; --muted:#9aa3b4; --faint:#6b7385;
-    --accent:#7b9bff; --accent-soft:#1b2440;
-    --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.4);
-  }}
-  :root[data-theme="dark"]{
-    color-scheme:dark;
-    --bg:#0d0f14; --surface:#161a22; --surface-2:#12151c; --surface-hover:#1c212b;
-    --border:#262c38; --border-strong:#323a49;
-    --text:#e8eaf0; --muted:#9aa3b4; --faint:#6b7385;
-    --accent:#7b9bff; --accent-soft:#1b2440;
-    --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.4);
-  }
-  *{box-sizing:inherit;}
-  html{scroll-padding-top:env(safe-area-inset-top,0px); -webkit-text-size-adjust:100%;}
-  body{margin:0; background:var(--bg); color:var(--text);
-    font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    -webkit-font-smoothing:antialiased; line-height:1.5;}
-  .wrap{max-width:620px; margin:0 auto; padding:22px 16px 72px;}
+}
 
-  .toolbar{display:flex; justify-content:flex-end; margin-bottom:4px;}
-  .icon-btn{appearance:none; border:1px solid var(--border); background:var(--surface);
-    color:var(--muted); width:38px; height:38px; border-radius:11px; display:grid; place-items:center;
-    cursor:pointer; transition:color .15s,border-color .15s;}
-  .icon-btn:hover{color:var(--text); border-color:var(--border-strong);}
-  .icon-btn:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
-  .icon-btn svg{width:18px; height:18px;}
-  .moon{display:none;}
-  :root[data-theme="dark"] .moon,:root:not([data-theme="light"]) .moon{display:block;}
-  :root[data-theme="dark"] .sun{display:none;}
-  @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]) .sun{display:none;} }
 
-  .hero{text-align:center; padding:2px 0 4px;}
-  .mono{width:64px; height:64px; margin:0 auto 12px; border-radius:20px; background:var(--accent);
-    color:#fff; display:grid; place-items:center; font-weight:800; font-size:24px; letter-spacing:.5px;
-    box-shadow:0 10px 24px -8px color-mix(in srgb,var(--accent) 60%,transparent);}
-  .name{margin:0; font-size:24px; font-weight:800; letter-spacing:-.02em;}
-  .tagline{margin:5px 0 0; color:var(--muted); font-size:14px;}
-  .intro{color:var(--muted); font-size:12.5px; line-height:1.5; max-width:46ch; margin:10px auto 0;}
-  .plinks{display:flex; flex-wrap:wrap; justify-content:center; gap:8px; margin:14px auto 2px;}
-  .plink{display:inline-flex; align-items:center; gap:7px; border:1px solid var(--border); background:var(--surface);
-    color:var(--text); border-radius:999px; padding:7px 13px; font-size:13px; font-weight:600; text-decoration:none;
-    transition:border-color .15s,background .15s;}
-  .plink:hover{border-color:var(--border-strong); background:var(--surface-hover);}
-  .plink svg{width:15px; height:15px; color:var(--muted);}
 
-  .controls{position:sticky; top:env(safe-area-inset-top,0px); z-index:5; background:var(--bg);
-    padding:10px 0 8px; margin-bottom:4px;}
-  .search{position:relative;}
-  .search svg{position:absolute; left:13px; top:50%; transform:translateY(-50%); width:17px; height:17px; color:var(--faint);}
-  .search input{width:100%; border:1px solid var(--border); background:var(--surface); color:var(--text);
-    border-radius:12px; padding:12px 14px 12px 38px; font:inherit; font-size:15px;}
-  .search input:focus{outline:2px solid var(--accent); outline-offset:1px; border-color:transparent;}
-  .search input::placeholder{color:var(--faint);}
 
-  .chips{display:flex; gap:7px; overflow-x:auto; padding:9px 1px 2px; -webkit-overflow-scrolling:touch; scrollbar-width:none;}
-  .chips::-webkit-scrollbar{display:none;}
-  .chip{flex:none; border:1px solid var(--border); background:var(--surface); color:var(--muted);
-    border-radius:999px; padding:6px 13px; font-size:13px; font-weight:600; cursor:pointer; transition:all .15s;}
-  .chip[aria-pressed="true"]{background:var(--accent); border-color:var(--accent); color:#fff;}
-  .chip.ghost{margin-left:auto; border-style:dashed; font-weight:500;}
+  
+    
+    
+    
+     /* --- Hands-On Tools Usage --- */
+    .role-tools { margin-top: 20px; text-align: left; }
+    .role-tools h4 { margin-bottom: 16px;  font-size: 16px; font-weight: 700; }
+    
+    /* NEW: the two-column grid wrapper */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;  /* two equal columns */
+      gap: 12px 24px;                  /* row/column spacing */
+    }
+    @media (max-width: 720px) {
+      .tools-grid { grid-template-columns: 1fr; } /* stack on phones */
+    }
+    
+    .tool { display: flex; align-items: center; gap: 10px; }
+    .tool-icon { width: 22px; height: 22px; object-fit: contain; }
+    .bar { flex: 1; height: 8px; background: #eee; border-radius: 4px; overflow: hidden; }
+    .bar div { height: 100%; background: #0047AB; } /* MSCI blue */
+    .percent { font-size: 13px; font-weight: 600; min-width: 32px; text-align: right; }
 
-  .month{background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
-    box-shadow:var(--shadow); margin-top:14px; overflow:hidden;}
-  .month.sec{border-style:solid; border-color:var(--border);}
-  .month-head{list-style:none; cursor:pointer; display:flex; align-items:center; gap:12px; padding:14px 16px; user-select:none;}
-  .month-head::-webkit-details-marker{display:none;}
-  .month-title{display:flex; flex-direction:column; min-width:0;}
-  .month-name{font-weight:700; font-size:16px; letter-spacing:-.01em; display:flex; align-items:center; gap:7px;}
-  .month-name .pin{width:14px; height:14px; color:var(--faint); flex:none;}
-  .month-meta{font-size:11.5px; color:var(--muted); margin-top:1px;}
-  .month-count{font-size:12px; font-weight:600; background:var(--accent-soft); color:var(--accent);
-    padding:3px 9px; border-radius:999px; white-space:nowrap;}
-  .chev{margin-left:6px; color:var(--faint); transition:transform .2s ease; flex:none;}
-  .chev svg{width:18px; height:18px; display:block;}
-  details[open] > .month-head .chev{transform:rotate(180deg);}
+    /* === Uniform tool bar widths across ALL tool lists === */
+    .tool .bar,
+    .tool-row .bar{
+      width: var(--tool-bar-w);
+      flex: 0 0 var(--tool-bar-w);   /* override previous flex:1 */
+    }
+    
+    .tool .percent,
+    .tool-row .percent{
+      width: var(--tool-pct-w);
+      flex: 0 0 var(--tool-pct-w);
+      text-align: right;
+    }
+    
+    /* Let the label flex while keeping icon / bar / % fixed */
+    .tool span:not(.percent),
+    .tool-row span:not(.percent){
+      flex: 1 1 auto;
+      min-width: 0;
+    }
 
-  .links{padding:0 12px 12px; display:flex; flex-direction:column; gap:8px;}
 
-  .cred{display:flex; align-items:center; gap:8px; padding:10px 12px; border:1px solid var(--border);
-    border-radius:12px; background:var(--accent-soft); font-size:12.5px;}
-  .cred .key{width:15px; height:15px; color:var(--accent); flex:none;}
-  .cred .label{color:var(--muted);}
-  .cred code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-weight:700; color:var(--text);}
+    /* === Consistent progress bar width across all tool lists === */
+    .tool .bar{
+      flex: 0 0 var(--tool-bar-w);
+      width: var(--tool-bar-w);
+    }
+    .tool .percent{
+      flex: 0 0 var(--tool-pct-w);
+      min-width: var(--tool-pct-w);
+      text-align: right;
+      font-size: 13px; font-weight: 600;
+    }
+    .tool > span { flex: 1; } /* let the label take remaining space */
+    
+    .tool-row .bar{
+      flex: 0 0 var(--tool-bar-w);
+      width: var(--tool-bar-w);
+    }
+    .tool-row .percent{
+      flex: 0 0 var(--tool-pct-w);
+      min-width: var(--tool-pct-w);
+      text-align: right;
+    }
+    
+    /* Optional: slightly smaller bar on narrow screens */
+    @media (max-width: 720px){
+      :root{ --tool-bar-w: clamp(160px, 60vw, 220px); }
+    }
 
-  .card{border:1px solid var(--border); border-radius:12px; background:var(--surface); overflow:hidden;
-    transition:border-color .15s;}
-  .card:hover{border-color:var(--border-strong);}
-  .open{display:flex; align-items:center; gap:12px; padding:11px 12px; text-decoration:none; color:inherit;
-    transition:background .15s;}
-  .open:hover{background:var(--surface-hover);}
-  .open:active{background:var(--surface-2);}
-  .open:focus-visible{outline:2px solid var(--accent); outline-offset:-2px;}
-  .tile{width:38px; height:38px; border-radius:10px; flex:none; display:grid; place-items:center; overflow:hidden;
-    background:color-mix(in srgb,var(--c) 13%,var(--surface)); color:var(--c);}
-  .tile svg{width:20px; height:20px;}
-  .tile img{width:100%; height:100%; object-fit:contain; padding:6px; background:#fff;}
-  .tile .initials{font-weight:800; font-size:12px; letter-spacing:.3px;}
-  @media (prefers-color-scheme:dark){ :root:not([data-theme="light"]) .tile{
-    background:color-mix(in srgb,var(--c) 24%,var(--surface)); color:color-mix(in srgb,var(--c) 62%,white);} }
-  :root[data-theme="dark"] .tile{background:color-mix(in srgb,var(--c) 24%,var(--surface)); color:color-mix(in srgb,var(--c) 62%,white);}
-  .card-text{min-width:0; display:flex; flex-direction:column;}
-  .card-title{font-weight:600; font-size:14.5px; line-height:1.3;}
-  .card-sub{font-size:12px; color:var(--muted); margin-top:1px;}
-  .ext{margin-left:auto; color:var(--faint); flex:none; align-self:center;}
-  .ext svg{width:16px; height:16px; display:block;}
-  .open:hover .ext{color:var(--c);}
 
-  .pw{display:flex; align-items:center; gap:8px; padding:9px 12px; border-top:1px dashed var(--border);
-    background:var(--surface-2); font-size:12.5px;}
-  .pw .lock{width:14px; height:14px; color:var(--muted); flex:none;}
-  .pw .label{color:var(--muted);}
-  .pw code{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace; font-weight:600; color:var(--text);
-    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
-  .copy{margin-left:auto; flex:none; border:1px solid var(--border); background:var(--surface); color:var(--muted);
-    border-radius:8px; padding:5px 10px; font:inherit; font-size:12px; font-weight:600; cursor:pointer;
-    display:inline-flex; align-items:center; gap:5px; transition:all .15s;}
-  .copy:hover{color:var(--text); border-color:var(--border-strong);}
-  .copy.done{color:#157f4a; border-color:#157f4a;}
-  .copy svg{width:13px; height:13px;}
+    /* === Normalize widths/heights in LEFT tools box === */
+    .gdrc-column.tools .tool-row .bar{
+      width: var(--tool-bar-w);
+      flex: 0 0 var(--tool-bar-w);   /* override earlier flex:1 */
+      height: 8px;                   /* match thickness with other bars */
+    }
+    
+    .gdrc-column.tools .tool-row .percent{
+      width: var(--tool-pct-w);
+      flex: 0 0 var(--tool-pct-w);
+      text-align: right;
+    }
+    
+    /* Let the label flex while bar/% stay fixed */
+    .gdrc-column.tools .tool-row span:not(.percent){
+      flex: 1 1 auto;
+      min-width: 0;
+    }
+    
+    /* (Optional) lock icon size for consistency */
+    .gdrc-column.tools .tool-icon{
+      width: 22px;
+      height: 22px;
+    }
 
-  .empty{border:1px dashed var(--border-strong); border-radius:12px; padding:18px 14px; text-align:center;
-    color:var(--muted); font-size:13.5px;}
-  .noresult{text-align:center; color:var(--muted); font-size:14px; padding:40px 10px;}
+    /* ----------------------
+       CLOUD EFFECT KEYFRAMES
+    ---------------------- */
+    @keyframes cloudFade {
+      0%   { opacity: 0; filter: blur(20px); transform: translateY(60px); }
+      100% { opacity: 1; filter: blur(0);    transform: translateY(0); }
+    }
+    /* ----------------------
+   GDRC Two-Column Section
+---------------------- */
+    .gdrc-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 20px;
+    }
+    @media (max-width: 768px) {
+      .gdrc-columns {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .gdrc-column {
+      background: #fdfdfd;
+      border: 1px solid #eee;
+      border-radius: 10px;
+      padding: 16px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.04);
+    }
+    .gdrc-column h4 {
+      margin-top: 0;
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #0047AB;
+    }
+    
+    .gdrc-scroller {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .tool-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .tool-row span {
+      font-size: 14px;
+      font-weight: 600;
+    }
+    .tool-row .bar {
+      flex: 1;
+      height: 6px;
+      background: #eee;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .tool-row .bar > div {
+      height: 100%;
+      background: #0047AB;
+    }
+    .tool-row .percent {
+      font-size: 13px;
+      font-weight: 600;
+      min-width: 32px;
+      text-align: right;
+    }
 
-  footer{text-align:center; color:var(--faint); font-size:12.5px; margin-top:24px; line-height:1.6;}
-  @media (prefers-reduced-motion:reduce){ *{transition:none !important;} }
-</style>
+    .mentions-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      padding-right: 4px;
+    }
+    
+    @media (max-width: 600px) {
+      .mentions-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .mention {
+      border-radius: 6px;
+      transition: background 0.2s ease, box-shadow 0.2s ease;
+    }
+    
+    .mention:hover {
+      background: #f1f6ff;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+    
+    .mention a {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #0047AB;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      line-height: 1.4;
+      padding: 6px 8px;
+    }
+    
+    .mention a:hover {
+      text-decoration: underline;
+    }
+    
+    .mention img {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+
+    /* Force "View important projects →" to render as a button */
+    .role-card a.role-btn,
+    .role-card a.role-btn:link,
+    .role-card a.role-btn:visited{
+      display:inline-block;
+      padding:8px 16px;
+      border:1px solid #0047AB;
+      border-radius:6px;
+      font-weight:600;
+      color:#0047AB;
+      text-decoration:none;
+      transition:all .2s ease;
+    }
+    .role-card a.role-btn:hover{
+      background:#0047AB;
+      color:#fff;
+      text-decoration:none;
+    }
+
+    /* optional */
+    .role-card a.role-btn{ background:rgba(0,71,171,0.06); }
+
+
+    /* subtle spacing below preceding content */
+    .role-card a.role-btn{
+      margin-top: 18px; /* was 14px; tweak to taste (16–20px) */
+    }
+
+    .role-card a.role-btn{ margin-top: 18px; margin-bottom: 6px; }
+
+
+    /* === FIX: lock widths in LEFT tools box === */
+    .gdrc-column.tools .tool-row{
+      display: grid;
+      /* icon | flexible label | bar (min 120px, up to 40% of row) | percent */
+      grid-template-columns: 22px minmax(0,1fr) minmax(120px, 40%) var(--tool-pct-w);
+      align-items: center;
+      gap: 10px;
+    }
+    .gdrc-column.tools .tool-row .bar{ width: 100% !important; height: 8px; }
+    .gdrc-column.tools .tool-row .percent{ text-align: right; }
+
+
+    /* Put each piece in a fixed grid column so rows with NO icon still line up */
+.gdrc-column.tools .tool-row .tool-icon { grid-column: 1; }
+.gdrc-column.tools .tool-row .bar       { grid-column: 3; }
+.gdrc-column.tools .tool-row .percent   { grid-column: 4; }
+.gdrc-column.tools .tool-row span:not(.percent):not(.tool-icon) {
+  grid-column: 2;
+  min-width: 0;           /* prevent squeeze overflow */
+  overflow: hidden;
+  text-overflow: ellipsis; /* optional: tidy long labels */
+  white-space: nowrap;     /* optional: keep on one line */
+}
+
+
+    
+    .gdrc-column.tools .tool-row .bar{
+      width: 100% !important;
+      height: 8px;
+      flex: 0 0 auto !important;
+    }
+    
+    .gdrc-column.tools .tool-row .percent{
+      width: var(--tool-pct-w) !important;
+      flex: 0 0 auto !important;
+      text-align: right;
+    }
+    
+    .gdrc-column.tools .tool-row span:not(.percent){
+      min-width: 0;
+    }
+
+
+
+      .gdrc-column.tools .tool-row span:not(.percent){
+      min-width: 0;
+    }
+
+/* ----------------------------------
+   Testimonials (Pinterest Masonry)
+----------------------------------- */
+/* The Masonry Wrapper becomes a Grid */
+.testimonial-masonry {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 24px; /* spacing between rows and columns */
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 0 16px;
+}
+
+/* Individual testimonial card */
+.testimonial {
+  break-inside: avoid; /* just in case */
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeUp 0.8s ease forwards;
+}
+
+/* Optional margin reset */
+.testimonial {
+  margin: 0; /* grid already provides gap */
+}
+
+
+.testimonial:nth-child(1) { animation-delay: 0.2s; }
+.testimonial:nth-child(2) { animation-delay: 0.4s; }
+.testimonial:nth-child(3) { animation-delay: 0.6s; }
+.testimonial:nth-child(4) { animation-delay: 0.8s; }
+
+.testimonial-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 14px;
+}
+
+.testimonial-img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255,255,255,0.3);
+}
+
+.testimonial-name {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.testimonial-role,
+.testimonial-ref {
+  margin: 0;
+  font-size: 13px;
+  color: #cfd6ff;
+}
+
+.linkedin-icon {
+  width: 18px;
+  height: 18px;
+  margin-top: 6px;
+  opacity: 0.85;
+  transition: opacity 0.2s;
+}
+.linkedin-icon:hover { opacity: 1; }
+
+.testimonial-text {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #f1f4ff;
+  font-style: italic;
+  position: relative;
+  padding-left: 22px;
+}
+
+.testimonial-text::before {
+  content: "❝";
+  font-size: 32px;
+  color: rgba(255,255,255,0.2);
+  position: absolute;
+  left: 0;
+  top: -4px;
+}
+
+    /* Hidden testimonials by default */
+    .testimonial.hidden {
+      display: none;
+    }
+
+
+
+  #loadMoreBtn {
+  background: #fff; 
+  color: #000; 
+  border: 1px solid #000; 
+  font-weight: 700;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#loadMoreBtn:hover {
+  background: #000;
+  color: #fff;
+}
+
+
+    /* Education map + button layout */
+.map-iframe{ width:100%; height:220px; border:0; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.06); }
+.edu-actions{ display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+
+    /* Education layout */
+.double-cards{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:18px;
+  max-width:1100px;
+  margin:28px auto;
+  align-items:start;
+}
+@media (max-width:720px){
+  .double-cards{ grid-template-columns:1fr; }
+}
+.stack-cards{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:18px;
+  max-width:1100px;
+  margin:28px auto;
+}
+
+
+.map-iframe{ width:75%; height:220px; border:0; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.06); }
+.edu-actions{ display:flex; flex-wrap:wrap; gap:8px; margin-top:12px; }
+/* Heritage: full width (matches both columns combined) */
+.stack-cards { justify-items: stretch; }
+
+.stack-cards .heritage-narrow{
+  width: 100% !important;     /* fill the 1100px container like the two-card row */
+  max-width: 800px !important;
+  margin-left: 0 !important;
+  justify-self: stretch;
+}
+
+
+    /* Education docs scroller */
+.edu-scroller{
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #fafafa;
+  box-shadow: inset 0 0 0 1px #eee;
+  padding: 10px 0;
+  margin-top: 12px;
+}
+.edu-track{
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  width: 640px;
+  animation: eduScroll 24s linear infinite;
+  padding-left: 12px;
+}
+.edu-item{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0,0,0,.04);
+  white-space: nowrap;
+}
+.edu-item img{ width:24px; height:24px; object-fit:contain; }
+.edu-item a{ color:#0047AB; font-weight:700; text-decoration:none; }
+.edu-item a:hover{ text-decoration:underline; }
+
+@keyframes eduScroll { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+@media (prefers-reduced-motion: reduce){ .edu-track{ animation: none; } }
+
+    /* --- Manual education scroller + arrows (override any older auto-scroll rules) --- */
+.edu-scroller{
+  overflow-x: auto;
+  overflow-y: hidden;     /* stop vertical growth */
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-gutter: stable both-edges;
+}
+.edu-track{
+  display: flex;
+  flex-wrap: nowrap;      /* single row */
+  gap: 18px;
+  width: max-content;     /* content defines width */
+  padding-left: 12px;
+  animation: none;
+}
+.edu-item{
+  flex: 0 0 auto;         /* don’t shrink; stay in one line */
+  white-space: nowrap;
+}
+
+
+/* Arrow buttons */
+.edu-nav{
+  position: absolute; top: 50%; transform: translateY(-50%);
+  border: 1px solid #ddd; background: #fff; border-radius: 8px;
+  width: 34px; height: 34px; font-size: 20px; line-height: 30px;
+  cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
+.edu-nav.prev{ left: 6px; }
+.edu-nav.next{ right: 6px; }
+.edu-nav:hover{ border-color: #bbb; }
+
+    /* Arrow buttons */
+.edu-nav{
+  position: absolute; top: 50%; transform: translateY(-50%);
+  border: 1px solid #ddd; background: #fff; border-radius: 8px;
+  width: 34px; height: 34px; font-size: 20px; line-height: 30px;
+  cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
+.edu-nav.prev{ left: 6px; }
+.edu-nav.next{ right: 6px; }
+.edu-nav:hover{ border-color: #bbb; }
+
+/* ▼ PASTE HERE */
+ /* Show 4 per view; scroll to see the rest */
+.edu-scroller { --per-view: 4; --gap: 18px; }
+
+.edu-scroller .edu-track{
+  width: 100% !important;       /* override max-content so % bases work */
+  gap: var(--gap);               /* keep your 18px spacing */
+}
+
+.edu-scroller .edu-item{
+  /* exactly 4 columns incl. gaps */
+  flex: 0 0 calc((100% - (var(--per-view) - 1) * var(--gap)) / var(--per-view));
+}
+
+/* (nice to have) fewer per view on phones */
+@media (max-width: 720px){
+  .edu-scroller { --per-view: 2; }
+}
+
+/* FIX: Heritage card should be left-aligned */
+.stack-cards { justify-items: start; }
+
+.stack-cards .heritage-narrow{
+  margin-left: 0 !important;   /* stop the right push */
+  justify-self: start;         /* align left within the grid */
+}
+
+/* Keep Heritage card inside the 1100px container and full width */
+.stack-cards{ max-width:1100px; margin:28px auto; }
+.stack-cards .heritage-narrow{
+  width:100% !important;
+  max-width:1100px !important;
+  margin-left:0 !important;
+  justify-self:center;
+}
+
+/* Inside Heritage: left column is 2× right column */
+.stack-cards .heritage-narrow .gdrc-columns{
+  grid-template-columns: 2fr 1fr;
+}
+
+/* Scroller: show exactly 2 items per view that fill the left column */
+.stack-cards .heritage-narrow .edu-scroller{ --per-view: 2; --gap: 18px; }
+.stack-cards .heritage-narrow .edu-scroller .edu-track{
+  width: 100% !important;
+  gap: var(--gap);
+}
+.stack-cards .heritage-narrow .edu-scroller .edu-item{
+  flex: 0 0 calc((100% - (var(--per-view) - 1) * var(--gap)) / var(--per-view));
+}
+
+/* Mobile: stack columns, one scroller item per view */
+@media (max-width:720px){
+  .stack-cards .heritage-narrow .gdrc-columns{ grid-template-columns: 1fr; }
+  .stack-cards .heritage-narrow .edu-scroller{ --per-view: 1; }
+}
+
+
+
+
+
+
+    /* --- HERITAGE: stop the scroller box from overflowing --- */
+/* 1) Let grid children shrink inside the card */
+.stack-cards .heritage-narrow .gdrc-columns > .gdrc-column{
+  min-width: 0;                 /* critical fix in CSS Grid */
+}
+
+/* 2) Keep the column’s contents inside the card */
+.stack-cards .heritage-narrow .gdrc-column{
+  overflow: hidden;             /* prevents right-bleed of the white box */
+}
+
+/* 3) Make the scroller compute width with padding included */
+.stack-cards .heritage-narrow .edu-scroller,
+.stack-cards .heritage-narrow .edu-track,
+.stack-cards .heritage-narrow .edu-item{
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+/* 4) Keep the track constrained to the column width */
+.stack-cards .heritage-narrow .edu-track{
+  width: 100%;                  /* works with your per-view calc */
+}
+
+/* 5) Make sure arrows sit above and don’t cause layout jitter */
+.stack-cards .heritage-narrow .edu-nav{ z-index: 3; }
+
+    .stack-cards .role-card + .role-card { margin-top: 18px; }
+
+/* Projects – solid white background, black text */
+#projects-list .project-card {
+  background: #fff;                 /* solid background, no transparency */
+  border: 1px solid #ddd;
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  color: #000;                      /* base text color */
+}
+
+/* Ensure text always appears black */
+#projects-list .project-card h3,
+#projects-list .project-card p,
+#projects-list .project-card li,
+#projects-list .project-card a,
+#projects-list .project-card strong {
+  color: #000 !important;
+}
+
+/* Projects – solid white, left aligned */
+    
+#projects-list .project-card {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 14px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  margin: 20px auto;
+  max-width: 1100px;
+  padding: 20px;
+  text-align: left;                /* ✅ left align text */
+  color: #000;                     /* black text */
+}
+
+    /* Keep the Projects section title centered */
+#projects > h2 {
+  text-align: center !important;
+}
+
+/* Force only the project cards and their children to left align */
+#projects .project-card,
+#projects .project-card * {
+  text-align: left !important;
+}
+
+/* Smooth hover grow for project screenshots */
+#projects .gdrc-column img {
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  cursor: pointer;
+}
+
+#projects .gdrc-column img:hover {
+  transform: scale(1.17); /* slightly grow on hover */
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+  z-index: 2;
+  position: center; /* ensures the hovered image stays above siblings */
+}
+
+
+    /* Solid black button for "Load more projects" */
+#loadMoreProjects.black-btn {
+  background: #000;
+  color: #fff;
+  border: 1px solid #000;
+  font-weight: 700;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+#loadMoreProjects.black-btn:hover {
+  background: #222;
+  border-color: #222;
+}
+
+    /* Make .hidden work globally, not just for testimonials */
+.hidden {
+  display: none !important;
+}
+
+
+/* Lightbox overlay */
+.image-lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+/* Active state */
+.image-lightbox.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Enlarged image */
+.image-lightbox img {
+  max-width: 275%;
+  max-height: 275%;
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+  transition: transform 0.3s ease;
+}
+
+/* Active state → scale up */
+.image-lightbox.active img {
+  transform: scale(1.37); /* 185% of original size */
+}
+
+/* AI impact infographic: tall preview in card, full image in lightbox */
+#projects .gdrc-column img.tall-shot{
+  width: 100%;
+  max-height: 420px;
+  object-fit: cover;
+  object-position: top;
+  border-radius: 8px;
+}
+#projects .gdrc-column img.tall-shot:hover{ transform: scale(1.03); }
+.image-lightbox{ overflow: auto; }
+.image-lightbox.tall{ align-items: flex-start; padding: 24px 0; }
+.image-lightbox.tall img{ max-width: min(92vw, 1200px); max-height: none; transform: none !important; }
+
+  </style>
 </head>
 <body>
-  <main class="wrap">
-    <div class="toolbar">
-      <button class="icon-btn" id="themeBtn" type="button" aria-label="Switch theme" title="Switch theme">
-        <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
-        <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
-      </button>
-    </div>
+  <!-- Fallback if JS fails: ensure hero text stays visible -->
+  <noscript>
+    <style>
+      .hero-content { opacity: 1 !important; filter: none !important; transform: none !important; }
+    </style>
+  </noscript>
 
-    <header class="hero">
-      <div class="mono" id="mono">SD</div>
-      <h1 class="name" id="ownerName">Somik Das</h1>
-      <p class="tagline" id="ownerTag">Financial documents · updated monthly</p>
-      <p class="intro" id="intro" hidden></p>
-      <div class="plinks" id="plinks"></div>
-    </header>
+  <!-- NAVIGATION -->
+  <nav>
+    <a href="#home">Home</a>
+    <a href="#career">Career</a>
+    <a href="#education">Education</a>
+    <a href="#projects">Projects</a>
+    <a href="#rewards">Rewards</a>
+    <a href="#certifications">Certifications</a>
+    <a href="#comments">Testimonials</a>
+  </nav>
 
-    <div class="controls">
-      <div class="search">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
-        <input id="search" type="search" placeholder="Search documents…" autocomplete="off" aria-label="Search documents">
+  <!-- HEADER HERO -->
+  <section id="home" class="hero-section">
+    <header>
+      <div class="hero-content">
+        <h1>Somik Das</h1>
+        <p>
+          Passionate Data Ops, BI, and Analytics Professional | Driven to Deliver Excellence and Innovation |
+          Data Operations • Data Visualisation • Data Processes Automation • Big Data Handling & Analysis
+        </p>
+        <div class="hero-buttons">
+          <a href="#projects" class="btn-primary">View My Work</a>
+          <a
+            href="cv1.pdf"
+            class="btn-secondary"
+            target="_blank"
+            rel="noopener"
+          >Download Resume</a>
+        </div>
       </div>
-      <div class="chips" id="chips"></div>
+    </header>
+  
+    <!-- Band styled as glass-box, still inside #home -->
+    <div class="band glass-box">
+      <p>
+        As a graduate from a Top Tier Management School, I bring a high level of motivation and dedication to every task,
+        ensuring excellence and adherence to standards. Currently working as a Data Processes Professional, I specialize
+        in managing and optimizing data workflows, data modeling, defining QA/QC processes, and building efficient data
+        pipelines. My expertise includes data operations, process automation, dataset prescreening and visualization,
+        enabling actionable insights and supporting data-driven decision-making. With a strong interest in AI, I am actively
+        implementing AI Prompt Engineering by leveraging and democratizing AI to make it accessible and impactful across
+        data processes. I am eager to continue refining my skills in advanced data management, AI, and analytics within a
+        dynamic work environment that fosters innovation and growth.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- SECTIONS -->
+  <section id="career">
+    <h2>Career</h2>
+
+    <!-- BRAND SCROLLER -->
+    <div class="brands-wrap">
+      <div class="brands-title">Brands associated with</div>
+      <div class="brands-scroller" aria-label="Associated brands">
+        <div class="brands-track">
+          <img src="Chemtex.png" class="brands-logo" alt="Chemtex Speciality Limited">
+          <img src="SIIB.png" class="brands-logo" alt="Symbiosis Institute of International Business">
+          <img src="KPMG.png" class="brands-logo" alt="KPMG India">
+          <img src="sail.png" class="brands-logo" alt="S.A.i.L">
+          <img src="MnM.png" class="brands-logo" alt="MarketsandMarkets Research">
+          <img src="LT.jpeg" class="brands-logo" alt="L&T Financial Services">
+          <img src="GDRC.png" class="brands-logo" alt="GlobalData Research Centre">
+          <img src="EVS.png" class="brands-logo" alt="Evalueserve">
+          <img src="MSCI.png" class="brands-logo" alt="MSCI Inc.">
+          <!-- duplicate for seamless loop -->
+          <img src="Chemtex.png" class="brands-logo" alt="Chemtex Speciality Limited">
+          <img src="SIIB.png" class="brands-logo" alt="Symbiosis Institute of International Business">
+          <img src="KPMG.png" class="brands-logo" alt="KPMG India">
+          <img src="MnM.png" class="brands-logo" alt="MarketsandMarkets Research">
+          <img src="LT.jpeg" class="brands-logo" alt="L&T Financial Services">
+          <img src="sail.png" class="brands-logo" alt="S.A.I.L">
+          <img src="GDRC.png" class="brands-logo" alt="GlobalData Research Centre">
+          <img src="EVS.png" class="brands-logo" alt="Evalueserve">
+          <img src="MSCI.png" class="brands-logo" alt="MSCI Inc.">
+        </div>
+      </div>
     </div>
 
-    <div id="list"></div>
+    <!-- TIMELINE (2010 → 2025) -->
+    <div class="timeline-wrap">
+      <div class="timeline" id="career-timeline" aria-label="Career timeline">
+        <div class="timeline-track"></div>
+        <div class="cursor" aria-hidden="true" style="left:0;width:0;"></div>
 
-    <footer>Click any item to open the document. Tap “Copy” to copy a password.<br><span id="stamp"></span></footer>
-  </main>
+         <!-- From 2008 onwards -->
+        <button
+          class="year"
+          data-payload='{
+            "year":"2008",
+            "title":"Indian Certificate School Education (ICSE)",
+            "subtitle":"The Frank Anthony Public School (FAPS)",
+            "img":"faps.png",
+            "alt":"faps logo",
+            "tab":"FAPS"
+          }'
+        >2008</button>
 
-  <!-- ===================================================================== -->
-  <!-- FIN-DATA:BEGIN  —  To add a month, insert ONE object at the TOP of the  -->
-  <!-- "months" array. Standing reference groups live in "sections".           -->
-  <!-- Link fields: title, url, password?, brand?, type?. Months auto-sort by  -->
-  <!-- "id" (YYYY-MM), newest first. Nothing else in this file needs to change.-->
-  <!-- ===================================================================== -->
-  <script type="application/json" id="fin-data">
-{
-  "owner": { "name": "Somik Das", "initials": "SD", "tagline": "Financial documents · updated monthly" },
-  "profile": {
-    "intro": "A repository of financial documents. Viewing a document requires a valid Apple ID and password — please keep your Apple ID and password handy.",
-    "links": [
-      { "label": "LinkedIn", "url": "https://www.linkedin.com/in/somik-das?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" },
-      { "label": "Email", "url": "mailto:somikds3@gmail.com" },
-      { "label": "iCloud Drive", "url": "https://www.twitch.tv/https://www.icloud.com/iclouddrive/" }
-    ]
-  },
-  "sections": [
-    { "id": "archives", "name": "Yearly archives", "meta": "All documents together, by year", "links": [
-      { "title": "2026 Financial Documents — all documents", "url": "https://www.icloud.com/iclouddrive/0700VYTZBqAhgTR50ETs_r0Nw#2026_financial_documents", "type": "archive" },
-      { "title": "2025 Financial Documents — all documents", "url": "https://www.icloud.com/iclouddrive/0e7CaOujzTA82aGjOv9UWQwgg#2025_Read_full_file_names", "type": "archive" },
-      { "title": "2024 Financial Documents — all documents", "url": "https://www.icloud.com/iclouddrive/0ffXAAorbT90RZrgCpgf_KM3Q#2024_%28read_full_file_names%29", "type": "archive" },
-      { "title": "2023 Financial Documents — all documents", "url": "https://www.icloud.com/iclouddrive/0881FnJde1YpOMdC80VQAM3OA#2023_%28Read_full_file_names%29", "type": "archive" }
-    ]},
-    { "id": "epf", "name": "Provident Fund (EPF / UAN)", "meta": "EPFO passbooks & UAN card",
-      "credential": { "label": "UAN 101296357457", "password": "Somik1912$" }, "links": [
-      { "title": "UAN Card", "url": "https://www.icloud.com/iclouddrive/0eeKwDQ_A5r8kRuCISv9GMNPQ#101296357457-UAN_Card" },
-      { "title": "EPFO Evalueserve", "url": "https://www.icloud.com/iclouddrive/0beaXHXWfk-BZO-SHihcUtFUw#EPFO_Evalueserve" },
-      { "title": "EPFO GDRC Passbook", "url": "https://www.icloud.com/iclouddrive/045iLoLuMcOOgeF_BZ5RAEDHw#EPFOGDRC" },
-      { "title": "EPFO Passbook — MarketsAndMarkets Research Private Limited", "url": "https://www.icloud.com/iclouddrive/0cbAfJ8NCZ6J9GbYgA3RAaFPg#EpfoMarketsAndMarkets" },
-      { "title": "EPFO Passbook — L&T Financial Services", "url": "https://www.icloud.com/iclouddrive/05dyq4MPtUolY5ZI0fIeE9d-w#EPFOL&TFinancials" },
-      { "title": "EPFO Passbook (Aug 2025) — MSCI", "url": "https://www.icloud.com/iclouddrive/049Z3w-JlZoTd-umNiJgPLF9w#August_2025_EPFO_passbook" }
-    ]},
-    { "id": "lic", "name": "LIC Policies", "meta": "Annual policy receipts", "links": [
-      { "title": "2026 — Premium receipt (received 7 Nov 2026)", "url": "https://www.icloud.com/iclouddrive/07fBI2bu5hQCxAC0gGbe9Qiig", "password": "19121991" },
-      { "title": "2026 — Payment receipt for policy 403318942", "url": "https://www.icloud.com/iclouddrive/0d16zsL0MQxhlNuRfZHuhAF-g#LIC_POLICY_403318942" },
-      { "title": "2026 — Payment receipt for policy 505644853", "url": "https://www.icloud.com/iclouddrive/0dacpR7OTeJp5_d2oMtruOXvQ#LIC_Policy_505644853" },
-      { "title": "2025 — Payment receipt for policy 403318942", "url": "https://www.icloud.com/iclouddrive/0d5tcWx8tcZ8ReZ73cEvZLuGw#LIC_Policy_403318942" },
-      { "title": "2025 — Receipt for policy 505644853", "url": "https://www.icloud.com/iclouddrive/045UYIUKNZY62SGnC5tqTRBKA#LIC_policy_receipt_505644853" },
-      { "title": "2025 — Payment receipt for policy 405545620", "url": "https://www.icloud.com/iclouddrive/0e5wsRxybUflJ4l-j6-59YvCA#lic_november_2025" },
-      { "title": "LIC — All policy statements (FY2024-2025)", "url": "https://www.icloud.com/iclouddrive/0969dHCTeJV-gapahls_rkbkQ#LIC_ALL_POLICY_STATEMENT" }
-    ]}
-  ],
-  "months": [
-    { "id": "2026-11", "name": "November 2026", "meta": "Statements generated 26 Oct 2026", "links": [
-      { "title": "October 2026 Payslip", "url": "https://www.icloud.com/iclouddrive/0efL8jPHsCHSvN-pTZnJypeZQ" },
-      { "title": "October 2026 Mutual Funds statement", "url": "https://www.icloud.com/iclouddrive/0f7EVvVmXSzaEi6IGM95hqG6w", "password": "AWRPD3553G" },
-      { "title": "October 2026 Kotak Mahindra savings account statement", "url": "https://www.icloud.com/iclouddrive/0a5vRvXdCqjEfQesc6gE-GuuA", "password": "somi1912" },
-      { "title": "October 2026 SBI savings account statement", "url": "https://www.icloud.com/iclouddrive/013mtZA3xORVqzov3I25yBI3g", "password": "35953191291" },
-      { "title": "November 2026 House rent receipt", "url": "https://www.icloud.com/iclouddrive/0edpmSFNK3sicw60Aj6aUUr1A" },
-      { "title": "Internet receipt (Nov 2026 – May 2026)", "url": "https://www.icloud.com/iclouddrive/03dNjV9NlOv_gH3OhlEUOSH3A" },
-      { "title": "November 2026 Airtel bill", "url": "https://www.icloud.com/iclouddrive/042HZS1ANnspdOIDQe2fp-kdw" },
-      { "title": "LIC premium receipt (received 7 Nov 2026)", "url": "https://www.icloud.com/iclouddrive/07fBI2bu5hQCxAC0gGbe9Qiig", "password": "19121991" }
-    ]},
-    { "id": "2026-10", "name": "October 2026", "meta": "Statements generated 26 Sep 2026", "links": [
-      { "title": "SBI Statement", "url": "https://www.icloud.com/iclouddrive/0f9eeO_gpO9FnbUSyD-PaR1uQ#sbi_password_35953191291", "password": "35953191291" },
-      { "title": "September 2026 MF statement", "url": "https://www.icloud.com/iclouddrive/0700VYTZBqAhgTR50ETs_r0Nw#2026_financial_documents" },
-      { "title": "Kotak Mahindra statement", "url": "https://www.icloud.com/iclouddrive/0700VYTZBqAhgTR50ETs_r0Nw#2026_financial_documents", "password": "somi1912" },
-      { "title": "Payslip", "url": "https://www.icloud.com/iclouddrive/0700VYTZBqAhgTR50ETs_r0Nw#2026_financial_documents" }
-    ]},
-    { "id": "2026-09", "name": "September 2026", "meta": "Statements generated 26 Aug 2026", "links": [
-      { "title": "September 2026 Payslip", "url": "https://www.icloud.com/iclouddrive/0af0U20UsohR9oUVOsXzAd96w#August_2026_Payslip" },
-      { "title": "September 2026 House Rent", "url": "https://www.icloud.com/iclouddrive/0e5x8B-4sKykERh9AtX6RZdNQ#house_rent" },
-      { "title": "Kotak August 2026 Statement", "url": "https://www.icloud.com/iclouddrive/08bHFKCC0wNdixnbnBAV0YIEg#Kotak_Aug_2026_statement" },
-      { "title": "SBI August 2026 Statement", "url": "https://www.icloud.com/iclouddrive/006Yb2C4setVaI-9QvsuXp8mg#SBI_Aug_2026_statement" },
-      { "title": "August 2026 MF statement", "url": "https://www.icloud.com/iclouddrive/0dfwRLqaNsRY6EwJG5CuRBKmA#MF_Statement_Aug_2026" }
-    ]},
-    { "id": "2026-08", "name": "August 2026", "meta": "Statements generated 26 Jul 2026", "links": [
-      { "title": "July Payslip", "url": "https://www.icloud.com/iclouddrive/0c2QQ7HcZnrSbozEHpk9F5Jnw#July_2026_Payslip" },
-      { "title": "Kotak July 2026 statement", "url": "https://www.icloud.com/iclouddrive/0ddeG32ubw9DYQAUtsH37Pb-A#kotak_July_2026_statement" },
-      { "title": "Mutual Fund Statement for July 2026", "url": "https://www.icloud.com/iclouddrive/02bZwD_cwBOJ_4YC-IxE5fYVg#MF_statement" },
-      { "title": "Rent receipt August 2026", "url": "https://www.icloud.com/iclouddrive/007BHq4I6urRLz4Pb2uOYX8SQ#rent_receipt" },
-      { "title": "SBI July 2026 statement", "url": "https://www.icloud.com/iclouddrive/0c702JJtR9UZrHxjKGlkMsX6A#sbi_statement_July_2026" }
-    ]},
-    { "id": "2026-07", "name": "July 2026", "meta": "Statements generated 26 Jun 2026", "links": [
-      { "title": "July Payslip", "url": "https://www.icloud.com/iclouddrive/01f6P26l1RQvWKqXfqXfv1urA#payslip_july_2026" },
-      { "title": "Computation Sheet", "url": "https://www.icloud.com/iclouddrive/0e97VyffPbtVIXLRcVfPs6RDA#IT_Computation_SHeet" },
-      { "title": "July rent receipt", "url": "https://www.icloud.com/iclouddrive/0abcSUx11owAYzMfr7uJdBtsA#July_Payslip" },
-      { "title": "Kotak Mahindra statement", "url": "https://www.icloud.com/iclouddrive/0d5fEEdHra0zDlVPXDMVR2VgA#Kotak_Mahindra_June_2026_statement" },
-      { "title": "SBI statement", "url": "https://www.icloud.com/iclouddrive/07fles9bh47gm-9MvTT00LI8w#AccountStatement_01052026_185349", "password": "SOM19121991" },
-      { "title": "Mutual Fund Statement", "url": "https://www.icloud.com/iclouddrive/0e7-oAo1wdiFxrBvnU4_DxSCw#MF_Statement", "password": "Somik1912$" }
-    ]},
-    { "id": "2026-06", "name": "June 2026", "meta": "Statements generated 26 May 2026", "links": [
-      { "title": "Payslip May 2026", "url": "https://www.icloud.com/iclouddrive/0f25cG2RmFM0fphYWg5jrJcKQ#Payslip_May_2026" },
-      { "title": "Tax Receipt May 2026", "url": "https://www.icloud.com/iclouddrive/0f0jI_hrtAkvaJ0p3xtxMgMOg#YTD_Tax_Receipt_May_2026" },
-      { "title": "IT Computation Sheet May 2026", "url": "https://www.icloud.com/iclouddrive/0dfI6TlK0WjpwJYqNCwJnInYQ#IT_Computation_Sheet" },
-      { "title": "Rent receipt June 2026", "url": "https://www.icloud.com/iclouddrive/0b86JM8stb6vYSGTiRAD_QdPA#Rent_Receipt" },
-      { "title": "May 2026 Kotak Bank Statement", "url": "https://www.icloud.com/iclouddrive/045QenUmv6ARLi3K2ZRwcbsww#KOTAK_MAY_2026" },
-      { "title": "CTC Breakup", "url": "https://www.icloud.com/iclouddrive/054vm13cws61lf-pBi7Teyikg#CTC_BreakUp_May_2026" },
-      { "title": "Mutual Funds", "url": "https://www.icloud.com/iclouddrive/00f69RrBWTx0uanSkO4s24szw#Mutual_Funds_May_2026", "password": "SOMIK19121991" },
-      { "title": "SBI Statement May 2026", "url": "https://www.icloud.com/iclouddrive/03cmwAflrDFdkD1oBKokP65kg#SBI_may_2026" }
-    ]},
-    { "id": "2026-05", "name": "May 2026", "meta": "Statements generated 26 Apr 2026", "links": [
-      { "title": "April 2026 Payslip", "url": "https://www.icloud.com/iclouddrive/04cATqirt0sFdhCgIs8efCXnQ#April_2026_Payslip" },
-      { "title": "IT Computation Sheet", "url": "https://www.icloud.com/iclouddrive/04fvTgNynzvXhzFKWkJArK2DQ#IT_Computation_Sheet_April_2016" },
-      { "title": "Earnings and Tax Sheet", "url": "https://www.icloud.com/iclouddrive/026Xi5lEy2VayKyjZlxFetG3g#Earnings_and_Tax_Sheet_April_2016" },
-      { "title": "Rent receipt - April 2026", "url": "https://www.icloud.com/iclouddrive/05b24bN_NlOvvUUjSigyUCXag#Rent_May_2026" },
-      { "title": "Kotak April 2026 statement", "url": "https://www.icloud.com/iclouddrive/0abUFijFfzLfYZJVgG41dkdlA#kotak_April_2026" },
-      { "title": "SBI Statement April 2026", "url": "https://www.icloud.com/iclouddrive/066f0NMd70QsIVcUbSVh2kqtg#SBI_SOMIK19121991", "password": "SOMIK19121991" },
-      { "title": "Mutual Fund April 2026", "url": "https://www.icloud.com/iclouddrive/012Rroijba0juQVlYQ46ARZew#CAMS_Password_Somik1912$", "password": "Somik1912$" }
-    ]},
-    { "id": "2026-04", "name": "April 2026", "meta": "Statements generated 26 Mar 2026", "links": [
-      { "title": "March Payslip 2026", "url": "https://www.icloud.com/iclouddrive/09dAjzfkEQM0jUPj0FBmIL-jA#March2026_Payslip" },
-      { "title": "IT Computation Sheet", "url": "https://www.icloud.com/iclouddrive/003uKe47TpxZRU83PX-XUTxDw#IT_Computation_Sheet" },
-      { "title": "Earnings and Tax Sheet", "url": "https://www.icloud.com/iclouddrive/053V-tFkxp4b7PlgI9lkSdYGQ#Earnings_and_Tax" },
-      { "title": "Kotak Mahindra Mar 2026 Statement", "url": "https://www.icloud.com/iclouddrive/0700VYTZBqAhgTR50ETs_r0Nw#2026_financial_documents" },
-      { "title": "SBI March 2026 Statement", "url": "https://www.icloud.com/iclouddrive/0capuJSxciJ0hxy3QfdCEPuQA#SBI2026March", "password": "SOMIK19121991" },
-      { "title": "House Rent April 2026", "url": "https://www.icloud.com/iclouddrive/004cm8uDthveo3hIKan7S23KQ#house_rent_april_2026" }
-    ]},
-    { "id": "2026-03", "name": "March 2026", "meta": "Statements generated 26 Feb 2026", "links": [
-      { "title": "Feb 2026 Payslip", "url": "https://www.icloud.com/iclouddrive/0e7gAdv1ADex7RfJl9Vj8r96A#Feb_2026_Payslip" },
-      { "title": "SBI statement Feb 2026", "url": "https://www.icloud.com/iclouddrive/04eOALNuxh2fo2WbCeJTmQhqA#SBI_bank_account_statement" },
-      { "title": "PPF Statement", "url": "https://www.icloud.com/iclouddrive/0614phU6LTDzSCQ6aXoGL4Mrw#PPF_statement" },
-      { "title": "Kotak Mahindra Statement February 2026", "url": "https://www.icloud.com/iclouddrive/0f8CSCne9vUGMcSQr9rsT2Glw#Kotak_Mahindra_Statement" },
-      { "title": "Rent receipt February 2026", "url": "https://www.icloud.com/iclouddrive/0f54u-gQZe7xPP-nIWunIdXxg#House_rent_march_2026" },
-      { "title": "Mutual Funds receipt", "url": "https://www.icloud.com/iclouddrive/08dAsXNzY5FxjMCxhkDMdlNMw#MutualFund_pass_Somik1912$", "password": "Somik1912$" }
-    ]},
-    { "id": "2026-02", "name": "February 2026", "meta": "Statements generated 26 Jan 2026", "links": [
-      { "title": "Kotak Mahindra Bank account statement January 2026", "url": "https://www.icloud.com/iclouddrive/04bCAR8qxqCOgozXEQG12AtSg#Payslip_Jan_2026" },
-      { "title": "Payslip January 2026", "url": "https://www.icloud.com/iclouddrive/04bCAR8qxqCOgozXEQG12AtSg#Payslip_Jan_2026" },
-      { "title": "Annual payslip", "url": "https://www.icloud.com/iclouddrive/06073TydtL9fuP65ZNLQm1m5Q#IT_Computation_Sheet_Jan_2026" },
-      { "title": "Income tax computation statement", "url": "https://www.icloud.com/iclouddrive/06bJnSVR04CmnYcqtdU5pI-gw#Annual_Salary_Jan_2026" },
-      { "title": "January 2026 mutual fund statement", "url": "https://www.icloud.com/iclouddrive/0b8PiQpw_IGJUSTu4uDQg5iiw#mf_jan2026" },
-      { "title": "SBI Statement Jan 2026", "url": "https://www.icloud.com/iclouddrive/042YEqklfx9GYdhmnDaP_LCEQ#sbi_jan_2026" }
-    ]},
-    { "id": "2026-01", "name": "January 2026", "meta": "Statements generated 26 Dec 2025", "links": [
-      { "title": "Dec 2025 Payslip", "url": "https://www.icloud.com/iclouddrive/0e7pjBI2JFUzBs6XEFkTUiqXg#dec_2026_payslip" },
-      { "title": "Dec 2025 IT computation sheet", "url": "https://www.icloud.com/iclouddrive/0700VYTZBqAhgTR50ETs_r0Nw#2026_financial_documents" },
-      { "title": "Dec 2025 annual payslip", "url": "https://www.icloud.com/iclouddrive/034El3bqYd6lGm6BniJ56vbvQ#dec_2025_annual_payslip" },
-      { "title": "Kotak Mahindra Bank account statement", "url": "https://www.icloud.com/iclouddrive/0b3savTSNMVDNG9OdKRTX13qA#kotak_mahindra_dec_2025_statemet" },
-      { "title": "SBI Statement", "url": "https://www.icloud.com/iclouddrive/0eaxFPO2vjHhJMwbysnjobd0Q#sbi_dec2025_statement%28Password_SOMIK19121991%29", "password": "SOMIK19121991" },
-      { "title": "Mutual Fund Statement", "url": "https://www.icloud.com/iclouddrive/00fNuUG6lzfjfElZYw883dVdg#MF_Dec_2025%28Password_Mumbai@2025%29", "password": "Mumbai@2025" },
-      { "title": "January 2026 rent agreement", "url": "https://www.icloud.com/iclouddrive/05bQG8cSgq9KHZO9EH1Enw43w#january_2026" }
-    ]}
-  ]
-}
-  </script>
-  <!-- FIN-DATA:END -->
+        <button class="year disabled" disabled aria-disabled="true">2009</button>
+
+
+        <!-- 2010 with tabs -->
+        <button
+          class="year"
+          data-payload='[
+            {
+              "year":"2010",
+              "title":"Indian School Certificate (ISC)",
+              "subtitle":"The Frank Anthony Public School (FAPS)",
+              "img":"faps.png",
+              "alt":"faps logo",
+              "tab":"FAPS"
+            },
+            {
+              "year":"2010",
+              "title":"Bachelor of Technology (B.Tech), Chemical Engineering",
+              "subtitle":"Heritage Institute of Technology, Kolkata (HITK)",
+              "img":"heritage.jpeg",
+              "alt":"heritage logo",
+              "tab":"HITK"
+            }
+          ]'
+        >2010</button>
+
+        
+        <button class="year disabled" disabled aria-disabled="true">2011</button>
+        <button class="year disabled" disabled aria-disabled="true">2012</button>
+        <button class="year disabled" disabled aria-disabled="true">2013</button>
+
+       
+        
+        <!-- From 2014 onwards -->
+        <button
+          class="year"
+          data-payload='{
+            "year":"2014",
+            "title":"Chemtex Speciality Limited",
+            "subtitle":"Sales and Service Engineer",
+            "img":"Chemtex.png",
+            "alt":"Chemtex logo",
+            "tab":"Chemtex"
+          }'
+        >2014</button>
+
+        <!-- From 2015 onwards -->
+        <button
+          class="year"
+          data-payload='{
+            "year":"2015",
+            "title":"Aglow Quality Testing Laboratories Private Limited",
+            "subtitle":"Procurement Engineering Trainee",
+            "img":"aglow.jpeg",
+            "alt":"Aglow logo",
+            "tab":"Aglow Labs"
+          }'
+        >2015</button>
+
+
+        <button
+          class="year"
+          data-payload='{
+            "year":"2016",
+            "title":"MBA in Energy and Environment",
+            "subtitle":"Symbiosis Institute of International Business",
+            "img":"SIIB.png",
+            "alt":"SIIB logo",
+            "tab":"SIIB"
+          }'
+        >2016</button>
+
+        <!-- 2017 with tabs -->
+        <button
+          class="year"
+          data-payload='[
+            {
+              "year":"2017",
+              "title":"MBA in Energy and Environment",
+              "subtitle":"Symbiosis Institute of International Business",
+              "img":"SIIB.png",
+              "alt":"SIIB logo",
+              "tab":"SIIB"
+            },
+            {
+              "year":"2017",
+              "title":"Summer Internship",
+              "subtitle":"KPMG India",
+              "img":"KPMG.png",
+              "alt":"KPMG logo",
+              "tab":"KPMG"
+            }
+          ]'
+        >2017</button>
+
+        <!-- 2018 with tabs -->
+        <button
+          class="year"
+          data-payload='[
+            {
+              "year":"2018",
+              "title":"MBA in Energy and Environment",
+              "subtitle":"Symbiosis Institute of International Business",
+              "img":"SIIB.png",
+              "alt":"SIIB logo",
+              "tab":"SIIB"
+            },
+            {
+              "year":"2018",
+              "title":"L&T Financial Services",
+              "subtitle":"Team Manager (June 2018)",
+              "img":"LT.jpeg",
+              "alt":"L&T Financial Services logo",
+              "tab":"L&T"
+            },
+            {
+              "year":"2018",
+              "title":"MarketsandMarkets Research Pvt. Ltd.",
+              "subtitle":"Strategic Research Analyst",
+              "img":"MnM.png",
+              "alt":"MarketsandMarkets logo",
+              "tab":"MnM"
+            }
+          ]'
+        >2018</button>
+
+        <button
+          class="year"
+          data-payload='{
+            "year":"2019",
+            "title":"MarketsandMarkets Research Pvt. Ltd.",
+            "subtitle":"Strategic Research Analyst",
+            "img":"MnM.png",
+            "alt":"MarketsandMarkets logo",
+            "tab":"MnM"
+          }'
+        >2019</button>
+
+        <!-- 2020 with tabs -->
+        <button
+          class="year"
+          data-payload='[
+            {
+              "year":"2020",
+              "title":"MarketsandMarkets Research Pvt. Ltd.",
+              "subtitle":"Strategic Research Analyst",
+              "img":"MnM.png",
+              "alt":"MarketsandMarkets logo",
+              "tab":"MnM"
+            },
+            {
+              "year":"2020",
+              "title":"GlobalData Research Centre",
+              "subtitle":"Senior Research Analyst",
+              "img":"GDRC.png",
+              "alt":"GlobalData Research Centre logo",
+              "tab":"GDRC"
+            }
+          ]'
+        >2020</button>
+
+        <!-- 2021 with tabs -->
+        <button
+          class="year"
+          data-payload='[
+            {
+              "year":"2021",
+              "title":"GlobalData Research Centre",
+              "subtitle":"Senior Research Analyst",
+              "img":"GDRC.png",
+              "alt":"GlobalData Research Centre logo",
+              "tab":"GDRC"
+            },
+            {
+              "year":"2021",
+              "title":"Evalueserve",
+              "subtitle":"Senior Analyst",
+              "img":"EVS.png",
+              "alt":"Evalueserve logo",
+              "tab":"EVS"
+            }
+          ]'
+        >2021</button>
+
+        <button
+          class="year"
+          data-payload='{
+            "year":"2022",
+            "title":"Evalueserve",
+            "subtitle":"Senior Analyst",
+            "img":"EVS.png",
+            "alt":"Evalueserve logo",
+            "tab":"EVS"
+          }'
+        >2022</button>
+
+        <button
+          class="year"
+          data-payload='{
+            "year":"2023",
+            "title":"Evalueserve",
+            "subtitle":"Senior Analyst",
+            "img":"EVS.png",
+            "alt":"Evalueserve logo",
+            "tab":"EVS"
+          }'
+        >2023</button>
+
+        <!-- 2024 with tabs -->
+        <button
+          class="year"
+          data-payload='[
+            {
+              "year":"2024",
+              "title":"Evalueserve",
+              "subtitle":"Senior Analyst",
+              "img":"EVS.png",
+              "alt":"Evalueserve logo",
+              "tab":"EVS"
+            },
+            {
+              "year":"2024",
+              "title":"MSCI Inc.",
+              "subtitle":"Senior Associate, DCS (Data Operations)",
+              "img":"MSCI.png",
+              "alt":"MSCI logo",
+              "tab":"MSCI"
+            }
+          ]'
+        >2024</button>
+
+        <button
+          class="year"
+          data-payload='{
+            "year":"2025",
+            "title":"MSCI Inc.",
+            "subtitle":"Senior Associate, DCS (Data Operations)",
+            "img":"MSCI.png",
+            "alt":"MSCI logo",
+            "tab":"MSCI"
+          }'
+        >2025</button>
+
+        <button
+          class="year"
+          data-payload='{
+            "year":"2026",
+            "title":"MSCI Inc.",
+            "subtitle":"Senior Associate, DCS (Data Operations)",
+            "img":"MSCI.png",
+            "alt":"MSCI logo",
+            "tab":"MSCI"
+          }'
+        >2026</button>
+
+      </div>
+    </div>
+
+    <!-- POST-TIMELINE ROLE CARDS -->
+    <div class="role-card" aria-labelledby="msci-role-title">
+      <div class="role-header">
+        <img src="MSCI.png" alt="MSCI logo" class="role-logo">
+        <div>
+          <h3 id="msci-role-title" class="role-title">Senior Associate (Data Operations), MSCI Inc.</h3>
+          <p class="role-meta">October 2024 – Present</p>
+        </div>
+      </div>
+      <div class="role-body">
+        <ul>
+          <li>Manages data quality processes, utilizing automation tools for quality assessment to enhance efficiency and accuracy.</li>
+          <li>Possesses advanced expertise in Microsoft Excel, adept at handling large volumes of data effectively.</li>
+          <li>Built AI agent pipelines for ESG data extraction at MSCI across 13+ datapoints (supply chain, water, biodiversity); modular sub-agents validated against a 463-row ground-truth set; prompt tuning cut token usage 30–40%.</li>
+          <li>Architected the ICP/OMDP issuer-feedback AI agent (auto-tagging NEW/UPDATE/CORRECTION/REJECT via a 3-level SOP hierarchy), with an interactive simulator and reviewer dashboards.</li>
+          <li>Led "Agent Factory" input-schema design within DCAIM (AI First Data Collection Modernization) and authored the cross-team agent I/O interface agreement.</li>
+          <li>Operate Claude daily via MCP connectors — Jira/Confluence, M365 email, Azure PostgreSQL (prod/non-prod); build custom Claude Skills and Cursor AI workflows automating extraction, QA, and documentation.</li>
+          <li>Built AI-powered frontends/trackers (React/Vite/Tailwind UAT portals; DCAIM Build Test Console with live Jira discovery and tester notifications).</li>
+          <li>Built AI-powered frontends/trackers (React/Vite/Tailwind UAT portals; DCAIM Build Test Console with live Jira discovery and tester notifications).</li>
+          <li>Applied AI governance: anti-hallucination audits and full-context verification before any system-of-record edit. Manage data-quality processes using automation for quality assessment, improving efficiency and accuracy. Advanced Microsoft Excel; handle large data volumes effectively</li>
+          <li>Demonstrates comprehensive knowledge of equities, financial markets, and company disclosures such as 10-Ks
+            and annual reports.</li>
+          <li>AI-prompt-driven work in pandas, Power BI, and Jupyter for analysis, visualization, and ground-truth pre-screening; built notebooks using matplotlib, openpyxl, PyPDF2.</li>
+          <li>Conducts Data Quality Assurance (QA) processes, including results assessment, reporting, and process
+            improvement.</li>
+          <li>Creates impactful presentations and performs detailed data analysis, showcasing excellent written and oral
+            communication skills.</li>
+          <li>Collaborates with global teams in an international environment, working seamlessly across hierarchies, functions, and time zones.</li>
+        </ul>
+
+        <!-- Hands-On Tools Usage -->
+        <!-- Hands-On Tools Usage -->
+        <div class="role-tools">
+          <h4>Hands-On Tools Usage</h4>
+          <div class="tools-grid">
+            <div class="tool">
+              <img src="jupyter.png" alt="Jupyter Notebooks" class="tool-icon">
+              <span>Jupyter Notebooks</span>
+              <div class="bar"><div style="width:15%"></div></div>
+              <span class="percent">15%</span>
+            </div>
+        
+            <div class="tool">
+              <img src="excel.png" alt="Microsoft Excel" class="tool-icon">
+              <span>Advanced Microsoft Excel</span>
+              <div class="bar"><div style="width:25%"></div></div>
+              <span class="percent">25%</span>
+            </div>
+        
+            <div class="tool">
+              <img src="postgres.png" alt="Postgres SQL" class="tool-icon">
+              <span>Postgres SQL</span>
+              <div class="bar"><div style="width:25%"></div></div>
+              <span class="percent">25%</span>
+            </div>
+        
+            <div class="tool">
+              <img src="powerbi.png" alt="Power BI" class="tool-icon">
+              <span>Power BI (Data Visualisation)</span>
+              <div class="bar"><div style="width:10%"></div></div>
+              <span class="percent">10%</span>
+            </div>
+        
+            <div class="tool">
+              <img src="miro.png" alt="Miro Board" class="tool-icon">
+              <span>Miro Board</span>
+              <div class="bar"><div style="width:10%"></div></div>
+              <span class="percent">10%</span>
+            </div>
+        
+            <div class="tool">
+              <img src="postman.png" alt="Postman" class="tool-icon">
+              <span>Postman</span>
+              <div class="bar"><div style="width:5%"></div></div>
+              <span class="percent">5%</span>
+            </div>
+        
+            <div class="tool">
+              <img src="loop.png" alt="Microsoft Loop" class="tool-icon">
+              <span>Microsoft Loop</span>
+              <div class="bar"><div style="width:5%"></div></div>
+              <span class="percent">5%</span>
+            </div>
+        
+            <div class="tool">
+              <img src="whiteboard.png" alt="Microsoft Whiteboard" class="tool-icon">
+              <span>Microsoft Whiteboard</span>
+              <div class="bar"><div style="width:2%"></div></div>
+              <span class="percent">2%</span>
+            </div>
+        
+            <div class="tool">
+              <img src="jira.png" alt="Jira Sprints" class="tool-icon">
+              <span>Jira Sprints</span>
+              <div class="bar"><div style="width:2%"></div></div>
+              <span class="percent">2%</span>
+            </div>
+        
+            <div class="tool">
+              <span>Others</span>
+              <div class="bar"><div style="width:1%"></div></div>
+              <span class="percent">1%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="role-card" aria-labelledby="evs-role-title">
+    <div class="role-header">
+      <img src="EVS.png" alt="EVS logo" class="role-logo">
+      <div>
+        <h3 id="evs-role-title" class="role-title">Senior Analyst, Evalueserve India</h3>
+        <p class="role-meta">August 2021 - October 2024</p>
+      </div>
+    </div>
+    <div class="role-body">
+      <ul>
+        <li>Experienced in syndicate and custom research projects, encompassing qualitative and quantitative analysis.</li>
+        <li>Conducted research on heavy power components, including competitor analysis, market sizing, and go-to-market strategy.</li>
+        <li>Proficient in data modeling, database analysis, scenario-based data models, and extracting actionable insights via standard frameworks.</li>
+        <li>Additionally, conducted extensive research and analysis, constructing over 50 client competitor profiles and customer profiles, which improved strategic decision-making.</li>
+        <li>Also created newsletters, client decks, country Power Outlooks, and worked as a COVID-19 Analyst.</li>
+        <li>Developed advanced data visualization dashboards using Excel, Power BI, Infogram, Google Data Studio, and Tableau. These dashboards increased visibility of key business insights for stakeholders.</li>
+      </ul>
+
+    <!-- Hands-On Tools Usage -->
+      <div class="role-tools">
+        <h4>Hands-On Tools Usage</h4>
+        <div class="tools-grid">
+          <div class="tool">
+            <img src="excel.png" alt="Microsoft Excel" class="tool-icon">
+            <span>Advanced Microsoft Excel</span>
+            <div class="bar"><div style="width:25%"></div></div>
+            <span class="percent">25%</span>
+          </div>
+      
+          <div class="tool">
+            <img src="powerbi.png" alt="Power BI" class="tool-icon">
+            <span>Data Visualisation (Power BI)</span>
+            <div class="bar"><div style="width:20%"></div></div>
+            <span class="percent">20%</span>
+          </div>
+      
+          <div class="tool">
+            <img src="powerautomate.png" alt="Power Automate (Desktop)" class="tool-icon">
+            <span>Power Automate (Desktop)</span>
+            <div class="bar"><div style="width:20%"></div></div>
+            <span class="percent">20%</span>
+          </div>
+      
+          <div class="tool">
+            <img src="webscraper.png" alt="WebScrapper" class="tool-icon">
+            <span>WebScrapper</span>
+            <div class="bar"><div style="width:15%"></div></div>
+            <span class="percent">15%</span>
+          </div>
+      
+          <div class="tool">
+            <img src="tableau.png" alt="Tableau" class="tool-icon">
+            <span>Tableau</span>
+            <div class="bar"><div style="width:5%"></div></div>
+            <span class="percent">5%</span>
+          </div>
+
+          <div class="tool">
+            <img src="sp.png" alt="S&P CapIQ" class="tool-icon">
+            <span>S&P CapIQ</span>
+            <div class="bar"><div style="width:5%"></div></div>
+            <span class="percent">5%</span>
+          </div>
+
+          <div class="tool">
+            <img src="factiva.png" alt="Factiva" class="tool-icon">
+            <span>Factiva</span>
+            <div class="bar"><div style="width:5%"></div></div>
+            <span class="percent">5%</span>
+          </div>
+      
+          <div class="tool">
+            <span>Others</span>
+            <div class="bar"><div style="width:5%"></div></div>
+            <span class="percent">5%</span>
+          </div>
+        </div>
+      </div>
+
+      
+      <!-- NEW BUTTON -->
+      <a href="#projects" class="role-btn">View important projects →</a>
+    </div>
+  </div>
+
+
+      <div class="role-card" aria-labelledby="gdrc-role-title">
+    <div class="role-header">
+      <img src="GDRC.png" alt="GDRC logo" class="role-logo">
+      <div>
+        <h3 id="gdrc-role-title" class="role-title">Senior Research Analyst, GlobalData Research Centre (GDRC)</h3>
+        <p class="role-meta">February 2020 – August 2021</p>
+      </div>
+    </div>
+    <div class="role-body">
+      <ul>
+        <li>Conducted research on heavy power components, including competitor analysis, market sizing, and go-to-market strategy, leading to consultative and advisory contributions.</li>
+        <li>Proficient in data modeling, database analysis, creating artifacts like scenario-based data models, and extracting actionable insights from data through industry expertise and standard frameworks.</li>
+        <li>In addition, created newsletters, client decks, and country Power Outlooks, and worked as a COVID-19 Analyst.</li>
+      </ul>
+                  <!-- Dual Column Section: Tools + Mentions -->
+       <div class="gdrc-columns">
+          <!-- Left Column: Hands-On Tools -->
+          <div class="gdrc-column tools">
+            <h4>Hands-On Tools Usage</h4>
+            <div class="gdrc-scroller">
+              <div class="tool-row">
+                <img src="excel.png" alt="Microsoft Excel" class="tool-icon">
+                <span>Microsoft Excel</span>
+                <div class="bar"><div style="width:35%"></div></div>
+                <span class="percent">35%</span>
+              </div>
+              <div class="tool-row">
+                <img src="tableau.png" alt="Tableau" class="tool-icon">
+                <span>Tableau</span>
+                <div class="bar"><div style="width:25%"></div></div>
+                <span class="percent">25%</span>
+              </div>
+              <div class="tool-row">
+                <img src="googledata.png" alt="Google Data Studio / Looker Studio" class="tool-icon">
+                <span>Google Data Studio / Looker Studio</span>
+                <div class="bar"><div style="width:20%"></div></div>
+                <span class="percent">20%</span>
+              </div>
+              <div class="tool-row">
+                <img src="powerpoint.png" alt="Microsoft PowerPoint / Word" class="tool-icon">
+                <span>Microsoft PowerPoint / Word</span>
+                <div class="bar"><div style="width:15%"></div></div>
+                <span class="percent">15%</span>
+              </div>
+              <div class="tool-row">
+                <span>Others</span>
+                <div class="bar"><div style="width:5%"></div></div>
+                <span class="percent">5%</span>
+              </div>
+            </div>
+          </div>
+
+        
+          <!-- Right Column: Notable Mentions -->
+          <div class="gdrc-column mentions">
+            <h4>Notable Mentions / Blogs / White Papers</h4>
+            <div class="gdrc-scroller mentions-grid">
+          
+              <div class="mention">
+                <a href="https://www.bloomberg.com/news/articles/2020-05-05/italy-leads-power-demand-recovery-as-europe-starts-to-reopen" target="_blank" rel="noopener">
+                  <img src="https://www.google.com/s2/favicons?sz=24&domain=bloomberg.com" alt="Bloomberg">
+                  <span>Bloomberg</span>
+                </a>
+              </div>
+          
+              <div class="mention">
+                <a href="https://www.zawya.com/en/business/covid-19-disrupts-global-solar-pv-supply-chain-globaldata-f64u26t8" target="_blank" rel="noopener">
+                  <img src="https://www.google.com/s2/favicons?sz=24&domain=zawya.com" alt="Zawya">
+                  <span>Zawya (1)</span>
+                </a>
+              </div>
+          
+              <div class="mention">
+                <a href="https://www.zawya.com/en/business/manufacturing-firms-repurpose-facilities-to-combat-covid-19-q1siyjyk" target="_blank" rel="noopener">
+                  <img src="https://www.google.com/s2/favicons?sz=24&domain=zawya.com" alt="Zawya">
+                  <span>Zawya (2)</span>
+                </a>
+              </div>
+
+              <div class="mention">
+                <a href="https://www.zawya.com/en/business/covid-19-likely-to-impact-short-term-development-of-renewables-in-middle-east-e109zw6p" target="_blank" rel="noopener">
+                  <img src="https://www.google.com/s2/favicons?sz=24&domain=zawya.com" alt="Zawya">
+                  <span>Zawya (3)</span>
+                </a>
+              </div>
+          
+              <div class="mention">
+                <a href="https://www.smart-energy.com/top-stories/globaldata-explores-the-impact-of-covid-19-on-the-energy-sector/" target="_blank" rel="noopener">
+                  <img src="https://www.google.com/s2/favicons?sz=24&domain=smart-energy.com" alt="SEI">
+                  <span>SEI</span>
+                </a>
+              </div>
+          
+              <div class="mention">
+                <a href="https://www.energetica-india.net/news/wind-project-approval-delays-to-hamper-uk-from-achieving-offshore-capacity-globaldata" target="_blank" rel="noopener">
+                  <img src="https://www.google.com/s2/favicons?sz=24&domain=energetica-india.net" alt="Energetica">
+                  <span>Energetica</span>
+                </a>
+              </div>
+          
+              <div class="mention">
+                <a href="https://www.windsystemsmag.com/globaldata-spanish-turbine-manufacturers-get-back-to-business/" target="_blank" rel="noopener">
+                  <img src="https://www.google.com/s2/favicons?sz=24&domain=windsystemsmag.com" alt="Wind Systems Magazine">
+                  <span>Wind Systems Magazine</span>
+                </a>
+              </div>
+          
+              <div class="mention">
+                <a href="https://pes.eu.com/press-releases/indias-silicon-pv-manufacturer-provides-noble-response-to-covid-19-outbreak-by-aspiring-to-join-hands-with-ventilator-manufacturers-says-globaldata/" target="_blank" rel="noopener">
+                  <img src="https://www.google.com/s2/favicons?sz=24&domain=pes.eu.com" alt="PES">
+                  <span>PES</span>
+                </a>
+              </div>
+          
+              <div class="mention">
+                <a href="https://solarquarter.com/2020/12/01/ecuador-could-achieve-optimistic-400mw-solar-pv-capacity-by-2030/" target="_blank" rel="noopener">
+                  <img src="https://www.google.com/s2/favicons?sz=24&domain=solarquarter.com" alt="Solar Quarter">
+                  <span>Solar Quarter (1)</span>
+                </a>
+              </div>
+          
+              <div class="mention">
+                <a href="https://www.saurenergy.com/solar-energy-news/bangladesh-module-manufacturers-need-stimulus-to-maintain-operations-globaldata" target="_blank" rel="noopener">
+                  <img src="https://www.google.com/s2/favicons?sz=24&domain=saurenergy.com" alt="Saur Energy">
+                  <span>Saur Energy</span>
+                </a>
+              </div>
+          
+              <div class="mention">
+                <a href="https://solarquarter.com/2020/07/22/malaysia-bets-on-large-scale-solar-pv-to-revive-covid-19-hit-economy-globaldata/" target="_blank" rel="noopener">
+                  <img src="https://www.google.com/s2/favicons?sz=24&domain=solarquarter.com" alt="Solar Quarter">
+                  <span>Solar Quarter (2)</span>
+                </a>
+              </div>
+          
+              <div class="mention">
+                <a href="https://www.powerengineeringint.com/coal-fired/spains-remaining-coal-fired-plants-likely-to-be-phased-out-by-2025/" target="_blank" rel="noopener">
+                  <img src="https://www.google.com/s2/favicons?sz=24&domain=powerengineeringint.com" alt="PEI">
+                  <span>PEI</span>
+                </a>
+              </div>
+          
+              <div class="mention">
+                <a href="https://www.hydroreview.com/business-finance/business/moroccos-capacity-mix-to-be-52-renewables-by-2030/#gref" target="_blank" rel="noopener">
+                  <img src="https://www.google.com/s2/favicons?sz=24&domain=hydroreview.com" alt="Hydro Review">
+                  <span>Hydro Review</span>
+                </a>
+              </div>
+          
+              <div class="mention">
+                <a href="https://www.sonnenseite.com/en/politics/germany-goes-aggressive-on-renewables-with-the-latest-amendment-of-the-eeg-asking-for-highly-optimistic-annual-re-additions-says-globaldata/" target="_blank" rel="noopener">
+                  <img src="https://www.google.com/s2/favicons?sz=24&domain=sonnenseite.com" alt="Sonnenseite">
+                  <span>Sonnenseite</span>
+                </a>
+              </div>
+          
+              <div class="mention">
+                <a href="https://www.greencarcongress.com/2020/09/20200910-globaldata.html" target="_blank" rel="noopener">
+                  <img src="https://www.google.com/s2/favicons?sz=24&domain=greencarcongress.com" alt="Green Car Congress">
+                  <span>Green Car Congress</span>
+                </a>
+              </div>
+          
+              <div class="mention">
+                <a href="https://www.offshore-energy.biz/taiwan-to-become-second-largest-apac-offshore-wind-market/" target="_blank" rel="noopener">
+                  <img src="https://www.google.com/s2/favicons?sz=24&domain=offshore-energy.biz" alt="Offshore Wind Energy">
+                  <span>Offshore Wind Energy</span>
+                </a>
+              </div>
+          
+              <div class="mention">
+                <a href="https://renewablesnow.com/news/bangladesh-backs-renewables-energy-efficiency-through-usd-2187m-fund-697528/" target="_blank" rel="noopener">
+                  <img src="https://www.google.com/s2/favicons?sz=24&domain=renewablesnow.com" alt="Renewables Now">
+                  <span>Renewables Now</span>
+                </a>
+              </div>
+          
+              <div class="mention">
+                <a href="https://www.evwind.es/2020/09/16/wind-power-concentrated-solar-power-and-photovoltaic-energy-potential-in-chile-stands-out/77204" target="_blank" rel="noopener">
+                  <img src="https://www.google.com/s2/favicons?sz=24&domain=evwind.es" alt="EV Wind">
+                  <span>EV Wind</span>
+                </a>
+              </div>
+            </div>
+          </div>
+         </div>
+        <!-- NEW BUTTON HERE -->
+            <a href="#projects" class="role-btn">View important projects →</a>
+            </div>
+            </div> 
+  </div>
+
+  <!-- ================================
+         MarketsandMarkets ROLE CARD (NEW)
+         Paste this block inside #career,
+         ABOVE the GDRC role-card.
+    ================================== -->
+    <div class="role-card" aria-labelledby="mnm-role-title">
+      <div class="role-header">
+        <img src="MnM.png" alt="MarketsandMarkets logo" class="role-logo">
+        <div>
+          <h3 id="mnm-role-title" class="role-title">Strategic Growth Analyst, MarketsandMarkets Research Private Limited</h3>
+          <p class="role-meta">November 2018 – January 2020</p>
+        </div>
+      </div>
+  
+      <div class="role-body">
+        <ul>
+          <li><strong>Consultant &amp; syndicated research analyst:</strong> crafted proposals for consulting engagements; delivered market strategy and research via primary &amp; secondary sources; built client-facing sales decks; partnered with inbound/outbound sales, including cold outreach and use of global information resources.</li>
+          <li><strong>Market entry &amp; GTM (Renewables, Smart Infrastructure):</strong> evaluated new markets across regions; developed GTM strategies; assessed country-specific policies/regulations, documentation, political context, pricing indices, contracting models, and timelines.</li>
+          <li><strong>Smart ports program:</strong> sized the global market, mapped current/future players, analyzed buyer behavior, and created a marketing plan; designed and ran PESTEL-informed surveys across port authorities, smart solution providers, and EPCs; combined quant/qual insights to rank top three penetration countries per region.</li>
+          <li><strong>Thought leadership:</strong> published articles on smart solar, electrical components, and smart ports; analyzed corporate developments and strategic M&amp;A; articulated growth drivers, restraints, opportunities, and constraints.</li>
+          <li><strong>Collateral &amp; key initiatives:</strong> produced capability decks on Smart Energy and emerging power-generation/T&amp;D technologies (renewables focus); authored multiple reports across energy &amp; environment; contributed to the “2iTB” initiative, handling Technip and nVent.</li>
+        </ul>
+  
+        <!-- Dual Column Section: Tools (left) + Mentions (right) -->
+        <div class="gdrc-columns">
+          <!-- Left Column: Hands-On Tools -->
+          <div class="gdrc-column tools">
+            <h4>Hands-On Tools Usage</h4>
+            <div class="gdrc-scroller">
+              <div class="tool-row">
+                <img src="excel.png" alt="Advanced Microsoft Excel" class="tool-icon">
+                <span>Advanced Microsoft Excel</span>
+                <div class="bar"><div style="width:65%"></div></div>
+                <span class="percent">65%</span>
+              </div>
+              <div class="tool-row">
+                <img src="powerpoint.png" alt="Microsoft Word/PowerPoint" class="tool-icon">
+                <span>Microsoft Word/PowerPoint</span>
+                <div class="bar"><div style="width:20%"></div></div>
+                <span class="percent">20%</span>
+              </div>
+              <div class="tool-row">
+                <img src="factiva.png" alt="Factiva" class="tool-icon">
+                <span>Factiva</span>
+                <div class="bar"><div style="width:7%"></div></div>
+                <span class="percent">7%</span>
+              </div>
+              <div class="tool-row">
+                <img src="tableau.png" alt="Tableau" class="tool-icon">
+                <span>Tableau</span>
+                <div class="bar"><div style="width:5%"></div></div>
+                <span class="percent">5%</span>
+              </div>
+              <div class="tool-row">
+                <span>Others</span>
+                <div class="bar"><div style="width:3%"></div></div>
+                <span class="percent">3%</span>
+              </div>
+            </div>
+          </div>
+  
+          <!-- Right Column: Mentions -->
+          <div class="gdrc-column mentions">
+            <h4>Notable Mentions / Blogs / White Papers</h4>
+            <div class="gdrc-scroller mentions-grid">
+              <!-- Replace # with actual URLs when ready -->
+              <div class="mention">
+                <a href="https://blog.marketsandmarkets.com/nsw-labor-pledges-state-owned-renewable-energy-company-to-power-three-million-homes-and-to-cut-down-the-states-carbon-emissions/" target="_blank" rel="noopener">
+                  <img src="MnM.png" alt="MnM">
+                  <span>NSW Labor pledges state-owned renewable energy company to power three million homes and to cut down the state’s carbon emissions</span>
+                </a>
+              </div>
+              <div class="mention">
+                <a href="https://blog.marketsandmarkets.com/total-eren-strengthens-its-renewable-energy-foothold-in-south-europe/" target="_blank" rel="noopener">
+                  <img src="MnM.png" alt="MnM">
+                  <span>Total Eren Strengthens Its Renewable Energy Foothold In South Europe</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Optional CTA, keep if you want consistency with other cards -->
+        <a href="#projects" class="role-btn">View important projects →</a>
+      </div>
+    </div>
+
+
+  <!-- === Three compact cards row: L&T / Aglow / Chemtex === -->
+<div class="triple-cards">
+
+  <!-- Left: L&T Financial Services -->
+  <div class="role-card triple-card">
+    <div class="role-header">
+      <img src="LT.jpeg" alt="L&amp;T Financial Services logo" class="role-logo">
+      <div>
+        <h3 class="role-title">Team Manager, L&amp;T Financial Services</h3>
+        <p class="role-meta">May 2018 – November 2018</p>
+      </div>
+    </div>
+    <div class="role-body scrollable">
+      <p>
+        A certified NISM SERIES V A candidate, I started in financial services as a financial advisor (Mutual Funds):
+        advising clients on investments, ticket size, and risk appetite.
+      </p>
+      <ul>
+        <li>
+          Worked in Housing Finance on credit policy checks; evaluated LOAN-TO-VALUE using Average Bank Balance; conducted
+          Field Investigation; analyzed client financial statements.
+        </li>
+        <li>
+          Worked in Two Wheeler Finance (product &amp; collections): managed MIS, GNPA and early-bucket sheets; coordinated
+          with agencies; collated collection data; analyzed &amp; segmented GNPA/early-bucket MIS.
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Center: Aglow Quality Testing Laboratories -->
+  <div class="role-card triple-card">
+    <div class="role-header">
+      <img src="aglow.jpeg" alt="Aglow Quality Testing Laboratories logo" class="role-logo">
+      <div>
+        <h3 class="role-title">Procurement Engineering Trainee, Aglow Quality Testing Laboratories Private Limited</h3>
+        <p class="role-meta">May 2015 – January 2016</p>
+      </div>
+    </div>
+    <div class="role-body">
+      <p>
+        Communication with clients; maintaining databases; maintaining an inventory database; tracking inventory condition;
+        supporting the R&amp;D team end-to-end.
+      </p>
+    </div>
+  </div>
+
+  <!-- Right: Chemtex Speciality Limited -->
+  <div class="role-card triple-card">
+    <div class="role-header">
+      <img src="Chemtex.png" alt="Chemtex Speciality Limited logo" class="role-logo">
+      <div>
+        <h3 class="role-title">Sales and Service Engineer, Chemtex Speciality Limited</h3>
+        <p class="role-meta">June 2014 – August 2014</p>
+      </div>
+    </div>
+    <div class="role-body">
+      <p>
+        On-call marketing; after-sales servicing of glycol (food &amp; non-food grade); specific gravity tests; bill
+        generation &amp; clarification; Silvox demos; order follow-up.
+      </p>
+    </div>
+  </div>
+
+</div>
+
+<!-- KPMG Summer Internship (dark frozen card) -->
+<div class="frost-card" aria-labelledby="kpmg-role-title">
+  <div class="role-header">
+    <img src="KPMG.png" alt="KPMG logo" class="role-logo">
+    <div>
+      <h3 id="kpmg-role-title" class="role-title">Summer Internship, KPMG India</h3>
+      <p class="role-meta">March 2017 – May 2017</p>
+    </div>
+  </div>
+
+  <p><strong>Project Title:</strong> Preparation of a technical note on SDGs and SDBs and formulation of client proposals and approach notes on IAQ, Sustainable solutions in the transportation sector, and E-Waste Management in the banking sector.</p>
+
+  <p><strong>Description:</strong></p>
+  <ul>
+    <li>Prepared proposals for clients to provide sustainable services in the field of transportation services,</li>
+    <li>Prepared proposals for clients to provide sustainable services on IAQ and</li>
+    <li>Prepared approach notes for clients to provide sustainable services in E-Waste Management.</li>
+  </ul>
+  <p>Provided support in coordinating a seminar on the Biomedical and Hazardous waste management act amendment 2016 and GRI training.</p>
+
+  <div class="frost-actions">
+    <a class="frost-btn" href="https://drive.google.com/file/d/0B7BnsadGNakzX1lRalJxTjdKRDQ/view?usp=drivesdk&resourcekey=0-S8oYmGS4Ho1j4yMbnGwSPg" target="_blank" rel="noopener">Internship Report</a>
+    <a class="frost-btn" href="https://drive.google.com/file/d/14gQ6X0dJ4ZynOG3andCUO6CH6DWVI3gr/view?usp=drivesdk" target="_blank" rel="noopener">Internship certificate</a>
+  </div>
+</div>
+
+
+  <!-- ================================
+     Industrial Trainee Block
+     (dual frosted columns, same style as KPMG)
+================================ -->
+<div class="gdrc-columns">
+  
+  <!-- Left Column: Training Info -->
+  <div class="frost-card">
+    <h4 style="color:#fff;">Industrial Trainee</h4>
+    <p><strong>United Breweries Ltd., Diamond Bottling Plant, Durgapur</strong></p>
+    <p><em>June 2012 – July 2012</em></p>
+    <p>
+      Underwent an industrial training program at Diamond Bottling Plant, in Durgapur, India, during June 2012 – July 2012. Training was in the field of Chemical Process and Industrial Safety.
+    </p>
+    
+    <!-- Training Certificate Button -->
+    <a href="https://docs.google.com/document/d/1no-n5z-aVsOKHyRJzwj4c_3deJcshKx5suUTT4JZZYo/edit?usp=drivesdk"
+       class="frost-btn"
+       target="_blank"
+       rel="noopener">
+      View Training Certificate
+    </a>
+  </div>
+
+  <!-- Right Column: Same for now (you can edit later) -->
+  <div class="frost-card">
+    <h4 style="color:#fff;">Industrial Trainee</h4>
+    <p><strong>Steel Authority of India Ltd. (S.A.I.L), 2013, Burnpur</strong></p>
+    <p><em>June 2013 – July 2013</em></p>
+    <p>
+      Summer Training in the chemical process and analysis of the coke oven, blast furnace, and tar distillation plant.
+    </p>
+    
+    <!-- Training Certificate Button -->
+    <a href="https://docs.google.com/document/d/1no-n5z-aVsOKHyRJzwj4c_3deJcshKx5suUTT4JZZYo/edit?usp=drivesdk"
+       class="frost-btn"
+       target="_blank"
+       rel="noopener">
+      View Training Certificate
+    </a>
+  </div>
+
+</div>
+
+
+</section> <!-- end #career -->
+
+<section id="education">
+  <h2>Education</h2>
+
+  <!-- First two cards side-by-side -->
+  <div class="double-cards">
+    <!-- Box 1: Class X -->
+    <div class="role-card triple-card">
+      <div class="role-header">
+        <img src="faps.png" alt="The Frank Anthony Public School logo" class="role-logo">
+        <div>
+          <h3 class="role-title">The Frank Anthony Public School, Kolkata</h3>
+          <p class="role-meta">171, Acharya Jagdish Chandra Bose Rd, Beniapukur, Kolkata, West Bengal 700014</p>
+        </div>
+      </div>
+      <div class="role-body">
+        <div class="gdrc-columns">
+          <div class="gdrc-column">
+            <p><strong>Completed:</strong> Class X &nbsp;[Board: Indian Certificate Secondary Education (ICSE)] — 2008</p>
+            <p><strong>Score:</strong> 89% <br>(English + Best 3)</p>
+            <div class="edu-actions">
+              <a href="https://drive.google.com/file/d/1MD9n-qUV0ASDHjYj6w44rN3WeWmu7fxf/view?usp=sharing" class="role-btn" target="_blank" rel="noopener">Class X Marksheet</a>
+              <a href="https://drive.google.com/file/d/14MbfBg96RyWkSUPp_FNYYuJGqnG45y3k/view?usp=sharing" class="role-btn" target="_blank" rel="noopener">Class X Passing Certificate</a>
+            </div>
+          </div>
+          <div class="gdrc-column">
+            <iframe class="map-iframe" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                    src="https://www.google.com/maps?q=The+Frank+Anthony+Public+School,+Kolkata&output=embed"></iframe>
+            <a href="https://maps.app.goo.gl/bTdbVggNVAEMCYD29" class="role-btn" target="_blank" rel="noopener" style="margin-top:10px;display:inline-block;">View in maps</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Box 2: Class XII -->
+    <div class="role-card triple-card">
+      <div class="role-header">
+        <img src="faps.png" alt="The Frank Anthony Public School logo" class="role-logo">
+        <div>
+          <h3 class="role-title">The Frank Anthony Public School, Kolkata</h3>
+          <p class="role-meta">171, Acharya Jagdish Chandra Bose Rd, Beniapukur, Kolkata, West Bengal 700014</p>
+        </div>
+      </div>
+      <div class="role-body">
+        <div class="gdrc-columns">
+          <div class="gdrc-column">
+            <p><strong>Completed:</strong> Class XII &nbsp;[Board: Indian Secondary Certificate (ISC)] — 2010</p>
+            <p><strong>Score:</strong> 76% <br>(English + Best 3)</p>
+            <div class="edu-actions">
+              <a href="https://drive.google.com/file/d/1UnFUQpnDwl5dJasGeo4DTvU_kM5JZtmA/view?usp=sharing" class="role-btn" target="_blank" rel="noopener">Class XII Marksheet</a>
+              <a href="https://drive.google.com/file/d/14BDe2jyoUP3mTa0hTPuLwdHOve4RyDaD/view?usp=sharing" class="role-btn" target="_blank" rel="noopener">Class XII Passing Certificate</a>
+            </div>
+          </div>
+          <div class="gdrc-column">
+            <iframe class="map-iframe" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                    src="https://www.google.com/maps?q=The+Frank+Anthony+Public+School,+Kolkata&output=embed"></iframe>
+            <a href="https://maps.app.goo.gl/bTdbVggNVAEMCYD29" class="role-btn" target="_blank" rel="noopener" style="margin-top:10px;display:inline-block;">View in maps</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+      </div>
+    </div>
+  
+ <!-- Everything after this stacks vertically -->
+<div class="stack-cards">
+  <!-- Heritage Institute of Technology -->
+  <div class="role-card triple-card heritage-narrow">
+    <div class="role-header">
+      <img src="heritage.jpeg" alt="Heritage Institute of Technology logo" class="role-logo">
+      <div>
+        <h3 class="role-title">Heritage Institute of Technology, Kolkata</h3>
+        <p class="role-meta">
+          Board: West Bengal University of Technology (WBUT)
+          [Presently Maulana Abdul Kalam Azad University of Technology (MAKAUT)]
+        </p>
+      </div>
+    </div>
+
+    <div class="role-body">
+      <div class="gdrc-columns">
+        <!-- Left: details + scrolling docs -->
+        <div class="gdrc-column">
+          <p><strong>Overall CGPA:</strong> 7.8</p>
+          <p><strong>Stream/ Course:</strong> Bachelor of Technology in Chemical Engineering</p>
+
+          <div class="edu-scroller-wrap limit4" style="position:relative;">
+  <button class="edu-nav prev" aria-label="Scroll left">‹</button>
+
+  <div class="edu-scroller" aria-label="Semester scorecards">
+    <div class="edu-track">
+      <div class="edu-item">
+        <img src="certificate.png" alt="">
+        <a href="https://drive.google.com/file/d/15DN0bW9DC8wVH27XjKvmIqY4Kdy9KrUk/view?usp=sharing" target="_blank" rel="noopener">
+          Semester 1 scorecard
+        </a>
+      </div>
+      <div class="edu-item">
+        <img src="certificate.png" alt="">
+        <a href="https://drive.google.com/file/d/15DN0bW9DC8wVH27XjKvmIqY4Kdy9KrUk/view?usp=sharing" target="_blank" rel="noopener">
+          Semester 2 scorecard
+        </a>
+      </div>
+      <div class="edu-item">
+        <img src="certificate.png" alt="">
+        <a href="https://drive.google.com/file/d/15FwmvopAq1fOFvvvnetHtfG32Z0wCcx6/view?usp=drive_link" target="_blank" rel="noopener">
+          Semester 3 scorecard
+        </a>
+      </div>
+      <div class="edu-item">
+        <img src="certificate.png" alt="">
+        <a href="https://drive.google.com/file/d/15MQgDEUwMKB1ULQu37ldKPnv3CjpmBAn/view?usp=drive_link" target="_blank" rel="noopener">
+          Semester 4 scorecard
+        </a>
+      </div>
+      <div class="edu-item">
+        <img src="certificate.png" alt="">
+        <a href="https://drive.google.com/file/d/15DDeUG798xekJo5z04pJ8cumG2RA4-My/view?usp=drive_link" target="_blank" rel="noopener">
+          Semester 5 scorecard
+        </a>
+      </div>
+      <div class="edu-item">
+        <img src="certificate.png" alt="">
+        <a href="https://drive.google.com/file/d/15xyfUWH5KFwJGR-XHf6_Vd06xoWHVfKD/view?usp=drive_link" target="_blank" rel="noopener">
+          Semester 6 scorecard
+        </a>
+      </div>
+      <div class="edu-item">
+        <img src="certificate.png" alt="">
+        <a href="https://https://drive.google.com/file/d/15A-UlUCsX5px_7kJT3NcCNHX2K43QVoz/view?usp=drive_link" target="_blank" rel="noopener">
+          Semester 7 scorecard
+        </a>
+      </div>
+      <div class="edu-item">
+        <img src="certificate.png" alt="">
+        <a href="https://drive.google.com/file/d/15u0HDW9pScxB6nUnG3oFhBLBZi03HbAD/view?usp=drive_link" target="_blank" rel="noopener">
+          Semester 8 scorecard
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <button class="edu-nav next" aria-label="Scroll right">›</button>
+</div>
+
+          <a href="https://drive.google.com/file/d/18UUG0F6OUdqQWoAWhXziu_0i7H6yByxx/view?usp=sharing"
+   class="role-btn"
+   target="_blank"
+   rel="noopener"
+   style="margin-top:12px;display:inline-block;">
+  Degree Certificate
+</a>
+
+
+        <!-- Right: map + CTA -->
+        <div class="gdrc-column">
+          <iframe
+            class="map-iframe"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps?q=Heritage+Institute+of+Technology,+Kolkata&output=embed">
+          </iframe>
+          <a href="https://maps.app.goo.gl/8e3TiAwX9R9Gbo6m7" class="role-btn" target="_blank" rel="noopener" style="margin-top:10px;display:inline-block;">
+            View in maps
+          </a>
+        </div>         
+  </div>
+
+        
+          
+  </div>
+</div>
+</div>
+
+  <!-- SIIB -->
+  <div class="role-card triple-card heritage-narrow">
+    <div class="role-header">
+      <img src="SIIB.png" alt="SIIB logo" class="role-logo">
+      <div>
+        <h3 class="role-title">Symbiosis Institute of International Business, Pune, India</h3>
+        <p class="role-meta">
+          Board: Symbiosis International University
+        </p>
+      </div>
+    </div>
+
+    <div class="role-body">
+      <div class="gdrc-columns">
+        <!-- Left: details + scrolling docs -->
+        <div class="gdrc-column">
+          <p><strong>Overall CGPA:</strong> 6.7</p>
+          <p><strong>Stream/ Course:</strong> MBA in Energy & ENvironment</p>
+
+          <a href="https://drive.google.com/file/d/18QE20Wr9l82uH7QicqiTKhR6Jb5bJ2Nc/view?usp=sharing"
+   class="role-btn"
+   target="_blank"
+   rel="noopener"
+   style="margin-top:12px;display:inline-block;">
+  Degree Certificate
+</a>
+
+
+        <!-- Right: map + CTA -->
+        <div class="gdrc-column">
+          <iframe
+            class="map-iframe"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps?q=Symbiosis+Institute+of+International+Business,+Pune&output=embed">
+          </iframe>
+          <a href="https://maps.app.goo.gl/14YcMdR3UnW61YVD9" class="role-btn" target="_blank" rel="noopener" style="margin-top:10px;display:inline-block;">
+            View in maps
+          </a>
+        </div> 
+
+</section>
+
+
+          <section id="projects">
+  <h2>Projects</h2>
+
+  <div id="projects-list">
+
+    <!-- Project 0: MSCI – AI Impact -->
+    <div class="project-card">
+      <div class="role-header">
+        <img src="MSCI.png" alt="MSCI logo" class="role-logo">
+        <div>
+          <h3 class="role-title">MSCI – AI First Data Collection: Impact Summary</h3>
+          <p class="role-meta">Platform: Claude, Cursor, MCP connectors</p>
+        </div>
+      </div>
+
+      <div class="gdrc-columns">
+        <!-- Left: Project Description -->
+        <div class="gdrc-column">
+          <p><strong>Overview:</strong> Six months of agentic pipelines, AI-designed workflows and MCP-connected tooling on MSCI's AI First Data Collection Modernization programme.</p>
+          <ul>
+            <li>Built an agentic E&amp;S extraction skill covering 13 ESG datapoints, working in three modes: Extract → Verify → Patch.</li>
+            <li>Designed an issuer-feedback validation agent and led the shared Agent Factory input schema across 6 datasets.</li>
+            <li>Wired 6 AI connectors (Atlassian, M365, DAP, databases, Sustainability &amp; Climate) into daily data operations.</li>
+          </ul>
+        </div>
+
+        <!-- Right: Infographic (click to view full size) -->
+        <div class="gdrc-column">
+          <img src="https://somikds3-glitch.github.io/webportfolio/AI-Impact.png" alt="AI impact infographic" class="tall-shot">
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 1: Evalueserve -->
+    <div class="project-card">
+      <div class="role-header">
+        <img src="EVS.png" alt="Evalueserve logo" class="role-logo">
+        <div>
+          <h3 class="role-title">Evalueserve – Competitor Benchmarking Dashboard</h3>
+          <p class="role-meta">Platform: Microsoft Power BI</p>
+        </div>
+      </div>
+
+      <div class="gdrc-columns">
+        <!-- Left: Project Description -->
+        <div class="gdrc-column">
+          <p><strong>Overview:</strong> This project incorporates a few of the key competitors of the client.</p>
+          <ul>
+            <li>The dashboard provides a holistic view of offerings/specifications, manufacturing units, product portfolios, and recent developments of competitors for power grid-related components such as transformers, switchgear, HVDC components, and battery energy storage systems.</li>
+            <li>Additional coverage included SCADA, PLC, and grid automation components.</li>
+            <li>Enabled comparison/analysis across all competitors for a selected equipment type.</li>
+          </ul>
+
+          <!-- Project Link -->
+          <a href="https://app.powerbi.com/links/KEJoP2Xn1B?ctid=0483ae51-a627-466e-a7dd-de2ac7e1238e&pbi_source=linkShare&bookmarkGuid=57595d44-2fa6-47be-a63a-6a7bce57b52e" 
+             target="_blank" rel="noopener" class="role-btn">
+            Click here to view the project →
+          </a>
+        </div>
+
+        <!-- Right: Screenshots -->
+        <div class="gdrc-column">
+          <img src="EVSProj1.jpg" alt="Competitor Dashboard Screenshot 1" style="width:100%; border-radius:8px; margin-bottom:12px;">
+          <img src="EVSProj2.jpg" alt="Competitor Dashboard Screenshot 2" style="width:100%; border-radius:8px;">
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 2: Evalueserve -->
+    <div class="project-card">
+      <div class="role-header">
+        <img src="EVS.png" alt="Evalueserve logo" class="role-logo">
+        <div>
+          <h3 class="role-title">Evalueserve – Power Sector Trends Report (Balkan Countries)</h3>
+          <p class="role-meta">Platform: Microsoft Word / Excel</p>
+        </div>
+      </div>
+
+      <div class="gdrc-columns">
+        <!-- Left: Project Description -->
+        <div class="gdrc-column">
+          <p><strong>Overview:</strong> This report provides an in-depth analysis of the political and energy sector landscapes across Balkan nations.</p>
+          <ul>
+            <li>Analyzed the political landscapes of Turkey, Serbia, Bosnia, Kosovo, Croatia, and Montenegro.</li>
+            <li>Included information on political stability, leadership (presidents, prime ministers), power ministries, and electrical infrastructure.</li>
+            <li>Deep dive into policies/regulations and plant-level details for Turkey, Serbia, and Bosnia.</li>
+            <li>Political summaries with leadership lists for other Balkan countries.</li>
+            <li>Explored how political stability impacts the shift toward renewable energy sources.</li>
+            <li>Covered each country’s election format, ruling party, and government stance on renewable energy.</li>
+          </ul>
+        </div>
+
+        <!-- Right: Screenshots -->
+        <div class="gdrc-column">
+          <img src="EVSProj3.jpg" alt="Power Sector Report Screenshot 1" style="width:100%; border-radius:8px; margin-bottom:12px;">
+          <img src="EVSProj4.jpg" alt="Power Sector Report Screenshot 2" style="width:100%; border-radius:8px;">
+        </div>
+      </div>
+    </div>
+
+    <!-- Project 3: Evalueserve -->
+<div class="project-card">
+  <div class="role-header">
+    <img src="EVS.png" alt="Evalueserve logo" class="role-logo">
+    <div>
+      <h3 class="role-title">Evalueserve – Legislation Tracker Report</h3>
+      <p class="role-meta">Platform: Microsoft Word / Excel</p>
+    </div>
+  </div>
+
+  <div class="gdrc-columns">
+    <!-- Left: Project Description -->
+    <div class="gdrc-column">
+      <p><strong>Overview:</strong> This report tracks new and updated legislations impacting the global energy and power sector.</p>
+      <ul>
+        <li>Covers newly passed laws and updates to previously enacted bills.</li>
+        <li>Summarizes country/state-level regulations across multiple fuel types and sectors:</li>
+        <ul>
+          <li>Coal</li>
+          <li>Nuclear</li>
+          <li>Utilities / Power Grid / Other</li>
+          <li>Industries</li>
+          <li>Renewables</li>
+          <li>Hydrogen</li>
+          <li>Others (EVs, T&D, green buildings, etc.)</li>
+        </ul>
+      </ul>
+    </div>
+
+    <!-- Right: Screenshots -->
+    <div class="gdrc-column">
+      <img src="EVSProj5.jpg" alt="Legislation Tracker Screenshot 1" style="width:100%; border-radius:8px; margin-bottom:12px;">
+      <img src="EVSProj6.jpg" alt="Legislation Tracker Screenshot 2" style="width:100%; border-radius:8px;">
+    </div>
+  </div>
+</div>
+
+<!-- Project 4: Evalueserve -->
+<div class="project-card hidden">
+  <div class="role-header">
+    <img src="EVS.png" alt="Evalueserve logo" class="role-logo">
+    <div>
+      <h3 class="role-title">Evalueserve – Web Scrapping / Automation Tasks</h3>
+      <p class="role-meta">Platform: Microsoft Power Automate</p>
+    </div>
+  </div>
+
+  <div class="gdrc-columns">
+    <!-- Left: Project Description -->
+    <div class="gdrc-column">
+      <p><strong>Overview:</strong> Automated web scrapping workflows using Microsoft Power Automate.</p>
+      <ul>
+        <li>Built several process flows to automate web scrapping activities across multiple deliverables.</li>
+        <li>Leveraged both the web scrapper plugin and custom Power Automate logic.</li>
+        <li>Handled a mix of simple websites and complex sites requiring pagination algorithms.</li>
+        <li>Attached sample flow snippets as references for key deliverables.</li>
+      </ul>
+    </div>
+
+    <!-- Right: Screenshots -->
+    <div class="gdrc-column">
+      <img src="EVSProj7.jpg" alt="Web Scrapping Flow Screenshot 1" style="width:100%; border-radius:8px; margin-bottom:12px;">
+      <img src="EVSProj8.jpg" alt="Web Scrapping Flow Screenshot 2" style="width:100%; border-radius:8px;">
+    </div>
+  </div>
+</div>
+
+<!-- Project 5: Evalueserve -->
+<div class="project-card hidden">
+  <div class="role-header">
+    <img src="EVS.png" alt="Evalueserve logo" class="role-logo">
+    <div>
+      <h3 class="role-title">Evalueserve – Customer Financials Dashboard</h3>
+      <p class="role-meta">Platform: Microsoft Excel</p>
+    </div>
+  </div>
+
+  <div class="gdrc-columns">
+    <!-- Left: Project Description -->
+    <div class="gdrc-column">
+      <p><strong>Overview:</strong> This Excel dashboard consolidates financial and non-financial parameters for all clients.</p>
+      <ul>
+        <li>Data source: S&amp;P CapIQ.</li>
+        <li>Built using advanced Microsoft Excel techniques, including CapIQ formula integration.</li>
+        <li>Developer tab in Excel was enabled and used extensively to design the dashboard.</li>
+        <li>Provides comprehensive visibility into client financials and key performance indicators.</li>
+      </ul>
+
+      <!-- Project Link -->
+      <a href="https://1drv.ms/x/c/16c51c6eb41fe1da/Eck6tgi7YxxMq-BTm-Hs0R4B4toWbazHwcAhyQWUY0dq3A" 
+         target="_blank" rel="noopener" class="role-btn">
+        Click here to view the project →
+      </a>
+    </div>
+
+    <!-- Right: Screenshots -->
+    <div class="gdrc-column">
+      <img src="EVSProj9.jpg" alt="Customer Financials Dashboard Screenshot 1" style="width:100%; border-radius:8px; margin-bottom:12px;">
+      <img src="EVSProj10.jpg" alt="Customer Financials Dashboard Screenshot 2" style="width:100%; border-radius:8px;">
+    </div>
+  </div>
+</div>
+
+
+  </div> <!-- end #projects-list -->
+
+  <!-- Load More Button -->
+  <div style="text-align:center; margin-top:20px;">
+    <button id="loadMoreProjects" class="black-btn" type="button">Load more projects</button>
+  </div>
+</section>
+
+<!-- Rewards / Accolades Section -->
+<section id="rewards">
+  <h2>Rewards / Accolades</h2>
+  <div style="text-align:center; margin-top:20px;">
+    <img src="EVSReward.jpg" alt="Rewards and Accolades" 
+         style="max-width:800px; width:100%; border-radius:12px; box-shadow:0 6px 20px rgba(0,0,0,0.15);">
+  </div>
+</section>
+
+
+
+
+
+          
+  <section id="certifications">
+  <h2>Certifications</h2>
+
+  <!-- Reuse the same grid + card styles as Testimonials -->
+  <div class="testimonial-masonry" id="cert-list">
+    <!-- Cert 1 -->
+    <div class="frost-card testimonial">
+      <div class="testimonial-header">
+        <img src="KPMG.png" alt="KPMG logo" class="testimonial-img" width="64" height="64">
+        <div>
+          <h4 class="testimonial-name">GRI G4 Training by KPMG</h4>
+          <p class="testimonial-role">8th November 2017</p>
+          <a class="frost-btn" target="_blank" rel="noopener" href="https://drive.google.com/file/d/1loyHcwFzOIQIJLTBELF-tF8nf4Tiq9QS/view?usp=sharing">Open certificate</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cert 2 -->
+    <div class="frost-card testimonial">
+      <div class="testimonial-header">
+        <img src="tuv.jpeg" alt="TÜV logo" class="testimonial-img" width="64" height="64">
+        <div>
+          <h4 class="testimonial-name">ISO 14001:2015 Environmental Management System (EnMS)</h4>
+          <p class="testimonial-role">3rd November 2017</p>
+          <a class="frost-btn" target="_blank" rel="noopener" href="https://drive.google.com/file/d/1g5XaBtcbe56fCBbcNIwL5yK9fSGsJLBq/view?usp=sharing">Open certificate</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cert 3 -->
+    <div class="frost-card testimonial">
+      <div class="testimonial-header">
+        <img src="tuv.jpeg" alt="TÜV logo" class="testimonial-img" width="64" height="64">
+        <div>
+          <h4 class="testimonial-name">ISO 50001:2011 Energy Management System (EMS)</h4>
+          <p class="testimonial-role">3rd November 2017</p>
+          <a class="frost-btn" target="_blank" rel="noopener" href="https://drive.google.com/file/d/1g5XaBtcbe56fCBbcNIwL5yK9fSGsJLBq/view?usp=sharing">Open certificate</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cert 4 -->
+    <div class="frost-card testimonial hidden">
+      <div class="testimonial-header">
+        <img src="KPMG.png" alt="KPMG logo" class="testimonial-img" width="64" height="64">
+        <div>
+          <h4 class="testimonial-name">Lean Six Sigma Certification</h4>
+          <p class="testimonial-role">7th September 2017</p>
+          <a class="frost-btn" target="_blank" rel="noopener" href="https://drive.google.com/file/d/10hxr62E9M2Wj_FE4hr6exRYubS04znVB/view?usp=sharing">Open certificate</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cert 5 -->
+    <div class="frost-card testimonial hidden">
+      <div class="testimonial-header">
+        <img src="nism.jpeg" alt="NISM logo" class="testimonial-img" width="64" height="64">
+        <div>
+          <h4 class="testimonial-name">NISM Series V A, Mutual Fund Distributors License Certificate</h4>
+          <p class="testimonial-role">24th April 2018</p>
+          <a class="frost-btn" target="_blank" rel="noopener" href="https://drive.google.com/file/d/10w6M678mLLfi79fGbfflYSgmnctJqtdi/view?usp=sharing">Open certificate</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cert 6 -->
+    <div class="frost-card testimonial hidden">
+      <div class="testimonial-header">
+        <img src="marketplace.png" alt="Marketplace logo" class="testimonial-img" width="64" height="64">
+        <div>
+          <h4 class="testimonial-name">Strategic Corporate Management, Marketplace Simulation</h4>
+          <p class="testimonial-role">9th December 2017</p>
+          <a class="frost-btn" target="_blank" rel="noopener" href="https://drive.google.com/file/d/19hmPu1YEGdYOCXbcU-9aly3cBvPoUvm3/view?usp=sharing">Open certificate</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cert 7 -->
+    <div class="frost-card testimonial hidden">
+      <div class="testimonial-header">
+        <img src="udemy.png" alt="Udemy logo" class="testimonial-img" width="64" height="64">
+        <div>
+          <h4 class="testimonial-name">Advanced Training in Tableau</h4>
+          <p class="testimonial-role">29th August 2020</p>
+          <a class="frost-btn" target="_blank" rel="noopener" href="https://drive.google.com/file/d/19hmPu1YEGdYOCXbcU-9aly3cBvPoUvm3/view?usp=sharing">Open certificate</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cert 8 -->
+    <div class="frost-card testimonial hidden">
+      <div class="testimonial-header">
+        <img src="linkedin.png" alt="Udemy logo" class="testimonial-img" width="64" height="64">
+        <div>
+          <h4 class="testimonial-name">AI Show: The Basics of Prompt Engineering with Azure OpenAI Service</h4>
+          <p class="testimonial-role">August 2025</p>
+          <a class="frost-btn" target="_blank" rel="noopener" href="https://www.linkedin.com/learning/certificates/c21c6a87c6df62956cb052540b24c5a407994ddaa270ee0aa795cb81c8fef005">Open certificate</a>
+        </div>
+      </div>
+    </div>
+
+        <!-- Cert 9 -->
+    <div class="frost-card testimonial hidden">
+      <div class="testimonial-header">
+        <img src="linkedin.png" alt="Udemy logo" class="testimonial-img" width="64" height="64">
+        <div>
+          <h4 class="testimonial-name">Advanced Prompt Engineering Techniques</h4>
+          <p class="testimonial-role">August 2025</p>
+          <a class="frost-btn" target="_blank" rel="noopener" href="https://www.linkedin.com/learning/certificates/3a47e4c707580a590aab8425840545d5690d117f9ec66e5ec494c0812e86b735">Open certificate</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cert 10 -->
+    <div class="frost-card testimonial hidden">
+      <div class="testimonial-header">
+        <img src="linkedin.png" alt="Udemy logo" class="testimonial-img" width="64" height="64">
+        <div>
+          <h4 class="testimonial-name">Amplify Your Critical Thinking with Generative AI</h4>
+          <p class="testimonial-role">August 2025</p>
+          <a class="frost-btn" target="_blank" rel="noopener" href="https://www.linkedin.com/learning/certificates/6cb9f35b1029e8959c9e26c6cc2b15dc3d63d9c39e20767591fb6d93ec8101d6">Open certificate</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cert 11 -->
+    <div class="frost-card testimonial hidden">
+      <div class="testimonial-header">
+        <img src="linkedin.png" alt="Udemy logo" class="testimonial-img" width="64" height="64">
+        <div>
+          <h4 class="testimonial-name">Becoming More Coachable</h4>
+          <p class="testimonial-role">August 2025</p>
+          <a class="frost-btn" target="_blank" rel="noopener" href="https://www.linkedin.com/learning/certificates/d318fed0344b79a8e4983a8e5b6d11e3e86024203c9b7c6d4f77ba29608d048c">Open certificate</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cert 12 -->
+    <div class="frost-card testimonial hidden">
+      <div class="testimonial-header">
+        <img src="linkedin.png" alt="Udemy logo" class="testimonial-img" width="64" height="64">
+        <div>
+          <h4 class="testimonial-name">Excel and ChatGPT: Data Analysis Power Tips</h4>
+          <p class="testimonial-role">August 2025</p>
+          <a class="frost-btn" target="_blank" rel="noopener" href="https://www.linkedin.com/learning/certificates/84b4095d05d33d24eb2becc9d82d1f672590a3ff318a0c98d1df0f42faef9371">Open certificate</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cert 13 -->
+    <div class="frost-card testimonial hidden">
+      <div class="testimonial-header">
+        <img src="linkedin.png" alt="Udemy logo" class="testimonial-img" width="64" height="64">
+        <div>
+          <h4 class="testimonial-name">Hands-On AI: Introduction to Retrieval-Augmented Generation (RAG)</h4>
+          <p class="testimonial-role">August 2025</p>
+          <a class="frost-btn" target="_blank" rel="noopener" href="https://www.linkedin.com/learning/certificates/0606766c5f70efa3bd5281984dc81ec295fa657b4831a82aefb9a92b00c6dbfb">Open certificate</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cert 14 -->
+    <div class="frost-card testimonial hidden">
+      <div class="testimonial-header">
+        <img src="linkedin.png" alt="Udemy logo" class="testimonial-img" width="64" height="64">
+        <div>
+          <h4 class="testimonial-name">How to Collaborate with Your Colleagues to Build Psychological Safety Together</h4>
+          <p class="testimonial-role">August 2025</p>
+          <a class="frost-btn" target="_blank" rel="noopener" href="https://www.linkedin.com/learning/certificates/8d306e0eb8650de111b4982cac4361d9214125f2dd8d83f6d02f22497de56c4a">Open certificate</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cert 15 -->
+    <div class="frost-card testimonial hidden">
+      <div class="testimonial-header">
+        <img src="linkedin.png" alt="Udemy logo" class="testimonial-img" width="64" height="64">
+        <div>
+          <h4 class="testimonial-name">Mitigating Prompt Injection and Prompt Hacking</h4>
+          <p class="testimonial-role">August 2025</p>
+          <a class="frost-btn" target="_blank" rel="noopener" href="https://www.linkedin.com/learning/certificates/e86f09efe82506cfd10d256231f66f03d00d2a0d3ebd35d997c81cc1430a1e99">Open certificate</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cert 16 -->
+    <div class="frost-card testimonial hidden">
+      <div class="testimonial-header">
+        <img src="linkedin.png" alt="Udemy logo" class="testimonial-img" width="64" height="64">
+        <div>
+          <h4 class="testimonial-name">Multimodal Prompting with Google's Project Gemini</h4>
+          <p class="testimonial-role">August 2025</p>
+          <a class="frost-btn" target="_blank" rel="noopener" href="https://www.linkedin.com/learning/certificates/e570f6b39cec8e76fdeae02370cc1b63cd54b74f19719f31e32c7dc8b980c827">Open certificate</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cert 17 -->
+    <div class="frost-card testimonial hidden">
+      <div class="testimonial-header">
+        <img src="linkedin.png" alt="Udemy logo" class="testimonial-img" width="64" height="64">
+        <div>
+          <h4 class="testimonial-name">Nano Tips for Using ChatGPT for Business with Rachel Woods</h4>
+          <p class="testimonial-role">August 2025</p>
+          <a class="frost-btn" target="_blank" rel="noopener" href="https://www.linkedin.com/learning/certificates/7634ae3d29d954b2595f959eaf9a42975aa0216b605a2aad4d1e871ad7a1a267">Open certificate</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cert 18 -->
+    <div class="frost-card testimonial hidden">
+      <div class="testimonial-header">
+        <img src="linkedin.png" alt="Udemy logo" class="testimonial-img" width="64" height="64">
+        <div>
+          <h4 class="testimonial-name">Nano Tips to Thrive in Uncertainty and Embrace Change with Shadé Zahrai</h4>
+          <p class="testimonial-role">August 2025</p>
+          <a class="frost-btn" target="_blank" rel="noopener" href="https://www.linkedin.com/learning/certificates/302735f76e30de3173c73a8a44af346cde07db3c022fe9d07662e33c5775a77c">Open certificate</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cert 19 -->
+    <div class="frost-card testimonial hidden">
+      <div class="testimonial-header">
+        <img src="linkedin.png" alt="Udemy logo" class="testimonial-img" width="64" height="64">
+        <div>
+          <h4 class="testimonial-name">Prompting ChatGPT with Multimodal Techniques</h4>
+          <p class="testimonial-role">August 2025</p>
+          <a class="frost-btn" target="_blank" rel="noopener" href="https://www.linkedin.com/learning/certificates/d6a4e5545ebcc3b17a63db740ba1e14701b5d8d064aa49be2b6bcc452ab5b34f">Open certificate</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cert 20 -->
+    <div class="frost-card testimonial hidden">
+      <div class="testimonial-header">
+        <img src="linkedin.png" alt="Udemy logo" class="testimonial-img" width="64" height="64">
+        <div>
+          <h4 class="testimonial-name">The Unspoken Rules of High Performers and High Potentials</h4>
+          <p class="testimonial-role">August 2025</p>
+          <a class="frost-btn" target="_blank" rel="noopener" href="https://www.linkedin.com/learning/certificates/2192bb0114ff372ede2e43bc2381ded5d2d0b43881dd7ea7e2c4ca4591bf520b">Open certificate</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cert 21 -->
+    <div class="frost-card testimonial hidden">
+      <div class="testimonial-header">
+        <img src="linkedin.png" alt="Udemy logo" class="testimonial-img" width="64" height="64">
+        <div>
+          <h4 class="testimonial-name">Introduction to Prompt Engineering for Generative AI</h4>
+          <p class="testimonial-role">July 2025</p>
+          <a class="frost-btn" target="_blank" rel="noopener" href="https://www.linkedin.com/learning/certificates/5467ffa6fa479c2a21d55b15218386c5431e20561a025218ca29e58b1a379233">Open certificate</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cert 22 -->
+    <div class="frost-card testimonial hidden">
+      <div class="testimonial-header">
+        <img src="linkedin.png" alt="Udemy logo" class="testimonial-img" width="64" height="64">
+        <div>
+          <h4 class="testimonial-name">Communication within Teams</h4>
+          <p class="testimonial-role">October 2025</p>
+          <a class="frost-btn" target="_blank" rel="noopener" href="https://www.linkedin.com/learning/certificates/8c02ec151d965327f89d15d2ba7632609b3d0273b4259bfe584372de7c1dca0f?trk=share_certificate">Open certificate</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cert 23 -->
+    <div class="frost-card testimonial hidden">
+      <div class="testimonial-header">
+        <img src="AIFluency.png" alt="Udemy logo" class="testimonial-img" width="64" height="64">
+        <div>
+          <h4 class="testimonial-name">AI Fluency: Framework & Foundations</h4>
+          <p class="testimonial-role">May 2026</p>
+          <a class="frost-btn" target="_blank" rel="noopener" href="https://github.com/somikds3-glitch/webportfolio/blob/main/AIFluency.png">Open certificate</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Cert 24 -->
+    <div class="frost-card testimonial hidden">
+      <div class="testimonial-header">
+        <img src="CertiImage.png" alt="Udemy logo" class="testimonial-img" width="64" height="64">
+        <div>
+          <h4 class="testimonial-name">Certificate of Completion – DATA for Excellence</h4>
+          <p class="testimonial-role">December 2025</p>
+          <a class="frost-btn" target="_blank" rel="noopener" href="CertiImage.png">Open certificate</a>
+        </div>
+      </div>
+    </div>
+
+
+<!-- View more (shows 3-at-a-time) --> <div style="text-align:center; margin-top:20px;"> <button id="loadMoreCerts" class="frost-btn" type="button">View more</button> </div> </section>
+
+  <section id="comments">
+  <h2>Recommendations / Testimonials</h2>
+  
+  <div class="testimonial-masonry" id="testimonial-list">
+    
+    <!-- Testimonial 1 -->
+    <div class="frost-card testimonial">
+      <div class="testimonial-header">
+        <img src="IMG_5970.jpeg" alt="Ambuj Rao" class="testimonial-img">
+        <div>
+          <h4 class="testimonial-name">Ambuj Rao</h4>
+          <p class="testimonial-role">Business Researcher / Analytical Thinking Specialist</p>
+          <p class="testimonial-ref">Reference: worked with Somik on different teams</p>
+          <a href="https://www.linkedin.com/in/ambujrao?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" 
+             target="_blank" rel="noopener">
+            <img src="linkedin.png" alt="LinkedIn" class="linkedin-icon">
+          </a>
+        </div>
+      </div>
+      <p class="testimonial-text">
+        "Somik is an exceptional data visualization expert. His ability to transform complex data into visually
+        compelling and informative stories is truly remarkable. He has a deep understanding of data storytelling
+        and can effectively communicate insights to audiences of all levels.
+        <br><br>
+        Beyond his technical skills, Somik is a great team player and always willing to share his knowledge with others.
+        Wishing him all best for all future endeavors. Keep rocking mate!"
+      </p>
+    </div>
+    
+    <!-- Testimonial 2 -->
+    <div class="frost-card testimonial">
+      <div class="testimonial-header">
+        <img src="smahi.jpg" alt="Smahi Pareek" class="testimonial-img">
+        <div>
+          <h4 class="testimonial-name">Smahi Pareek</h4>
+          <p class="testimonial-role">Data and BI Specialist</p>
+          <p class="testimonial-ref">Reference: worked with Somik, in different teams</p>
+          <a href="https://www.linkedin.com/in/smahi-pareek-9abb74156?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" 
+             target="_blank" rel="noopener">
+            <img src="linkedin.png" alt="LinkedIn" class="linkedin-icon">
+          </a>
+        </div>
+      </div>
+      <p class="testimonial-text">
+        "Somik is a very dedicated employee. He has strong domain knowledge. He has a holistic approach to data modeling
+        and forecasting. I have not got a chance to work with him on a project directly but being aware of the tasks he
+        has been involved in, and seeing him at his work, I myself at times have learned so much from him, be it in terms
+        of domain expertise, developing a research scope, tackling project bottlenecks and at times simply maintaining
+        calm when the ship gets rocking.
+        <br><br>
+        Here's wishing him all the best for all his future endeavors. Keep rocking..."
+      </p>
+    </div>
+    <!-- Testimonial 3 -->
+    <div class="frost-card testimonial">
+      <div class="testimonial-header">
+        <img src="rebecca.jpg" alt="Rebecca Panks" class="testimonial-img">
+        <div>
+          <h4 class="testimonial-name">Rebecca Panks</h4>
+          <p class="testimonial-role">Content Specialist</p>
+          <p class="testimonial-ref">Reference: worked with Somik on the same team</p>
+          <a href="https://www.linkedin.com/in/rebecca-panks-62223076?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" 
+             target="_blank" rel="noopener">
+            <img src="linkedin.png" alt="LinkedIn" class="linkedin-icon">
+          </a>
+        </div>
+      </div>
+      <p class="testimonial-text">
+        "Somik is an extremely dedicated individual who puts huge effort and care into his work. He is highly skilled at analytics and has great ability to find the story behind the figures in order to fulfil his PR work, which is the project we worked on together. 
+        He always happily takes feedback on board and successfully implements in the next draft.
+        <br><br>
+        Furthermore, he is very pleasant to work with, and is always happy to help our team out with enquiries and queries.
+        I would easily recommend him for any role that requires analysis and related PR or article writing."
+      </p>
+    </div>
+    <!-- Testimonial 4 -->
+    <div class="frost-card testimonial">
+      <div class="testimonial-header">
+        <img src="atharva.jpg" alt="Atharva Karkhanis" class="testimonial-img">
+        <div>
+          <h4 class="testimonial-name">Atharva Karkhanis</h4>
+          <p class="testimonial-role">Communication/External Engagement Specialist</p>
+          <p class="testimonial-ref">Reference: Atharva and Somik studied together</p>
+          <a href="https://www.linkedin.com/in/atharva-karkhanis-955627187?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" 
+             target="_blank" rel="noopener">
+            <img src="linkedin.png" alt="LinkedIn" class="linkedin-icon">
+          </a>
+        </div>
+      </div>
+      <p class="testimonial-text">
+        "I worked with Somik on several group projects during my MBA. He always brought his analytical skills to the table.
+        His strengths in Tableau, SQL, Excel, R and other statistical tools were always extremely helpful in problem-solving.
+        <br><br>
+        All the very best and a huge thanks for all your contributions."
+      </p>
+    </div>
+    <!-- Testimonial 5 -->
+    <div class="frost-card testimonial">
+      <div class="testimonial-header">
+        <img src="anoop.jpg" alt="Atharva Karkhanis" class="testimonial-img">
+        <div>
+          <h4 class="testimonial-name">Anoop Vinaykumar Kulkarni</h4>
+          <p class="testimonial-role">Business Analytics and IT professional</p>
+          <p class="testimonial-ref">Reference: Anoop worked with Somik but they were at different companies</p>
+          <a href="https://www.linkedin.com/in/anoop-kulkarni-955130120?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" 
+             target="_blank" rel="noopener">
+            <img src="linkedin.png" alt="LinkedIn" class="linkedin-icon">
+          </a>
+        </div>
+      </div>
+      <p class="testimonial-text">
+        "Somik is good with his analytical and research skills. He is a problem solver with averse to tackling tense situations and tedious tasks.
+        Having gained quite an amount of experience in market research domain, he has turned out to be a very useful resource in analytics with a good hand over tools and languages like TABLEU, R, SQL and Excel macros.
+        <br><br>
+        My best wishes for all his future endeavors and look forward to be associated with him again."
+      </p>
+    </div>
+    <!-- Testimonial 6 -->
+    <div class="frost-card testimonial">
+      <div class="testimonial-header">
+        <img src="aish.jpg" alt="Aishwarya Sharma" class="testimonial-img">
+        <div>
+          <h4 class="testimonial-name">Aishwarya Sharma</h4>
+          <p class="testimonial-role">Senior Knowledge Analyst</p>
+          <p class="testimonial-ref">Reference: Aishwarya worked with Somik on the same team</p>
+          <a href="https://www.linkedin.com/in/aishwarya-sharma-95133874?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" 
+             target="_blank" rel="noopener">
+            <img src="linkedin.png" alt="LinkedIn" class="linkedin-icon">
+          </a>
+        </div>
+      </div>
+      <p class="testimonial-text">
+        "Having gained quite an amount of experience in market research domain, he has turned out to be a very useful resource in analytics with a good hand over tools and languages like TABLEU, R, SQL and Excel macros.
+        <br><br>
+        My bestest wishes for all his future endeavors and I always seek to be associated with him again."
+      </p>
+    </div>
+    <!-- Testimonial 7 -->
+    <div class="frost-card testimonial">
+      <div class="testimonial-header">
+        <img src="rhijhul.jpg" alt="Rhijhul Sikka" class="testimonial-img">
+        <div>
+          <h4 class="testimonial-name">Rhijhul Sikka</h4>
+          <p class="testimonial-role">Business Intelligence and Strategy Developer</p>
+          <p class="testimonial-ref">Reference: Rhijhul managed Somik directly</p>
+          <a href="https://www.linkedin.com/in/rhijhul-sikka-a7b3295a?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" 
+             target="_blank" rel="noopener">
+            <img src="linkedin.png" alt="LinkedIn" class="linkedin-icon">
+          </a>
+        </div>
+      </div>
+      <p class="testimonial-text">
+        "Somik is extremely good with his excels and analytical skills. He is light headed in tense situation and knows how to handle tedious tasks.
+        <br><br>
+        He has turned out to be a very useful resource in growing strategic account & handling tough consulting assignments.
+        My best wishes for all his future endeavour and look forward to be associated with him again."
+      </p>
+    </div>
+    <!-- Testimonial 8 -->
+    <div class="frost-card testimonial">
+      <div class="testimonial-header">
+        <img src="sakshi.jpg" alt="Sakshi Jaiswal" class="testimonial-img">
+        <div>
+          <h4 class="testimonial-name">Sakshi Jaiswal</h4>
+          <p class="testimonial-role">HR/QA Specialist</p>
+          <p class="testimonial-ref">Reference: Sakshi worked with Somik but on different teams</p>
+          <a href="https://www.linkedin.com/in/sakshijaiswal02?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" 
+             target="_blank" rel="noopener">
+            <img src="linkedin.png" alt="LinkedIn" class="linkedin-icon">
+          </a>
+        </div>
+      </div>
+      <p class="testimonial-text">
+        "He is a smart worker and a great team player and above all, a great colleague. He is highly dedicated and sincere toward any work assigned and carries a great amount of theoretical and practical knowledge.
+        All your research syndicate as well as consulting projects were very well accomplished by you.
+        I see a great career path for him and I truly believe he will be a boon to global business analytics industry.
+        <br><br>
+        All the best for your future endeavor."
+      </p>
+    </div>
+    <!-- Testimonial 9 -->
+    <div class="frost-card testimonial">
+      <div class="testimonial-header">
+        <img src="mathan.jpg" alt="Manthan Sutaria" class="testimonial-img">
+        <div>
+          <h4 class="testimonial-name">Manthan Sutaria</h4>
+          <p class="testimonial-role">Digital Marketing and Strategist</p>
+          <p class="testimonial-ref">Reference: Manthan and Somik studied together</p>
+          <a href="https://www.linkedin.com/in/manthansutaria?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" 
+             target="_blank" rel="noopener">
+            <img src="linkedin.png" alt="LinkedIn" class="linkedin-icon">
+          </a>
+        </div>
+      </div>
+      <p class="testimonial-text">
+        "Somik is one of the most pleasing personalities around with excellent networking skills.
+        He displays a lot of energy in everything that he gets into and that really puts him apart from most of his peers.
+        <br><br>
+        He is a wonderful team player and a great friend.
+        With strong skillsets like Tableau, SQL I truly believe he will be an invaluable asset to the global business analytics and consulting industry."
+      </p>
+    </div>
+    <!-- Testimonial 10 -->
+    <div class="frost-card testimonial">
+      <div class="testimonial-header">
+        <img src="utsha.jpg" alt="Utsha Ghosh Haldar" class="testimonial-img">
+        <div>
+          <h4 class="testimonial-name">Utsha Ghosh Haldar</h4>
+          <p class="testimonial-role">Senior Analyst- Electricity and Utilities</p>
+          <p class="testimonial-ref">Reference: Utsha worked with Somik on the same team</p>
+          <a href="https://www.linkedin.com/in/utsha-ghosh-97a53190?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" 
+             target="_blank" rel="noopener">
+            <img src="linkedin.png" alt="LinkedIn" class="linkedin-icon">
+          </a>
+        </div>
+      </div>
+      <p class="testimonial-text">
+        "A thoughtful individual coupled with very strong networking skills!
+        He is a smart worker and a great team player and above all, a great friend. He is highly dedicated and sincere toward any work assigned and carries a great amount of theoretical and practical knowledge.
+        <br><br>
+        I see a great career path for him and I truly believe he will be a boon to global business analytics industry. All the best for the career ahead of you."
+      </p>
+    </div>
+    <!-- Testimonial 11 -->
+    <div class="frost-card testimonial">
+      <div class="testimonial-header">
+        <img src="arun.jpg" alt="Arun Srinivas" class="testimonial-img">
+        <div>
+          <h4 class="testimonial-name">Arun Srinivas</h4>
+          <p class="testimonial-role">Advisory, Corporate and Professional Services</p>
+          <p class="testimonial-ref">Reference: Arun worked with Somik on the same team</p>
+          <a href="https://www.linkedin.com/in/arun-srinivas-09502aab?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" 
+             target="_blank" rel="noopener">
+            <img src="linkedin.png" alt="LinkedIn" class="linkedin-icon">
+          </a>
+        </div>
+      </div>
+      <p class="testimonial-text">
+        "Strong analytical skills and critical thinking makes Somik and asset in any task or team. Calm head during challenging times, approachable demeanor and a resourceful nature make him an ideal fit for growth oriented strategic accounts.
+        <br><br>
+        I see a great technical prowess within you and hence I wish you all the best for the career ahead of you."
+      </p>
+    </div>
+    
+    <!-- Testimonial 12 -->
+    <div class="frost-card testimonial">
+      <div class="testimonial-header">
+        <img src="IMG_1596.jpeg" alt="Aayush Jain" class="testimonial-img">
+        <div>
+          <h4 class="testimonial-name">Aayush Jain</h4>
+          <p class="testimonial-role">Advisory, Corporate and Professional Services</p>
+          <p class="testimonial-ref">Reference: Ayush worked with Somik on different teams</p>
+          <a href="https://www.linkedin.com/in/aayush-jain-954aa49b?utm_source=share_via&utm_content=profile&utm_medium=member_ios" 
+             target="_blank" rel="noopener">
+            <img src="linkedin.png" alt="LinkedIn" class="linkedin-icon">
+          </a>
+        </div>
+      </div>
+      <p class="testimonial-text">
+        "I had the opportunity to work alongside Somik at Evalueserve. While we were in different teams, I was consistently impressed by their technical capabilities, specifically in analytics coding and architecture development.
+        <br><br>
+        Somik has a distinct talent for building robust analytical architectures that streamline complex data and support strategic decision-making. I highly recommend them for any role requiring deep technical analytics and systems architecture expertise."
+      </p>
+    </div>
+    
+    <!-- Testimonial 13 -->
+    <div class="frost-card testimonial">
+      <div class="testimonial-header">
+        <img src="kunal.jpg" alt="Kunal Dua" class="testimonial-img">
+        <div>
+          <h4 class="testimonial-name">Kunal Dua</h4>
+          <p class="testimonial-role">Strategic Research Consultant</p>
+          <p class="testimonial-ref">Reference: Kunal worked with Somik, but on different teams</p>
+          <a href="https://www.linkedin.com/in/kunal-dua-a456b395?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" 
+             target="_blank" rel="noopener">
+            <img src="linkedin.png" alt="LinkedIn" class="linkedin-icon">
+          </a>
+        </div>
+      </div>
+      <p class="testimonial-text">
+        "I have had the pleasure of working closely with Somik, and I can confidently say he is one of the most talented individuals when it comes to handling data and tools.
+        His ability to dive deep into data processes, extract valuable insights, and optimize workflows is remarkable. His passion for exploring new tools and getting hands-on with them, even on a personal level, showcases his continuous drive for learning and innovation.
+        While Somik excels at data (his expertise here is nothing short of exceptional), he also brings solid consulting and advisory skills to the table. His Data converted into Strategies and Analysis perfectly complements his problem-solving approach, allowing him to both advise on high-level strategies and implement data-driven solutions with ease.
+        <br><br>
+        What really sets Somik apart is his team spirit. He's always willing to lend a hand, support colleagues, and offer guidance, no matter how busy he is with his own tasks."
+      </p>
+    </div>
+    
+    <!-- More testimonials can be added here in the same format -->
+    
+  </div>
+
+  <!-- Load More Button -->
+  <div style="text-align:center; margin-top:20px;">
+    <button id="loadMoreBtn" class="frost-btn">Load More Testimonials</button>
+  </div>
+</section>
+
+
+  <!-- MODAL -->
+  <div class="modal" id="career-modal" role="dialog" aria-modal="true" aria-label="Career detail">
+    <div class="modal-card">
+      <button class="modal-close" aria-label="Close">✕</button>
+      <img class="modal-img" src="" alt="Logo">
+      <div>
+        <div class="modal-tabs" role="tablist"></div>
+        <h3 class="modal-title">Title</h3>
+        <p class="modal-sub"><span class="modal-year">Year</span></p>
+      </div>
+    </div>
+  </div>
 
   <script>
-  (function(){
-    "use strict";
-    var root = document.documentElement;
-
-    try{ var s=localStorage.getItem("fin-theme"); if(s==="dark"||s==="light") root.setAttribute("data-theme",s);}catch(e){}
-    document.getElementById("themeBtn").addEventListener("click",function(){
-      var dark=root.getAttribute("data-theme")==="dark"||(!root.hasAttribute("data-theme")&&matchMedia("(prefers-color-scheme:dark)").matches);
-      var n=dark?"light":"dark"; root.setAttribute("data-theme",n);
-      try{localStorage.setItem("fin-theme",n);}catch(e){}
+    /* ----------------------
+       1) Hero: one-time cloud reveal
+    ---------------------- */
+    document.addEventListener('DOMContentLoaded', () => {
+      const hero = document.querySelector('.hero-content');
+      if (hero) setTimeout(() => hero.classList.add('visible'), 80);
     });
 
-    var DATA;
-    try{ DATA=JSON.parse(document.getElementById("fin-data").textContent); }
-    catch(e){ document.getElementById("list").innerHTML='<div class="noresult">Could not read the data block.</div>'; return; }
+    /* ----------------------
+       2) Sections cloud reveal + continuous fade
+    ---------------------- */
+    (function() {
+      const sections = Array.from(document.querySelectorAll('section'));
+      if (!sections.length) return;
 
-    if(DATA.owner){
-      if(DATA.owner.name){ document.getElementById("ownerName").textContent=DATA.owner.name; document.title=DATA.owner.name+" · Financial Documents"; }
-      if(DATA.owner.initials) document.getElementById("mono").textContent=DATA.owner.initials;
-      if(DATA.owner.tagline) document.getElementById("ownerTag").textContent=DATA.owner.tagline;
-    }
+      // Seed cloud state
+      sections.forEach(sec => sec.classList.add('reveal-seed'));
 
-    var months=(DATA.months||[]).slice().sort(function(a,b){return (a.id<b.id?1:a.id>b.id?-1:0);});
-    var sections=(DATA.sections||[]).slice();
+      // One-time cloud reveal on first intersection
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            entry.target.classList.remove('reveal-seed');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { root: null, rootMargin: '0px 0px -80px 0px', threshold: 0.15 });
 
-    // profile
-    var prof=DATA.profile||{};
-    if(prof.intro){ var ie=document.getElementById("intro"); ie.textContent=prof.intro; ie.hidden=false; }
-    var PICONS={
-      linkedin:'<path d="M4 4h4v16H4zM6 2.5a2 2 0 1 0 0 4 2 2 0 0 0 0-4z" fill="currentColor" stroke="none"/><path d="M10 9h3.8v2h.05c.53-1 1.8-2.05 3.7-2.05 3.96 0 4.45 2.6 4.45 5.98V20h-4v-4.3c0-1.02-.02-2.34-1.43-2.34-1.43 0-1.65 1.12-1.65 2.27V20h-4z" fill="currentColor" stroke="none"/>',
-      mail:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M4 7l8 6 8-6"/>',
-      cloud:'<path d="M7 18a4 4 0 0 1 .5-8 5 5 0 0 1 9.5 1.5A3.5 3.5 0 0 1 17 18z"/>'
-    };
-    function piconFor(l){
-      var u=(l.url||"").toLowerCase(), lab=(l.label||"").toLowerCase();
-      if(/linkedin/.test(u)||/linkedin/.test(lab)) return PICONS.linkedin;
-      if(u.indexOf("mailto:")===0||/email|mail/.test(lab)) return PICONS.mail;
-      return PICONS.cloud;
-    }
-    var plinks=document.getElementById("plinks");
-    (prof.links||[]).forEach(function(l){
-      var a=document.createElement("a"); a.className="plink"; a.href=l.url;
-      if(a.href.indexOf("mailto:")!==0){ a.target="_blank"; a.rel="noopener noreferrer"; }
-      a.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">'+piconFor(l)+'</svg>';
-      var sp=document.createElement("span"); sp.textContent=l.label||"Link"; a.appendChild(sp);
-      plinks.appendChild(a);
+      sections.forEach(sec => io.observe(sec));
+
+      // Disable section opacity fading by forcing full opacity
+      function update() {
+        for (const el of sections) {
+          el.style.opacity = "1";
+        }
+      }
+
+
+      window.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update, { passive: true });
+      window.addEventListener('load', update, { passive: true });
+      document.addEventListener('DOMContentLoaded', update, { passive: true });
+    })();
+    </script>
+
+    <!-- ✅ Unified JavaScript block -->
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const sections = document.querySelectorAll("section");
+      const navLinks = document.querySelectorAll("nav a");
+
+      // Keep CSS --nav-h equal to the actual nav height
+      const navEl = document.querySelector('nav');
+      const setNavH = () => document.documentElement.style.setProperty('--nav-h', ((navEl && navEl.offsetHeight) || 64) + 'px');
+      setNavH(); window.addEventListener('resize', setNavH); window.addEventListener('load', setNavH);
+
+  
+      // ----------------------
+      // Modal elements
+      // ----------------------
+      const modal = document.getElementById('career-modal');
+      const mTitle = modal.querySelector('.modal-title');
+      const mSub   = modal.querySelector('.modal-sub');
+      const mImg   = modal.querySelector('.modal-img');
+      const mTabs  = modal.querySelector('.modal-tabs');
+      const mClose = modal.querySelector('.modal-close');
+  
+      function renderEntry(entry) {
+        mTitle.textContent = entry.title || '';
+        mSub.innerHTML = `<span class="modal-year">${entry.year || ''}</span> — ${entry.subtitle || ''}`;
+        mImg.src = entry.img || '';
+        mImg.alt = entry.alt || entry.title || 'Logo';
+      }
+  
+      function openModal(payload) {
+        const items = Array.isArray(payload) ? payload : [payload];
+        mTabs.innerHTML = '';
+  
+        if (items.length > 1) {
+          items.forEach((it, idx) => {
+            const tab = document.createElement('button');
+            tab.className = 'modal-tab';
+            tab.type = 'button';
+            tab.role = 'tab';
+            tab.setAttribute('aria-selected', idx === 0 ? 'true' : 'false');
+            tab.textContent = it.tab ? it.tab : (it.title ? it.title : `Item ${idx + 1}`);
+            tab.addEventListener('click', () => {
+              mTabs.querySelectorAll('.modal-tab').forEach(t => t.setAttribute('aria-selected','false'));
+              tab.setAttribute('aria-selected','true');
+              renderEntry(items[idx]);
+            });
+            mTabs.appendChild(tab);
+          });
+        }
+  
+        renderEntry(items[0]);
+        modal.classList.add('show');
+      }
+  
+      function closeModal() { modal.classList.remove('show'); }
+      mClose.addEventListener('click', closeModal);
+      modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+  
+      // ----------------------
+      // Timeline setup
+      // ----------------------
+      function initTimeline() {
+        const line   = document.querySelector('.timeline');
+        const cursor = document.querySelector('.cursor');
+        const years  = Array.from(document.querySelectorAll('.timeline .year'));
+  
+        if (!line || !cursor || !years.length) return;
+  
+        function moveCursorTo(el) {
+          const rect = el.getBoundingClientRect();
+          const parentRect = line.getBoundingClientRect();
+          const left = rect.left - parentRect.left + line.scrollLeft;
+          cursor.style.left = `${left + 6}px`;
+          cursor.style.width = `${rect.width - 12}px`;
+          el.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        }
+  
+        function setActive(el) {
+          years.forEach(y => y.classList.remove('active'));
+          el.classList.add('active');
+          moveCursorTo(el);
+        }
+  
+        // Initial active
+        const firstActive = years.find(y => !y.disabled && !y.classList.contains('disabled'));
+        if (firstActive) setTimeout(() => setActive(firstActive), 100);
+  
+        // Button clicks
+        years.forEach(btn => {
+          btn.addEventListener('click', () => {
+            if (btn.disabled || btn.classList.contains('disabled')) return;
+            setActive(btn);
+  
+            const raw = btn.dataset.payload;
+            if (!raw) return;
+            let payload;
+            try { payload = JSON.parse(raw); } catch { payload = null; }
+            if (payload) openModal(payload);
+          });
+        });
+  
+        // Resize handling
+        window.addEventListener('resize', () => {
+          const active = document.querySelector('.timeline .year.active');
+          if (active) moveCursorTo(active);
+        });
+      }
+  
+      // ----------------------
+      // Section switching
+      // ----------------------
+      function showSection(id) {
+        sections.forEach(sec => {
+          sec.style.display = (sec.id === id) ? "block" : "none";
+        });
+  
+        if (id === "career") {
+          initTimeline();
+        }
+      }
+  
+      // Default show home
+      showSection("home");
+  
+      navLinks.forEach(link => {
+        link.addEventListener("click", e => {
+          e.preventDefault();
+          const id = link.getAttribute("href").substring(1);
+          showSection(id);
+        });
+        // Make any in-page anchor (e.g., href="#projects") switch sections
+        document.body.addEventListener("click", (e) => {
+          const a = e.target.closest('a[href^="#"]');
+          if (!a) return;
+        
+          const id = a.getAttribute("href").slice(1);
+          const target = document.getElementById(id);
+          if (!target) return; // not a section anchor
+        
+          e.preventDefault();
+          showSection(id);
+          target.scrollTo({ top: 0, behavior: "smooth" });
+        });
+
+      });
     });
 
-    var BRANDS={
-      sbi:{name:"SBI",domain:"sbi.co.in",color:"#22409a"},
-      kotak:{name:"Kotak",domain:"kotak.com",color:"#ed1c24"},
-      hdfc:{name:"HDFC",domain:"hdfcbank.com",color:"#004c8f"},
-      icici:{name:"ICICI",domain:"icicibank.com",color:"#ae282e"},
-      lic:{name:"LIC",domain:"licindia.in",color:"#00539f"},
-      absl:{name:"ABSL",domain:"adityabirlacapital.com",color:"#e21a23"},
-      canara:{name:"Canara",domain:"canararobeco.com",color:"#0067b1"},
-      ppfas:{name:"PPFAS",domain:"amc.ppfas.com",color:"#f47a20"},
-      epfo:{name:"EPFO",domain:"epfindia.gov.in",color:"#1f6f43"},
-      airtel:{name:"Airtel",domain:"airtel.in",color:"#e40000"}
-    };
-    var TYPES={
-      bank:{label:"Banking",c:"var(--c-bank)",svg:'<path d="M3 21h18M4 21V10M20 21V10M12 3l9 5H3l9-5zM8 21v-7M12 21v-7M16 21v-7"/>'},
-      pay:{label:"Salary",c:"var(--c-pay)",svg:'<path d="M7 3h7l5 5v13H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2z"/><path d="M14 3v5h5"/><path d="M12 11c-1.3 0-2 .6-2 1.4 0 2 4 1.1 4 3.1 0 .9-.8 1.5-2 1.5s-2-.6-2-1.3M12 10v1M12 17.5v1"/>'},
-      fund:{label:"Investments",c:"var(--c-fund)",svg:'<path d="M3 3v18h18"/><path d="M7 14l3-3 3 2 5-6"/><path d="M18 7h3v3"/>'},
-      tax:{label:"Tax",c:"var(--c-tax)",svg:'<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 7h6M8.5 11.5l7 7M15.5 11.5l-7 7"/>'},
-      rent:{label:"Housing",c:"var(--c-rent)",svg:'<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/>'},
-      util:{label:"Utilities",c:"var(--c-util)",svg:'<path d="M5 13a10 10 0 0 1 14 0M8.5 16.5a5 5 0 0 1 7 0M2 9.5a15 15 0 0 1 20 0"/><circle cx="12" cy="20" r="1"/>'},
-      prov:{label:"Provident fund",c:"var(--c-prov)",svg:'<path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/>'},
-      ins:{label:"Insurance",c:"var(--c-ins)",svg:'<path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"/>'},
-      archive:{label:"Archive",c:"var(--c-arch)",svg:'<path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M3 11h18"/>'},
-      doc:{label:"Document",c:"var(--c-doc)",svg:'<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5z"/><path d="M14 3v5h5M9 13h6M9 17h6"/>'}
-    };
-    var ORDER={pay:0,tax:1,bank:2,fund:3,rent:4,util:5,prov:6,ins:7,archive:8,doc:9};
-
-    function classify(link){
-      var t=(link.title||"").toLowerCase();
-      var out={type:link.type||null, brand:link.brand||null};
-      if(!out.brand){
-        if(/\bsbi\b|state bank/.test(t)) out.brand="sbi";
-        else if(/kotak/.test(t)) out.brand="kotak";
-        else if(/hdfc/.test(t)) out.brand="hdfc";
-        else if(/icici/.test(t)) out.brand="icici";
-        else if(/\blic\b/.test(t)) out.brand="lic";
-        else if(/aditya birla|absl/.test(t)) out.brand="absl";
-        else if(/canara/.test(t)) out.brand="canara";
-        else if(/parag parikh|ppfas/.test(t)) out.brand="ppfas";
-        else if(/epfo/.test(t)) out.brand="epfo";
-        else if(/airtel/.test(t)) out.brand="airtel";
-      }
-      if(!out.type){
-        if(/ppf|epf|epfo|uan|provident/.test(t)) out.type="prov";
-        else if(/\blic\b|policy|insurance/.test(t)) out.type="ins";
-        else if(/internet|broadband|wifi|mobile bill|airtel|jio|vodafone|\bvi\b|electricity|gas bill/.test(t)) out.type="util";
-        else if(/mutual|\bmf\b|cams|folio/.test(t)) out.type="fund";
-        else if(/tax|computation|earnings|ctc|form 16|ytd/.test(t)) out.type="tax";
-        else if(/rent/.test(t)) out.type="rent";
-        else if(/payslip|salary/.test(t)) out.type="pay";
-        else if(/sbi|kotak|hdfc|icici|bank|account statement|passbook|statement/.test(t)) out.type="bank";
-        else out.type="doc";
-      }
-      if(out.brand){
-        if(out.brand==="absl"||out.brand==="canara"||out.brand==="ppfas") out.type="fund";
-        else if(out.brand==="epfo") out.type="prov";
-        else if(out.brand==="lic") out.type="ins";
-        else if(out.brand==="airtel") out.type="util";
-      }
-      return out;
-    }
-
-    function svgIcon(d){return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">'+d+'</svg>';}
-    function makeTile(info){
-      var tile=document.createElement("span"); tile.className="tile";
-      var ty=TYPES[info.type]||TYPES.doc; var brand=info.brand?BRANDS[info.brand]:null;
-      tile.style.setProperty("--c", brand?brand.color:ty.c);
-      if(brand){
-        var img=document.createElement("img");
-        img.src="https://www.google.com/s2/favicons?domain="+brand.domain+"&sz=128";
-        img.alt=brand.name; img.loading="lazy"; img.width=38; img.height=38;
-        var toInitials=function(){ var sp=document.createElement("span"); sp.className="initials"; sp.textContent=brand.name.slice(0,4); tile.innerHTML=""; tile.appendChild(sp); };
-        img.onerror=toInitials;
-        // The favicon service answers a missing icon with a tiny generic globe (~16px).
-        // Treat anything under 24px as "no real logo" and show clean branded initials instead.
-        img.onload=function(){ if(!img.naturalWidth || img.naturalWidth<24) toInitials(); };
-        tile.appendChild(img);
-      } else { tile.innerHTML=svgIcon(ty.svg); }
-      return tile;
-    }
-    function subLabel(info){ var ty=TYPES[info.type]||TYPES.doc; var brand=info.brand?BRANDS[info.brand]:null; return brand?(brand.name+" · "+ty.label):ty.label; }
-
-    var EXT=svgIcon('<path d="M7 17L17 7M9 7h8v8"/>');
-    var LOCK='<svg class="lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>';
-    var KEY='<svg class="key" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="4"/><path d="M10.8 12.2L21 2M16 7l3 3M14 9l2 2"/></svg>';
-    var COPYSVG='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>';
-    var PIN='<svg class="pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 17v5M7 4h10l-1 7 3 3H5l3-3z"/></svg>';
-
-    function copyBtn(value){
-      var btn=document.createElement("button"); btn.className="copy"; btn.type="button"; btn.innerHTML=COPYSVG+'<span>Copy</span>';
-      btn.addEventListener("click",function(ev){
-        ev.preventDefault(); ev.stopPropagation();
-        var done=function(){ btn.classList.add("done"); btn.querySelector("span").textContent="Copied"; setTimeout(function(){btn.classList.remove("done"); btn.querySelector("span").textContent="Copy";},1400); };
-        function fallback(){ var ta=document.createElement("textarea"); ta.value=value; document.body.appendChild(ta); ta.select(); try{document.execCommand("copy");}catch(e){} document.body.removeChild(ta); done(); }
-        try{ if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(value).then(done,fallback);} else {fallback();} }catch(e){ fallback(); }
+    document.addEventListener("DOMContentLoaded", () => {
+      const testimonials = document.querySelectorAll("#testimonial-list .testimonial");
+      const loadMoreBtn = document.getElementById("loadMoreBtn");
+    
+      let visibleCount = 3; // how many testimonials are shown at first
+      const increment = 3;  // how many to show each click
+    
+      // hide testimonials beyond visibleCount
+      testimonials.forEach((t, i) => {
+        if (i >= visibleCount) t.classList.add("hidden");
       });
-      return btn;
-    }
-
-    function makeCard(link){
-      var info=classify(link);
-      var card=document.createElement("div"); card.className="card";
-      var a=document.createElement("a"); a.className="open"; a.href=link.url; a.target="_blank"; a.rel="noopener noreferrer";
-      a.appendChild(makeTile(info));
-      var txt=document.createElement("span"); txt.className="card-text";
-      var ti=document.createElement("span"); ti.className="card-title"; ti.textContent=link.title||"Document";
-      var sub=document.createElement("span"); sub.className="card-sub"; sub.textContent=subLabel(info);
-      txt.appendChild(ti); txt.appendChild(sub); a.appendChild(txt);
-      var ext=document.createElement("span"); ext.className="ext"; ext.innerHTML=EXT; a.appendChild(ext);
-      card.appendChild(a);
-      if(link.password){
-        var pw=document.createElement("div"); pw.className="pw";
-        pw.innerHTML=LOCK+'<span class="label">Password</span><code></code>';
-        pw.querySelector("code").textContent=link.password;
-        pw.appendChild(copyBtn(link.password)); card.appendChild(pw);
-      }
-      return card;
-    }
-
-    function buildGroup(g, opts){
-      opts=opts||{};
-      var d=document.createElement("details"); d.className="month"+(opts.section?" sec":""); d.open=!!opts.open;
-      var sum=document.createElement("summary"); sum.className="month-head";
-      var tt=document.createElement("span"); tt.className="month-title";
-      var nm=document.createElement("span"); nm.className="month-name";
-      if(opts.section){ nm.innerHTML=PIN; }
-      nm.appendChild(document.createTextNode(g.name||g.id)); tt.appendChild(nm);
-      if(g.meta){ var me=document.createElement("span"); me.className="month-meta"; me.textContent=g.meta; tt.appendChild(me); }
-      sum.appendChild(tt);
-      var cnt=document.createElement("span"); cnt.className="month-count";
-      cnt.textContent=(opts.links.length)+" link"+(opts.links.length===1?"":"s"); sum.appendChild(cnt);
-      var ch=document.createElement("span"); ch.className="chev"; ch.innerHTML=svgIcon('<path d="M6 9l6 6 6-6"/>'); sum.appendChild(ch);
-      d.appendChild(sum);
-      var lk=document.createElement("div"); lk.className="links";
-      if(opts.section && g.credential && g.credential.password){
-        var cr=document.createElement("div"); cr.className="cred";
-        cr.innerHTML=KEY+'<span class="label">'+(g.credential.label?g.credential.label+' · ':'')+'Password</span><code></code>';
-        cr.querySelector("code").textContent=g.credential.password;
-        cr.appendChild(copyBtn(g.credential.password)); lk.appendChild(cr);
-      }
-      if(opts.links.length===0){ var em=document.createElement("div"); em.className="empty"; em.textContent="No links yet."; lk.appendChild(em); }
-      else opts.links.forEach(function(l){ lk.appendChild(makeCard(l)); });
-      d.appendChild(lk); return d;
-    }
-
-    var listEl=document.getElementById("list");
-    var chipsEl=document.getElementById("chips");
-    var searchEl=document.getElementById("search");
-    var state={year:"all", q:""};
-
-    var years=[]; months.forEach(function(m){var y=(m.id||"").slice(0,4); if(y&&years.indexOf(y)<0)years.push(y);});
-    function mkChip(label,val){
-      var b=document.createElement("button"); b.className="chip"; b.type="button"; b.textContent=label;
-      b.dataset.val=val; b.setAttribute("aria-pressed", state.year===val?"true":"false");
-      b.addEventListener("click",function(){ state.year=val; render(); });
-      return b;
-    }
-    function buildChips(){
-      chipsEl.innerHTML="";
-      chipsEl.appendChild(mkChip("All","all"));
-      years.forEach(function(y){ chipsEl.appendChild(mkChip(y,y)); });
-      if(sections.length) chipsEl.appendChild(mkChip("Reference","ref"));
-      var toggle=document.createElement("button"); toggle.className="chip ghost"; toggle.type="button"; toggle.textContent="Expand all";
-      toggle.addEventListener("click",function(){
-        var ds=listEl.querySelectorAll("details"); var anyClosed=false;
-        ds.forEach(function(d){ if(!d.open) anyClosed=true; });
-        ds.forEach(function(d){ d.open=anyClosed; });
-        toggle.textContent=anyClosed?"Collapse all":"Expand all";
+    
+      loadMoreBtn.addEventListener("click", () => {
+        const hiddenTestimonials = document.querySelectorAll("#testimonial-list .testimonial.hidden");
+        for (let i = 0; i < increment && i < hiddenTestimonials.length; i++) {
+          hiddenTestimonials[i].classList.remove("hidden");
+        }
+    
+        // hide button if no more testimonials
+        if (document.querySelectorAll("#testimonial-list .testimonial.hidden").length === 0) {
+          loadMoreBtn.style.display = "none";
+        }
       });
-      chipsEl.appendChild(toggle);
+    });
+
+    </script>
+
+    document.addEventListener("DOMContentLoaded", () => {
+  const certs = document.querySelectorAll("#cert-list .testimonial");
+  const btn   = document.getElementById("loadMoreCerts");
+  if (!btn || !certs.length) return;
+
+  let visible = 3;
+  const step  = 3;
+
+  // Hide all beyond the first 3
+  certs.forEach((c, i) => { 
+    if (i >= visible) c.classList.add("hidden"); 
+  });
+
+  // Ensure button only hides if nothing left
+  if (certs.length <= visible) {
+    btn.style.display = "none";
+  } else {
+    btn.style.display = "inline-block";  // force visibility
+  }
+
+  btn.addEventListener("click", () => {
+    const hidden = document.querySelectorAll("#cert-list .testimonial.hidden");
+    for (let i = 0; i < step && i < hidden.length; i++) {
+      hidden[i].classList.remove("hidden");
     }
-
-    function matches(link,q){
-      if(!q) return true;
-      var info=classify(link);
-      return ((link.title||"")+" "+(link.password||"")+" "+subLabel(info)).toLowerCase().indexOf(q)>=0;
+    if (document.querySelectorAll("#cert-list .testimonial.hidden").length === 0) {
+      btn.style.display = "none";
     }
+  });
+});
 
-    function render(){
-      Array.prototype.forEach.call(chipsEl.querySelectorAll(".chip:not(.ghost)"),function(c){
-        c.setAttribute("aria-pressed", c.dataset.val===state.year?"true":"false");
-      });
-      listEl.innerHTML="";
-      var q=state.q.trim().toLowerCase();
-      var searching=q.length>0, yr=state.year;
-      var wantSections = searching || yr==="all" || yr==="ref";
-      var wantMonths   = searching || yr!=="ref";
-      var shown=0, total=0;
 
-      if(wantSections){
-        sections.forEach(function(sec){
-          var links=(sec.links||[]).filter(function(l){return matches(l,q);});
-          if(searching && links.length===0) return;
-          total+=links.length; shown++;
-          listEl.appendChild(buildGroup(sec,{links:links, section:true, open: searching||yr==="ref"}));
-        });
-      }
-      if(wantMonths){
-        var firstOpen=false;
-        months.forEach(function(m){
-          if(!searching && yr!=="all" && yr!=="ref" && (m.id||"").slice(0,4)!==yr) return;
-          var links=(m.links||[]).filter(function(l){return matches(l,q);});
-          if(searching && links.length===0) return;
-          links=links.slice().map(function(l,i){return {l:l,i:i,o:(ORDER[classify(l).type]||9)};})
-            .sort(function(a,b){return a.o-b.o || a.i-b.i;}).map(function(x){return x.l;});
-          total+=links.length; shown++;
-          var openIt = searching || (yr!=="all" && yr!=="ref") || !firstOpen;
-          if(!firstOpen) firstOpen=true;
-          listEl.appendChild(buildGroup(m,{links:links, section:false, open:openIt}));
-        });
-      }
-      if(shown===0){ listEl.innerHTML='<div class="noresult">No documents match “'+state.q+'”.</div>'; }
-      document.getElementById("stamp").textContent="Last updated November 2026 · "+total+" documents";
+
+  <script>
+document.addEventListener('DOMContentLoaded', () => {
+  document.querySelectorAll('.edu-scroller-wrap').forEach(wrap => {
+    const scroller = wrap.querySelector('.edu-scroller');
+    const prev = wrap.querySelector('.prev');
+    const next = wrap.querySelector('.next');
+    function step(){ return Math.max(240, Math.round(scroller.clientWidth * 0.8)); }
+
+prev.addEventListener('click', () => scroller.scrollBy({ left: -step(), behavior: 'smooth' }));
+next.addEventListener('click', () => scroller.scrollBy({ left:  step(),  behavior: 'smooth' }));
+
+  });
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const list = document.getElementById("cert-list");
+  const btn  = document.getElementById("loadMoreCerts");
+  if (!list || !btn) return;
+
+  // Always start with only 3 visible
+  const cards = Array.from(list.querySelectorAll(".testimonial"));
+  cards.forEach((el, i) => {
+    if (i >= 3) el.classList.add("hidden");
+  });
+
+  // Show or hide button based on how many cards exist
+  btn.style.display = (cards.length > 3) ? "inline-block" : "none";
+
+  btn.addEventListener("click", (e) => {
+    e.preventDefault();               // just in case
+    const hiddenNow = Array.from(list.querySelectorAll(".testimonial.hidden")).slice(0, 3);
+    hiddenNow.forEach(el => el.classList.remove("hidden"));
+
+    // Hide button if nothing left to show
+    if (!list.querySelector(".testimonial.hidden")) {
+      btn.style.display = "none";
     }
+  });
+});
+</script>
 
-    var tmr;
-    searchEl.addEventListener("input",function(){ clearTimeout(tmr); tmr=setTimeout(function(){ state.q=searchEl.value; render(); },120); });
+      <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const projects = document.querySelectorAll("#projects-list .project-card");
+  const btn = document.getElementById("loadMoreProjects");
+  let visible = 2;
+  const step = 2;
 
-    buildChips(); render();
-  })();
-  </script>
-</body>
-</html>
+  projects.forEach((p, i) => {
+    if (i >= visible) p.classList.add("hidden");
+  });
+
+  btn.addEventListener("click", () => {
+    const hidden = document.querySelectorAll("#projects-list .project-card.hidden");
+    for (let i = 0; i < step && i < hidden.length; i++) {
+      hidden[i].classList.remove("hidden");
+    }
+    if (document.querySelectorAll("#projects-list .project-card.hidden").length === 0) {
+      btn.style.display = "none";
+    }
+  });
+
+  if (projects.length <= visible) {
+    btn.style.display = "none";
+  }
+});
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const imgs = document.querySelectorAll("#projects .gdrc-column img");
+  const lightbox = document.getElementById("imageLightbox");
+  const lightboxImg = lightbox.querySelector("img");
+
+  imgs.forEach(img => {
+    img.addEventListener("click", () => {
+      lightboxImg.src = img.src;
+      lightbox.classList.toggle("tall", img.classList.contains("tall-shot"));
+      lightbox.classList.add("active");
+    });
+  });
+
+  // Close when clicking overlay or pressing ESC
+  lightbox.addEventListener("click", () => {
+    lightbox.classList.remove("active");
+  });
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") lightbox.classList.remove("active");
+  });
+});
+</script>
+
+      
+<!-- Image Lightbox -->
+<div class="image-lightbox" id="imageLightbox">
+  <img src="" alt="Expanded Project Screenshot">
+</div>
+
+
+  </body>
