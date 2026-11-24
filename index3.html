@@ -1252,6 +1252,7 @@
 .week-legend span { display: inline-flex; align-items: center; }
 .week-legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 8px; }
 .week-legend em { font-style: normal; font-weight: 700; margin-left: 5px; }
+.gdrc-columns.mentions-only { grid-template-columns: 1fr; margin-top: 18px; }
 .legend-icon { width: 18px; height: 18px; object-fit: contain; margin-right: 6px; }
 .week-others { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 8px; font-size: 12px; color: #666; }
 .week-others::before { content: "Other tools:"; font-weight: 700; color: #444; }
@@ -1716,6 +1717,8 @@
           <div class="chip-group"><span>BI &amp; Design</span><div class="chip-list"><span class="chip"><img src="powerbi.png" alt="" class="chip-icon">Power BI / DAX</span><span class="chip"><img src="miro.png" alt="" class="chip-icon">Miro</span><span class="chip">Figma</span></div></div>
           <div class="chip-group"><span>Delivery</span><div class="chip-list"><span class="chip"><img src="jira.png" alt="" class="chip-icon">Jira</span><span class="chip"><img src="postman.png" alt="" class="chip-icon">Postman</span><span class="chip"><img src="loop.png" alt="" class="chip-icon">Microsoft Loop</span><span class="chip"><img src="whiteboard.png" alt="" class="chip-icon">Microsoft Whiteboard</span><span class="chip">Confluence</span></div></div>
         </div>
+
+        <a href="#proj-msci" class="role-btn">View important projects →</a>
       </div>
     </div>
 
@@ -1737,70 +1740,34 @@
         <li>Developed advanced data visualization dashboards using Excel, Power BI, Infogram, Google Data Studio, and Tableau. These dashboards increased visibility of key business insights for stakeholders.</li>
       </ul>
 
-    <!-- Hands-On Tools Usage -->
-      <div class="role-tools">
+      <!-- Hands-On Tools Usage (stacked bar; shares add to 100%) -->
+      <div class="week">
         <h4>Hands-On Tools Usage</h4>
-        <div class="tools-grid">
-          <div class="tool">
-            <img src="excel.png" alt="Microsoft Excel" class="tool-icon">
-            <span>Advanced Microsoft Excel</span>
-            <div class="bar"><div style="width:25%"></div></div>
-            <span class="percent">25%</span>
-          </div>
-      
-          <div class="tool">
-            <img src="powerbi.png" alt="Power BI" class="tool-icon">
-            <span>Data Visualisation (Power BI)</span>
-            <div class="bar"><div style="width:20%"></div></div>
-            <span class="percent">20%</span>
-          </div>
-      
-          <div class="tool">
-            <img src="powerautomate.png" alt="Power Automate (Desktop)" class="tool-icon">
-            <span>Power Automate (Desktop)</span>
-            <div class="bar"><div style="width:20%"></div></div>
-            <span class="percent">20%</span>
-          </div>
-      
-          <div class="tool">
-            <img src="webscraper.png" alt="WebScrapper" class="tool-icon">
-            <span>WebScrapper</span>
-            <div class="bar"><div style="width:15%"></div></div>
-            <span class="percent">15%</span>
-          </div>
-      
-          <div class="tool">
-            <img src="tableau.png" alt="Tableau" class="tool-icon">
-            <span>Tableau</span>
-            <div class="bar"><div style="width:5%"></div></div>
-            <span class="percent">5%</span>
-          </div>
-
-          <div class="tool">
-            <img src="sp.png" alt="S&P CapIQ" class="tool-icon">
-            <span>S&P CapIQ</span>
-            <div class="bar"><div style="width:5%"></div></div>
-            <span class="percent">5%</span>
-          </div>
-
-          <div class="tool">
-            <img src="factiva.png" alt="Factiva" class="tool-icon">
-            <span>Factiva</span>
-            <div class="bar"><div style="width:5%"></div></div>
-            <span class="percent">5%</span>
-          </div>
-      
-          <div class="tool">
-            <span>Others</span>
-            <div class="bar"><div style="width:5%"></div></div>
-            <span class="percent">5%</span>
-          </div>
+        <div class="week-bar" role="img" aria-label="Time split: Advanced Microsoft Excel 25%, Data Visualisation (Power BI) 20%, Power Automate (Desktop) 20%, WebScrapper 15%, Tableau 5%, S&amp;P CapIQ 5%, Factiva 5%, Others 5%">
+          <div style="width:25%; background:#0047AB"></div>
+          <div style="width:20%; background:#2E6FD8"></div>
+          <div style="width:20%; background:#6FA0EA"></div>
+          <div style="width:15%; background:#A9C6F2"></div>
+          <div style="width:5%; background:#1B2A41"></div>
+          <div style="width:5%; background:#5B6B82"></div>
+          <div style="width:5%; background:#8FA3BF"></div>
+          <div style="width:5%; background:#B8BEC8"></div>
+        </div>
+        <div class="week-legend">
+          <span><i style="background:#0047AB"></i><img src="excel.png" alt="Microsoft Excel" class="legend-icon">Advanced Microsoft Excel<em>25%</em></span>
+          <span><i style="background:#2E6FD8"></i><img src="powerbi.png" alt="Power BI" class="legend-icon">Data Visualisation (Power BI)<em>20%</em></span>
+          <span><i style="background:#6FA0EA"></i><img src="powerautomate.png" alt="Power Automate (Desktop)" class="legend-icon">Power Automate (Desktop)<em>20%</em></span>
+          <span><i style="background:#A9C6F2"></i><img src="webscraper.png" alt="WebScrapper" class="legend-icon">WebScrapper<em>15%</em></span>
+          <span><i style="background:#1B2A41"></i><img src="tableau.png" alt="Tableau" class="legend-icon">Tableau<em>5%</em></span>
+          <span><i style="background:#5B6B82"></i><img src="sp.png" alt="S&P CapIQ" class="legend-icon">S&P CapIQ<em>5%</em></span>
+          <span><i style="background:#8FA3BF"></i><img src="factiva.png" alt="Factiva" class="legend-icon">Factiva<em>5%</em></span>
+          <span><i style="background:#B8BEC8"></i>Others<em>5%</em></span>
         </div>
       </div>
 
       
       <!-- NEW BUTTON -->
-      <a href="#projects" class="role-btn">View important projects →</a>
+      <a href="#proj-evs" class="role-btn">View important projects →</a>
     </div>
   </div>
 
@@ -1819,43 +1786,27 @@
         <li>Proficient in data modeling, database analysis, creating artifacts like scenario-based data models, and extracting actionable insights from data through industry expertise and standard frameworks.</li>
         <li>In addition, created newsletters, client decks, and country Power Outlooks, and worked as a COVID-19 Analyst.</li>
       </ul>
-                  <!-- Dual Column Section: Tools + Mentions -->
-       <div class="gdrc-columns">
-          <!-- Left Column: Hands-On Tools -->
-          <div class="gdrc-column tools">
-            <h4>Hands-On Tools Usage</h4>
-            <div class="gdrc-scroller">
-              <div class="tool-row">
-                <img src="excel.png" alt="Microsoft Excel" class="tool-icon">
-                <span>Microsoft Excel</span>
-                <div class="bar"><div style="width:35%"></div></div>
-                <span class="percent">35%</span>
-              </div>
-              <div class="tool-row">
-                <img src="tableau.png" alt="Tableau" class="tool-icon">
-                <span>Tableau</span>
-                <div class="bar"><div style="width:25%"></div></div>
-                <span class="percent">25%</span>
-              </div>
-              <div class="tool-row">
-                <img src="googledata.png" alt="Google Data Studio / Looker Studio" class="tool-icon">
-                <span>Google Data Studio / Looker Studio</span>
-                <div class="bar"><div style="width:20%"></div></div>
-                <span class="percent">20%</span>
-              </div>
-              <div class="tool-row">
-                <img src="powerpoint.png" alt="Microsoft PowerPoint / Word" class="tool-icon">
-                <span>Microsoft PowerPoint / Word</span>
-                <div class="bar"><div style="width:15%"></div></div>
-                <span class="percent">15%</span>
-              </div>
-              <div class="tool-row">
-                <span>Others</span>
-                <div class="bar"><div style="width:5%"></div></div>
-                <span class="percent">5%</span>
-              </div>
-            </div>
-          </div>
+       <!-- Hands-On Tools Usage (stacked bar; shares add to 100%) -->
+       <div class="week">
+         <h4>Hands-On Tools Usage</h4>
+         <div class="week-bar" role="img" aria-label="Time split: Microsoft Excel 35%, Tableau 25%, Google Data Studio / Looker Studio 20%, Microsoft PowerPoint / Word 15%, Others 5%">
+           <div style="width:35%; background:#0047AB"></div>
+           <div style="width:25%; background:#2E6FD8"></div>
+           <div style="width:20%; background:#6FA0EA"></div>
+           <div style="width:15%; background:#A9C6F2"></div>
+           <div style="width:5%; background:#B8BEC8"></div>
+         </div>
+         <div class="week-legend">
+           <span><i style="background:#0047AB"></i><img src="excel.png" alt="Microsoft Excel" class="legend-icon">Microsoft Excel<em>35%</em></span>
+           <span><i style="background:#2E6FD8"></i><img src="tableau.png" alt="Tableau" class="legend-icon">Tableau<em>25%</em></span>
+           <span><i style="background:#6FA0EA"></i><img src="googledata.png" alt="Google Data Studio / Looker Studio" class="legend-icon">Google Data Studio / Looker Studio<em>20%</em></span>
+           <span><i style="background:#A9C6F2"></i><img src="powerpoint.png" alt="Microsoft PowerPoint / Word" class="legend-icon">Microsoft PowerPoint / Word<em>15%</em></span>
+           <span><i style="background:#B8BEC8"></i>Others<em>5%</em></span>
+         </div>
+       </div>
+
+       <!-- Mentions (full width) -->
+       <div class="gdrc-columns mentions-only">
 
         
           <!-- Right Column: Notable Mentions -->
@@ -1991,8 +1942,6 @@
             </div>
           </div>
          </div>
-        <!-- NEW BUTTON HERE -->
-            <a href="#projects" class="role-btn">View important projects →</a>
             </div>
             </div> 
   </div>
@@ -2020,43 +1969,27 @@
           <li><strong>Collateral &amp; key initiatives:</strong> produced capability decks on Smart Energy and emerging power-generation/T&amp;D technologies (renewables focus); authored multiple reports across energy &amp; environment; contributed to the “2iTB” initiative, handling Technip and nVent.</li>
         </ul>
   
-        <!-- Dual Column Section: Tools (left) + Mentions (right) -->
-        <div class="gdrc-columns">
-          <!-- Left Column: Hands-On Tools -->
-          <div class="gdrc-column tools">
-            <h4>Hands-On Tools Usage</h4>
-            <div class="gdrc-scroller">
-              <div class="tool-row">
-                <img src="excel.png" alt="Advanced Microsoft Excel" class="tool-icon">
-                <span>Advanced Microsoft Excel</span>
-                <div class="bar"><div style="width:65%"></div></div>
-                <span class="percent">65%</span>
-              </div>
-              <div class="tool-row">
-                <img src="powerpoint.png" alt="Microsoft Word/PowerPoint" class="tool-icon">
-                <span>Microsoft Word/PowerPoint</span>
-                <div class="bar"><div style="width:20%"></div></div>
-                <span class="percent">20%</span>
-              </div>
-              <div class="tool-row">
-                <img src="factiva.png" alt="Factiva" class="tool-icon">
-                <span>Factiva</span>
-                <div class="bar"><div style="width:7%"></div></div>
-                <span class="percent">7%</span>
-              </div>
-              <div class="tool-row">
-                <img src="tableau.png" alt="Tableau" class="tool-icon">
-                <span>Tableau</span>
-                <div class="bar"><div style="width:5%"></div></div>
-                <span class="percent">5%</span>
-              </div>
-              <div class="tool-row">
-                <span>Others</span>
-                <div class="bar"><div style="width:3%"></div></div>
-                <span class="percent">3%</span>
-              </div>
-            </div>
+        <!-- Hands-On Tools Usage (stacked bar; shares add to 100%) -->
+        <div class="week">
+          <h4>Hands-On Tools Usage</h4>
+          <div class="week-bar" role="img" aria-label="Time split: Advanced Microsoft Excel 65%, Microsoft Word/PowerPoint 20%, Factiva 7%, Tableau 5%, Others 3%">
+            <div style="width:65%; background:#0047AB"></div>
+            <div style="width:20%; background:#2E6FD8"></div>
+            <div style="width:7%; background:#6FA0EA"></div>
+            <div style="width:5%; background:#A9C6F2"></div>
+            <div style="width:3%; background:#B8BEC8"></div>
           </div>
+          <div class="week-legend">
+            <span><i style="background:#0047AB"></i><img src="excel.png" alt="Advanced Microsoft Excel" class="legend-icon">Advanced Microsoft Excel<em>65%</em></span>
+            <span><i style="background:#2E6FD8"></i><img src="powerpoint.png" alt="Microsoft Word/PowerPoint" class="legend-icon">Microsoft Word/PowerPoint<em>20%</em></span>
+            <span><i style="background:#6FA0EA"></i><img src="factiva.png" alt="Factiva" class="legend-icon">Factiva<em>7%</em></span>
+            <span><i style="background:#A9C6F2"></i><img src="tableau.png" alt="Tableau" class="legend-icon">Tableau<em>5%</em></span>
+            <span><i style="background:#B8BEC8"></i>Others<em>3%</em></span>
+          </div>
+        </div>
+
+        <!-- Mentions (full width) -->
+        <div class="gdrc-columns mentions-only">
   
           <!-- Right Column: Mentions -->
           <div class="gdrc-column mentions">
@@ -2079,8 +2012,6 @@
           </div>
         </div>
   
-        <!-- Optional CTA, keep if you want consistency with other cards -->
-        <a href="#projects" class="role-btn">View important projects →</a>
       </div>
     </div>
 
@@ -2451,7 +2382,7 @@
   <div id="projects-list">
 
     <!-- Project: MSCI – Workflow, Collection & Correction Screens -->
-    <div class="project-card">
+    <div class="project-card" id="proj-msci">
       <div class="role-header">
         <img src="MSCI.png" alt="MSCI logo" class="role-logo">
         <div>
@@ -2517,7 +2448,7 @@
     </div>
 
     <!-- Project 1: Evalueserve -->
-    <div class="project-card">
+    <div class="project-card" id="proj-evs">
       <div class="role-header">
         <img src="EVS.png" alt="Evalueserve logo" class="role-logo">
         <div>
@@ -3502,11 +3433,25 @@
         
           const id = a.getAttribute("href").slice(1);
           const target = document.getElementById(id);
-          if (!target) return; // not a section anchor
-        
+          if (!target) return; // not an in-page anchor
+
+          // The section that holds the target (the target itself if it is a section)
+          const sec = target.tagName === "SECTION" ? target : target.closest("section");
+          if (!sec) return;
+
           e.preventDefault();
-          showSection(id);
-          target.scrollTo({ top: 0, behavior: "smooth" });
+          showSection(sec.id);
+
+          if (target === sec) {
+            sec.scrollTo({ top: 0, behavior: "smooth" });
+          } else {
+            // e.g. "#proj-evs": scroll the Projects section to that company's first project
+            if (target.classList.contains("hidden")) target.classList.remove("hidden");
+            requestAnimationFrame(() => {
+              const top = target.getBoundingClientRect().top - sec.getBoundingClientRect().top + sec.scrollTop - 16;
+              sec.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+            });
+          }
         });
 
       });
@@ -3619,7 +3564,7 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
   const projects = document.querySelectorAll("#projects-list .project-card");
   const btn = document.getElementById("loadMoreProjects");
-  let visible = 2;
+  let visible = 4; // 2 MSCI cards + the 2 Evalueserve cards that were visible before
   const step = 2;
 
   projects.forEach((p, i) => {
