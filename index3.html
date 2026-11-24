@@ -1234,6 +1234,64 @@
 .image-lightbox.tall{ align-items: flex-start; padding: 24px 0; }
 .image-lightbox.tall img{ max-width: min(92vw, 1200px); max-height: none; transform: none !important; }
 
+
+/* ===== MSCI career card: impact counters ===== */
+.impact-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; margin: 14px 0 8px; }
+.impact { background: #fff; border: 1px solid #e6ecf7; border-radius: 10px; padding: 12px 14px; text-align: left; }
+.impact b { display: block; font-size: 28px; font-weight: 800; color: #0047AB; line-height: 1.1; }
+.impact span { font-size: 13px; color: #555; }
+@media (max-width: 600px) { .impact-row { grid-template-columns: 1fr; } }
+
+/* ===== MSCI career card: stacked "where my week goes" bar ===== */
+.week { margin-top: 22px; text-align: left; }
+.week h4, .chips h4 { margin: 0 0 10px; font-size: 16px; font-weight: 700; }
+.week-bar { display: flex; height: 18px; border-radius: 9px; overflow: hidden; background: #eee; }
+.week-bar div { height: 100%; }
+.week-bar div + div { border-left: 2px solid #f9fbff; }
+.week-legend { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 12px; font-size: 13px; color: #333; }
+.week-legend span { display: inline-flex; align-items: center; }
+.week-legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 8px; }
+.week-legend em { font-style: normal; font-weight: 700; margin-left: 5px; }
+.legend-icon { width: 18px; height: 18px; object-fit: contain; margin-right: 6px; }
+.week-others { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: 8px; font-size: 12px; color: #666; }
+.week-others::before { content: "Other tools:"; font-weight: 700; color: #444; }
+.week-others span { display: inline-flex; align-items: center; }
+.week-others .legend-icon { width: 15px; height: 15px; margin-right: 5px; }
+
+/* ===== MSCI career card: grouped toolkit chips ===== */
+.chips { margin-top: 22px; text-align: left; }
+.chip-group { display: grid; grid-template-columns: 130px 1fr; gap: 10px; align-items: start; padding: 8px 0; border-top: 1px solid #eef1f6; }
+.chip-group > span { font-size: 13px; font-weight: 700; color: #0047AB; padding-top: 6px; }
+.chip-list { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 600; padding: 5px 12px; min-height: 20px; border-radius: 999px; background: #fff; border: 1px solid #dbe3f0; color: #222; }
+.chip-icon { width: 18px; height: 18px; object-fit: contain; }
+@media (max-width: 600px) { .chip-group { grid-template-columns: 1fr; } }
+
+/* ===== Project card: process stepper ===== */
+.steps { list-style: none; margin: 14px 0 0; padding: 0; }
+.steps li { position: relative; padding: 0 0 14px 34px; line-height: 1.45; }
+.steps li::before { content: attr(data-n); position: absolute; left: 0; top: 0; width: 22px; height: 22px; border-radius: 50%; background: #0047AB; color: #fff !important; font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; }
+.steps li::after { content: ""; position: absolute; left: 10px; top: 24px; bottom: 2px; width: 2px; background: #cfdbef; }
+.steps li:last-child::after { display: none; }
+.steps strong { display: block; font-size: 14px; }
+.steps span { font-size: 13px; color: #555 !important; }
+
+/* ===== Project card: CSS-drawn mock screen (sample data, no screenshot) ===== */
+.mock { border: 1px solid #dde3ee; border-radius: 10px; overflow: hidden; background: #fff; font-size: 12px; box-shadow: 0 6px 18px rgba(0,0,0,.06); }
+.mock-top { display: flex; gap: 6px; align-items: center; padding: 8px 10px; background: #0b1f3a; }
+.mock-top i { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,.35); }
+.mock-top b { margin-left: 8px; color: #fff !important; font-weight: 700; }
+.mock-tabs { display: flex; border-bottom: 1px solid #eee; }
+.mock-tabs span { padding: 7px 12px; color: #666 !important; font-weight: 600; }
+.mock-tabs span.on { color: #0047AB !important; border-bottom: 2px solid #0047AB; }
+.mock-row { display: grid; grid-template-columns: 1.5fr 1fr 1fr 0.9fr; gap: 8px; padding: 7px 10px; border-bottom: 1px solid #f1f1f1; align-items: center; }
+.mock-row.head { background: #f7f9fc; font-weight: 700; color: #555; }
+.tag { justify-self: start; font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px; }
+.t-ok { background: #e3f4ec; color: #11613f !important; }
+.t-rev { background: #fff1d6; color: #8a5a00 !important; }
+.t-cor { background: #e7edfb; color: #1f3f9e !important; }
+.mock-note { padding: 7px 10px; color: #888 !important; font-size: 11px; }
+
   </style>
 </head>
 <body>
@@ -1607,104 +1665,56 @@
         <img src="MSCI.png" alt="MSCI logo" class="role-logo">
         <div>
           <h3 id="msci-role-title" class="role-title">Senior Associate (Data Operations), MSCI Inc.</h3>
-          <p class="role-meta">October 2024 – Present</p>
+          <p class="role-meta">October 2024 – Present · ESG Operations · AI First Data Collection Modernization</p>
         </div>
       </div>
+
+      <!-- Impact counters -->
+      <div class="impact-row">
+        <div class="impact"><b>13</b><span>ESG datapoints automated with AI agents</span></div>
+        <div class="impact"><b>3</b><span>platform screens taken from requirements to design</span></div>
+        <div class="impact"><b>6</b><span>AI connectors wired into daily operations</span></div>
+      </div>
+
       <div class="role-body">
         <ul>
-          <li>Manages data quality processes, utilizing automation tools for quality assessment to enhance efficiency and accuracy.</li>
-          <li>Possesses advanced expertise in Microsoft Excel, adept at handling large volumes of data effectively.</li>
-          <li>Built AI agent pipelines for ESG data extraction at MSCI across 13+ datapoints (supply chain, water, biodiversity); modular sub-agents validated against a 463-row ground-truth set; prompt tuning cut token usage 30–40%.</li>
-          <li>Architected the ICP/OMDP issuer-feedback AI agent (auto-tagging NEW/UPDATE/CORRECTION/REJECT via a 3-level SOP hierarchy), with an interactive simulator and reviewer dashboards.</li>
-          <li>Led "Agent Factory" input-schema design within DCAIM (AI First Data Collection Modernization) and authored the cross-team agent I/O interface agreement.</li>
-          <li>Operate Claude daily via MCP connectors — Jira/Confluence, M365 email, Azure PostgreSQL (prod/non-prod); build custom Claude Skills and Cursor AI workflows automating extraction, QA, and documentation.</li>
-          <li>Built AI-powered frontends/trackers (React/Vite/Tailwind UAT portals; DCAIM Build Test Console with live Jira discovery and tester notifications).</li>
-          <li>Built AI-powered frontends/trackers (React/Vite/Tailwind UAT portals; DCAIM Build Test Console with live Jira discovery and tester notifications).</li>
-          <li>Applied AI governance: anti-hallucination audits and full-context verification before any system-of-record edit. Manage data-quality processes using automation for quality assessment, improving efficiency and accuracy. Advanced Microsoft Excel; handle large data volumes effectively</li>
-          <li>Demonstrates comprehensive knowledge of equities, financial markets, and company disclosures such as 10-Ks
-            and annual reports.</li>
-          <li>AI-prompt-driven work in pandas, Power BI, and Jupyter for analysis, visualization, and ground-truth pre-screening; built notebooks using matplotlib, openpyxl, PyPDF2.</li>
-          <li>Conducts Data Quality Assurance (QA) processes, including results assessment, reporting, and process
-            improvement.</li>
-          <li>Creates impactful presentations and performs detailed data analysis, showcasing excellent written and oral
-            communication skills.</li>
-          <li>Collaborates with global teams in an international environment, working seamlessly across hierarchies, functions, and time zones.</li>
+          <li><strong>AI agent pipelines:</strong> built a modular extraction skill for 13 E&amp;S datapoints (supply chain, water, biodiversity), validated against a 463-row ground truth.</li>
+          <li><strong>Pipeline design:</strong> investigated the existing issuer-feedback mechanism and designed the pipeline diagrams that route issuer feedback through the AI First Collection platform into OMDP; led the shared Agent Factory input schema.</li>
+          <li><strong>Product &amp; UX:</strong> gathered requirements and led UI/UX for the Workflow, Collection and Correction screens, from Figma and stakeholder approval to Claude Design prototypes.</li>
+          <li><strong>AI-first operations:</strong> run Claude and Cursor daily through MCP connectors (Jira/Confluence, M365, PostgreSQL), with verification before any system-of-record edit.</li>
+          <li><strong>Data quality:</strong> own QA processes and automated quality checks across ESG datasets; Power BI and SQL for accuracy reporting.</li>
+          <li><strong>Collaboration:</strong> coordinate with engineering, dataset leads and global teams across time zones.</li>
         </ul>
 
-        <!-- Hands-On Tools Usage -->
-        <!-- Hands-On Tools Usage -->
-        <div class="role-tools">
-          <h4>Hands-On Tools Usage</h4>
-          <div class="tools-grid">
-            <div class="tool">
-              <img src="jupyter.png" alt="Jupyter Notebooks" class="tool-icon">
-              <span>Jupyter Notebooks</span>
-              <div class="bar"><div style="width:15%"></div></div>
-              <span class="percent">15%</span>
-            </div>
-        
-            <div class="tool">
-              <img src="excel.png" alt="Microsoft Excel" class="tool-icon">
-              <span>Advanced Microsoft Excel</span>
-              <div class="bar"><div style="width:25%"></div></div>
-              <span class="percent">25%</span>
-            </div>
-        
-            <div class="tool">
-              <img src="postgres.png" alt="Postgres SQL" class="tool-icon">
-              <span>Postgres SQL</span>
-              <div class="bar"><div style="width:25%"></div></div>
-              <span class="percent">25%</span>
-            </div>
-        
-            <div class="tool">
-              <img src="powerbi.png" alt="Power BI" class="tool-icon">
-              <span>Power BI (Data Visualisation)</span>
-              <div class="bar"><div style="width:10%"></div></div>
-              <span class="percent">10%</span>
-            </div>
-        
-            <div class="tool">
-              <img src="miro.png" alt="Miro Board" class="tool-icon">
-              <span>Miro Board</span>
-              <div class="bar"><div style="width:10%"></div></div>
-              <span class="percent">10%</span>
-            </div>
-        
-            <div class="tool">
-              <img src="postman.png" alt="Postman" class="tool-icon">
-              <span>Postman</span>
-              <div class="bar"><div style="width:5%"></div></div>
-              <span class="percent">5%</span>
-            </div>
-        
-            <div class="tool">
-              <img src="loop.png" alt="Microsoft Loop" class="tool-icon">
-              <span>Microsoft Loop</span>
-              <div class="bar"><div style="width:5%"></div></div>
-              <span class="percent">5%</span>
-            </div>
-        
-            <div class="tool">
-              <img src="whiteboard.png" alt="Microsoft Whiteboard" class="tool-icon">
-              <span>Microsoft Whiteboard</span>
-              <div class="bar"><div style="width:2%"></div></div>
-              <span class="percent">2%</span>
-            </div>
-        
-            <div class="tool">
-              <img src="jira.png" alt="Jira Sprints" class="tool-icon">
-              <span>Jira Sprints</span>
-              <div class="bar"><div style="width:2%"></div></div>
-              <span class="percent">2%</span>
-            </div>
-        
-            <div class="tool">
-              <span>Others</span>
-              <div class="bar"><div style="width:1%"></div></div>
-              <span class="percent">1%</span>
-            </div>
+        <!-- Where my week goes (one stacked bar; shares add to 100%) -->
+        <div class="week">
+          <h4>Where my week goes</h4>
+          <div class="week-bar" role="img" aria-label="Time split: PostgreSQL 25%, Excel 25%, Jupyter 15%, Power BI 10%, Miro 10%, other tools 15%">
+            <div style="width:25%; background:#0047AB"></div>
+            <div style="width:25%; background:#2E6FD8"></div>
+            <div style="width:15%; background:#6FA0EA"></div>
+            <div style="width:10%; background:#A9C6F2"></div>
+            <div style="width:10%; background:#1B2A41"></div>
+            <div style="width:15%; background:#B8BEC8"></div>
           </div>
+          <div class="week-legend">
+            <span><i style="background:#0047AB"></i><img src="postgres.png" alt="" class="legend-icon">PostgreSQL<em>25%</em></span>
+            <span><i style="background:#2E6FD8"></i><img src="excel.png" alt="" class="legend-icon">Advanced Excel<em>25%</em></span>
+            <span><i style="background:#6FA0EA"></i><img src="jupyter.png" alt="" class="legend-icon">Jupyter<em>15%</em></span>
+            <span><i style="background:#A9C6F2"></i><img src="powerbi.png" alt="" class="legend-icon">Power BI<em>10%</em></span>
+            <span><i style="background:#1B2A41"></i><img src="miro.png" alt="" class="legend-icon">Miro<em>10%</em></span>
+            <span><i style="background:#B8BEC8"></i>Other tools<em>15%</em></span>
+          </div>
+          <div class="week-others"><span><img src="postman.png" alt="" class="legend-icon">Postman 5%</span><span><img src="loop.png" alt="" class="legend-icon">Microsoft Loop 5%</span><span><img src="whiteboard.png" alt="" class="legend-icon">Microsoft Whiteboard 2%</span><span><img src="jira.png" alt="" class="legend-icon">Jira Sprints 2%</span><span>Others 1%</span></div>
+        </div>
+
+        <!-- Toolkit (grouped; no skill levels implied) -->
+        <div class="chips">
+          <h4>Toolkit</h4>
+          <div class="chip-group"><span>AI &amp; Agents</span><div class="chip-list"><span class="chip">Claude</span><span class="chip">Claude Skills</span><span class="chip">Cursor</span><span class="chip">MCP connectors</span><span class="chip">Claude Design</span></div></div>
+          <div class="chip-group"><span>Data</span><div class="chip-list"><span class="chip"><img src="postgres.png" alt="" class="chip-icon">PostgreSQL</span><span class="chip"><img src="excel.png" alt="" class="chip-icon">Advanced Excel</span><span class="chip"><img src="jupyter.png" alt="" class="chip-icon">Jupyter</span><span class="chip">Python / pandas</span></div></div>
+          <div class="chip-group"><span>BI &amp; Design</span><div class="chip-list"><span class="chip"><img src="powerbi.png" alt="" class="chip-icon">Power BI / DAX</span><span class="chip"><img src="miro.png" alt="" class="chip-icon">Miro</span><span class="chip">Figma</span></div></div>
+          <div class="chip-group"><span>Delivery</span><div class="chip-list"><span class="chip"><img src="jira.png" alt="" class="chip-icon">Jira</span><span class="chip"><img src="postman.png" alt="" class="chip-icon">Postman</span><span class="chip"><img src="loop.png" alt="" class="chip-icon">Microsoft Loop</span><span class="chip"><img src="whiteboard.png" alt="" class="chip-icon">Microsoft Whiteboard</span><span class="chip">Confluence</span></div></div>
         </div>
       </div>
     </div>
@@ -2440,6 +2450,44 @@
 
   <div id="projects-list">
 
+    <!-- Project: MSCI – Workflow, Collection & Correction Screens -->
+    <div class="project-card">
+      <div class="role-header">
+        <img src="MSCI.png" alt="MSCI logo" class="role-logo">
+        <div>
+          <h3 class="role-title">MSCI – Workflow, Collection &amp; Correction Screens</h3>
+          <p class="role-meta">Platform: Figma · Claude Design · Jira · Confluence</p>
+        </div>
+      </div>
+
+      <div class="gdrc-columns">
+        <!-- Left: Project Description -->
+        <div class="gdrc-column">
+          <p><strong>Overview:</strong> Requirement gathering and UI/UX design for three core analyst screens of the AI First Data Collection platform.</p>
+          <ol class="steps">
+            <li data-n="1"><strong>Requirements</strong><span>Workshops with dataset leads and engineering to map analyst tasks and edge cases.</span></li>
+            <li data-n="2"><strong>Figma design</strong><span>Wireframes and flows for the workflow, collection and correction journeys.</span></li>
+            <li data-n="3"><strong>Review &amp; approval</strong><span>Stakeholder sign-off on screens, states and validation rules.</span></li>
+            <li data-n="4"><strong>Claude Design prototype</strong><span>Interactive prototypes for walkthroughs and build handoff.</span></li>
+          </ol>
+        </div>
+
+        <!-- Right: Illustrative screen (sample data) -->
+        <div class="gdrc-column">
+          <div class="mock" role="img" aria-label="Illustrative collection screen with sample rows">
+            <div class="mock-top"><i></i><i></i><i></i><b>Collection screen</b></div>
+            <div class="mock-tabs"><span>Workflow</span><span class="on">Collection</span><span>Correction</span></div>
+            <div class="mock-row head"><span>Datapoint</span><span>Value</span><span>Source</span><span>Status</span></div>
+            <div class="mock-row"><span>Scope 1 emissions</span><span>12,480 t</span><span>CSR p.42</span><span class="tag t-ok">Validated</span></div>
+            <div class="mock-row"><span>Water withdrawal</span><span>3.1 ML</span><span>AR p.118</span><span class="tag t-rev">Review</span></div>
+            <div class="mock-row"><span>Supplier audits</span><span>Yes</span><span>CSR p.67</span><span class="tag t-cor">Corrected</span></div>
+            <div class="mock-row"><span>Biodiversity policy</span><span>Yes</span><span>Policy p.3</span><span class="tag t-ok">Validated</span></div>
+            <div class="mock-note">Illustration with sample data</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Project 0: MSCI – AI Impact -->
     <div class="project-card">
       <div class="role-header">
@@ -2456,7 +2504,7 @@
           <p><strong>Overview:</strong> Six months of agentic pipelines, AI-designed workflows and MCP-connected tooling on MSCI's AI First Data Collection Modernization programme.</p>
           <ul>
             <li>Built an agentic E&amp;S extraction skill covering 13 ESG datapoints, working in three modes: Extract → Verify → Patch.</li>
-            <li>Designed an issuer-feedback validation agent and led the shared Agent Factory input schema across 6 datasets.</li>
+            <li>Designed the pipeline that routes issuer feedback through the AI First Collection platform into OMDP, and led the shared Agent Factory input schema across 6 datasets.</li>
             <li>Wired 6 AI connectors (Atlassian, M365, DAP, databases, Sustainability &amp; Climate) into daily data operations.</li>
           </ul>
         </div>
