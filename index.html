@@ -1293,6 +1293,9 @@
 .t-cor { background: #e7edfb; color: #1f3f9e !important; }
 .mock-note { padding: 7px 10px; color: #888 !important; font-size: 11px; }
 
+/* ===== Project card: video ===== */
+.project-video { display: block; width: 100%; border-radius: 8px; background: #000; box-shadow: 0 6px 18px rgba(0,0,0,.12); }
+
   </style>
 </head>
 <body>
@@ -2449,6 +2452,36 @@
       </div>
     </div>
 
+    <!-- Project: MSCI – E&S Programs Extraction Skill Film (made with Claude) -->
+    <div class="project-card" id="proj-msci-film">
+      <div class="role-header">
+        <img src="MSCI.png" alt="MSCI logo" class="role-logo">
+        <div>
+          <h3 class="role-title">MSCI – E&amp;S Programs Extraction: Skill Film</h3>
+          <p class="role-meta">Made with Claude · Narrated explainer · 1:56</p>
+        </div>
+      </div>
+
+      <div class="gdrc-columns">
+        <!-- Left: Project Description -->
+        <div class="gdrc-column">
+          <p><strong>Overview:</strong> A narrated explainer film, made entirely with Claude, that introduces the E&amp;S Programs Extraction skill and shows what it achieves.</p>
+          <ul>
+            <li>Walks through the skill's three modes: Extract, Verify and Patch.</li>
+            <li>Script, narration, music, motion graphics and the final render were all produced with Claude.</li>
+            <li>Built as marketing content for the skill, so colleagues can understand it in under two minutes.</li>
+          </ul>
+        </div>
+
+        <!-- Right: Video -->
+        <div class="gdrc-column">
+          <video class="project-video" controls preload="metadata" playsinline src="ES-Programs-Extraction-Film.mp4">
+            Your browser can't play this video. <a href="ES-Programs-Extraction-Film.mp4">Download the film</a>.
+          </video>
+        </div>
+      </div>
+    </div>
+
     <!-- Project 1: Evalueserve -->
     <div class="project-card" id="proj-evs">
       <div class="role-header">
@@ -3566,7 +3599,7 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
   const projects = document.querySelectorAll("#projects-list .project-card");
   const btn = document.getElementById("loadMoreProjects");
-  let visible = 4; // 2 MSCI cards + the 2 Evalueserve cards that were visible before
+  let visible = 5; // 3 MSCI cards + the 2 Evalueserve cards that were visible before
   const step = 2;
 
   projects.forEach((p, i) => {
